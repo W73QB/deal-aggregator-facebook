@@ -34,4 +34,4 @@ deal-aggregator/deal-aggregator/
 
 # Runtime logs
 crawl-*.log
-fb-live-posts-*.jsonl
+fb-live-posts-*.jsonlnode_modules/
