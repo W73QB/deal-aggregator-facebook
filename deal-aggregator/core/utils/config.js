@@ -108,14 +108,14 @@ class ConfigLoader {
    * @returns {boolean} True if Facebook config is valid
    */
   static validateFacebookConfig(config) {
-    const hasValidPageId = config.FB_PAGE_ID && 
-                          config.FB_PAGE_ID !== 'YOUR_PAGE_ID' &&
-                          config.FB_PAGE_ID !== '1234567890';
+    const hasValidPageId = !!(config.FB_PAGE_ID && 
+                            config.FB_PAGE_ID !== 'YOUR_PAGE_ID' &&
+                            config.FB_PAGE_ID !== '1234567890');
                           
-    const hasValidToken = config.FB_PAGE_ACCESS_TOKEN && 
-                         config.FB_PAGE_ACCESS_TOKEN !== 'YOUR_ACCESS_TOKEN' &&
-                         config.FB_PAGE_ACCESS_TOKEN !== 'EAAG..long-lived..' &&
-                         config.FB_PAGE_ACCESS_TOKEN.length > 20;
+    const hasValidToken = !!(config.FB_PAGE_ACCESS_TOKEN && 
+                           config.FB_PAGE_ACCESS_TOKEN !== 'YOUR_ACCESS_TOKEN' &&
+                           config.FB_PAGE_ACCESS_TOKEN !== 'EAAG..long-lived..' &&
+                           (config.FB_PAGE_ACCESS_TOKEN?.length || 0) > 20);
 
     if (!hasValidPageId) {
       console.warn('Invalid or missing FB_PAGE_ID');

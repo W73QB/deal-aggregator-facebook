@@ -1,6 +1,6 @@
-const fs = require('fs');
 const path = require('path');
 const { ConfigLoader } = require('../utils/config');
+const { FileProcessor } = require('../utils/file-processor');
 
 // Load configurations
 const env = ConfigLoader.loadEnvironment();
@@ -8,10 +8,7 @@ const dateStr = ConfigLoader.getDateString();
 
 // Load raw deals
 const rawFile = path.join(env.DEALS_RAW_DIR, `raw-multi-${dateStr}.jsonl`);
-const rawDeals = fs.readFileSync(rawFile, 'utf8')
-  .trim()
-  .split('\n')
-  .map(line => JSON.parse(line));
+const rawDeals = FileProcessor.loadJSONL(rawFile);
 
 console.log(`Loaded ${rawDeals.length} raw deals from ${rawFile}`);
 
@@ -101,10 +98,7 @@ selectedDeals.forEach((deal, idx) => {
 });
 
 // Save selected deals for next step
-const selectedDealsContent = selectedDeals.map(deal => JSON.stringify(deal)).join('\n');
-fs.writeFileSync(
-  path.join(env.DEALS_RAW_DIR, `../../data/selected/selected-deals-${dateStr}.jsonl`), 
-  selectedDealsContent
-);
+const outputPath = path.join(env.DEALS_RAW_DIR, `../../data/selected/selected-deals-${dateStr}.jsonl`);
+FileProcessor.saveJSONL(outputPath, selectedDeals, { createDirs: true });
 
 console.log(`\nSaved ${selectedDeals.length} selected deals for affiliate enrichment`);
