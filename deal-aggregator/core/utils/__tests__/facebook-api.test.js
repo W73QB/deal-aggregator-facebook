@@ -166,7 +166,7 @@ describe('FacebookAPI', () => {
       
       expect(result).toEqual({
         success: false,
-        error: { error: { message: 'Invalid token' } },
+        error: { message: 'Invalid token' },
         message: 'Token validation failed'
       });
     });
@@ -213,7 +213,7 @@ describe('FacebookAPI', () => {
       
       expect(result).toEqual({
         success: false,
-        error: { error: { message: 'Invalid message' } },
+        error: { message: 'Invalid message' },
         message: 'Failed to create post'
       });
     });

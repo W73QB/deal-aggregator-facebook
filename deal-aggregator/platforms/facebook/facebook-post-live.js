@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
-const querystring = require('querystring');
 const { ConfigLoader } = require('../../core/utils/config');
+const { FacebookAPI } = require('../../core/utils/facebook-api');
 
 // Load configurations
 const env = ConfigLoader.loadEnvironment();
@@ -18,78 +17,30 @@ const enrichedDeals = fs.readFileSync(enrichedFile, 'utf8')
 console.log(`🎯 LIVE FACEBOOK POSTING`);
 console.log(`📊 Loaded ${enrichedDeals.length} enriched deals`);
 
-// Helper function for Facebook API calls
-function makeRequest(options, postData = null) {
-  return new Promise((resolve, reject) => {
-    const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => data += chunk);
-      res.on('end', () => {
-        try {
-          const jsonData = JSON.parse(data);
-          resolve({ statusCode: res.statusCode, data: jsonData });
-        } catch (e) {
-          resolve({ statusCode: res.statusCode, data: data });
-        }
-      });
-    });
-
-    req.on('error', reject);
-    req.setTimeout(20000, () => {
-      req.destroy();
-      reject(new Error('Request timeout'));
-    });
-
-    if (postData) req.write(postData);
-    req.end();
-  });
-}
+// Initialize Facebook API client
+const facebookAPI = new FacebookAPI(env.FB_PAGE_ID, env.FB_PAGE_ACCESS_TOKEN);
 
 async function postToFacebook(deal) {
   console.log(`\n📝 Posting: ${deal.source} (${deal.region}) - ${deal.title.substring(0, 50)}...`);
   
-  const postData = querystring.stringify({
+  const result = await facebookAPI.postMessage({
     message: deal.caption,
-    link: deal.affiliateUrl,
-    access_token: env.FB_PAGE_ACCESS_TOKEN
+    link: deal.affiliateUrl
   });
-
-  const options = {
-    hostname: 'graph.facebook.com',
-    path: '/v23.0/me/feed',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Content-Length': Buffer.byteLength(postData),
-      'User-Agent': 'DealAggregator/1.0'
-    }
-  };
-
-  try {
-    const response = await makeRequest(options, postData);
-    
-    if (response.statusCode === 200 && response.data.id) {
-      console.log(`✅ Success! Post ID: ${response.data.id}`);
-      return {
-        success: true,
-        postId: response.data.id,
-        dealId: deal.id,
-        timestamp: new Date().toISOString()
-      };
-    } else {
-      console.log(`❌ Failed: ${response.data.error?.message || 'Unknown error'}`);
-      return {
-        success: false,
-        error: response.data,
-        dealId: deal.id,
-        timestamp: new Date().toISOString()
-      };
-    }
-  } catch (error) {
-    console.log(`❌ Network error: ${error.message}`);
+  
+  if (result.success) {
+    console.log(`✅ Success! Post ID: ${result.postId}`);
+    return {
+      success: true,
+      postId: result.postId,
+      dealId: deal.id,
+      timestamp: new Date().toISOString()
+    };
+  } else {
+    console.log(`❌ Failed: ${result.error?.error?.message || result.error?.message || result.message || 'Unknown error'}`);
     return {
       success: false,
-      error: error.message,
+      error: result.error || result.message,
       dealId: deal.id,
       timestamp: new Date().toISOString()
     };
