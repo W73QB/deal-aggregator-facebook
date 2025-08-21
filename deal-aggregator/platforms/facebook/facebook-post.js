@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { ConfigLoader } = require('../../core/utils/config');
+const { FacebookAPI } = require('../../core/utils/facebook-api');
 
 // Load configurations
 const env = ConfigLoader.loadEnvironment();
@@ -27,6 +28,9 @@ console.log(`Facebook credentials check:`);
 console.log(`  Page ID: ${hasValidPageId ? '✅' : '❌'}`);
 console.log(`  Access Token: ${hasValidFbToken ? '✅' : '❌'}`);
 console.log(`  Mode: ${isPostingMode ? 'POSTING' : 'SIMULATION'}`);
+
+// Initialize Facebook API client (when credentials are valid)
+const facebookAPI = isPostingMode ? new FacebookAPI(env.FB_PAGE_ID, env.FB_PAGE_ACCESS_TOKEN) : null;
 
 // Select deals to post (3-6 for today)
 const dealsToPost = enrichedDeals.slice(0, 6);
@@ -57,6 +61,7 @@ function simulatePosting() {
     const mediaExists = fs.existsSync(mediaPath);
     
     // Simulate API call
+    // TODO: For real posting, use: await facebookAPI.postMessage({ message: deal.caption, link: deal.affiliateUrl })
     const postResult = {
       dealId: deal.id,
       pageId: env.FB_PAGE_ID,
