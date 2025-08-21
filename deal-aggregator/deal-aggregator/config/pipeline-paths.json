@@ -1,0 +1,16 @@
+{
+  "PROJECT_ROOT": "/Users/admin/projects/deal-aggregator-facebook",
+  "PATHS": {
+    "DEALS_RAW_DIR": "/Users/admin/projects/deal-aggregator-facebook/deals/raw",
+    "DEALS_ENRICHED_DIR": "/Users/admin/projects/deal-aggregator-facebook/deals/enriched", 
+    "MEDIA_DIR": "/Users/admin/projects/deal-aggregator-facebook/media",
+    "LOGS_DIR": "/Users/admin/projects/deal-aggregator-facebook/logs",
+    "CONFIG_DIR": "/Users/admin/projects/deal-aggregator-facebook/config",
+    "ENV_FILE": "/Users/admin/projects/deal-aggregator-facebook/config/.env.local.json"
+  },
+  "LEGACY_PATHS": {
+    "OLD_OUTPUT_DIR": "/Users/admin/mcp/playwright-mcp/output",
+    "MIGRATION_STATUS": "COMPLETED",
+    "MIGRATION_DATE": "2025-08-19T19:06:00Z"
+  }
+}
