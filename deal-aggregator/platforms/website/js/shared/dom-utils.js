@@ -1,50 +1,76 @@
 /**
- * TODO: DOM UTILITIES MODULE
- * 
- * MỤC TIÊU: Tiện ích thao tác DOM dùng chung cho script.js & blog.js
- * 
- * HIỆN TẠI TRÙNG LẶP Ở:
- * - deal-aggregator/platforms/website/js/script.js
- * - deal-aggregator/platforms/website/js/blog.js
- * 
- * FUNCTIONS TRÙNG LẶP (60% similarity):
- * - DOM selectors: $() và $$() (100% identical)
- * - debounce function (100% identical)  
- * - Event handler patterns (70% identical)
- * - URL syncing logic (75% identical)
- * - State management (localStorage) (80% identical)
- * 
- * IDENTICAL CODE:
- * ```javascript
- * const $ = (sel, ctx = document) => ctx.querySelector(sel);
- * const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
- * function debounce(fn, wait = 200) {
- *     let t;
- *     return (...args) => {
- *         clearTimeout(t);
- *         t = setTimeout(() => fn(...args), wait);
- *     };
- * }
- * ```
- * 
- * TODO IMPLEMENTATION:
- * - [ ] Tạo DOMUtils object với methods:
- *   - $, $$ selectors
- *   - debounce function
- *   - syncURL(params)
- *   - loadState(key), saveState(key, state)
- *   - commonEventHandlers
- * - [ ] Export for modules hoặc assign to window
- * - [ ] Refactor script.js và blog.js để import/use utilities
- * 
- * ESTIMATED REDUCTION: ~40 lines duplicate code
+ * DOM UTILITIES MODULE
+ * Consolidated helper functions for website/js scripts
+ * Eliminates duplication between script.js and blog.js
  */
 
-// TODO: Implement DOMUtils object here
+// DOM Selectors
+export const $ = (sel, ctx = document) => ctx.querySelector(sel);
+export const $$ = (sel, ctx = document) => ctx.querySelectorAll(sel);
 
-// Export for modules or assign to window for direct use
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { /* TODO: Export DOMUtils */ };
-} else {
-  // TODO: window.DOMUtils = DOMUtils;
+// Debounce utility
+export function debounce(fn, wait = 250) {
+  let timeout;
+  return function executedFunction(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), wait);
+  };
+}
+
+// URL synchronization without page reload
+export function syncURL(params) {
+  const url = new URL(window.location);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === null || value === undefined || value === '') {
+      url.searchParams.delete(key);
+    } else {
+      url.searchParams.set(key, value);
+    }
+  });
+  window.history.replaceState({}, '', url);
+}
+
+// State persistence with localStorage
+export function loadState(key) {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  } catch (e) {
+    console.warn(`Failed to load state for key: ${key}`, e);
+    return null;
+  }
+}
+
+export function saveState(key, state) {
+  try {
+    localStorage.setItem(key, JSON.stringify(state));
+    return true;
+  } catch (e) {
+    console.warn(`Failed to save state for key: ${key}`, e);
+    return false;
+  }
+}
+
+// Enhanced element visibility checker
+export function isElementVisible(element) {
+  if (!element) return false;
+  const rect = element.getBoundingClientRect();
+  return rect.width > 0 && rect.height > 0 && 
+         rect.top >= 0 && rect.left >= 0 &&
+         rect.bottom <= window.innerHeight && 
+         rect.right <= window.innerWidth;
+}
+
+// Safe event listener with cleanup
+export function addEventListenerWithCleanup(element, event, handler, options = {}) {
+  element.addEventListener(event, handler, options);
+  return () => element.removeEventListener(event, handler, options);
+}
+
+// Global fallback for direct HTML usage
+if (typeof window !== 'undefined') {
+  window.DOMUtils = {
+    $, $$, debounce, syncURL, loadState, saveState, 
+    isElementVisible, addEventListenerWithCleanup
+  };
 }

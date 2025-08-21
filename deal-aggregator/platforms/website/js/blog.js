@@ -1,17 +1,7 @@
 // Enhanced Blog JavaScript with State Management and URL Sync
+import { $, $$, debounce, syncURL, loadState, saveState } from './shared/dom-utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Helper functions
-    const $ = (sel, ctx = document) => ctx.querySelector(sel);
-    const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-    
-    function debounce(fn, wait = 250) {
-        let t;
-        return (...args) => {
-            clearTimeout(t);
-            t = setTimeout(() => fn(...args), wait);
-        };
-    }
 
     // DOM elements
     const filterButtons = $$('.filter-btn');
@@ -49,40 +39,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Save state to localStorage
-    function saveState() {
-        localStorage.setItem('blogState', JSON.stringify({
+    function saveBlogState() {
+        saveState('blogState', {
             category: state.category,
             search: state.search
-        }));
+        });
     }
 
     // Load state from localStorage
-    function loadState() {
-        const savedState = localStorage.getItem('blogState');
+    function loadBlogState() {
+        const savedState = loadState('blogState');
         if (savedState) {
-            const parsed = JSON.parse(savedState);
             // Only use saved state if no URL params
             const params = new URLSearchParams(location.search);
             if (!params.get('category') && !params.get('q')) {
-                state.category = parsed.category || 'all';
-                state.search = parsed.search || '';
+                state.category = savedState.category || 'all';
+                state.search = savedState.search || '';
             }
         }
     }
 
     // Sync URL with current state
-    function syncURL() {
-        const params = new URLSearchParams();
+    function syncBlogURL() {
+        const params = {};
         if (state.category && state.category !== 'all') {
-            params.set('category', state.category);
+            params.category = state.category;
         }
         if (state.search) {
-            params.set('q', state.search);
+            params.q = state.search;
         }
 
-        const newUrl = `${location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
-        history.replaceState(null, '', newUrl);
-        saveState();
+        syncURL(params);
+        saveBlogState();
     }
 
     // Build share URLs with UTM
@@ -288,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Sync URL
-        syncURL();
+        syncBlogURL();
 
         // === NEW ENHANCEMENTS ===
         
@@ -604,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize everything
     function initialize() {
         // Load saved state first
-        loadState();
+        loadBlogState();
         
         // Initialize state from URL (overrides saved state if URL has params)
         initializeState();
