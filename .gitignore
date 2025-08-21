@@ -18,3 +18,20 @@ config/.env.local.json
 # API keys and tokens
 *.key
 *.pem
+
+# Data & runtime files
+data/raw/*.jsonl
+data/enriched/*.jsonl
+data/logs/*.csv
+data/logs/*.jsonl
+
+# Date-specific configs
+*/*-20250*.json
+*/*-20250*.jsonl
+
+# Duplicated nested structure
+deal-aggregator/deal-aggregator/
+
+# Runtime logs
+crawl-*.log
+fb-live-posts-*.jsonl
