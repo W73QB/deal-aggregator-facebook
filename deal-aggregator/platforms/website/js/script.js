@@ -1,17 +1,8 @@
 // Main JavaScript file for DealRadarUS
+import { $, $$, debounce, syncURL, loadState, saveState } from './shared/dom-utils.js';
 
 // Mobile Navigation Toggle
 document.addEventListener('DOMContentLoaded', function() {
-    // Helper functions
-    const $ = (sel, ctx = document) => ctx.querySelector(sel);
-    const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-    function debounce(fn, wait = 200) {
-        let t;
-        return (...args) => {
-            clearTimeout(t);
-            t = setTimeout(() => fn(...args), wait);
-        };
-    }
 
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -265,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Read & apply initial state from URL and localStorage
         const params = new URLSearchParams(location.search);
-        const savedFilters = JSON.parse(localStorage.getItem('dealFilters') || '{}');
+        const savedFilters = loadState('dealFilters') || {};
         
         const q = params.get('q') || savedFilters.search || '';
         const merParam = params.get('merchant') || savedFilters.merchant || 'all';
@@ -308,11 +299,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 sort: sortSelect ? sortSelect.value : 'relevance',
                 discount: activeDiscountPill ? activeDiscountPill.dataset.discount : null
             };
-            localStorage.setItem('dealFilters', JSON.stringify(filters));
+            saveState('dealFilters', filters);
         }
         
         // Create a function to sync URL without page reload
-        function syncURL() {
+        function syncURLState() {
             const cat = (document.querySelector('.filter-pill[data-category].active')?.dataset.category) || 'all';
             const mer = merchantFilter ? merchantFilter.value : 'all';
             const p = priceFilter ? priceFilter.value : '2000';
@@ -320,16 +311,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const s = sortSelect ? sortSelect.value : 'relevance';
             const d = document.querySelector('.filter-pill[data-discount].active')?.dataset.discount || null;
             
-            const newParams = new URLSearchParams();
-            if (cat && cat !== 'all') newParams.set('category', cat);
-            if (mer && mer !== 'all') newParams.set('merchant', mer);
-            if (p && p !== '2000') newParams.set('price', p);
-            if (q) newParams.set('q', q);
-            if (s && s !== 'relevance') newParams.set('sort', s);
-            if (d) newParams.set('discount', d);
+            const params = {};
+            if (cat && cat !== 'all') params.category = cat;
+            if (mer && mer !== 'all') params.merchant = mer;
+            if (p && p !== '2000') params.price = p;
+            if (q) params.q = q;
+            if (s && s !== 'relevance') params.sort = s;
+            if (d) params.discount = d;
             
-            const newUrl = `${location.pathname}${newParams.toString() ? '?' + newParams.toString() : ''}`;
-            history.replaceState(null, '', newUrl);
+            syncURL(params);
             saveFilters();
         }
         
@@ -415,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (noResults) noResults.hidden = totalMatching !== 0;
             
             // Sync URL
-            syncURL();
+            syncURLState();
         }
         
         // Add event listeners for filter pills
