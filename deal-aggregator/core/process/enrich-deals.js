@@ -1,6 +1,6 @@
-const fs = require('fs');
 const path = require('path');
 const { ConfigLoader } = require('../utils/config');
+const { FileProcessor } = require('../utils/file-processor');
 
 // Load configurations
 const env = ConfigLoader.loadEnvironment();
@@ -8,10 +8,7 @@ const dateStr = ConfigLoader.getDateString();
 
 // Load selected deals
 const selectedFile = path.join(env.DEALS_RAW_DIR, `../../data/selected/selected-deals-${dateStr}.jsonl`);
-const selectedDeals = fs.readFileSync(selectedFile, 'utf8')
-  .trim()
-  .split('\n')
-  .map(line => JSON.parse(line));
+const selectedDeals = FileProcessor.loadJSONL(selectedFile);
 
 console.log(`Loaded ${selectedDeals.length} selected deals for enrichment`);
 
@@ -138,8 +135,7 @@ const enrichedDeals = selectedDeals.map(deal => {
 
 // Save enriched deals
 const enrichedFile = path.join(env.DEALS_ENRICHED_DIR, `enriched-multi-${dateStr}.jsonl`);
-const enrichedContent = enrichedDeals.map(deal => JSON.stringify(deal)).join('\n');
-fs.writeFileSync(enrichedFile, enrichedContent);
+FileProcessor.saveJSONL(enrichedFile, enrichedDeals, { createDirs: true });
 
 console.log(`\nSaved ${enrichedDeals.length} enriched deals to ${enrichedFile}`);
 
