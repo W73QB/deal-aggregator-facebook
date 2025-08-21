@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const { ConfigLoader } = require('../../core/utils/config');
 
 // Load configurations
-const env = JSON.parse(fs.readFileSync("../../config/.env.local.json", 'utf8'));
-const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+const env = ConfigLoader.loadEnvironment();
+const dateStr = ConfigLoader.getDateString();
 
 // Load enriched deals
 const enrichedFile = path.join(env.DEALS_ENRICHED_DIR, `enriched-multi-${dateStr}.jsonl`);

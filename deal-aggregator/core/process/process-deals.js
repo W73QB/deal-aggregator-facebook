@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const { ConfigLoader } = require('../utils/config');
 
 // Load configurations
-const env = JSON.parse(fs.readFileSync("../../config/.env.local.json", 'utf8'));
-const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+const env = ConfigLoader.loadEnvironment();
+const dateStr = ConfigLoader.getDateString();
 
 // Load raw deals
 const rawFile = path.join(env.DEALS_RAW_DIR, `raw-multi-${dateStr}.jsonl`);
