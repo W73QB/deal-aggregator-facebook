@@ -1,9 +1,10 @@
 const https = require('https');
 const querystring = require('querystring');
 const fs = require('fs');
+const { ConfigLoader } = require('../../core/utils/config');
 
 // Load environment
-const env = JSON.parse(fs.readFileSync("../../config/.env.local.json", 'utf8'));
+const env = ConfigLoader.loadEnvironment();
 
 const FB_PAGE_ID = env.FB_PAGE_ID;
 const FB_ACCESS_TOKEN = env.FB_PAGE_ACCESS_TOKEN;
