@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /config/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /handoff/
+Disallow: /scripts/
+
+# Allow specific public paths
+Allow: /deal-aggregator/platforms/website/
+
+# Sitemap location
+Sitemap: https://example.com/sitemap.xml

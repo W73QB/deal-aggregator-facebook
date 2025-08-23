@@ -39,7 +39,7 @@ class ConfigLoader {
    * @param {string} relativePath - Relative path to config file
    * @returns {Object} Parsed configuration object
    */
-  static loadEnvironment(relativePath = '../../config/.env.local.json') {
+    static loadEnvironment(relativePath = '../../../config/.env.local.json') {
     try {
       const configPath = path.resolve(__dirname, relativePath);
       const configContent = fs.readFileSync(configPath, 'utf8');
