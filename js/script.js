@@ -49,21 +49,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Newsletter form submission
+    // Newsletter form handling
     const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
+    const newsletterSuccess = document.querySelector('#newsletter-success');
+    
+    if (newsletterForm && newsletterSuccess) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const emailInput = this.querySelector('input[type="email"]');
+            
+            const emailInput = document.querySelector('#newsletter-email');
             const email = emailInput.value.trim();
             
-            if (email) {
-                // Simulate newsletter signup
-                console.log('Newsletter signup:', email);
-                alert('Thank you for subscribing! You\'ll receive our daily deal updates.');
-                emailInput.value = '';
+            if (email && validateEmail(email)) {
+                // Simulate API call
+                setTimeout(() => {
+                    newsletterSuccess.style.display = 'block';
+                    emailInput.value = '';
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        newsletterSuccess.style.display = 'none';
+                    }, 5000);
+                }, 500);
             }
         });
+    }
+    
+    // Email validation helper
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
     }
     
     // Deal button click tracking
