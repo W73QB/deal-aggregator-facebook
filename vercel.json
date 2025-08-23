@@ -1,6 +1,36 @@
 {
   "redirects": [
     {
+      "source": "/about.html",
+      "destination": "/pages/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html", 
+      "destination": "/pages/contact.html",
+      "permanent": true
+    },
+    {
+      "source": "/privacy.html",
+      "destination": "/pages/privacy.html", 
+      "permanent": true
+    },
+    {
+      "source": "/affiliate-disclosure.html",
+      "destination": "/pages/affiliate-disclosure.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog.html",
+      "destination": "/pages/blog.html",
+      "permanent": true
+    },
+    {
+      "source": "/deals.html",
+      "destination": "/pages/deals.html",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.dealradarus.com" }],
       "destination": "https://dealradarus.com/$1",

@@ -24,7 +24,7 @@
                     <li><a href="deals.html" class="nav-link">Deals</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="/pages/about.html" class="nav-link">About</a></li>
-                    <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span><span></span><span></span>
@@ -84,7 +84,7 @@
                     <ul>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="/pages/contact.html">Contact</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="/pages/about.html">About Us</a></li>
                     </ul>
                 </div>

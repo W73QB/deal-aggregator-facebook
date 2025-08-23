@@ -150,14 +150,14 @@
     <header class="header" role="banner">
         <nav class="navbar" role="navigation" aria-label="Main navigation">
             <div class="nav-container">
-                <a href="index.html" class="logo" aria-label="DealRadarUS Home">
+                <a href="/" class="logo" aria-label="DealRadarUS Home">
                     <img src="../assets/logo-concept.svg" alt="DealRadarUS Logo" width="160" height="48" class="logo-img">
                 </a>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="deals.html" class="nav-link">Deals</a></li>
                     <li><a href="blog.html" class="nav-link active" aria-current="page">Blog</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="/pages/about.html" class="nav-link">About</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 <form class="search-container" role="search" aria-label="Search articles">
@@ -527,7 +527,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <a href="index.html" class="logo footer-logo" aria-label="DealRadarUS Home">
+                    <a href="/" class="logo footer-logo" aria-label="DealRadarUS Home">
                         <img src="../assets/logo-concept.svg" alt="DealRadarUS Logo" width="150" height="45" class="footer-logo-image">
                     </a>
                     <p>Your trusted source for the best tech deals in the US.</p>
@@ -539,7 +539,7 @@
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="/pages/about.html">About Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
