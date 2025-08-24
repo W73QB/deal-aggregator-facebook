@@ -53,7 +53,32 @@
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
-    
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+
+      // Cấu hình cơ bản
+      gtag("config", "G-9ZVTTTBD03", {
+        "anonymize_ip": true,   // Ẩn IP để tuân thủ GDPR
+        "send_page_view": true  // Tự động gửi page_view
+      });
+
+      // Theo dõi click ra ngoài (outbound link) - quan trọng cho affiliate
+      document.addEventListener("click", function(e) {
+        let link = e.target.closest("a");
+        if (link && link.hostname !== window.location.hostname) {
+          gtag("event", "click_outbound", {
+            "event_category": "outbound",
+            "event_label": link.href,
+            "transport_type": "beacon"
+          });
+        }
+      });
+    </script>    
     <!-- Structured Data - Product Deals -->
     <script type="application/ld+json">
     {
