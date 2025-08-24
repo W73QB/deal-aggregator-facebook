@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# GA4 ID Validation Pre-commit Hook
+echo "🔍 Validating GA4 tracking IDs before commit..."
+
+# Check for any GA4 measurement IDs (G-XXXXXXXXXX format) in staged files
+STAGED_HTML_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.html$' || true)
+
+if [ -z "$STAGED_HTML_FILES" ]; then
+  echo "ℹ️ No HTML files in staging area, skipping GA4 validation"
+  exit 0
+fi
+
+echo "📝 Checking HTML files: $STAGED_HTML_FILES"
+
+# Search for GA4 IDs in staged files
+GA4_ISSUES=""
+
+for file in $STAGED_HTML_FILES; do
+  if [ -f "$file" ]; then
+    # Check for unauthorized GA4 IDs
+    UNAUTHORIZED=$(grep -n "G-[A-Z0-9]\{10\}" "$file" | grep -v "G-9ZVTTTBD03" || true)
+    
+    if [ -n "$UNAUTHORIZED" ]; then
+      GA4_ISSUES="$GA4_ISSUES\n❌ File: $file\n$UNAUTHORIZED\n"
+    fi
+    
+    # Check for missing guard if GA4 config exists
+    if grep -q "gtag.*config.*G-9ZVTTTBD03" "$file"; then
+      if ! grep -q "__GA4_LOADED__" "$file"; then
+        GA4_ISSUES="$GA4_ISSUES\n⚠️ File: $file - GA4 config without duplicate load guard\n"
+      fi
+    fi
+  fi
+done
+
+if [ -n "$GA4_ISSUES" ]; then
+  echo "🚨 GA4 VALIDATION FAILED:"
+  echo -e "$GA4_ISSUES"
+  echo ""
+  echo "🔧 To fix:"
+  echo "  1. Remove any GA4 IDs other than G-9ZVTTTBD03"
+  echo "  2. Ensure all GA4 configs have __GA4_LOADED__ guards"
+  echo "  3. Only use the authorized GA4 tracking ID: G-9ZVTTTBD03"
+  echo ""
+  echo "❌ Commit blocked. Please fix the issues above."
+  exit 1
+fi
+
+echo "✅ GA4 validation passed - all tracking IDs are authorized"
+exit 0

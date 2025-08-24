@@ -1,0 +1,36 @@
+    <!-- Google tag (gtag.js) with duplicate-load guard -->
+    <script>
+      // GA4 One-time Load Guard
+      if (!window.__GA4_LOADED__) {
+        window.__GA4_LOADED__ = true;
+        
+        // Load gtag.js script
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03';
+        document.head.appendChild(script);
+        
+        // Initialize GA4
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+
+        // Cấu hình cơ bản - chỉ G-9ZVTTTBD03
+        gtag("config", "G-9ZVTTTBD03", {
+          "anonymize_ip": true,   // Ẩn IP để tuân thủ GDPR
+          "send_page_view": true  // Tự động gửi page_view
+        });
+
+        // Theo dõi click ra ngoài (outbound link) - quan trọng cho affiliate
+        document.addEventListener("click", function(e) {
+          let link = e.target.closest("a");
+          if (link && link.hostname !== window.location.hostname) {
+            gtag("event", "click_outbound", {
+              "event_category": "outbound",
+              "event_label": link.href,
+              "transport_type": "beacon"
+            });
+          }
+        });
+      }
+    </script>
