@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - DealRadarUS</title>
-    <meta name="description" content="Get in touch with the DealRadarUS team. Contact us for inquiries, feedback, or deal submissions.">
-    <link rel="canonical" href="https://dealradarus.com/pages/contact.html">
+    <title>About Us - DealRadarUS</title>
+    <meta name="description" content="Learn about DealRadarUS, our mission to find the best tech deals, and the team behind the radar.">
+    <link rel="canonical" href="https://dealradarus.com/pages/about.html">
     <link rel="icon" href="/favicon.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="../css/styles.css?v=navcss_1756000709" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03"></script>
@@ -48,8 +48,8 @@
                     <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="deals.html" class="nav-link">Deals</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="/pages/about.html" class="nav-link">About</a></li>
-                    <li><a href="/pages/contact.html" class="nav-link active" aria-current="page">Contact</a></li>
+                    <li><a href="/pages/about.html" class="nav-link active" aria-current="page">About</a></li>
+                    <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 <button class="hamburger" aria-controls="site-nav" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span><span></span><span></span>
@@ -60,29 +60,18 @@
 
     <main class="container" style="padding: 4rem 1rem;">
         <div class="text-content" style="max-width: 800px; margin: auto; text-align: center;">
-            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Contact Us</h1>
-            <p style="font-size: 1.2rem; color: #555; margin-bottom: 2rem;">We'd love to hear from you!</p>
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">About DealRadarUS</h1>
+            <p style="font-size: 1.2rem; color: #555; margin-bottom: 2rem;">Your Trusted Source for Tech Deals.</p>
             
-            <div style="text-align: left; background: #f9f9f9; padding: 2rem; border-radius: 8px;">
-                <h2>Get in Touch</h2>
-                <p>For partnership inquiries, feedback, or to report an issue with a deal, please email us directly or use the form below.</p>
-                <p><strong>Email:</strong> <a href="mailto:contact@dealradarus.com">contact@dealradarus.com</a></p>
-                <hr style="margin: 2rem 0;">
-                <form action="#" method="POST">
-                    <div style="margin-bottom: 1rem;">
-                        <label for="name" style="display: block; margin-bottom: 0.5rem;">Name</label>
-                        <input type="text" id="name" name="name" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label for="email" style="display: block; margin-bottom: 0.5rem;">Email</label>
-                        <input type="email" id="email" name="email" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label for="message" style="display: block; margin-bottom: 0.5rem;">Message</label>
-                        <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-                    </div>
-                    <button type="submit" class="cta-button primary">Send Message</button>
-                </form>
+            <div style="text-align: left;">
+                <h2>Our Mission</h2>
+                <p>In a world flooded with endless products and fluctuating prices, finding a genuine deal can be overwhelming. Our mission at DealRadarUS is simple: to scan the digital marketplace with precision and bring you only the best, most valuable deals on refurbished and open-box technology. We believe that everyone deserves access to quality tech without paying premium prices.</p>
+
+                <h2>What We Do</h2>
+                <p>Our team, a mix of tech enthusiasts and savvy shoppers, works tirelessly to analyze hundreds of deals every day. We cut through the noise, filtering out the duds and highlighting the gems. From powerful laptops for professionals to smart home devices that simplify your life, we put every deal under the microscope to ensure it offers real value and quality.</p>
+
+                <h2>Our Team</h2>
+                <p>DealRadarUS was founded by a small group of friends who were passionate about technology and frustrated with the hunt for good deals. Today, our team has grown to include experienced developers, writers, and deal hunters dedicated to making tech more accessible for everyone. Our diverse backgrounds in technology, e-commerce, and consumer advocacy help us provide comprehensive deal analysis and recommendations.</p>
             </div>
         </div>
     </main>
