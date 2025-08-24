@@ -1,36 +1,53 @@
 (function () {
-  console.log('[nav] script loaded');
   document.addEventListener('DOMContentLoaded', function () {
-    console.log('[nav] DOM ready');
     var hamburger = document.querySelector('.hamburger');
     var nav = document.querySelector('.nav-menu');
-    console.log('[nav] hamburger found?', !!hamburger);
-    console.log('[nav] nav found?', !!nav);
+    var firstLink = nav ? nav.querySelector('.nav-link') : null;
 
     if (!hamburger || !nav) return;
 
+    function openMenu() {
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.classList.add('active');
+      nav.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if (firstLink) firstLink.focus();
+      if (typeof gtag !== 'undefined') gtag('event', 'nav_menu_open');
+    }
+
+    function closeMenu() {
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.classList.remove('active');
+      nav.classList.remove('active');
+      document.body.style.overflow = '';
+      if (typeof gtag !== 'undefined') gtag('event', 'nav_menu_close');
+      hamburger.focus();
+    }
+
     function toggleMenu() {
-      console.log('[nav] toggleMenu called');
-      var expanded = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', (!expanded).toString());
-      hamburger.classList.toggle('active');
-      nav.classList.toggle('active');
-      console.log('[nav] hamburger active?', hamburger.classList.contains('active'));
-      console.log('[nav] nav active?', nav.classList.contains('active'));
-      console.log('[nav] aria-expanded:', hamburger.getAttribute('aria-expanded'));
+      hamburger.classList.contains('active') ? closeMenu() : openMenu();
     }
 
     hamburger.addEventListener('click', toggleMenu);
-    console.log('[nav] click event listener attached');
 
-    // Close menu when clicking on nav links
-    var navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(function(link) {
-      link.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        nav.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
+    // Close on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && hamburger.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+
+    // Click outside to close
+    document.addEventListener('click', function(e) {
+      if (!hamburger.classList.contains('active')) return;
+      if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close after clicking a menu item
+    nav.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
     });
 
     // Newsletter form handling

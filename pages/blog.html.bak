@@ -55,7 +55,7 @@
     <link rel="alternate" type="application/rss+xml" title="DealRadarUS Blog RSS" href="/feed.xml">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/styles.css?v=navcss_1756000709" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03"></script>
@@ -212,7 +212,7 @@
         <div class="container">
             <article class="article-featured" itemscope itemtype="https://schema.org/BlogPosting">
                 <div class="article-image">
-                    <img src="https://via.placeholder.com/800x400/1A73E8/ffffff?text=MacBook+vs+Windows" alt="Side-by-side comparison of MacBook Pro and Windows laptop showing specs and features" class="deal-image" itemprop="image">
+                    <img src="https://placehold.co/800x400/1A73E8/ffffff?text=MacBook+vs+Windows" alt="Side-by-side comparison of MacBook Pro and Windows laptop showing specs and features" class="deal-image" itemprop="image">
                     <div class="article-category">Buying Guide</div>
                 </div>
                 <div class="article-content">
@@ -263,7 +263,7 @@
                 <!-- Article 1 -->
                 <article class="article-card" data-category="reviews" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/1A73E8/ffffff?text=iPhone+14+Review" alt="iPhone 14 Pro on desk with testing equipment and review notes" itemprop="image">
+                        <img src="https://placehold.co/400x250/1A73E8/ffffff?text=iPhone+14+Review" alt="iPhone 14 Pro on desk with testing equipment and review notes" itemprop="image">
                         <div class="article-category">Review</div>
                     </div>
                     <div class="article-content">
@@ -289,7 +289,7 @@
                 <!-- Article 2 -->
                 <article class="article-card" data-category="guides" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/1A73E8/ffffff?text=Smart+Home+Setup" alt="Modern living room with smart home devices including Echo, smart lights, and security camera" itemprop="image">
+                        <img src="https://placehold.co/400x250/1A73E8/ffffff?text=Smart+Home+Setup" alt="Modern living room with smart home devices including Echo, smart lights, and security camera" itemprop="image">
                         <div class="article-category">Guide</div>
                     </div>
                     <div class="article-content">
@@ -315,7 +315,7 @@
                 <!-- Article 3 -->
                 <article class="article-card" data-category="deals" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/1A73E8/ffffff?text=Gaming+Deals" alt="Gaming laptop with RGB keyboard and graphics showcasing RTX 4060 performance benchmarks" itemprop="image">
+                        <img src="https://placehold.co/400x250/1A73E8/ffffff?text=Gaming+Deals" alt="Gaming laptop with RGB keyboard and graphics showcasing RTX 4060 performance benchmarks" itemprop="image">
                         <div class="article-category">Deal Analysis</div>
                     </div>
                     <div class="article-content">
@@ -341,7 +341,7 @@
                 <!-- Article 4 -->
                 <article class="article-card" data-category="tips" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/1A73E8/ffffff?text=Refurbished+Tips" alt="Hands inspecting refurbished laptop with checklist and magnifying glass showing quality assessment" itemprop="image">
+                        <img src="https://placehold.co/400x250/1A73E8/ffffff?text=Refurbished+Tips" alt="Hands inspecting refurbished laptop with checklist and magnifying glass showing quality assessment" itemprop="image">
                         <div class="article-category">Tips</div>
                     </div>
                     <div class="article-content">
@@ -367,7 +367,7 @@
                 <!-- Article 5 -->
                 <article class="article-card" data-category="reviews" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/1A73E8/ffffff?text=AirPods+Pro+2" alt="AirPods Pro 2nd generation in open box next to new retail package with sound quality testing equipment" itemprop="image">
+                        <img src="https://placehold.co/400x250/1A73E8/ffffff?text=AirPods+Pro+2" alt="AirPods Pro 2nd generation in open box next to new retail package with sound quality testing equipment" itemprop="image">
                         <div class="article-category">Review</div>
                     </div>
                     <div class="article-content">
@@ -393,7 +393,7 @@
                 <!-- Article 6 -->
                 <article class="article-card" data-category="guides" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/1A73E8/ffffff?text=Monitor+Setup" alt="Dual monitor workspace setup with open-box monitors, cables, and productivity tools arranged on desk" itemprop="image">
+                        <img src="https://placehold.co/400x250/1A73E8/ffffff?text=Monitor+Setup" alt="Dual monitor workspace setup with open-box monitors, cables, and productivity tools arranged on desk" itemprop="image">
                         <div class="article-category">Guide</div>
                     </div>
                     <div class="article-content">
@@ -419,7 +419,7 @@
                 <!-- Article 7 -->
                 <article class="article-card" data-category="reviews" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/1A73E8/ffffff?text=ThinkPad+X1+Carbon" alt="Refurbished ThinkPad X1 Carbon laptop showing build quality inspection and performance benchmarks" itemprop="image">
+                        <img src="https://placehold.co/400x250/1A73E8/ffffff?text=ThinkPad+X1+Carbon" alt="Refurbished ThinkPad X1 Carbon laptop showing build quality inspection and performance benchmarks" itemprop="image">
                         <div class="article-category">Review</div>
                     </div>
                     <div class="article-content">
@@ -449,7 +449,7 @@
                 <!-- Article 8 -->
                 <article class="article-card" data-category="guides" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/1A73E8/ffffff?text=Smart+Home+Security" alt="Smart home security system setup with cameras, sensors, and mobile app dashboard showing monitoring features" itemprop="image">
+                        <img src="https://placehold.co/400x250/1A73E8/ffffff?text=Smart+Home+Security" alt="Smart home security system setup with cameras, sensors, and mobile app dashboard showing monitoring features" itemprop="image">
                         <div class="article-category">Guide</div>
                     </div>
                     <div class="article-content">
@@ -479,7 +479,7 @@
                 <!-- Article 9 (Refurbished Tech) -->
                 <article class="article-card" data-category="reviews" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/34A853/ffffff?text=Refurbished+Pixel+8" alt="A refurbished Google Pixel 8 phone being inspected for quality." itemprop="image">
+                        <img src="https://placehold.co/400x250/34A853/ffffff?text=Refurbished+Pixel+8" alt="A refurbished Google Pixel 8 phone being inspected for quality." itemprop="image">
                         <div class="article-category">Refurbished Tech</div>
                     </div>
                     <div class="article-content">
@@ -502,7 +502,7 @@
                 <!-- Article 10 (Smart Home) -->
                 <article class="article-card" data-category="guides" itemscope itemtype="https://schema.org/BlogPosting">
                     <div class="article-image">
-                        <img src="https://via.placeholder.com/400x250/F9AB00/ffffff?text=Smart+Lighting" alt="A living room showing off a smart lighting setup with multiple colors." itemprop="image">
+                        <img src="https://placehold.co/400x250/F9AB00/ffffff?text=Smart+Lighting" alt="A living room showing off a smart lighting setup with multiple colors." itemprop="image">
                         <div class="article-category">Smart Home</div>
                     </div>
                     <div class="article-content">
@@ -596,7 +596,7 @@
         </div>
     </footer>
 
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js?v=navfix_1756000219"></script>
     <script src="../js/blog.js"></script>
 </body>
 </html>
