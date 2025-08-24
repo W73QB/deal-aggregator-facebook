@@ -1098,3 +1098,17 @@ body {
         display: none;
     }
 }
+
+/* --- Mobile nav hard override --- */
+@media (max-width: 768px) {
+    #site-nav.nav-menu.active {
+        display: flex !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        z-index: 1000;
+        flex-direction: column;
+    }
+}
