@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - DealRadarUS | Tech Reviews, Guides & Deal Analysis</title>
     <meta name="description" content="Expert tech reviews, buying guides, and deal analysis. Get insider tips on refurbished electronics, smart home devices, and the best tech deals.">
-    <link rel="canonical" href="https://dealradarus.com/blog.html">
+    <link rel="canonical" href="https://dealradarus.com/pages/blog.html">
     <link rel="icon" href="/favicon.ico">
     
+    <!-- GA4: G-XXXXXXX placeholder -->
+    <!-- TODO: Replace with actual GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX');
+    </script>
     
     <!-- GSC Verification: meta name="google-site-verification" content="TODO" -->
     <meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE_HERE">
@@ -53,18 +62,50 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Blog",
-        "name": "DealRadarUS Blog",
-        "description": "Expert tech reviews, buying guides, and deal analysis for refurbished electronics and smart home devices.",
-        "url": "https://dealradarus.com/blog.html",
-        "publisher": {
-            "@type": "Organization",
-            "name": "DealRadarUS",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://dealradarus.com/logo-concept.svg"
+        "@graph": [
+            {
+                "@type": "Blog",
+                "name": "DealRadarUS Blog",
+                "description": "Expert tech reviews, buying guides, and deal analysis for refurbished electronics and smart home devices.",
+                "url": "https://dealradarus.com/pages/blog.html",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "DealRadarUS",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://dealradarus.com/assets/logo-concept.svg"
+                    }
+                },
+                "blogPost": [
+                    {
+                        "@type": "BlogPosting",
+                        "headline": "MacBook vs Windows Laptops: 2025 Buying Guide for Refurbished Tech",
+                        "datePublished": "2025-08-15",
+                        "author": {
+                            "@type": "Organization",
+                            "name": "DealRadarUS"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "DealRadarUS"
+                        }
+                    },
+                    {
+                        "@type": "BlogPosting",
+                        "headline": "iPhone 14 Pro Refurbished: Is It Worth It in 2025?",
+                        "datePublished": "2025-08-10",
+                        "author": {
+                            "@type": "Organization",
+                            "name": "DealRadarUS"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "DealRadarUS"
+                        }
+                    }
+                ]
             }
-        }
+        ]
     }
     </script>
     

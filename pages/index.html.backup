@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DealRadarUS - Your Radar for the Best Deals in the US</title>
     <meta name="description" content="Discover amazing discounts on refurbished tech, smart home devices, and open-box electronics. Daily deals from trusted retailers with up to 70% off.">
-    <link rel="canonical" href="https://dealradarus.com/">
     <link rel="icon" href="/favicon.ico">
     
+    <!-- GA4: G-XXXXXXX placeholder -->
+    <!-- TODO: Replace with actual GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX');
+    </script>
     
     <!-- GSC Verification: meta name="google-site-verification" content="TODO" -->
     <meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE_HERE">
@@ -77,15 +85,15 @@
     <header class="header" role="banner">
         <nav class="navbar" role="navigation" aria-label="Main navigation">
             <div class="nav-container">
-                <a href="index.html" class="logo" aria-label="DealRadarUS Home">
+                <a href="/" class="logo" aria-label="DealRadarUS Home">
                     <img src="../assets/logo-concept.svg" alt="DealRadarUS Logo" width="200" height="60" class="logo-image">
                 </a>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
+                    <li><a href="/" class="nav-link" aria-current="page">Home</a></li>
                     <li><a href="deals.html" class="nav-link">Deals</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="/pages/about.html" class="nav-link">About</a></li>
+                    <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 <div class="search-container">
                     <label for="search-input" class="sr-only">Search deals</label>
@@ -190,7 +198,7 @@
             <h2 class="section-title">Latest Deals</h2>
             <div class="deals-grid">
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/300x200/1A73E8/ffffff?text=iPhone+14" alt="iPhone 14 Pro Max Refurbished" class="deal-image">
+                    <img src="https://placehold.co/300x200/1A73E8/ffffff?text=iPhone+14" alt="iPhone 14 Pro Max Refurbished" class="deal-image">
                     <div class="deal-info">
                         <h3 class="deal-title">iPhone 14 Pro Max Refurbished</h3>
                         <div class="deal-pricing">
@@ -201,7 +209,7 @@
                     </div>
                 </div>
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/300x200/1A73E8/ffffff?text=Amazon+Echo" alt="Amazon Echo Dot 5th Generation" class="deal-image">
+                    <img src="https://placehold.co/300x200/1A73E8/ffffff?text=Amazon+Echo" alt="Amazon Echo Dot 5th Generation" class="deal-image">
                     <div class="deal-info">
                         <h3 class="deal-title">Amazon Echo Dot (5th Gen)</h3>
                         <div class="deal-pricing">
@@ -212,7 +220,7 @@
                     </div>
                 </div>
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/300x200/1A73E8/ffffff?text=Gaming+Monitor" alt="27 inch Gaming Monitor 144Hz" class="deal-image">
+                    <img src="https://placehold.co/300x200/1A73E8/ffffff?text=Gaming+Monitor" alt="27 inch Gaming Monitor 144Hz" class="deal-image">
                     <div class="deal-info">
                         <h3 class="deal-title">27" Gaming Monitor 144Hz</h3>
                         <div class="deal-pricing">
@@ -223,7 +231,7 @@
                     </div>
                 </div>
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/300x200/1A73E8/ffffff?text=AirPods+Pro" alt="AirPods Pro 2nd Generation" class="deal-image">
+                    <img src="https://placehold.co/300x200/1A73E8/ffffff?text=AirPods+Pro" alt="AirPods Pro 2nd Generation" class="deal-image">
                     <div class="deal-info">
                         <h3 class="deal-title">AirPods Pro (2nd Gen)</h3>
                         <div class="deal-pricing">
@@ -243,14 +251,12 @@
             <div class="newsletter-content">
                 <h2 id="newsletter-title">Get the Hottest Deals Daily</h2>
                 <p>Join 50,000+ deal hunters and never miss a great offer again!</p>
-                <form class="newsletter-form" action="/api/newsletter" method="POST" aria-label="Newsletter signup">
+                <!-- TODO: Connect newsletter form to backend service (Mailchimp/ConvertKit) -->
+                <form class="newsletter-form" aria-label="Newsletter signup">
                     <label for="newsletter-email" class="sr-only">Email address</label>
-                    <input type="email" id="newsletter-email" name="email" placeholder="Enter your email address" required aria-describedby="newsletter-note">
+                    <input type="email" id="newsletter-email" placeholder="Enter your email address" required aria-describedby="newsletter-note">
                     <button type="submit">Subscribe Now</button>
                 </form>
-                <div id="newsletter-success" class="newsletter-success" style="display: none; color: #28a745; margin-top: 1rem;">
-                    ✅ Thanks for subscribing! Check your email to confirm.
-                </div>
                 <p id="newsletter-note" class="newsletter-note">No spam, unsubscribe at any time</p>
             </div>
         </div>
@@ -285,7 +291,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <a href="index.html" class="logo footer-logo" aria-label="DealRadarUS Home">
+                    <a href="/" class="logo footer-logo" aria-label="DealRadarUS Home">
                         <img src="../assets/logo-concept.svg" alt="DealRadarUS Logo" width="150" height="45" class="footer-logo-image">
                     </a>
                     <p>Your trusted source for the best tech deals in the US.</p>
@@ -295,8 +301,8 @@
                     <ul>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="/pages/contact.html">Contact</a></li>
+                        <li><a href="/pages/about.html">About Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -330,4 +336,4 @@
 
     <script src="../js/script.js"></script>
 </body>
-</html># CI/CD Test - Sat Aug 23 19:44:37 +07 2025
+</html>
