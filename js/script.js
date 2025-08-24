@@ -1,18 +1,27 @@
 (function () {
+  console.log('[nav] script loaded');
   document.addEventListener('DOMContentLoaded', function () {
+    console.log('[nav] DOM ready');
     var hamburger = document.querySelector('.hamburger');
     var nav = document.querySelector('.nav-menu');
+    console.log('[nav] hamburger found?', !!hamburger);
+    console.log('[nav] nav found?', !!nav);
 
     if (!hamburger || !nav) return;
 
     function toggleMenu() {
+      console.log('[nav] toggleMenu called');
       var expanded = hamburger.getAttribute('aria-expanded') === 'true';
       hamburger.setAttribute('aria-expanded', (!expanded).toString());
       hamburger.classList.toggle('active');
       nav.classList.toggle('active');
+      console.log('[nav] hamburger active?', hamburger.classList.contains('active'));
+      console.log('[nav] nav active?', nav.classList.contains('active'));
+      console.log('[nav] aria-expanded:', hamburger.getAttribute('aria-expanded'));
     }
 
     hamburger.addEventListener('click', toggleMenu);
+    console.log('[nav] click event listener attached');
 
     // Close menu when clicking on nav links
     var navLinks = document.querySelectorAll('.nav-link');

@@ -510,7 +510,7 @@
         </div>
     </footer>
 
-    <script src="../js/script.js?v=navfix_1756000219"></script>
+    <script src="../js/script.js"></script>
     <script>
         // Query preselect for category filter
         document.addEventListener('DOMContentLoaded', function() {
