@@ -56,7 +56,32 @@
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
-    <link href="../css/blog.css" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+
+      // Cấu hình cơ bản
+      gtag("config", "G-9ZVTTTBD03", {
+        "anonymize_ip": true,   // Ẩn IP để tuân thủ GDPR
+        "send_page_view": true  // Tự động gửi page_view
+      });
+
+      // Theo dõi click ra ngoài (outbound link) - quan trọng cho affiliate
+      document.addEventListener("click", function(e) {
+        let link = e.target.closest("a");
+        if (link && link.hostname !== window.location.hostname) {
+          gtag("event", "click_outbound", {
+            "event_category": "outbound",
+            "event_label": link.href,
+            "transport_type": "beacon"
+          });
+        }
+      });
+    </script>    <link href="../css/blog.css" rel="stylesheet">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -153,7 +178,7 @@
                 <a href="/" class="logo" aria-label="DealRadarUS Home">
                     <img src="../assets/logo-concept.svg" alt="DealRadarUS Logo" width="160" height="48" class="logo-img">
                 </a>
-                <ul class="nav-menu">
+                <ul id="site-nav" class="nav-menu">
                     <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="deals.html" class="nav-link">Deals</a></li>
                     <li><a href="blog.html" class="nav-link active" aria-current="page">Blog</a></li>
@@ -165,7 +190,7 @@
                     <input type="search" id="search-input" placeholder="Search articles..." class="search-input" aria-label="Search for articles">
                     <button type="submit" class="search-icon" aria-label="Search"><i class="fas fa-search"></i></button>
                 </form>
-                <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <button class="hamburger" aria-controls="site-nav" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>

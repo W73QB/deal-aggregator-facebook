@@ -1009,3 +1009,92 @@ body {
 .footer .footer-section a:hover {
     color: #ffffff !important;
 }
+
+/* === Mobile Navigation === */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        z-index: 1000;
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-menu li {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-menu .nav-link {
+        display: block;
+        padding: 12px 20px;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+    }
+    
+    .nav-menu .nav-link:hover,
+    .nav-menu .nav-link.active {
+        background-color: #f5f5f5;
+        color: #1a73e8;
+    }
+
+    .hamburger {
+        display: inline-flex;
+        width: 32px;
+        height: 32px;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        flex-direction: column;
+    }
+    
+    .hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        margin: 2px 0;
+        background: #111;
+        transition: transform .2s, opacity .2s;
+        border-radius: 1px;
+    }
+    
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    /* Hide search container on very small screens */
+    .search-container {
+        display: none;
+    }
+}
+
+/* Desktop hamburger should be hidden */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+}

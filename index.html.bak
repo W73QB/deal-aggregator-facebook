@@ -8,14 +8,30 @@
     <link rel="canonical" href="https://dealradarus.com/">
     <link rel="icon" href="/favicon.ico">
     
-    <!-- GA4: G-XXXXXXX placeholder -->
-    <!-- TODO: Replace with actual GA4 Measurement ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXX');
+
+      // Cấu hình cơ bản
+      gtag('config', 'G-9ZVTTTBD03', {
+        'anonymize_ip': true,   // Ẩn IP để tuân thủ GDPR
+        'send_page_view': true  // Tự động gửi page_view
+      });
+
+      // Theo dõi click ra ngoài (outbound link) - quan trọng cho affiliate
+      document.addEventListener('click', function(e) {
+        let link = e.target.closest('a');
+        if (link && link.hostname !== window.location.hostname) {
+          gtag('event', 'click_outbound', {
+            'event_category': 'outbound',
+            'event_label': link.href,
+            'transport_type': 'beacon'
+          });
+        }
+      });
     </script>
     
     <!-- GSC Verification: meta name="google-site-verification" content="TODO" -->
@@ -89,19 +105,19 @@
                 <a href="/" class="logo" aria-label="DealRadarUS Home">
                     <img src="../assets/logo-concept.svg" alt="DealRadarUS Logo" width="200" height="60" class="logo-image">
                 </a>
-                <ul class="nav-menu">
+                <ul id="site-nav" class="nav-menu">
                     <li><a href="/" class="nav-link" aria-current="page">Home</a></li>
                     <li><a href="deals.html" class="nav-link">Deals</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="/pages/about.html" class="nav-link">About</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 <div class="search-container">
                     <label for="search-input" class="sr-only">Search deals</label>
                     <input type="text" id="search-input" placeholder="Search deals..." class="search-input" aria-label="Search for deals">
                     <button type="button" class="search-icon" aria-label="Search"><i class="fas fa-search"></i></button>
                 </div>
-                <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -304,7 +320,7 @@
                     <ul>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/pages/contact.html">Contact</a></li>
                         <li><a href="/pages/about.html">About Us</a></li>
                     </ul>
                 </div>
