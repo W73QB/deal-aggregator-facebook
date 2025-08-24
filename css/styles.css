@@ -1099,10 +1099,14 @@ body {
     }
 }
 
-/* --- Mobile nav hard override --- */
+/* --- Mobile nav optimized --- */
 @media (max-width: 768px) {
-    #site-nav.nav-menu.active {
-        display: flex !important;
+    header .nav-container #site-nav.nav-menu {
+        display: none;
+    }
+    
+    header .nav-container #site-nav.nav-menu.active {
+        display: flex;
         position: absolute;
         top: 100%;
         left: 0;
@@ -1110,5 +1114,16 @@ body {
         background: #fff;
         z-index: 1000;
         flex-direction: column;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        border-top: 1px solid #eee;
+    }
+    
+    .hamburger {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
     }
 }

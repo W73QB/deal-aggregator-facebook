@@ -198,7 +198,7 @@
             <h2 class="section-title">Latest Deals</h2>
             <div class="deals-grid">
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/300x200/1A73E8/ffffff?text=iPhone+14" alt="iPhone 14 Pro Max Refurbished" class="deal-image">
+                    <img src="https://placehold.co/300x200/1A73E8/ffffff?text=iPhone+14" alt="iPhone 14 Pro Max Refurbished" class="deal-image">
                     <div class="deal-info">
                         <h3 class="deal-title">iPhone 14 Pro Max Refurbished</h3>
                         <div class="deal-pricing">
@@ -209,7 +209,7 @@
                     </div>
                 </div>
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/300x200/1A73E8/ffffff?text=Amazon+Echo" alt="Amazon Echo Dot 5th Generation" class="deal-image">
+                    <img src="https://placehold.co/300x200/1A73E8/ffffff?text=Amazon+Echo" alt="Amazon Echo Dot 5th Generation" class="deal-image">
                     <div class="deal-info">
                         <h3 class="deal-title">Amazon Echo Dot (5th Gen)</h3>
                         <div class="deal-pricing">
@@ -220,7 +220,7 @@
                     </div>
                 </div>
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/300x200/1A73E8/ffffff?text=Gaming+Monitor" alt="27 inch Gaming Monitor 144Hz" class="deal-image">
+                    <img src="https://placehold.co/300x200/1A73E8/ffffff?text=Gaming+Monitor" alt="27 inch Gaming Monitor 144Hz" class="deal-image">
                     <div class="deal-info">
                         <h3 class="deal-title">27" Gaming Monitor 144Hz</h3>
                         <div class="deal-pricing">
@@ -231,7 +231,7 @@
                     </div>
                 </div>
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/300x200/1A73E8/ffffff?text=AirPods+Pro" alt="AirPods Pro 2nd Generation" class="deal-image">
+                    <img src="https://placehold.co/300x200/1A73E8/ffffff?text=AirPods+Pro" alt="AirPods Pro 2nd Generation" class="deal-image">
                     <div class="deal-info">
                         <h3 class="deal-title">AirPods Pro (2nd Gen)</h3>
                         <div class="deal-pricing">
