@@ -13,7 +13,21 @@ Header always set Referrer-Policy "strict-origin-when-cross-origin"
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Remove trailing .html extension
+# Clean URL routing - map clean paths to actual files
+RewriteRule ^deals/?$ deals.html [NC,L]
+RewriteRule ^blog/?$ blog.html [NC,L]
+RewriteRule ^contact/?$ pages/contact.html [NC,L]
+RewriteRule ^privacy-policy/?$ pages/privacy.html [NC,L]
+RewriteRule ^affiliate-disclosure/?$ pages/affiliate-disclosure.html [NC,L]
+RewriteRule ^terms-of-service/?$ pages/terms-of-service.html [NC,L]
+
+# Category deal pages
+RewriteRule ^deals/refurbished/?$ deals.html?category=refurbished [NC,L]
+RewriteRule ^deals/smart-home/?$ deals.html?category=smart-home [NC,L]
+RewriteRule ^deals/open-box/?$ deals.html?category=open-box [NC,L]
+RewriteRule ^deals/trending/?$ deals.html?category=trending [NC,L]
+
+# Remove trailing .html extension for other files
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^.]+)$ $1.html [NC,L]
