@@ -153,6 +153,22 @@
     {
       "source": "/deals/trending/",
       "destination": "/deals.html?category=trending"
+    },
+    {
+      "source": "/blog/seo-trending-deals-2025",
+      "destination": "/blog/seo-trending-deals-2025.html"
+    },
+    {
+      "source": "/blog/seo-trending-deals-2025/",
+      "destination": "/blog/seo-trending-deals-2025.html"
+    },
+    {
+      "source": "/blog/affiliate-shopping-tips",
+      "destination": "/blog/affiliate-shopping-tips.html"
+    },
+    {
+      "source": "/blog/affiliate-shopping-tips/",
+      "destination": "/blog/affiliate-shopping-tips.html"
     }
   ],
   "headers": [
