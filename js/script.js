@@ -87,5 +87,104 @@
         }
       });
     }
+
+    // === ENHANCED DEAL CARDS: Countdown Timer Functionality ===
+    function initCountdownTimers() {
+      const countdownTimers = document.querySelectorAll('.countdown-timer');
+      
+      countdownTimers.forEach(function(timer) {
+        const endTime = timer.getAttribute('data-end');
+        if (!endTime) return;
+        
+        const targetDate = new Date(endTime).getTime();
+        
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = targetDate - now;
+          
+          if (distance < 0) {
+            timer.innerHTML = '<span class="timer-label">Deal Expired</span>';
+            return;
+          }
+          
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          
+          const timerDisplay = timer.querySelector('.timer-display');
+          if (timerDisplay) {
+            const dayUnit = timerDisplay.querySelector('.time-unit:nth-child(1) .number');
+            const hourUnit = timerDisplay.querySelector('.time-unit:nth-child(3) .number');
+            const minuteUnit = timerDisplay.querySelector('.time-unit:nth-child(5) .number');
+            
+            if (dayUnit) dayUnit.textContent = String(days).padStart(2, '0');
+            if (hourUnit) hourUnit.textContent = String(hours).padStart(2, '0');
+            if (minuteUnit) minuteUnit.textContent = String(minutes).padStart(2, '0');
+          }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 60000); // Update every minute
+      });
+    }
+
+    // === ENHANCED DEAL CARDS: Rating Stars Animation ===
+    function initRatingStars() {
+      const ratingElements = document.querySelectorAll('.deal-rating .stars');
+      
+      ratingElements.forEach(function(stars) {
+        stars.addEventListener('mouseenter', function() {
+          stars.style.transform = 'scale(1.1)';
+          stars.style.transition = 'transform 0.2s ease';
+        });
+        
+        stars.addEventListener('mouseleave', function() {
+          stars.style.transform = 'scale(1)';
+        });
+      });
+    }
+
+    // === ENHANCED DEAL CARDS: Enhanced CTA Tracking ===
+    function initEnhancedCTATracking() {
+      const enhancedCTAs = document.querySelectorAll('.deal-button.enhanced-cta');
+      
+      enhancedCTAs.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+          const dealCard = button.closest('.deal-card');
+          const dealTitle = dealCard.querySelector('.deal-title');
+          const dealPrice = dealCard.querySelector('.new-price');
+          const isFlashDeal = dealCard.classList.contains('flash-deal');
+          const isFeatured = dealCard.classList.contains('featured');
+          
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'enhanced_deal_click', {
+              'event_category': 'deals',
+              'event_label': dealTitle ? dealTitle.textContent : 'Unknown Deal',
+              'value': dealPrice ? parseFloat(dealPrice.textContent.replace(/[^\d.]/g, '')) : 0,
+              'deal_type': isFlashDeal ? 'flash' : (isFeatured ? 'featured' : 'regular'),
+              'transport_type': 'beacon'
+            });
+          }
+        });
+      });
+    }
+
+    // === ENHANCED DEAL CARDS: Affiliate Disclosure Compliance ===
+    function initAffiliateDisclosureCompliance() {
+      const affiliateBadges = document.querySelectorAll('.badge-affiliate');
+      
+      affiliateBadges.forEach(function(badge) {
+        badge.addEventListener('mouseenter', function() {
+          badge.title = 'This is an affiliate link. We may earn a commission from qualifying purchases at no extra cost to you.';
+        });
+      });
+    }
+
+    // Initialize all enhanced deal card features
+    initCountdownTimers();
+    initRatingStars();
+    initEnhancedCTATracking();
+    initAffiliateDisclosureCompliance();
+
   });
 })();
