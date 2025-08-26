@@ -1,0 +1,173 @@
+name: Auto-merge feature/hotfix → main
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Nhánh muốn gộp vào main (vd: hotfix/remove-cicd-debugline)"
+        required: true
+      merge_method:
+        description: "Phương thức merge: squash | merge | rebase"
+        required: true
+        default: "squash"
+      conflict_policy:
+        description: "Xử lý conflict: keep_feature | keep_main | manual"
+        required: true
+        default: "manual"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Tránh chạy chồng
+concurrency:
+  group: automerge-${{ github.repository }}-${{ inputs.target_branch || 'manual' }}
+  cancel-in-progress: false
+
+jobs:
+  prepare-and-pr:
+    runs-on: ubuntu-latest
+    outputs:
+      pr_number: ${{ steps.create-pr.outputs.pull-request-number }}
+      clean_merge: ${{ steps.detect.outputs.clean_merge }}
+      tmp_branch: ${{ steps.detect.outputs.tmp_branch }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate target branch exists
+        id: validate
+        shell: bash
+        run: |
+          set -euo pipefail
+          BR="${{ inputs.target_branch }}"
+          if ! git ls-remote --heads origin "${BR}" >/dev/null; then
+            echo "::error::Target branch '${BR}' không tồn tại trên origin"
+            exit 1
+          fi
+
+      - name: Prepare merge attempt (dry-run + optional conflict resolution)
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=main
+          HEAD="${{ inputs.target_branch }}"
+          TMP="auto-merge/${HEAD//\//-}-into-${BASE}"
+          echo "tmp_branch=$TMP" >> $GITHUB_OUTPUT
+
+          git fetch origin --prune
+          git checkout -B "$TMP" "origin/$BASE"
+
+          set +e
+          git merge --no-commit --no-ff "origin/$HEAD"
+          status=$?
+          set -e
+
+          if [ $status -eq 0 ]; then
+            echo "clean_merge=true" >> $GITHUB_OUTPUT
+            git commit -m "chore(auto-merge): $HEAD → $BASE (clean)"
+          else
+            echo "clean_merge=false" >> $GITHUB_OUTPUT
+            echo "⚠️ Conflict detected on $HEAD → $BASE"
+
+            case "${{ inputs.conflict_policy }}" in
+              keep_feature)
+                git ls-files --unmerged | awk '{print $4}' | sort -u | while read -r f; do
+                  git checkout --theirs -- "$f" || true
+                  git add "$f" || true
+                done
+                ;;
+              keep_main)
+                git ls-files --unmerged | awk '{print $4}' | sort -u | while read -r f; do
+                  git checkout --ours -- "$f" || true
+                  git add "$f" || true
+                done
+                ;;
+              manual)
+                echo "Manual conflict resolution required" > .automerge-conflicts.txt
+                git add .automerge-conflicts.txt
+                ;;
+              *)
+                echo "::error::conflict_policy không hợp lệ (keep_feature|keep_main|manual)"
+                exit 1
+                ;;
+            esac
+
+            git commit -m "chore(auto-merge): resolve conflicts via policy=${{ inputs.conflict_policy }}"
+            # safety: kiểm tra còn marker không
+            if grep -R "<<<<<<<" -n .; then
+              echo "::error::Conflict markers còn tồn tại sau khi resolve"
+              exit 1
+            fi
+          fi
+
+          git push origin "HEAD:$TMP" --force-with-lease
+
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "auto-merge: ${{ inputs.target_branch }} → main"
+          body: |
+            Auto PR tạo bởi workflow.
+            - Base: `main`
+            - Head: `${{ inputs.target_branch }}`
+            - Temp branch: `${{ steps.detect.outputs.tmp_branch }}`
+            - Merge method: `${{ inputs.merge_method }}`
+            - Conflict policy: `${{ inputs.conflict_policy }}`
+            - Clean merge: `${{ steps.detect.outputs.clean_merge }}`
+          branch: ${{ steps.detect.outputs.tmp_branch }}
+          base: main
+          labels: automerge, bot
+          delete-branch: false
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "PR #${{ steps.create-pr.outputs.pull-request-number }}"
+          echo "Clean merge: ${{ steps.detect.outputs.clean_merge }}"
+          echo "Temp branch: ${{ steps.detect.outputs.tmp_branch }}"
+
+  enable-automerge:
+    needs: prepare-and-pr
+    if: needs.prepare-and-pr.outputs.clean_merge == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable auto-merge (only clean merges)
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ needs.prepare-and-pr.outputs.pr_number }}
+          merge-method: ${{ inputs.merge_method }}
+
+  comment-when-manual:
+    needs: prepare-and-pr
+    if: needs.prepare-and-pr.outputs.clean_merge != 'true' && inputs.conflict_policy == 'manual'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment instructions for manual conflict resolution
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number("${{ needs.prepare-and-pr.outputs.pr_number }}"),
+              body: [
+                "⚠️ Merge có conflict và `conflict_policy=manual`.",
+                "Vui lòng dùng **Resolve conflicts** hoặc xử lý trên branch:",
+                "",
+                "```bash",
+                "git fetch origin",
+                "git checkout ${{ needs.prepare-and-pr.outputs.tmp_branch }}",
+                "git merge origin/${{ inputs.target_branch }}",
+                "# giải quyết conflict, rồi:",
+                "git commit && git push",
+                "```"
+              ].join("\n")
+            })
