@@ -1,0 +1,62 @@
+{
+  "redirects": [
+    {
+      "source": "/about.html",
+      "destination": "/pages/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html", 
+      "destination": "/pages/contact.html",
+      "permanent": true
+    },
+    {
+      "source": "/privacy.html",
+      "destination": "/pages/privacy.html", 
+      "permanent": true
+    },
+    {
+      "source": "/affiliate-disclosure.html",
+      "destination": "/pages/affiliate-disclosure.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog.html",
+      "destination": "/pages/blog.html",
+      "permanent": true
+    },
+    {
+      "source": "/deals.html",
+      "destination": "/pages/deals.html",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.dealradarus.com" }],
+      "destination": "https://dealradarus.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "header", "key": "x-forwarded-proto", "value": "http" }],
+      "destination": "https://dealradarus.com/$1",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(css|js|png|jpg|jpeg|gif|svg|webp)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}
