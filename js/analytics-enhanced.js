@@ -1,5 +1,5 @@
 /**
- * =Ê DealRadarUS - Enhanced GA4 Analytics Tracking
+ * =ï¿½ DealRadarUS - Enhanced GA4 Analytics Tracking
  * Comprehensive event tracking for user interactions
  */
 
@@ -56,10 +56,21 @@ document.addEventListener('DOMContentLoaded', function() {
         dealCards.forEach(card => impressionObserver.observe(card));
     }
 
-    // Social media click tracking
+    // Email and Social media click tracking
     document.addEventListener('click', function(e) {
         let link = e.target.closest('a');
         if (link) {
+            // Track mailto: clicks
+            if (link.href.startsWith('mailto:')) {
+                const email = (link.getAttribute('href').match(/mailto:([^?]+)/)||[])[1] || 'unknown';
+                gtag('event', 'mailto_click', {
+                    'event_category': 'engagement',
+                    'event_label': email,
+                    'value': 1
+                });
+            }
+            
+            // Track social media clicks
             var socialRegex = /facebook\.com|twitter\.com|instagram\.com|linkedin\.com|youtube\.com/i;
             
             if (socialRegex.test(link.href)) {
@@ -80,5 +91,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    console.log('=Ê DealRadarUS Enhanced Analytics loaded successfully');
+    console.log('=ï¿½ DealRadarUS Enhanced Analytics loaded successfully');
 });

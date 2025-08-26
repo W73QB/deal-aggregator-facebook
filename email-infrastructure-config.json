@@ -1,0 +1,29 @@
+{
+  "emailInfrastructure": {
+    "primary": "deals@dealradarus.com",
+    "domain": "dealradarus.com",
+    "aliases": {
+      "support@dealradarus.com": "deals@dealradarus.com",
+      "contact@dealradarus.com": "deals@dealradarus.com", 
+      "info@dealradarus.com": "deals@dealradarus.com",
+      "admin@dealradarus.com": "deals@dealradarus.com",
+      "hello@dealradarus.com": "deals@dealradarus.com"
+    },
+    "espConfig": {
+      "provider": "SendGrid|Mailgun|SES",
+      "defaultFrom": "deals@dealradarus.com",
+      "defaultReplyTo": "deals@dealradarus.com",
+      "domainAuthentication": "dealradarus.com",
+      "envVars": {
+        "EMAIL_FROM": "deals@dealradarus.com",
+        "SMTP_USER": "deals@dealradarus.com",
+        "MAIL_FROM_ADDRESS": "deals@dealradarus.com",
+        "SUPPORT_EMAIL": "deals@dealradarus.com"
+      }
+    },
+    "analytics": {
+      "ga4Events": ["mailto_click"],
+      "trackingEmail": "deals@dealradarus.com"
+    }
+  }
+}
