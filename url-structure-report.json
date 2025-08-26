@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-26T07:19:12.182Z",
+  "urlMappings": {
+    "/index.html": "/",
+    "/home.html": "/",
+    "/deals.html": "/deals/",
+    "/blog.html": "/blog/",
+    "/pages/index.html": "/",
+    "/pages/deals.html": "/deals/",
+    "/pages/blog.html": "/blog/",
+    "/pages/contact.html": "/contact/",
+    "/pages/affiliate-disclosure.html": "/affiliate-disclosure/",
+    "/pages/privacy-policy.html": "/privacy-policy/",
+    "/pages/terms-of-service.html": "/terms-of-service/",
+    "/deals.html?category=refurbished": "/deals/refurbished/",
+    "/deals.html?category=smart-home": "/deals/smart-home/",
+    "/deals.html?category=open-box": "/deals/open-box/",
+    "/deals.html?category=trending": "/deals/trending/"
+  },
+  "internalLinksUpdated": 44,
+  "filesGenerated": [
+    ".htaccess",
+    "_redirects",
+    "url-config.json"
+  ],
+  "seoBenefits": [
+    "Clean URLs without .html extension",
+    "301 redirects preserve SEO value",
+    "Canonical URLs prevent duplicate content",
+    "Optimized internal linking structure",
+    "Performance optimizations included"
+  ]
+}

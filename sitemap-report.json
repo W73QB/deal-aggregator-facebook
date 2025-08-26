@@ -1,0 +1,80 @@
+{
+  "timestamp": "2025-08-26T07:20:12.330Z",
+  "baseUrl": "https://dealradarus.com",
+  "totalUrls": 11,
+  "sitePages": [
+    {
+      "url": "https://dealradarus.com/",
+      "priority": 1,
+      "changefreq": "daily",
+      "description": "Homepage"
+    },
+    {
+      "url": "https://dealradarus.com/deals/",
+      "priority": 0.9,
+      "changefreq": "daily",
+      "description": "Deals page"
+    },
+    {
+      "url": "https://dealradarus.com/blog/",
+      "priority": 0.8,
+      "changefreq": "weekly",
+      "description": "Blog page"
+    },
+    {
+      "url": "https://dealradarus.com/contact/",
+      "priority": 0.6,
+      "changefreq": "monthly",
+      "description": "Contact page"
+    },
+    {
+      "url": "https://dealradarus.com/affiliate-disclosure/",
+      "priority": 0.4,
+      "changefreq": "monthly",
+      "description": "Affiliate disclosure"
+    },
+    {
+      "url": "https://dealradarus.com/privacy-policy/",
+      "priority": 0.4,
+      "changefreq": "monthly",
+      "description": "Privacy policy"
+    },
+    {
+      "url": "https://dealradarus.com/terms-of-service/",
+      "priority": 0.4,
+      "changefreq": "monthly",
+      "description": "Terms of service"
+    },
+    {
+      "url": "https://dealradarus.com/deals/refurbished/",
+      "priority": 0.7,
+      "changefreq": "daily",
+      "description": "Refurbished deals"
+    },
+    {
+      "url": "https://dealradarus.com/deals/smart-home/",
+      "priority": 0.7,
+      "changefreq": "daily",
+      "description": "Smart home deals"
+    },
+    {
+      "url": "https://dealradarus.com/deals/open-box/",
+      "priority": 0.7,
+      "changefreq": "daily",
+      "description": "Open box deals"
+    },
+    {
+      "url": "https://dealradarus.com/deals/trending/",
+      "priority": 0.8,
+      "changefreq": "hourly",
+      "description": "Trending deals"
+    }
+  ],
+  "seoNotes": [
+    "Homepage has highest priority (1.0)",
+    "Deals pages have high priority (0.7-0.9) with frequent updates",
+    "Legal pages have lower priority (0.4) with monthly updates",
+    "Trending deals update hourly for maximum SEO benefit",
+    "All URLs use clean structure without .html extensions"
+  ]
+}

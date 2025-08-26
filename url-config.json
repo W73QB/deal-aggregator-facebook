@@ -1,0 +1,30 @@
+{
+  "canonicalUrls": {
+    "/index.html": "https://dealradarus.com/",
+    "/home.html": "https://dealradarus.com/",
+    "/deals.html": "https://dealradarus.com/deals/",
+    "/blog.html": "https://dealradarus.com/blog/",
+    "/pages/contact.html": "https://dealradarus.com/contact/",
+    "/pages/affiliate-disclosure.html": "https://dealradarus.com/affiliate-disclosure/"
+  },
+  "baseUrl": "https://dealradarus.com",
+  "cleanUrls": true,
+  "redirectMappings": {
+    "/index.html": "/",
+    "/home.html": "/",
+    "/deals.html": "/deals/",
+    "/blog.html": "/blog/",
+    "/pages/index.html": "/",
+    "/pages/deals.html": "/deals/",
+    "/pages/blog.html": "/blog/",
+    "/pages/contact.html": "/contact/",
+    "/pages/affiliate-disclosure.html": "/affiliate-disclosure/",
+    "/pages/privacy-policy.html": "/privacy-policy/",
+    "/pages/terms-of-service.html": "/terms-of-service/",
+    "/deals.html?category=refurbished": "/deals/refurbished/",
+    "/deals.html?category=smart-home": "/deals/smart-home/",
+    "/deals.html?category=open-box": "/deals/open-box/",
+    "/deals.html?category=trending": "/deals/trending/"
+  },
+  "seoOptimized": true
+}
