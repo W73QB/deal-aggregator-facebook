@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-08-26T07:15:12.261Z",
+  "filesProcessed": 7,
+  "totalLinksFixed": 8,
+  "followLinksFixed": 6,
+  "shareLinksFixed": 2,
+  "socialUrls": {
+    "facebook": "https://www.facebook.com/DealRadarUS?utm_source=website&utm_medium=social&utm_campaign=footer_follow",
+    "twitter": "https://twitter.com/DealRadarUS?utm_source=website&utm_medium=social&utm_campaign=footer_follow",
+    "instagram": "https://instagram.com/DealRadarUS?utm_source=website&utm_medium=social&utm_campaign=footer_follow",
+    "linkedin": "https://linkedin.com/company/dealradarus?utm_source=website&utm_medium=social&utm_campaign=footer_follow",
+    "youtube": "https://youtube.com/@DealRadarUS?utm_source=website&utm_medium=social&utm_campaign=footer_follow",
+    "pinterest": "https://pinterest.com/DealRadarUS?utm_source=website&utm_medium=social&utm_campaign=footer_follow",
+    "reddit": "https://reddit.com/r/DealRadarUS?utm_source=website&utm_medium=social&utm_campaign=footer_follow"
+  }
+}

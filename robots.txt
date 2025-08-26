@@ -1,16 +1,30 @@
+# DealRadarUS - Robots.txt
+# SEO-optimized for clean URL structure
+
 User-agent: *
 Allow: /
 
-# Disallow admin and private paths
+# Prioritize important pages for crawling
+Allow: /deals/
+Allow: /blog/
+Allow: /contact/
+Allow: /affiliate-disclosure/
+Allow: /privacy-policy/
+Allow: /terms-of-service/
+
+# Block sensitive or unnecessary areas
 Disallow: /admin/
 Disallow: /config/
 Disallow: /node_modules/
 Disallow: /.git/
 Disallow: /handoff/
 Disallow: /scripts/
+Disallow: /temp/
+Disallow: /test/
+Disallow: /*.json$
 
-# Allow specific public paths
-Allow: /deal-aggregator/platforms/website/
+# Sitemap location (updated to real domain)
+Sitemap: https://dealradarus.com/sitemap.xml
 
-# Sitemap location
-Sitemap: https://example.com/sitemap.xml
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
