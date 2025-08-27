@@ -1,0 +1,1883 @@
+{
+  "summary": {
+    "totalLinks": 46,
+    "checkedLinks": 46,
+    "validLinks": 39,
+    "invalidLinks": 7,
+    "issuesFound": 0,
+    "affiliateLinks": 0,
+    "placeholderLinks": 0
+  },
+  "details": [
+    {
+      "url": "https://www.amazon.com/dp/B0B3C2R8MP?tag=dealradarus-20&linkCode=osi&th=1",
+      "originalUrl": "https://www.amazon.com/dp/B0B3C2R8MP?tag=dealradarus-20&linkCode=osi&th=1",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "tag": "dealradarus-20",
+        "linkCode": "osi",
+        "th": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "th"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "tag",
+          "linkCode",
+          "th"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.574Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.amazon.com/dp/B09B8V1LZ3?tag=dealradarus-20&linkCode=osi&th=1",
+      "originalUrl": "https://www.amazon.com/dp/B09B8V1LZ3?tag=dealradarus-20&linkCode=osi&th=1",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "tag": "dealradarus-20",
+        "linkCode": "osi",
+        "th": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "th"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "tag",
+          "linkCode",
+          "th"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.574Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.bestbuy.com/site/6425559.p?skuId=6425559&ref=212&loc=1&gclid=dealradarus",
+      "originalUrl": "https://www.bestbuy.com/site/6425559.p?skuId=6425559&ref=212&loc=1&gclid=dealradarus",
+      "domain": "www.bestbuy.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": {
+        "network": "bestbuy",
+        "domains": [
+          "bestbuy.com",
+          "bestbuy.ca"
+        ],
+        "detectedDomain": "www.bestbuy.com"
+      },
+      "params": {
+        "skuId": "6425559",
+        "ref": "212",
+        "loc": "1",
+        "gclid": "dealradarus"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "skuId",
+          "loc"
+        ],
+        "requiredParams": [
+          "ref"
+        ],
+        "optionalParams": [
+          "gclid",
+          "irclickid"
+        ],
+        "presentParams": [
+          "skuId",
+          "ref",
+          "loc",
+          "gclid"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.574Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.ebay.com/itm/apple-airpods-pro-2nd-generation?mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5338722076&toolid=10001&mkevt=1",
+      "originalUrl": "https://www.ebay.com/itm/apple-airpods-pro-2nd-generation?mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5338722076&toolid=10001&mkevt=1",
+      "domain": "www.ebay.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": {
+        "network": "ebay",
+        "domains": [
+          "ebay.com",
+          "ebay.ca"
+        ],
+        "detectedDomain": "www.ebay.com"
+      },
+      "params": {
+        "mkcid": "1",
+        "mkrid": "711-53200-19255-0",
+        "siteid": "0",
+        "campid": "5338722076",
+        "toolid": "10001",
+        "mkevt": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "siteid",
+          "toolid"
+        ],
+        "requiredParams": [
+          "mkcid",
+          "campid"
+        ],
+        "optionalParams": [
+          "mkevt",
+          "mkcid",
+          "mkrid",
+          "customid"
+        ],
+        "presentParams": [
+          "mkcid",
+          "mkrid",
+          "siteid",
+          "campid",
+          "toolid",
+          "mkevt"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.574Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://electronics.woot.com/offers/nintendo-switch-oled-console-refurbished?ref=mwj_cd_deal",
+      "originalUrl": "https://electronics.woot.com/offers/nintendo-switch-oled-console-refurbished?ref=mwj_cd_deal",
+      "domain": "electronics.woot.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": {
+        "network": "woot",
+        "domains": [
+          "woot.com"
+        ],
+        "detectedDomain": "electronics.woot.com"
+      },
+      "params": {
+        "ref": "mwj_cd_deal"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [],
+        "requiredParams": [],
+        "optionalParams": [
+          "ref"
+        ],
+        "presentParams": [
+          "ref"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.575Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.amazon.com/dp/B08QTXZQMD?tag=dealradarus-20&linkCode=osi&th=1",
+      "originalUrl": "https://www.amazon.com/dp/B08QTXZQMD?tag=dealradarus-20&linkCode=osi&th=1",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "tag": "dealradarus-20",
+        "linkCode": "osi",
+        "th": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "th"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "tag",
+          "linkCode",
+          "th"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.575Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.575Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.575Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.575Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.575Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.575Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/index.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.577Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/index.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.577Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/index.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.577Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deal-aggregator/platforms/website/pages/index.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.577Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.amazon.com/dp/B09B8V1LZ3?tag=dealradarus-20&linkCode=osi&th=1",
+      "originalUrl": "https://www.amazon.com/dp/B09B8V1LZ3?tag=dealradarus-20&linkCode=osi&th=1",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "tag": "dealradarus-20",
+        "linkCode": "osi",
+        "th": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "th"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "tag",
+          "linkCode",
+          "th"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.578Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.bestbuy.com/site/6425559.p?skuId=6425559&ref=212&loc=1&gclid=dealradarus",
+      "originalUrl": "https://www.bestbuy.com/site/6425559.p?skuId=6425559&ref=212&loc=1&gclid=dealradarus",
+      "domain": "www.bestbuy.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": {
+        "network": "bestbuy",
+        "domains": [
+          "bestbuy.com",
+          "bestbuy.ca"
+        ],
+        "detectedDomain": "www.bestbuy.com"
+      },
+      "params": {
+        "skuId": "6425559",
+        "ref": "212",
+        "loc": "1",
+        "gclid": "dealradarus"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "skuId",
+          "loc"
+        ],
+        "requiredParams": [
+          "ref"
+        ],
+        "optionalParams": [
+          "gclid",
+          "irclickid"
+        ],
+        "presentParams": [
+          "skuId",
+          "ref",
+          "loc",
+          "gclid"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.578Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://electronics.woot.com/offers/nintendo-switch-oled-console-refurbished?ref=mwj_cd_deal",
+      "originalUrl": "https://electronics.woot.com/offers/nintendo-switch-oled-console-refurbished?ref=mwj_cd_deal",
+      "domain": "electronics.woot.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": {
+        "network": "woot",
+        "domains": [
+          "woot.com"
+        ],
+        "detectedDomain": "electronics.woot.com"
+      },
+      "params": {
+        "ref": "mwj_cd_deal"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [],
+        "requiredParams": [],
+        "optionalParams": [
+          "ref"
+        ],
+        "presentParams": [
+          "ref"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.578Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.amazon.com/dp/B08QTXZQMD?tag=dealradarus-20&linkCode=osi&th=1",
+      "originalUrl": "https://www.amazon.com/dp/B08QTXZQMD?tag=dealradarus-20&linkCode=osi&th=1",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "tag": "dealradarus-20",
+        "linkCode": "osi",
+        "th": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "th"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "tag",
+          "linkCode",
+          "th"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.578Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.578Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.578Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.579Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.579Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.579Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "home.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.581Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "home.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.581Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "home.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.581Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "home.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.581Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.bestbuy.com/site/shop/27-inch-gaming-monitor?ref=dealradarus&utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://www.bestbuy.com/site/shop/27-inch-gaming-monitor?ref=dealradarus&utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "www.bestbuy.com",
+      "linkText": "Get Deal",
+      "sourcePath": "index.html",
+      "affiliate": {
+        "network": "bestbuy",
+        "domains": [
+          "bestbuy.com",
+          "bestbuy.ca"
+        ],
+        "detectedDomain": "www.bestbuy.com"
+      },
+      "params": {
+        "ref": "dealradarus",
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign"
+        ],
+        "requiredParams": [
+          "ref"
+        ],
+        "optionalParams": [
+          "gclid",
+          "irclickid"
+        ],
+        "presentParams": [
+          "ref",
+          "utm_source",
+          "utm_medium",
+          "utm_campaign"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.582Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.amazon.com/Apple-Generation-Cancelling-Transparency-Personalized/dp/B0CHWRXH8B?ref=dealradarus&utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://www.amazon.com/Apple-Generation-Cancelling-Transparency-Personalized/dp/B0CHWRXH8B?ref=dealradarus&utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "index.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "ref": "dealradarus",
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [
+          "tag"
+        ],
+        "extraParams": [
+          "ref",
+          "utm_source",
+          "utm_medium",
+          "utm_campaign"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "ref",
+          "utm_source",
+          "utm_medium",
+          "utm_campaign"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.582Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.amazon.com/dp/B0B3C2R8MP?tag=dealradarus-20&linkCode=osi&th=1",
+      "originalUrl": "https://www.amazon.com/dp/B0B3C2R8MP?tag=dealradarus-20&linkCode=osi&th=1",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "tag": "dealradarus-20",
+        "linkCode": "osi",
+        "th": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "th"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "tag",
+          "linkCode",
+          "th"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.amazon.com/dp/B09B8V1LZ3?tag=dealradarus-20&linkCode=osi&th=1",
+      "originalUrl": "https://www.amazon.com/dp/B09B8V1LZ3?tag=dealradarus-20&linkCode=osi&th=1",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "tag": "dealradarus-20",
+        "linkCode": "osi",
+        "th": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "th"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "tag",
+          "linkCode",
+          "th"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.bestbuy.com/site/6425559.p?skuId=6425559&ref=212&loc=1&gclid=dealradarus",
+      "originalUrl": "https://www.bestbuy.com/site/6425559.p?skuId=6425559&ref=212&loc=1&gclid=dealradarus",
+      "domain": "www.bestbuy.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": {
+        "network": "bestbuy",
+        "domains": [
+          "bestbuy.com",
+          "bestbuy.ca"
+        ],
+        "detectedDomain": "www.bestbuy.com"
+      },
+      "params": {
+        "skuId": "6425559",
+        "ref": "212",
+        "loc": "1",
+        "gclid": "dealradarus"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "skuId",
+          "loc"
+        ],
+        "requiredParams": [
+          "ref"
+        ],
+        "optionalParams": [
+          "gclid",
+          "irclickid"
+        ],
+        "presentParams": [
+          "skuId",
+          "ref",
+          "loc",
+          "gclid"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.ebay.com/itm/apple-airpods-pro-2nd-generation?mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5338722076&toolid=10001&mkevt=1",
+      "originalUrl": "https://www.ebay.com/itm/apple-airpods-pro-2nd-generation?mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5338722076&toolid=10001&mkevt=1",
+      "domain": "www.ebay.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": {
+        "network": "ebay",
+        "domains": [
+          "ebay.com",
+          "ebay.ca"
+        ],
+        "detectedDomain": "www.ebay.com"
+      },
+      "params": {
+        "mkcid": "1",
+        "mkrid": "711-53200-19255-0",
+        "siteid": "0",
+        "campid": "5338722076",
+        "toolid": "10001",
+        "mkevt": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "siteid",
+          "toolid"
+        ],
+        "requiredParams": [
+          "mkcid",
+          "campid"
+        ],
+        "optionalParams": [
+          "mkevt",
+          "mkcid",
+          "mkrid",
+          "customid"
+        ],
+        "presentParams": [
+          "mkcid",
+          "mkrid",
+          "siteid",
+          "campid",
+          "toolid",
+          "mkevt"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://electronics.woot.com/offers/nintendo-switch-oled-console-refurbished?ref=mwj_cd_deal",
+      "originalUrl": "https://electronics.woot.com/offers/nintendo-switch-oled-console-refurbished?ref=mwj_cd_deal",
+      "domain": "electronics.woot.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": {
+        "network": "woot",
+        "domains": [
+          "woot.com"
+        ],
+        "detectedDomain": "electronics.woot.com"
+      },
+      "params": {
+        "ref": "mwj_cd_deal"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [],
+        "requiredParams": [],
+        "optionalParams": [
+          "ref"
+        ],
+        "presentParams": [
+          "ref"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://www.amazon.com/dp/B08QTXZQMD?tag=dealradarus-20&linkCode=osi&th=1",
+      "originalUrl": "https://www.amazon.com/dp/B08QTXZQMD?tag=dealradarus-20&linkCode=osi&th=1",
+      "domain": "www.amazon.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": {
+        "network": "amazon",
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.co.uk"
+        ],
+        "detectedDomain": "www.amazon.com"
+      },
+      "params": {
+        "tag": "dealradarus-20",
+        "linkCode": "osi",
+        "th": "1"
+      },
+      "validation": {
+        "isValid": true,
+        "missingParams": [],
+        "extraParams": [
+          "th"
+        ],
+        "requiredParams": [
+          "tag"
+        ],
+        "optionalParams": [
+          "linkCode",
+          "camp",
+          "creative",
+          "creativeASIN"
+        ],
+        "presentParams": [
+          "tag",
+          "linkCode",
+          "th"
+        ]
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "originalUrl": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/deals.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "archive",
+        "utm_campaign": "grid"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.586Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/index.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.587Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/index.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.587Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/index.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.587Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "originalUrl": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "domain": "example.com",
+      "linkText": "Get Deal",
+      "sourcePath": "pages/index.html",
+      "affiliate": null,
+      "params": {
+        "utm_source": "site",
+        "utm_medium": "grid",
+        "utm_campaign": "latest"
+      },
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ],
+      "extractedAt": "2025-08-26T22:32:32.587Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    },
+    {
+      "url": "https://dealradarus.com",
+      "originalUrl": "https://dealradarus.com",
+      "domain": "dealradarus.com",
+      "linkText": "https://dealradarus.com",
+      "sourcePath": "pages/terms-of-service.html",
+      "affiliate": null,
+      "params": {},
+      "validation": {
+        "isValid": false,
+        "missingParams": [],
+        "extraParams": []
+      },
+      "issues": [],
+      "extractedAt": "2025-08-26T22:32:32.588Z",
+      "status": "extracted",
+      "httpStatus": null,
+      "responseTime": null,
+      "redirectChain": [],
+      "checkedAt": null
+    }
+  ],
+  "issues": [
+    {
+      "url": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deal-aggregator/platforms/website/pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deal-aggregator/platforms/website/pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deal-aggregator/platforms/website/pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deal-aggregator/platforms/website/pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deal-aggregator/platforms/website/pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "deal-aggregator/platforms/website/pages/index.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "deal-aggregator/platforms/website/pages/index.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "deal-aggregator/platforms/website/pages/index.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "deal-aggregator/platforms/website/pages/index.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "home.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "home.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "home.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "home.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/airfryer-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/kindle-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/vacuum-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/soundbar-deal?utm_source=site&utm_medium=archive&utm_campaign=grid",
+      "file": "pages/deals.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/iphone14-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "pages/index.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/echo-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "pages/index.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/monitor-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "pages/index.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    },
+    {
+      "url": "https://example.com/airpods-deal?utm_source=site&utm_medium=grid&utm_campaign=latest",
+      "file": "pages/index.html",
+      "issues": [
+        "Blocked domain detected: example.com",
+        "Placeholder URL - needs to be replaced with real affiliate link"
+      ]
+    }
+  ],
+  "affiliate": {
+    "networks": {
+      "amazon": 9,
+      "bestbuy": 4,
+      "ebay": 2,
+      "woot": 3
+    },
+    "validation": {}
+  },
+  "timestamp": "2025-08-26T22:32:32.545Z"
+}

@@ -1,0 +1,105 @@
+{
+  "timestamp": "2025-08-26T22:35:32.462Z",
+  "domain": "dealradarus.com",
+  "checks": [
+    {
+      "url": "https://dealradarus.com/",
+      "description": "Homepage accessibility",
+      "status": 200,
+      "headers": {
+        "contentType": "text/html; charset=utf-8",
+        "lastModified": "Tue, 26 Aug 2025 11:57:23 GMT",
+        "server": "Vercel"
+      },
+      "success": true
+    },
+    {
+      "url": "https://dealradarus.com/sitemap.xml",
+      "description": "Sitemap accessibility",
+      "status": 200,
+      "headers": {
+        "contentType": "application/xml",
+        "lastModified": "Tue, 26 Aug 2025 11:57:34 GMT",
+        "server": "Vercel"
+      },
+      "success": true
+    },
+    {
+      "url": "https://dealradarus.com/robots.txt",
+      "description": "Robots.txt accessibility",
+      "status": 200,
+      "headers": {
+        "contentType": "text/plain; charset=utf-8",
+        "lastModified": "Tue, 26 Aug 2025 12:49:55 GMT",
+        "server": "Vercel"
+      },
+      "success": true
+    },
+    {
+      "url": "https://dealradarus.com/deals/",
+      "description": "Deals page accessibility",
+      "status": 200,
+      "headers": {
+        "contentType": "text/html; charset=utf-8",
+        "lastModified": "Tue, 26 Aug 2025 11:56:16 GMT",
+        "server": "Vercel"
+      },
+      "success": true
+    },
+    {
+      "url": "https://dealradarus.com/blog/",
+      "description": "Blog page accessibility",
+      "status": 200,
+      "headers": {
+        "contentType": "text/html; charset=utf-8",
+        "lastModified": "Tue, 26 Aug 2025 11:57:35 GMT",
+        "server": "Vercel"
+      },
+      "success": true
+    },
+    {
+      "url": "https://dealradarus.com/contact/",
+      "description": "Contact page accessibility",
+      "status": 200,
+      "headers": {
+        "contentType": "text/html; charset=utf-8",
+        "lastModified": "Tue, 26 Aug 2025 11:56:17 GMT",
+        "server": "Vercel"
+      },
+      "success": true
+    },
+    {
+      "url": "https://dealradarus.com/sitemap.xml",
+      "description": "Sitemap content validation",
+      "success": true,
+      "details": {
+        "urlCount": 11,
+        "hasValidStructure": true,
+        "hasRequiredUrls": true,
+        "contentLength": 2179
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "warnings": 0
+  },
+  "recommendations": [
+    {
+      "type": "success",
+      "message": "All pre-submission checks passed! Ready for GSC setup."
+    },
+    {
+      "type": "info",
+      "message": "Complete GSC setup checklist",
+      "action": "Follow manual steps in GSC-SUBMISSION-REPORT.md"
+    },
+    {
+      "type": "info",
+      "message": "Monitor indexing progress",
+      "action": "Check GSC daily for first 2 weeks after submission"
+    }
+  ]
+}
