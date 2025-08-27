@@ -1,0 +1,13 @@
+{
+  "admin": {
+    "id": "cf7d35c3-65d1-42a9-aecc-42662a57caa6",
+    "email": "deals@dealradarus.com",
+    "role": "admin",
+    "email_verified": true,
+    "created_at": "2025-08-27T04:08:17.538Z",
+    "updated_at": "2025-08-27T04:08:17.538Z"
+  },
+  "temp_password_notice": "⚠️ Generated ADMIN_TEMP_PASSWORD — copy & store securely",
+  "database_url_source": ".env.dealradarus.local",
+  "operation": "UPSERT_ADMIN_USER"
+}
