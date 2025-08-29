@@ -1,4 +1,4 @@
-export default function handler(req, res) {
+module.exports = (req, res) => {
   const VERIFY_TOKEN = process.env.FACEBOOK_WEBHOOK_VERIFY_TOKEN;
 
   if (req.method === 'GET') {
@@ -19,4 +19,4 @@ export default function handler(req, res) {
 
   res.setHeader('Allow', 'GET, POST');
   res.status(405).end('Method Not Allowed');
-}
+};
