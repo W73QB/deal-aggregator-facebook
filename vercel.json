@@ -6,5 +6,15 @@
     { "src": "/api/hello", "dest": "/api/hello.js" },
     { "src": "/api/webhooks/facebook", "dest": "/api/webhooks/facebook.js" },
     { "src": "/.*", "status": 404 }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-API-Version", "value": "1.0" }
+      ]
+    }
   ]
 }
