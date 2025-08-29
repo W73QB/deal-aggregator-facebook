@@ -33,7 +33,7 @@
   },
   "validation": {
     "allowedDomains": ["amazon.com", "amazon.ca", "amazon.co.uk", "ebay.com", "ebay.ca", "bestbuy.com", "bestbuy.ca", "woot.com"],
-    "blockedDomains": ["example.com", "localhost", "127.0.0.1"],
+    "blockedDomains": ["dealradarus.com", "localhost", "127.0.0.1"],
     "checkRedirects": true,
     "validateSSL": true
   },

@@ -1,0 +1,79 @@
+.rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating-star {
+  color: #e0e0e0;
+  transition: color 0.2s ease, transform 0.1s ease;
+  user-select: none;
+}
+
+.rating-star--filled {
+  color: #ffd700;
+}
+
+.rating-star--half {
+  background: linear-gradient(90deg, #ffd700 50%, #e0e0e0 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.rating-star--interactive {
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.rating-star--interactive:hover {
+  color: #ffd700;
+  transform: scale(1.1);
+}
+
+.rating-star--interactive:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Size variants */
+.rating-star--small {
+  font-size: 14px;
+}
+
+.rating-star--medium {
+  font-size: 18px;
+}
+
+.rating-star--large {
+  font-size: 24px;
+}
+
+.rating-value {
+  margin-left: 6px;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .rating-star {
+    transition: none;
+  }
+  
+  .rating-star--interactive:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .rating-star--filled {
+    color: #000;
+  }
+  
+  .rating-star {
+    color: #666;
+  }
+}

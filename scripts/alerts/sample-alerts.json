@@ -1,0 +1,223 @@
+{
+  "alerting": {
+    "enabled": true,
+    "check_interval_minutes": 5,
+    "notification_config": {
+      "email": {
+        "enabled": true,
+        "recipients": ["deals@dealradarus.com"],
+        "from": "alerts@dealradarus.com",
+        "subject_prefix": "[DealRadarUS Alert]"
+      },
+      "console": {
+        "enabled": true
+      }
+    }
+  },
+  "alerts": [
+    {
+      "name": "health_check_failing",
+      "description": "Health endpoint returning non-200 status",
+      "type": "health",
+      "severity": "critical",
+      "query": {
+        "endpoint": "/health",
+        "method": "GET",
+        "expected_status": 200
+      },
+      "conditions": {
+        "failure_threshold": 3,
+        "time_window_minutes": 5
+      },
+      "cooldown_minutes": 10,
+      "enabled": true
+    },
+    {
+      "name": "high_error_rate",
+      "description": "HTTP error rate above threshold",
+      "type": "metrics",
+      "severity": "warning",
+      "query": {
+        "metric": "dealradarus_http_requests_total",
+        "filter": "status_code >= 400",
+        "aggregation": "rate5m"
+      },
+      "conditions": {
+        "threshold": 0.02,
+        "operator": ">",
+        "time_window_minutes": 5
+      },
+      "cooldown_minutes": 15,
+      "enabled": true
+    },
+    {
+      "name": "slow_response_time",
+      "description": "95th percentile response time above threshold",
+      "type": "metrics",
+      "severity": "warning",
+      "query": {
+        "metric": "dealradarus_http_request_duration_seconds",
+        "aggregation": "p95",
+        "time_window_minutes": 5
+      },
+      "conditions": {
+        "threshold": 1.5,
+        "operator": ">",
+        "time_window_minutes": 5
+      },
+      "cooldown_minutes": 20,
+      "enabled": true
+    },
+    {
+      "name": "high_memory_usage",
+      "description": "Memory usage above critical threshold",
+      "type": "metrics",
+      "severity": "warning",
+      "query": {
+        "metric": "dealradarus_memory_usage_bytes",
+        "filter": "type='heapUsed'",
+        "aggregation": "latest"
+      },
+      "conditions": {
+        "threshold": 1073741824,
+        "operator": ">",
+        "time_window_minutes": 5
+      },
+      "cooldown_minutes": 30,
+      "enabled": true
+    },
+    {
+      "name": "database_query_slow",
+      "description": "Database queries taking too long",
+      "type": "metrics",
+      "severity": "warning",
+      "query": {
+        "metric": "dealradarus_db_query_duration_seconds",
+        "aggregation": "avg5m"
+      },
+      "conditions": {
+        "threshold": 0.5,
+        "operator": ">",
+        "time_window_minutes": 5
+      },
+      "cooldown_minutes": 15,
+      "enabled": true
+    },
+    {
+      "name": "email_send_failures",
+      "description": "High rate of email send failures",
+      "type": "metrics",
+      "severity": "warning",
+      "query": {
+        "metric": "dealradarus_emails_sent_total",
+        "filter": "status='failed'",
+        "aggregation": "rate5m"
+      },
+      "conditions": {
+        "threshold": 0.1,
+        "operator": ">",
+        "time_window_minutes": 10
+      },
+      "cooldown_minutes": 20,
+      "enabled": true
+    },
+    {
+      "name": "job_processing_failures",
+      "description": "Background job failures above threshold",
+      "type": "metrics",
+      "severity": "warning",
+      "query": {
+        "metric": "dealradarus_jobs_processed_total",
+        "filter": "status='failed'",
+        "aggregation": "rate5m"
+      },
+      "conditions": {
+        "threshold": 0.05,
+        "operator": ">",
+        "time_window_minutes": 10
+      },
+      "cooldown_minutes": 25,
+      "enabled": true
+    },
+    {
+      "name": "rate_limit_exceeded",
+      "description": "High rate of rate limit hits",
+      "type": "metrics",
+      "severity": "info",
+      "query": {
+        "metric": "dealradarus_rate_limit_hits_total",
+        "aggregation": "rate1m"
+      },
+      "conditions": {
+        "threshold": 10,
+        "operator": ">",
+        "time_window_minutes": 1
+      },
+      "cooldown_minutes": 5,
+      "enabled": true
+    },
+    {
+      "name": "application_startup_failure",
+      "description": "Application failed to start properly",
+      "type": "health",
+      "severity": "critical",
+      "query": {
+        "endpoint": "/ready",
+        "method": "GET",
+        "expected_status": 200
+      },
+      "conditions": {
+        "failure_threshold": 1,
+        "time_window_minutes": 2
+      },
+      "cooldown_minutes": 5,
+      "enabled": true
+    },
+    {
+      "name": "disk_space_low",
+      "description": "Available disk space below threshold",
+      "type": "system",
+      "severity": "warning",
+      "query": {
+        "check": "disk_usage",
+        "path": "/"
+      },
+      "conditions": {
+        "threshold": 0.85,
+        "operator": ">",
+        "time_window_minutes": 5
+      },
+      "cooldown_minutes": 60,
+      "enabled": false
+    }
+  ],
+  "escalation": {
+    "enabled": false,
+    "rules": [
+      {
+        "severity": "critical",
+        "wait_minutes": 15,
+        "action": "escalate_to_oncall"
+      },
+      {
+        "severity": "warning",
+        "repeat_count": 3,
+        "action": "escalate_to_manager"
+      }
+    ]
+  },
+  "maintenance_windows": [
+    {
+      "name": "weekly_maintenance",
+      "description": "Weekly maintenance window",
+      "enabled": false,
+      "schedule": {
+        "day_of_week": "sunday",
+        "start_time": "02:00",
+        "end_time": "04:00",
+        "timezone": "UTC"
+      },
+      "suppress_alerts": ["slow_response_time", "high_memory_usage"]
+    }
+  ]
+}

@@ -1,0 +1,799 @@
+{
+  "timestamp": "2025-08-27T13:33:00.374Z",
+  "env": {
+    "environment": {
+      "file_exists": true,
+      "file_path": "/Users/admin/projects/deal-aggregator-facebook/.env.dealradarus.local",
+      "required_keys": {
+        "DATABASE_URL": {
+          "exists": true,
+          "masked_value": "********"
+        },
+        "JWT_SECRET": {
+          "exists": true,
+          "masked_value": "********"
+        },
+        "SMTP_HOST": {
+          "exists": true,
+          "masked_value": "********"
+        },
+        "SMTP_PORT": {
+          "exists": true,
+          "masked_value": "***"
+        },
+        "SMTP_USER": {
+          "exists": true,
+          "masked_value": "********"
+        },
+        "SMTP_PASS": {
+          "exists": true,
+          "masked_value": "********"
+        },
+        "FROM_EMAIL": {
+          "exists": true,
+          "masked_value": "********"
+        }
+      },
+      "optional_keys": {
+        "DATABASE_URL_POOLER": {
+          "exists": true,
+          "value": "********"
+        },
+        "FRONTEND_URL": {
+          "exists": true,
+          "value": "********"
+        },
+        "NOTIFICATIONS_ENABLED": {
+          "exists": false
+        }
+      }
+    },
+    "system": {
+      "node_version": "v22.17.0",
+      "npm_version": "10.9.2",
+      "dependencies": {
+        "pg": "^8.16.3",
+        "axios": "^1.11.0",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2"
+      }
+    },
+    "base_directory": "/Users/admin/projects/deal-aggregator-facebook",
+    "checks_directory": "/Users/admin/projects/deal-aggregator-facebook/.checks"
+  },
+  "filesystem": {
+    "summary": {
+      "total_expected": 35,
+      "found": 35,
+      "missing": 0,
+      "completion_rate": 100
+    },
+    "details": {
+      "M3.1 (Auth)": {
+        "server/auth/schema/001_users.sql": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/schema/001_users.sql",
+          "size": 4374
+        },
+        "server/auth/schema/002_audit_logging.sql": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/schema/002_audit_logging.sql",
+          "size": 3933
+        },
+        "server/auth/utils/database.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/utils/database.js",
+          "size": 1185
+        },
+        "server/auth/utils/jwt.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/utils/jwt.js",
+          "size": 1616
+        },
+        "server/auth/utils/password.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/utils/password.js",
+          "size": 2937
+        },
+        "server/auth/utils/audit.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/utils/audit.js",
+          "size": 6343
+        },
+        "server/auth/routes/auth.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/routes/auth.js",
+          "size": 1896
+        },
+        "server/auth/middleware/validation.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/middleware/validation.js",
+          "size": 5838
+        },
+        "server/auth/middleware/rate-limit.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/middleware/rate-limit.js",
+          "size": 6534
+        },
+        "server/email/templates/verification.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/email/templates/verification.js",
+          "size": 3890
+        },
+        "server/email/templates/password-reset.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/email/templates/password-reset.js",
+          "size": 4821
+        },
+        "server/email/templates/welcome.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/email/templates/welcome.js",
+          "size": 6458
+        },
+        "server/test/auth-flow-test.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/test/auth-flow-test.js",
+          "size": 11104
+        },
+        "M3.1-AUTH-SYSTEM-REPORT.md": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/M3.1-AUTH-SYSTEM-REPORT.md",
+          "size": 10400
+        }
+      },
+      "M3.2 (Saved Filters & Alerts)": {
+        "server/auth/schema/003_saved_filters.sql": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/schema/003_saved_filters.sql",
+          "size": 7050
+        },
+        "server/auth/controllers/filters.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/controllers/filters.js",
+          "size": 9777
+        },
+        "server/auth/controllers/alerts.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/controllers/alerts.js",
+          "size": 12665
+        },
+        "server/auth/routes/filters.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/routes/filters.js",
+          "size": 1052
+        },
+        "server/auth/routes/alerts.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/routes/alerts.js",
+          "size": 1036
+        },
+        "server/email/templates/alerts.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/email/templates/alerts.js",
+          "size": 17585
+        },
+        "server/test/filters-alerts-test.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/test/filters-alerts-test.js",
+          "size": 12083
+        },
+        "M3.2-SAVED-FILTERS-REPORT.md": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/M3.2-SAVED-FILTERS-REPORT.md",
+          "size": 10517
+        },
+        "server/jobs/alerts-processor.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/jobs/alerts-processor.js",
+          "size": 9188
+        }
+      },
+      "M3.3 (UGC)": {
+        "server/auth/schema/004_ugc.sql": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/schema/004_ugc.sql",
+          "size": 13525
+        },
+        "server/auth/schema/004_ugc_clean.sql": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/schema/004_ugc_clean.sql",
+          "size": 11973
+        },
+        "server/auth/controllers/reviews.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/controllers/reviews.js",
+          "size": 15398
+        },
+        "server/auth/controllers/comments.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/controllers/comments.js",
+          "size": 21776
+        },
+        "server/auth/controllers/reports.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/controllers/reports.js",
+          "size": 19934
+        },
+        "server/auth/routes/reviews.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/routes/reviews.js",
+          "size": 1646
+        },
+        "server/auth/routes/comments.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/routes/comments.js",
+          "size": 1888
+        },
+        "server/auth/routes/reports.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/auth/routes/reports.js",
+          "size": 1564
+        },
+        "server/email/templates/ugc-moderation.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/email/templates/ugc-moderation.js",
+          "size": 21782
+        },
+        "server/test/ugc-test.js": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/server/test/ugc-test.js",
+          "size": 17930
+        },
+        "M3.3-UGC-API.postman_collection.json": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/M3.3-UGC-API.postman_collection.json",
+          "size": 31043
+        },
+        "M3.3-UGC-IMPLEMENTATION-REPORT.md": {
+          "exists": true,
+          "path": "/Users/admin/projects/deal-aggregator-facebook/M3.3-UGC-IMPLEMENTATION-REPORT.md",
+          "size": 17754
+        }
+      }
+    }
+  },
+  "database": {
+    "connection": {
+      "success": true,
+      "timestamp": "2025-08-27T13:33:01.256Z"
+    },
+    "extensions": {
+      "citext": true,
+      "pgcrypto": true
+    },
+    "tables": {
+      "M3.1": {
+        "users": {
+          "exists": true,
+          "size": "112 kB"
+        },
+        "sessions": {
+          "exists": true,
+          "size": "96 kB"
+        },
+        "password_resets": {
+          "exists": true,
+          "size": "48 kB"
+        },
+        "email_verifications": {
+          "exists": true,
+          "size": "80 kB"
+        },
+        "email_events": {
+          "exists": true,
+          "size": "96 kB"
+        },
+        "auth_audit": {
+          "exists": true,
+          "size": "112 kB"
+        }
+      },
+      "M3.2": {
+        "saved_filters": {
+          "exists": true,
+          "size": "120 kB"
+        },
+        "alerts": {
+          "exists": true,
+          "size": "144 kB"
+        }
+      },
+      "M3.3": {
+        "reviews": {
+          "exists": true,
+          "size": "184 kB"
+        },
+        "comments": {
+          "exists": true,
+          "size": "152 kB"
+        },
+        "reports": {
+          "exists": true,
+          "size": "120 kB"
+        },
+        "deal_stats": {
+          "exists": true,
+          "size": "80 kB"
+        }
+      }
+    },
+    "indexes": {
+      "users_email_key": {
+        "found": true,
+        "details": [
+          {
+            "indexname": "users_email_key",
+            "tablename": "users"
+          },
+          {
+            "indexname": "email_verifications_pkey",
+            "tablename": "email_verifications"
+          },
+          {
+            "indexname": "email_verifications_token_hash_key",
+            "tablename": "email_verifications"
+          },
+          {
+            "indexname": "idx_users_email",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_email_verified",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_email_verifications_user_id",
+            "tablename": "email_verifications"
+          },
+          {
+            "indexname": "idx_email_verifications_token_hash",
+            "tablename": "email_verifications"
+          },
+          {
+            "indexname": "email_events_pkey",
+            "tablename": "email_events"
+          },
+          {
+            "indexname": "idx_email_events_user_id",
+            "tablename": "email_events"
+          },
+          {
+            "indexname": "idx_email_events_email_type",
+            "tablename": "email_events"
+          },
+          {
+            "indexname": "idx_email_events_status",
+            "tablename": "email_events"
+          },
+          {
+            "indexname": "idx_email_events_created_at",
+            "tablename": "email_events"
+          },
+          {
+            "indexname": "idx_auth_audit_email",
+            "tablename": "auth_audit"
+          }
+        ]
+      },
+      "sessions_user_id": {
+        "found": true,
+        "details": [
+          {
+            "indexname": "users_pkey",
+            "tablename": "users"
+          },
+          {
+            "indexname": "users_email_key",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_email",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_email_verified",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_role",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_created_at",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_sessions_user_id",
+            "tablename": "sessions"
+          },
+          {
+            "indexname": "idx_password_resets_user_id",
+            "tablename": "password_resets"
+          },
+          {
+            "indexname": "idx_email_verifications_user_id",
+            "tablename": "email_verifications"
+          },
+          {
+            "indexname": "idx_email_events_user_id",
+            "tablename": "email_events"
+          },
+          {
+            "indexname": "idx_auth_audit_user_id",
+            "tablename": "auth_audit"
+          },
+          {
+            "indexname": "saved_filters_user_name_unique",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "alerts_user_filter_unique",
+            "tablename": "alerts"
+          },
+          {
+            "indexname": "idx_saved_filters_user_id",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "idx_alerts_user_id",
+            "tablename": "alerts"
+          },
+          {
+            "indexname": "idx_alert_deliveries_user_id",
+            "tablename": "alert_deliveries"
+          },
+          {
+            "indexname": "reviews_user_deal_unique",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "reports_unique_user_content",
+            "tablename": "reports"
+          },
+          {
+            "indexname": "idx_reviews_user_id",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "idx_comments_user_id",
+            "tablename": "comments"
+          }
+        ]
+      },
+      "reviews_deal_id": {
+        "found": true,
+        "details": [
+          {
+            "indexname": "idx_deal_stats_avg_rating",
+            "tablename": "deal_stats"
+          },
+          {
+            "indexname": "idx_deal_stats_review_count",
+            "tablename": "deal_stats"
+          },
+          {
+            "indexname": "idx_deal_stats_last_activity",
+            "tablename": "deal_stats"
+          },
+          {
+            "indexname": "reviews_user_deal_unique",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "deal_stats_pkey",
+            "tablename": "deal_stats"
+          },
+          {
+            "indexname": "idx_reviews_deal_id",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "idx_reviews_deal_rating",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "idx_comments_deal_id",
+            "tablename": "comments"
+          }
+        ]
+      },
+      "comments_deal_id": {
+        "found": true,
+        "details": [
+          {
+            "indexname": "idx_deal_stats_avg_rating",
+            "tablename": "deal_stats"
+          },
+          {
+            "indexname": "idx_deal_stats_review_count",
+            "tablename": "deal_stats"
+          },
+          {
+            "indexname": "idx_deal_stats_last_activity",
+            "tablename": "deal_stats"
+          },
+          {
+            "indexname": "reviews_user_deal_unique",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "deal_stats_pkey",
+            "tablename": "deal_stats"
+          },
+          {
+            "indexname": "idx_reviews_deal_id",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "idx_reviews_deal_rating",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "idx_comments_deal_id",
+            "tablename": "comments"
+          }
+        ]
+      },
+      "saved_filters_user_id": {
+        "found": true,
+        "details": [
+          {
+            "indexname": "saved_filters_pkey",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "saved_filters_user_name_unique",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "idx_saved_filters_user_id",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "idx_saved_filters_is_active",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "idx_saved_filters_created_at",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "idx_saved_filters_criteria_gin",
+            "tablename": "saved_filters"
+          }
+        ]
+      },
+      "alerts_user_id": {
+        "found": true,
+        "details": [
+          {
+            "indexname": "users_pkey",
+            "tablename": "users"
+          },
+          {
+            "indexname": "users_email_key",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_email",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_email_verified",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_role",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_users_created_at",
+            "tablename": "users"
+          },
+          {
+            "indexname": "idx_sessions_user_id",
+            "tablename": "sessions"
+          },
+          {
+            "indexname": "idx_password_resets_user_id",
+            "tablename": "password_resets"
+          },
+          {
+            "indexname": "idx_email_verifications_user_id",
+            "tablename": "email_verifications"
+          },
+          {
+            "indexname": "idx_email_events_user_id",
+            "tablename": "email_events"
+          },
+          {
+            "indexname": "idx_auth_audit_user_id",
+            "tablename": "auth_audit"
+          },
+          {
+            "indexname": "saved_filters_user_name_unique",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "alerts_user_filter_unique",
+            "tablename": "alerts"
+          },
+          {
+            "indexname": "idx_saved_filters_user_id",
+            "tablename": "saved_filters"
+          },
+          {
+            "indexname": "idx_alerts_user_id",
+            "tablename": "alerts"
+          },
+          {
+            "indexname": "idx_alert_deliveries_user_id",
+            "tablename": "alert_deliveries"
+          },
+          {
+            "indexname": "reviews_user_deal_unique",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "reports_unique_user_content",
+            "tablename": "reports"
+          },
+          {
+            "indexname": "idx_reviews_user_id",
+            "tablename": "reviews"
+          },
+          {
+            "indexname": "idx_comments_user_id",
+            "tablename": "comments"
+          }
+        ]
+      }
+    },
+    "triggers": {},
+    "row_counts": {
+      "users": 7,
+      "sessions": 5,
+      "password_resets": 0,
+      "email_verifications": 5,
+      "email_events": 22,
+      "auth_audit": 22,
+      "saved_filters": 2,
+      "alerts": 1,
+      "reviews": 1,
+      "comments": 1,
+      "reports": 1,
+      "deal_stats": 4
+    }
+  },
+  "api": {
+    "server": {
+      "running": false,
+      "error": "Server not running - skipping API tests for safety",
+      "note": "Run server manually for full API audit"
+    },
+    "endpoints": {},
+    "summary": {
+      "total": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  "email": {
+    "smtp_config": {
+      "host": true,
+      "port": true,
+      "user": true,
+      "pass": true,
+      "from_email": true
+    },
+    "notifications_flag": {
+      "enabled": true,
+      "value": "undefined",
+      "recommendation": "Set NOTIFICATIONS_ENABLED=false for testing"
+    },
+    "template_tests": {
+      "server/email/templates/verification.js": {
+        "exists": true,
+        "loadable": true,
+        "exports": [
+          "generateVerificationEmail"
+        ]
+      },
+      "server/email/templates/welcome.js": {
+        "exists": true,
+        "loadable": true,
+        "exports": [
+          "generateWelcomeEmail"
+        ]
+      },
+      "server/email/templates/alerts.js": {
+        "exists": true,
+        "loadable": true,
+        "exports": [
+          "generateInstantAlert",
+          "generateDailyAlert",
+          "generateWeeklyAlert"
+        ]
+      },
+      "server/email/templates/ugc-moderation.js": {
+        "exists": true,
+        "loadable": true,
+        "exports": [
+          "generateNewContentAlert",
+          "generateContentReportAlert",
+          "generateModerationActionNotification",
+          "generateReviewReplyNotification"
+        ]
+      }
+    },
+    "transporter_verify": {
+      "file_exists": true,
+      "note": "Skipping actual SMTP verification to avoid connection overhead"
+    }
+  },
+  "tests": {
+    "auth_flow": {
+      "attempted": true,
+      "success": false,
+      "error": "Command failed: cross-env NOTIFICATIONS_ENABLED=false node -r dotenv/config server/test/auth-flow-test.js dotenv_config_path=.env.dealradarus.local\n/bin/sh: cross-env: command not found\n",
+      "stdout_snippet": "",
+      "stderr_snippet": "/bin/sh: cross-env: command not found\n",
+      "duration_ms": 0,
+      "command": "cross-env NOTIFICATIONS_ENABLED=false node -r dotenv/config server/test/auth-flow-test.js dotenv_config_path=.env.dealradarus.local"
+    },
+    "filters_alerts": {
+      "attempted": true,
+      "success": false,
+      "error": "Command failed: cross-env NOTIFICATIONS_ENABLED=false node -r dotenv/config server/test/filters-alerts-test.js dotenv_config_path=.env.dealradarus.local\n/bin/sh: cross-env: command not found\n",
+      "stdout_snippet": "",
+      "stderr_snippet": "/bin/sh: cross-env: command not found\n",
+      "duration_ms": 0,
+      "command": "cross-env NOTIFICATIONS_ENABLED=false node -r dotenv/config server/test/filters-alerts-test.js dotenv_config_path=.env.dealradarus.local"
+    },
+    "ugc": {
+      "attempted": true,
+      "success": false,
+      "error": "Command failed: cross-env NOTIFICATIONS_ENABLED=false node -r dotenv/config server/test/ugc-test.js dotenv_config_path=.env.dealradarus.local\n/bin/sh: cross-env: command not found\n",
+      "stdout_snippet": "",
+      "stderr_snippet": "/bin/sh: cross-env: command not found\n",
+      "duration_ms": 0,
+      "command": "cross-env NOTIFICATIONS_ENABLED=false node -r dotenv/config server/test/ugc-test.js dotenv_config_path=.env.dealradarus.local"
+    },
+    "summary": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3
+    }
+  },
+  "verdict": {
+    "M3_1": "ok",
+    "M3_2": "ok",
+    "M3_3": "ok"
+  },
+  "recommendations": [
+    {
+      "priority": "medium",
+      "category": "testing",
+      "issue": "Failed test suite: auth_flow",
+      "action": "Debug and fix auth_flow test failures"
+    },
+    {
+      "priority": "medium",
+      "category": "testing",
+      "issue": "Failed test suite: filters_alerts",
+      "action": "Debug and fix filters_alerts test failures"
+    },
+    {
+      "priority": "medium",
+      "category": "testing",
+      "issue": "Failed test suite: ugc",
+      "action": "Debug and fix ugc test failures"
+    },
+    {
+      "priority": "low",
+      "category": "configuration",
+      "issue": "Notifications enabled during testing",
+      "action": "Set NOTIFICATIONS_ENABLED=false for testing environments"
+    }
+  ]
+}

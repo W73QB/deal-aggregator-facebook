@@ -1,0 +1,68 @@
+{
+  "success": true,
+  "data": {
+    "reviews": [
+      {
+        "id": "review-1",
+        "rating": 5,
+        "title": "Excellent product!",
+        "content": "This deal was amazing. Fast shipping and great quality. Highly recommended!",
+        "user": {
+          "id": "user-1",
+          "first_name": "Alice",
+          "last_name": "Johnson"
+        },
+        "is_verified": true,
+        "helpful_count": 12,
+        "total_votes": 15,
+        "created_at": "2025-08-27T10:30:00Z",
+        "updated_at": null
+      },
+      {
+        "id": "review-2",
+        "rating": 4,
+        "title": "Good value for money",
+        "content": "Product quality is decent for the price. Delivery was on time. Would buy again.",
+        "user": {
+          "id": "user-2",
+          "first_name": "Bob",
+          "last_name": "Smith"
+        },
+        "is_verified": false,
+        "helpful_count": 8,
+        "total_votes": 10,
+        "created_at": "2025-08-26T14:20:00Z",
+        "updated_at": null
+      },
+      {
+        "id": "review-3",
+        "rating": 3,
+        "title": "Average experience",
+        "content": "The product is okay but nothing special. Price is fair.",
+        "user": {
+          "id": "user-3",
+          "first_name": "Carol",
+          "last_name": "Brown"
+        },
+        "is_verified": true,
+        "helpful_count": 3,
+        "total_votes": 8,
+        "created_at": "2025-08-25T09:15:00Z",
+        "updated_at": null
+      }
+    ],
+    "deal_stats": {
+      "avg_rating": 4.0,
+      "review_count": 3,
+      "comment_count": 7
+    },
+    "pagination": {
+      "page": 1,
+      "limit": 10,
+      "total_items": 3,
+      "total_pages": 1,
+      "has_next": false,
+      "has_prev": false
+    }
+  }
+}

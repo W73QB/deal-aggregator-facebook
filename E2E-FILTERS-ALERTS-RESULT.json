@@ -1,0 +1,36 @@
+{
+  "test_execution": {
+    "timestamp": "2025-08-27T08:32:52.671Z",
+    "duration_ms": 4704,
+    "status": "PASSED"
+  },
+  "smtp_test": {
+    "host": "smtp.zoho.com",
+    "user": "deals@dealradarus.com",
+    "delivery_time_ms": 4704,
+    "message_id": "<dffd336b-18e7-8610-e84c-2ba7f38e7653@dealradarus.com>"
+  },
+  "email_sent": {
+    "recipient": "e2e+direct1756283444853@dealradarus.com",
+    "subject": "New Deal Alert: Direct E2E Electronics",
+    "template": "instant_alert",
+    "status": "DELIVERED"
+  },
+  "database_logs": {
+    "email_events": 1,
+    "alert_deliveries_by_status": {
+      "sent": 1
+    }
+  },
+  "test_data": {
+    "user_id": "6a2b1ea0-229e-4714-a0de-160090d77beb",
+    "filter_id": "f2716cb3-e2f2-4d96-ac0e-712f36ed3e3c",
+    "alert_id": "f7b215fd-f428-44e4-b367-451e9f163826"
+  },
+  "acceptance_criteria": {
+    "smtp_connection": "PASS",
+    "email_delivery": "PASS",
+    "database_logging": "PASS",
+    "performance_threshold": "PASS"
+  }
+}
