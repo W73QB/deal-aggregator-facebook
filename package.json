@@ -26,7 +26,8 @@
     "audit:placeholders:fix": "node tools/placeholder-audit.js --verbose --fix",
     "audit:placeholders:report": "node tools/placeholder-audit.js --verbose --report PLACEHOLDER-AUDIT-REPORT.md",
     "audit:placeholders:ci": "node tools/placeholder-audit.js --report CI-PLACEHOLDER-AUDIT.md",
-    "precommit:audit": "node tools/placeholder-audit.js"
+    "precommit:audit": "node tools/placeholder-audit.js",
+    "vercel-build": "echo \"no build\""
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
