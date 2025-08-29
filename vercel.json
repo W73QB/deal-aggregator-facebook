@@ -1,12 +1,9 @@
 {
-  "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/api/hello", "dest": "/api/hello.js" },
-    { "src": "/api/webhooks/facebook", "dest": "/api/webhooks/facebook.js" },
-    { "src": "/.*", "status": 404 }
-  ],
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "headers": [
     {
       "source": "/api/(.*)",
