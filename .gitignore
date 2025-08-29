@@ -38,3 +38,11 @@ fb-live-posts-*.jsonlnode_modules/
 node_modules/
 
 node_modules/
+
+# Sensitive configuration files
+config/.env.*
+.env.*
+secrets/
+SECRETS-DISCOVERY-REPORT.md
+**/secrets.json
+**/all-secrets.json

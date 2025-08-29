@@ -1,0 +1,912 @@
+{
+  "info": {
+    "name": "DealRadarUS - M3.3 UGC API Collection",
+    "description": "Complete API collection for User-Generated Content features including Reviews, Comments, and Reports",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global setup script",
+          "pm.globals.set('baseUrl', 'http://localhost:3001');",
+          "pm.globals.set('testDealId', 'test-deal-postman-' + Date.now());"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001"
+    },
+    {
+      "key": "testUser1Email",
+      "value": "ugc-postman-user1@dealradarus.com"
+    },
+    {
+      "key": "testUser1Password",
+      "value": "TestPass123!"
+    },
+    {
+      "key": "testUser2Email",
+      "value": "ugc-postman-user2@dealradarus.com"
+    },
+    {
+      "key": "testUser2Password",
+      "value": "TestPass123!"
+    }
+  ],
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "User 1 Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Login successful', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    ",
+                  "    // Save user ID for future requests",
+                  "    if (responseJson.user && responseJson.user.id) {",
+                  "        pm.globals.set('user1Id', responseJson.user.id);",
+                  "        pm.globals.set('user1Name', responseJson.user.first_name + ' ' + responseJson.user.last_name);",
+                  "    }",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{testUser1Email}}\",\n  \"password\": \"{{testUser1Password}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "User 2 Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('User 2 login successful', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    ",
+                  "    if (responseJson.user && responseJson.user.id) {",
+                  "        pm.globals.set('user2Id', responseJson.user.id);",
+                  "        pm.globals.set('user2Name', responseJson.user.first_name + ' ' + responseJson.user.last_name);",
+                  "    }",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{testUser2Email}}\",\n  \"password\": \"{{testUser2Password}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "⭐ Reviews & Ratings",
+      "item": [
+        {
+          "name": "Create Review",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Review created successfully', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.review).to.exist;",
+                  "    pm.expect(responseJson.review.id).to.exist;",
+                  "    ",
+                  "    // Save review ID for subsequent requests",
+                  "    pm.globals.set('createdReviewId', responseJson.review.id);",
+                  "    pm.globals.set('testDealId', responseJson.review.deal_id);",
+                  "});",
+                  "",
+                  "pm.test('Review has correct structure', function () {",
+                  "    const responseJson = pm.response.json();",
+                  "    const review = responseJson.review;",
+                  "    ",
+                  "    pm.expect(review.rating).to.equal(5);",
+                  "    pm.expect(review.title).to.include('Postman Test');",
+                  "    pm.expect(review.user).to.exist;",
+                  "    pm.expect(review.user.first_name).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deal_id\": \"{{testDealId}}\",\n  \"rating\": 5,\n  \"title\": \"Excellent Deal - Postman Test\",\n  \"content\": \"This is a comprehensive review created via Postman testing. The product quality is outstanding and delivery was very fast. Would definitely recommend to others!\",\n  \"metadata\": {\n    \"purchase_price\": 89.99,\n    \"purchase_date\": \"2025-08-27\",\n    \"source\": \"postman-test\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reviews",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews"]
+            }
+          }
+        },
+        {
+          "name": "Get Reviews for Deal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Reviews retrieved successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.data.reviews).to.be.an('array');",
+                  "    pm.expect(responseJson.pagination).to.exist;",
+                  "});",
+                  "",
+                  "pm.test('Deal statistics present', function () {",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.deal_stats).to.exist;",
+                  "    pm.expect(responseJson.deal_stats.avg_rating).to.exist;",
+                  "    pm.expect(responseJson.deal_stats.review_count).to.be.at.least(1);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reviews/deal/{{testDealId}}?page=1&limit=10&sort=newest",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews", "deal", "{{testDealId}}"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "newest"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Single Review",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Single review retrieved', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.review).to.exist;",
+                  "    pm.expect(responseJson.review.id).to.equal(pm.globals.get('createdReviewId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reviews/review/{{createdReviewId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews", "review", "{{createdReviewId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Review",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Review updated successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.review.title).to.include('UPDATED');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"UPDATED: Excellent Deal - Postman Test\",\n  \"content\": \"This review has been updated via Postman. Still an excellent product with great value for money.\",\n  \"rating\": 4\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reviews/{{createdReviewId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews", "{{createdReviewId}}"]
+            }
+          }
+        },
+        {
+          "name": "Vote on Review (Helpful)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Vote recorded successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.vote_counts).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_helpful\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reviews/{{createdReviewId}}/vote",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews", "{{createdReviewId}}", "vote"]
+            }
+          }
+        },
+        {
+          "name": "Get My Reviews",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('My reviews retrieved', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.data.reviews).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reviews/my-reviews?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews", "my-reviews"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "💬 Comments",
+      "item": [
+        {
+          "name": "Create Deal Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Deal comment created', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.comment.id).to.exist;",
+                  "    ",
+                  "    pm.globals.set('dealCommentId', responseJson.comment.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deal_id\": \"{{testDealId}}\",\n  \"content\": \"Has anyone else tried this deal? I'm considering purchasing but want to know about experiences with shipping and customer service.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments",
+              "host": ["{{baseUrl}}"],
+              "path": ["comments"]
+            }
+          }
+        },
+        {
+          "name": "Create Review Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Review comment created', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    ",
+                  "    pm.globals.set('reviewCommentId', responseJson.comment.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"review_id\": \"{{createdReviewId}}\",\n  \"content\": \"Great review! I had a similar experience with this seller. The product quality really is excellent as described.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments",
+              "host": ["{{baseUrl}}"],
+              "path": ["comments"]
+            }
+          }
+        },
+        {
+          "name": "Create Threaded Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Threaded comment created', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.comment.parent_id).to.equal(pm.globals.get('dealCommentId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deal_id\": \"{{testDealId}}\",\n  \"parent_id\": \"{{dealCommentId}}\",\n  \"content\": \"@{{user1Name}} I can confirm this deal is legitimate! I ordered last week and received the item in perfect condition. Shipping was faster than expected.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments",
+              "host": ["{{baseUrl}}"],
+              "path": ["comments"]
+            }
+          }
+        },
+        {
+          "name": "Get Deal Comments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Deal comments retrieved', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.data.comments).to.be.an('array');",
+                  "});",
+                  "",
+                  "pm.test('Threaded structure present', function () {",
+                  "    const responseJson = pm.response.json();",
+                  "    const comments = responseJson.data.comments;",
+                  "    const hasReplies = comments.some(c => c.replies && c.replies.length > 0);",
+                  "    pm.expect(hasReplies).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/comments/deal/{{testDealId}}?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["comments", "deal", "{{testDealId}}"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit", 
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Review Comments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Review comments retrieved', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/comments/review/{{createdReviewId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["comments", "review", "{{createdReviewId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Comment updated successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"[UPDATED] Has anyone else tried this deal? I'm considering purchasing but want to know about experiences with shipping and customer service. Any recent updates?\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/{{dealCommentId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["comments", "{{dealCommentId}}"]
+            }
+          }
+        },
+        {
+          "name": "Vote on Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Comment vote recorded', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_helpful\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/{{reviewCommentId}}/vote",
+              "host": ["{{baseUrl}}"],
+              "path": ["comments", "{{reviewCommentId}}", "vote"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🚨 Reports & Moderation",
+      "item": [
+        {
+          "name": "Report Review",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Review reported successfully', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    pm.expect(responseJson.report.id).to.exist;",
+                  "    ",
+                  "    pm.globals.set('reviewReportId', responseJson.report.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content_type\": \"review\",\n  \"content_id\": \"{{createdReviewId}}\",\n  \"reason\": \"spam\",\n  \"description\": \"This review appears to be spam or promotional content. The language used seems artificial and overly promotional.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": ["{{baseUrl}}"],
+              "path": ["reports"]
+            }
+          }
+        },
+        {
+          "name": "Report Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Comment reported successfully', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "    ",
+                  "    pm.globals.set('commentReportId', responseJson.report.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content_type\": \"comment\",\n  \"content_id\": \"{{dealCommentId}}\",\n  \"reason\": \"inappropriate\",\n  \"description\": \"This comment contains inappropriate language or content that violates community guidelines.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": ["{{baseUrl}}"],
+              "path": ["reports"]
+            }
+          }
+        },
+        {
+          "name": "Try Duplicate Report (Should Fail)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Duplicate report rejected', function () {",
+                  "    pm.response.to.have.status(409);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.false;",
+                  "    pm.expect(responseJson.code).to.equal('REPORT_EXISTS');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content_type\": \"review\",\n  \"content_id\": \"{{createdReviewId}}\",\n  \"reason\": \"harassment\",\n  \"description\": \"Another report for the same review - this should fail.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": ["{{baseUrl}}"],
+              "path": ["reports"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧪 Validation & Error Testing",
+      "item": [
+        {
+          "name": "Invalid Review Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Invalid review rejected', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.false;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deal_id\": \"\",\n  \"rating\": 6,\n  \"title\": \"x\",\n  \"content\": \"y\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reviews",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews"]
+            }
+          }
+        },
+        {
+          "name": "Invalid Comment Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Invalid comment rejected', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.false;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"This comment has no deal_id or review_id\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments",
+              "host": ["{{baseUrl}}"],
+              "path": ["comments"]
+            }
+          }
+        },
+        {
+          "name": "Duplicate Review (Should Fail)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Duplicate review rejected', function () {",
+                  "    pm.response.to.have.status(409);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.false;",
+                  "    pm.expect(responseJson.code).to.equal('REVIEW_EXISTS');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deal_id\": \"{{testDealId}}\",\n  \"rating\": 3,\n  \"title\": \"Duplicate Review\",\n  \"content\": \"This should not be allowed as user already reviewed this deal.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reviews",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧹 Cleanup",
+      "item": [
+        {
+          "name": "Delete Test Review",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Review deleted successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.expect(responseJson.success).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reviews/{{createdReviewId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["reviews", "{{createdReviewId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

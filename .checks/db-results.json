@@ -1,0 +1,413 @@
+{
+  "connection": {
+    "success": true,
+    "timestamp": "2025-08-27T13:33:01.256Z"
+  },
+  "extensions": {
+    "citext": true,
+    "pgcrypto": true
+  },
+  "tables": {
+    "M3.1": {
+      "users": {
+        "exists": true,
+        "size": "112 kB"
+      },
+      "sessions": {
+        "exists": true,
+        "size": "96 kB"
+      },
+      "password_resets": {
+        "exists": true,
+        "size": "48 kB"
+      },
+      "email_verifications": {
+        "exists": true,
+        "size": "80 kB"
+      },
+      "email_events": {
+        "exists": true,
+        "size": "96 kB"
+      },
+      "auth_audit": {
+        "exists": true,
+        "size": "112 kB"
+      }
+    },
+    "M3.2": {
+      "saved_filters": {
+        "exists": true,
+        "size": "120 kB"
+      },
+      "alerts": {
+        "exists": true,
+        "size": "144 kB"
+      }
+    },
+    "M3.3": {
+      "reviews": {
+        "exists": true,
+        "size": "184 kB"
+      },
+      "comments": {
+        "exists": true,
+        "size": "152 kB"
+      },
+      "reports": {
+        "exists": true,
+        "size": "120 kB"
+      },
+      "deal_stats": {
+        "exists": true,
+        "size": "80 kB"
+      }
+    }
+  },
+  "indexes": {
+    "users_email_key": {
+      "found": true,
+      "details": [
+        {
+          "indexname": "users_email_key",
+          "tablename": "users"
+        },
+        {
+          "indexname": "email_verifications_pkey",
+          "tablename": "email_verifications"
+        },
+        {
+          "indexname": "email_verifications_token_hash_key",
+          "tablename": "email_verifications"
+        },
+        {
+          "indexname": "idx_users_email",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_email_verified",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_email_verifications_user_id",
+          "tablename": "email_verifications"
+        },
+        {
+          "indexname": "idx_email_verifications_token_hash",
+          "tablename": "email_verifications"
+        },
+        {
+          "indexname": "email_events_pkey",
+          "tablename": "email_events"
+        },
+        {
+          "indexname": "idx_email_events_user_id",
+          "tablename": "email_events"
+        },
+        {
+          "indexname": "idx_email_events_email_type",
+          "tablename": "email_events"
+        },
+        {
+          "indexname": "idx_email_events_status",
+          "tablename": "email_events"
+        },
+        {
+          "indexname": "idx_email_events_created_at",
+          "tablename": "email_events"
+        },
+        {
+          "indexname": "idx_auth_audit_email",
+          "tablename": "auth_audit"
+        }
+      ]
+    },
+    "sessions_user_id": {
+      "found": true,
+      "details": [
+        {
+          "indexname": "users_pkey",
+          "tablename": "users"
+        },
+        {
+          "indexname": "users_email_key",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_email",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_email_verified",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_role",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_created_at",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_sessions_user_id",
+          "tablename": "sessions"
+        },
+        {
+          "indexname": "idx_password_resets_user_id",
+          "tablename": "password_resets"
+        },
+        {
+          "indexname": "idx_email_verifications_user_id",
+          "tablename": "email_verifications"
+        },
+        {
+          "indexname": "idx_email_events_user_id",
+          "tablename": "email_events"
+        },
+        {
+          "indexname": "idx_auth_audit_user_id",
+          "tablename": "auth_audit"
+        },
+        {
+          "indexname": "saved_filters_user_name_unique",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "alerts_user_filter_unique",
+          "tablename": "alerts"
+        },
+        {
+          "indexname": "idx_saved_filters_user_id",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "idx_alerts_user_id",
+          "tablename": "alerts"
+        },
+        {
+          "indexname": "idx_alert_deliveries_user_id",
+          "tablename": "alert_deliveries"
+        },
+        {
+          "indexname": "reviews_user_deal_unique",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "reports_unique_user_content",
+          "tablename": "reports"
+        },
+        {
+          "indexname": "idx_reviews_user_id",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "idx_comments_user_id",
+          "tablename": "comments"
+        }
+      ]
+    },
+    "reviews_deal_id": {
+      "found": true,
+      "details": [
+        {
+          "indexname": "idx_deal_stats_avg_rating",
+          "tablename": "deal_stats"
+        },
+        {
+          "indexname": "idx_deal_stats_review_count",
+          "tablename": "deal_stats"
+        },
+        {
+          "indexname": "idx_deal_stats_last_activity",
+          "tablename": "deal_stats"
+        },
+        {
+          "indexname": "reviews_user_deal_unique",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "deal_stats_pkey",
+          "tablename": "deal_stats"
+        },
+        {
+          "indexname": "idx_reviews_deal_id",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "idx_reviews_deal_rating",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "idx_comments_deal_id",
+          "tablename": "comments"
+        }
+      ]
+    },
+    "comments_deal_id": {
+      "found": true,
+      "details": [
+        {
+          "indexname": "idx_deal_stats_avg_rating",
+          "tablename": "deal_stats"
+        },
+        {
+          "indexname": "idx_deal_stats_review_count",
+          "tablename": "deal_stats"
+        },
+        {
+          "indexname": "idx_deal_stats_last_activity",
+          "tablename": "deal_stats"
+        },
+        {
+          "indexname": "reviews_user_deal_unique",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "deal_stats_pkey",
+          "tablename": "deal_stats"
+        },
+        {
+          "indexname": "idx_reviews_deal_id",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "idx_reviews_deal_rating",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "idx_comments_deal_id",
+          "tablename": "comments"
+        }
+      ]
+    },
+    "saved_filters_user_id": {
+      "found": true,
+      "details": [
+        {
+          "indexname": "saved_filters_pkey",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "saved_filters_user_name_unique",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "idx_saved_filters_user_id",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "idx_saved_filters_is_active",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "idx_saved_filters_created_at",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "idx_saved_filters_criteria_gin",
+          "tablename": "saved_filters"
+        }
+      ]
+    },
+    "alerts_user_id": {
+      "found": true,
+      "details": [
+        {
+          "indexname": "users_pkey",
+          "tablename": "users"
+        },
+        {
+          "indexname": "users_email_key",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_email",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_email_verified",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_role",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_users_created_at",
+          "tablename": "users"
+        },
+        {
+          "indexname": "idx_sessions_user_id",
+          "tablename": "sessions"
+        },
+        {
+          "indexname": "idx_password_resets_user_id",
+          "tablename": "password_resets"
+        },
+        {
+          "indexname": "idx_email_verifications_user_id",
+          "tablename": "email_verifications"
+        },
+        {
+          "indexname": "idx_email_events_user_id",
+          "tablename": "email_events"
+        },
+        {
+          "indexname": "idx_auth_audit_user_id",
+          "tablename": "auth_audit"
+        },
+        {
+          "indexname": "saved_filters_user_name_unique",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "alerts_user_filter_unique",
+          "tablename": "alerts"
+        },
+        {
+          "indexname": "idx_saved_filters_user_id",
+          "tablename": "saved_filters"
+        },
+        {
+          "indexname": "idx_alerts_user_id",
+          "tablename": "alerts"
+        },
+        {
+          "indexname": "idx_alert_deliveries_user_id",
+          "tablename": "alert_deliveries"
+        },
+        {
+          "indexname": "reviews_user_deal_unique",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "reports_unique_user_content",
+          "tablename": "reports"
+        },
+        {
+          "indexname": "idx_reviews_user_id",
+          "tablename": "reviews"
+        },
+        {
+          "indexname": "idx_comments_user_id",
+          "tablename": "comments"
+        }
+      ]
+    }
+  },
+  "triggers": {},
+  "row_counts": {
+    "users": 7,
+    "sessions": 5,
+    "password_resets": 0,
+    "email_verifications": 5,
+    "email_events": 22,
+    "auth_audit": 22,
+    "saved_filters": 2,
+    "alerts": 1,
+    "reviews": 1,
+    "comments": 1,
+    "reports": 1,
+    "deal_stats": 4
+  }
+}

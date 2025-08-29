@@ -1,0 +1,53 @@
+{
+  "smtp_config": {
+    "host": true,
+    "port": true,
+    "user": true,
+    "pass": true,
+    "from_email": true
+  },
+  "notifications_flag": {
+    "enabled": true,
+    "value": "undefined",
+    "recommendation": "Set NOTIFICATIONS_ENABLED=false for testing"
+  },
+  "template_tests": {
+    "server/email/templates/verification.js": {
+      "exists": true,
+      "loadable": true,
+      "exports": [
+        "generateVerificationEmail"
+      ]
+    },
+    "server/email/templates/welcome.js": {
+      "exists": true,
+      "loadable": true,
+      "exports": [
+        "generateWelcomeEmail"
+      ]
+    },
+    "server/email/templates/alerts.js": {
+      "exists": true,
+      "loadable": true,
+      "exports": [
+        "generateInstantAlert",
+        "generateDailyAlert",
+        "generateWeeklyAlert"
+      ]
+    },
+    "server/email/templates/ugc-moderation.js": {
+      "exists": true,
+      "loadable": true,
+      "exports": [
+        "generateNewContentAlert",
+        "generateContentReportAlert",
+        "generateModerationActionNotification",
+        "generateReviewReplyNotification"
+      ]
+    }
+  },
+  "transporter_verify": {
+    "file_exists": true,
+    "note": "Skipping actual SMTP verification to avoid connection overhead"
+  }
+}
