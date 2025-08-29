@@ -3,6 +3,13 @@ const crypto = require("crypto");
 module.exports = (req, res) => {
   const VERIFY_TOKEN = process.env.FACEBOOK_WEBHOOK_VERIFY_TOKEN;
   const APP_SECRET = process.env.FACEBOOK_APP_SECRET;
+  
+  // Debug logging (remove in production)
+  console.log('Environment check:', {
+    hasVerifyToken: !!VERIFY_TOKEN,
+    hasAppSecret: !!APP_SECRET,
+    method: req.method
+  });
 
   if (req.method === "GET") {
     const mode = req.query["hub.mode"];
