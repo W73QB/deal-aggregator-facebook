@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build:static",
+  "buildCommand": "npm run build && cp *.html dist/ && cp robots.txt sitemap*.xml dist/",
   "outputDirectory": "dist",
   "redirects": [
     {
