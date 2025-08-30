@@ -1,18 +1,4 @@
 {
-  "headers": [
-    {
-      "source": "/(privacy-policy|terms-of-service|affiliate-disclosure)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
-    },
-    {
-      "source": "/(robots.txt|sitemap.xml)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" },
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
-      ]
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
