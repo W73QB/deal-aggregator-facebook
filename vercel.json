@@ -76,19 +76,19 @@
   "rewrites": [
     {
       "source": "/deals",
-      "destination": "/public/deals.html"
+      "destination": "/deals.html"
     },
     {
       "source": "/deals/",
-      "destination": "/public/deals.html"
+      "destination": "/deals.html"
     },
     {
       "source": "/blog",
-      "destination": "/public/blog.html"
+      "destination": "/blog.html"
     },
     {
       "source": "/blog/",
-      "destination": "/public/blog.html"
+      "destination": "/blog.html"
     },
     {
       "source": "/contact",
@@ -124,35 +124,35 @@
     },
     {
       "source": "/deals/refurbished",
-      "destination": "/public/deals.html?category=refurbished"
+      "destination": "/deals.html?category=refurbished"
     },
     {
       "source": "/deals/refurbished/",
-      "destination": "/public/deals.html?category=refurbished"
+      "destination": "/deals.html?category=refurbished"
     },
     {
       "source": "/deals/smart-home",
-      "destination": "/public/deals.html?category=smart-home"
+      "destination": "/deals.html?category=smart-home"
     },
     {
       "source": "/deals/smart-home/",
-      "destination": "/public/deals.html?category=smart-home"
+      "destination": "/deals.html?category=smart-home"
     },
     {
       "source": "/deals/open-box",
-      "destination": "/public/deals.html?category=open-box"
+      "destination": "/deals.html?category=open-box"
     },
     {
       "source": "/deals/open-box/",
-      "destination": "/public/deals.html?category=open-box"
+      "destination": "/deals.html?category=open-box"
     },
     {
       "source": "/deals/trending",
-      "destination": "/public/deals.html?category=trending"
+      "destination": "/deals.html?category=trending"
     },
     {
       "source": "/deals/trending/",
-      "destination": "/public/deals.html?category=trending"
+      "destination": "/deals.html?category=trending"
     },
     {
       "source": "/blog/seo-trending-deals-2025",
@@ -187,5 +187,5 @@
       ]
     }
   ],
-  "errorDocument": "public/404.html"
+  "errorDocument": "404.html"
 }
