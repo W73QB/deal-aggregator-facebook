@@ -57,7 +57,7 @@ class PreflightValidator {
       'SMTP_HOST',
       'SMTP_USER',
       'SMTP_PASS',
-      'REDIS_URL'
+      'UPSTASH_REDIS_REST_URL'
     ];
     
     const missing = [];
@@ -171,7 +171,9 @@ class PreflightValidator {
     console.log('🔍 Checking Redis Connection...');
     
     try {
-      this.redisClient = new Redis(process.env.REDIS_URL);
+      // Use the unified Redis client from our cache module
+      const { initialize } = require('./cache/redis.js');
+      this.redisClient = await initialize();
 
       // Test basic operations
       const startTime = Date.now();

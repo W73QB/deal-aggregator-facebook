@@ -25,9 +25,6 @@ class WorkerCoordinator {
       const { getClient } = require('../cache/redis.js');
       this.redis = await getClient();
       
-      // Detect client type for operation compatibility
-      this.isUpstashClient = this.redis.constructor.name === 'UpstashHttpClient';
-      
       // Set key prefix for worker coordination
       this.keyPrefix = 'dealradarus:worker:';
       
@@ -68,117 +65,6 @@ class WorkerCoordinator {
   }
 
   /**
-   * Compatibility wrapper for Redis operations
-   */
-  async redisSet(key, value, mode, ttl) {
-    if (this.isUpstashClient) {
-      // REST API: Check if key exists first (simulates NX behavior)
-      const exists = await this.redis.get(key);
-      if (exists !== null) {
-        return null; // Key exists, simulate NX failure
-      }
-      
-      // Key doesn't exist, set it with TTL
-      if (mode === 'PX' || mode === 'EX') {
-        const ttlSeconds = mode === 'PX' ? Math.floor(ttl / 1000) : ttl;
-        await this.redis.set(key, value, 'EX', ttlSeconds);
-        return 'OK';
-      }
-      await this.redis.set(key, value);
-      return 'OK';
-    } else {
-      // ioredis with full parameter support (atomic NX operation)
-      if (mode && ttl) {
-        return await this.redis.set(key, value, mode, ttl, 'NX');
-      }
-      return await this.redis.set(key, value);
-    }
-  }
-
-  async redisSetEx(key, seconds, value) {
-    if (this.isUpstashClient) {
-      return await this.redis.set(key, value, 'EX', seconds);
-    } else {
-      return await this.redis.setex(key, seconds, value);
-    }
-  }
-
-  async redisKeys(pattern) {
-    if (this.isUpstashClient) {
-      // REST API may not support KEYS, use safer approach
-      logger.warn('KEYS command not supported on REST API, using limited pattern matching');
-      return []; // Graceful degradation
-    } else {
-      return await this.redis.keys(pattern);
-    }
-  }
-
-  /**
-   * Compatibility wrapper for lock release (replaces Lua script)
-   */
-  async redisReleaseLock(key, expectedValue) {
-    if (this.isUpstashClient) {
-      // REST API: Use GET + conditional DEL (less atomic but functional)
-      try {
-        const currentValue = await this.redis.get(key);
-        if (currentValue === expectedValue) {
-          // We own the lock, safe to delete
-          const delResult = await this.redis.exec(['DEL', key]);
-          return delResult === 1 ? 1 : 0;
-        }
-        return 0; // Not our lock
-      } catch (error) {
-        logger.error('Error in REST lock release', { error: error.message });
-        return 0;
-      }
-    } else {
-      // ioredis: Use Lua script for atomicity
-      const luaScript = `
-        if redis.call("GET", KEYS[1]) == ARGV[1] then
-          return redis.call("DEL", KEYS[1])
-        else
-          return 0
-        end
-      `;
-      
-      return await this.redis.eval(luaScript, 1, key, expectedValue);
-    }
-  }
-
-  /**
-   * Compatibility wrapper for lock renewal (replaces Lua script)
-   */
-  async redisRenewLock(key, expectedValue, ttlMs) {
-    if (this.isUpstashClient) {
-      // REST API: Use GET + conditional SET (less atomic but functional)
-      try {
-        const currentValue = await this.redis.get(key);
-        if (currentValue === expectedValue) {
-          // We own the lock, safe to renew
-          const ttlSeconds = Math.floor(ttlMs / 1000);
-          await this.redis.set(key, expectedValue, 'EX', ttlSeconds);
-          return 1;
-        }
-        return 0; // Not our lock
-      } catch (error) {
-        logger.error('Error in REST lock renewal', { error: error.message });
-        return 0;
-      }
-    } else {
-      // ioredis: Use Lua script for atomicity
-      const luaScript = `
-        if redis.call("GET", KEYS[1]) == ARGV[1] then
-          return redis.call("PEXPIRE", KEYS[1], ARGV[2])
-        else
-          return 0
-        end
-      `;
-      
-      return await this.redis.eval(luaScript, 1, key, expectedValue, ttlMs);
-    }
-  }
-
-  /**
    * Acquire distributed lock with timeout
    */
   async acquireLock(lockName, ttlMs = 300000, timeoutMs = 10000) {
@@ -196,7 +82,13 @@ class WorkerCoordinator {
     while (Date.now() - startTime < timeoutMs) {
       try {
         // Try to acquire lock with SET if not exists
-        const result = await this.redisSet(lockKey, lockValue, 'PX', ttlMs);
+        const result = await this.redis.set(
+          lockKey, 
+          lockValue, 
+          'PX', 
+          ttlMs, 
+          'NX'
+        );
 
         if (result === 'OK') {
           // Lock acquired successfully
@@ -264,8 +156,21 @@ class WorkerCoordinator {
     }
 
     try {
-      // Use compatibility wrapper for atomic lock release
-      const result = await this.redisReleaseLock(lock.key, lock.value);
+      // Lua script to safely release lock only if we own it
+      const luaScript = `
+        if redis.call("GET", KEYS[1]) == ARGV[1] then
+          return redis.call("DEL", KEYS[1])
+        else
+          return 0
+        end
+      `;
+
+      const result = await this.redis.eval(
+        luaScript,
+        1,
+        lock.key,
+        lock.value
+      );
 
       if (result === 1) {
         this.locks.delete(lockName);
@@ -382,7 +287,7 @@ class WorkerCoordinator {
     
     const sendHeartbeat = async () => {
       try {
-        await this.redisSetEx(heartbeatKey, 60, JSON.stringify({
+        await this.redis.setex(heartbeatKey, 60, JSON.stringify({
           workerId: this.workerId,
           hostname: require('os').hostname(),
           pid: process.pid,
@@ -417,8 +322,21 @@ class WorkerCoordinator {
           
           // Renew if less than 25% of TTL remaining
           if (timeUntilExpiry < lock.ttl * 0.25) {
-            // Use compatibility wrapper for atomic lock renewal
-            const result = await this.redisRenewLock(lock.key, lock.value, lock.ttl);
+            const luaScript = `
+              if redis.call("GET", KEYS[1]) == ARGV[1] then
+                return redis.call("PEXPIRE", KEYS[1], ARGV[2])
+              else
+                return 0
+              end
+            `;
+
+            const result = await this.redis.eval(
+              luaScript,
+              1,
+              lock.key,
+              lock.value,
+              lock.ttl
+            );
 
             if (result === 1) {
               lock.renewedAt = now;
@@ -452,7 +370,7 @@ class WorkerCoordinator {
    */
   async getActiveWorkers() {
     try {
-      const keys = await this.redisKeys('heartbeat:*');
+      const keys = await this.redis.keys('heartbeat:*');
       const workers = [];
 
       for (const key of keys) {
@@ -509,11 +427,7 @@ class WorkerCoordinator {
 
     // Close Redis connection
     if (this.redis) {
-      // Graceful connection cleanup (different for REST vs TCP)
-      if (!this.isUpstashClient && this.redis.quit) {
-        await this.redis.quit();
-      }
-      // Upstash HTTP client doesn't need explicit connection closing
+      await this.redis.quit();
     }
 
     logger.info('Worker coordinator shutdown complete', {

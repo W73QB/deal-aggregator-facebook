@@ -24,27 +24,112 @@ class RedisClient {
     }
 
     try {
-      const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+      // Try Upstash Redis first, fallback to traditional Redis on failure
+      const upstashUrl = process.env.UPSTASH_REDIS_REST_URL;
+      const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+      const redisUrl = 'redis://127.0.0.1:6379'; // Local Redis for development fallback
       
-      // Redis configuration with optimizations
-      const config = {
-        retryDelayOnFailover: 100,
-        enableReadyCheck: true,
-        maxRetriesPerRequest: 3,
-        lazyConnect: true,
-        keepAlive: 30000,
-        family: 4, // IPv4
-        connectTimeout: 10000,
-        commandTimeout: 5000,
-        retryDelayOnClusterDown: 300,
-        retryDelayOnFailover: 100,
-        maxRetriesPerRequest: 3,
-      };
+      let upstashSuccess = false;
+      
+      if (upstashUrl && upstashToken) {
+        try {
+          // Try Upstash REST API with direct HTTP calls
+          logger.info('Trying Upstash Redis REST API', { 
+            url: upstashUrl.replace(/https:\/\//, 'https://***@')
+          });
+          
+          // Create custom Upstash client
+          const upstashClient = {
+            url: upstashUrl.trim(),
+            token: upstashToken.trim(),
+            
+            async ping() {
+              const response = await fetch(`${this.url}/ping`, {
+                method: 'GET',
+                headers: {
+                  'Authorization': `Bearer ${this.token}`,
+                  'Content-Type': 'application/json'
+                }
+              });
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+              const data = await response.json();
+              return data.result;
+            },
+            
+            async set(key, value, ...args) {
+              const command = ['SET', key, value, ...args];
+              return this.exec(command);
+            },
+            
+            async get(key) {
+              const command = ['GET', key];
+              return this.exec(command);
+            },
+            
+            async exec(command) {
+              const response = await fetch(this.url, {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${this.token}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(command)
+              });
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+              const data = await response.json();
+              return data.result;
+            },
+            
+            constructor: { name: 'UpstashHttpClient' }
+          };
+          
+          // Test connection
+          const pingResult = await Promise.race([
+            upstashClient.ping(),
+            new Promise((_, reject) => 
+              setTimeout(() => reject(new Error('Upstash connection timeout')), 2000)
+            )
+          ]);
+          
+          if (pingResult === 'PONG') {
+            this.client = upstashClient;
+            this.isConnected = true;
+            upstashSuccess = true;
+            logger.info('Upstash Redis REST API connected successfully');
+          }
+        } catch (error) {
+          logger.warn('Upstash Redis connection failed, falling back to traditional Redis', {
+            error: error.message,
+            errorType: error.constructor.name,
+            upstashUrl: upstashUrl?.substring(0, 30) + '...'
+          });
+        }
+      }
+      
+      if (!upstashSuccess) {
+        // Fallback to ioredis with traditional Redis URL
+        logger.info('Initializing traditional Redis client', { 
+          url: redisUrl.replace(/:\/\/.*@/, '://***@')
+        });
+        
+        const config = {
+          retryDelayOnFailover: 100,
+          enableReadyCheck: true,
+          maxRetriesPerRequest: 3,
+          lazyConnect: true,
+          keepAlive: 30000,
+          family: 4, // IPv4
+          connectTimeout: 10000,
+          commandTimeout: 5000,
+          retryDelayOnClusterDown: 300,
+          retryDelayOnFailover: 100,
+          maxRetriesPerRequest: 3,
+        };
 
-      this.client = new Redis(redisUrl, config);
+        this.client = new Redis(redisUrl, config);
 
-      // Event handlers
-      this.client.on('connect', () => {
+        // Event handlers for ioredis
+        this.client.on('connect', () => {
         logger.info('Redis client connected', { 
           url: redisUrl.replace(/:\/\/.*@/, '://***@'), // Hide credentials
           attempt: this.connectionAttempts 
@@ -85,18 +170,22 @@ class RedisClient {
         this.isConnected = false;
       });
 
-      // Connect to Redis
-      await this.client.connect();
+        // Connect to Redis (ioredis)
+        await this.client.connect();
+        
+        // Verify connection with ping
+        await this.ping();
+        
+        logger.info('Traditional Redis client initialized successfully', {
+          version: await this.client.info('server').then(info => 
+            info.match(/redis_version:([^\r\n]+)/)?.[1] || 'unknown'
+          ),
+          keyspace: await this.client.info('keyspace')
+        });
+      }
       
-      // Verify connection with ping
+      // Verify connection works
       await this.ping();
-      
-      logger.info('Redis client initialized successfully', {
-        version: await this.client.info('server').then(info => 
-          info.match(/redis_version:([^\r\n]+)/)?.[1] || 'unknown'
-        ),
-        keyspace: await this.client.info('keyspace')
-      });
 
       return this.client;
 
@@ -263,6 +352,75 @@ class RedisClient {
       throw error;
     }
   }
+
+  /**
+   * Enhanced cache methods with TTL defaults
+   */
+  async setWithTTL(key, value, ttlSeconds = 3600) {
+    try {
+      const client = await this.initialize();
+      return await client.set(key, JSON.stringify(value), 'EX', ttlSeconds);
+    } catch (error) {
+      logger.error('Failed to set key with TTL', { 
+        key, 
+        ttlSeconds, 
+        error: error.message 
+      });
+      throw error;
+    }
+  }
+
+  async getAndParse(key) {
+    try {
+      const client = await this.initialize();
+      const value = await client.get(key);
+      return value ? JSON.parse(value) : null;
+    } catch (error) {
+      logger.error('Failed to get and parse key', { 
+        key, 
+        error: error.message 
+      });
+      return null; // Graceful fallback
+    }
+  }
+
+  async deleteKeys(pattern) {
+    try {
+      const client = await this.initialize();
+      const keys = await client.keys(pattern);
+      if (keys.length > 0) {
+        return await client.del(...keys);
+      }
+      return 0;
+    } catch (error) {
+      logger.error('Failed to delete keys by pattern', { 
+        pattern, 
+        error: error.message 
+      });
+      throw error;
+    }
+  }
+
+  /**
+   * Increment with TTL for rate limiting
+   */
+  async incrementWithTTL(key, ttlSeconds = 3600) {
+    try {
+      const client = await this.initialize();
+      const multi = client.multi();
+      multi.incr(key);
+      multi.expire(key, ttlSeconds);
+      const results = await multi.exec();
+      return results[0][1]; // Return incremented value
+    } catch (error) {
+      logger.error('Failed to increment with TTL', { 
+        key, 
+        ttlSeconds, 
+        error: error.message 
+      });
+      throw error;
+    }
+  }
 }
 
 // Singleton instance
@@ -305,5 +463,22 @@ module.exports = {
   
   async getInfo() {
     return redisClient.getInfo();
+  },
+
+  // Enhanced cache methods
+  async setWithTTL(key, value, ttlSeconds = 3600) {
+    return redisClient.setWithTTL(key, value, ttlSeconds);
+  },
+  
+  async getAndParse(key) {
+    return redisClient.getAndParse(key);
+  },
+  
+  async deleteKeys(pattern) {
+    return redisClient.deleteKeys(pattern);
+  },
+  
+  async incrementWithTTL(key, ttlSeconds = 3600) {
+    return redisClient.incrementWithTTL(key, ttlSeconds);
   }
 };

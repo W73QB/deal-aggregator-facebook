@@ -1,0 +1,10 @@
+{
+  "builds": [
+    { "src": "api/**/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/hello", "dest": "/api/hello.js" },
+    { "src": "/api/webhooks/facebook", "dest": "/api/webhooks/facebook.js" },
+    { "src": "/.*", "status": 404 }
+  ]
+}

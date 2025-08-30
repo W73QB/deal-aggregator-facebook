@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "@vercel/node@18"
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
@@ -12,6 +7,33 @@
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-API-Version", "value": "1.0" }
       ]
+    },
+    {
+      "source": "/(privacy-policy|terms-of-service|affiliate-disclosure)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    },
+    {
+      "source": "/(robots.txt|sitemap.xml)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" },
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
+      ]
     }
-  ]
+  ],
+  "rewrites": [
+    { "source": "/privacy-policy", "destination": "/pages/privacy.html" },
+    { "source": "/privacy-policy/", "destination": "/pages/privacy.html" },
+    { "source": "/terms-of-service", "destination": "/pages/terms-of-service.html" },
+    { "source": "/terms-of-service/", "destination": "/pages/terms-of-service.html" },
+    { "source": "/affiliate-disclosure", "destination": "/pages/affiliate-disclosure.html" },
+    { "source": "/affiliate-disclosure/", "destination": "/pages/affiliate-disclosure.html" }
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "@vercel/node"
+    }
+  }
 }

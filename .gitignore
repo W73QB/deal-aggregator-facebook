@@ -46,3 +46,4 @@ secrets/
 SECRETS-DISCOVERY-REPORT.md
 **/secrets.json
 **/all-secrets.json
+.vercel
