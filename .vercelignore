@@ -1,0 +1,9 @@
+# Ignore files that shouldn't be deployed
+node_modules
+.git
+.env*
+*.log
+dist/
+pages/*.html
+pages/*.cachebak
+pages/*.backup

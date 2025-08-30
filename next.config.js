@@ -3,21 +3,22 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
-  // Ensure proper static generation
-  output: 'standalone',
+  // Force static export for proper page generation
+  output: 'export',
+  trailingSlash: false,
   
-  // Custom webpack config to ignore HTML files in pages
+  // Disable image optimization for static export
+  images: {
+    unoptimized: true,
+  },
+  
+  // Custom webpack config
   webpack: (config) => {
     config.module.rules.push({
       test: /\.html$/,
       type: 'asset/resource',
     });
     return config;
-  },
-  
-  // Async redirects for legal pages (backup)
-  async redirects() {
-    return [];
   },
   
   // Headers for static pages
