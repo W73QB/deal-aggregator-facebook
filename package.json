@@ -27,7 +27,7 @@
     "audit:placeholders:report": "node tools/placeholder-audit.js --verbose --report PLACEHOLDER-AUDIT-REPORT.md",
     "audit:placeholders:ci": "node tools/placeholder-audit.js --report CI-PLACEHOLDER-AUDIT.md",
     "precommit:audit": "node tools/placeholder-audit.js",
-    "vercel-build": "echo \"no build\""
+    "vercel-build": "next build"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
@@ -89,6 +89,7 @@
     "ioredis": "^5.7.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
+    "next": "^14.2.5",
     "node-cron": "^4.2.1",
     "node-fetch": "^3.3.2",
     "nodemailer": "^7.0.5",
