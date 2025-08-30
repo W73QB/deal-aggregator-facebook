@@ -1,8 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install",
-  "framework": null,
   "headers": [
     {
       "source": "/api/(.*)",
@@ -28,12 +24,12 @@
     }
   ],
   "rewrites": [
-    { "source": "/privacy-policy", "destination": "/pages/privacy.html" },
-    { "source": "/privacy-policy/", "destination": "/pages/privacy.html" },
-    { "source": "/terms-of-service", "destination": "/pages/terms-of-service.html" },
-    { "source": "/terms-of-service/", "destination": "/pages/terms-of-service.html" },
-    { "source": "/affiliate-disclosure", "destination": "/pages/affiliate-disclosure.html" },
-    { "source": "/affiliate-disclosure/", "destination": "/pages/affiliate-disclosure.html" }
+    { "source": "/privacy-policy", "destination": "/privacy.html" },
+    { "source": "/privacy-policy/", "destination": "/privacy.html" },
+    { "source": "/terms-of-service", "destination": "/terms-of-service.html" },
+    { "source": "/terms-of-service/", "destination": "/terms-of-service.html" },
+    { "source": "/affiliate-disclosure", "destination": "/affiliate-disclosure.html" },
+    { "source": "/affiliate-disclosure/", "destination": "/affiliate-disclosure.html" }
   ],
   "functions": {
     "api/**/*.js": {
