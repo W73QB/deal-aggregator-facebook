@@ -1,14 +1,6 @@
 {
   "headers": [
     {
-      "source": "/api/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-API-Version", "value": "1.0" }
-      ]
-    },
-    {
       "source": "/(privacy-policy|terms-of-service|affiliate-disclosure)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400" },
@@ -22,10 +14,5 @@
         { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
       ]
     }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "@vercel/node@20.x"
-    }
-  }
+  ]
 }
