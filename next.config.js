@@ -3,14 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
-  // Force static export for proper page generation
-  output: 'export',
+  // Use standalone for Vercel with API routes
+  output: 'standalone',
   trailingSlash: false,
-  
-  // Disable image optimization for static export
-  images: {
-    unoptimized: true,
-  },
   
   // Custom webpack config
   webpack: (config) => {

@@ -1,6 +1,4 @@
 {
-  "buildCommand": "next build && next export",
-  "outputDirectory": "out",
   "headers": [
     {
       "source": "/api/(.*)",
@@ -11,7 +9,7 @@
       ]
     },
     {
-      "source": "/(privacy-policy|terms-of-service|affiliate-disclosure).html",
+      "source": "/(privacy-policy|terms-of-service|affiliate-disclosure)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400" },
         { "key": "X-Content-Type-Options", "value": "nosniff" }
@@ -25,17 +23,9 @@
       ]
     }
   ],
-  "rewrites": [
-    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
-    { "source": "/privacy-policy/", "destination": "/privacy-policy.html" },
-    { "source": "/terms-of-service", "destination": "/terms-of-service.html" },
-    { "source": "/terms-of-service/", "destination": "/terms-of-service.html" },
-    { "source": "/affiliate-disclosure", "destination": "/affiliate-disclosure.html" },
-    { "source": "/affiliate-disclosure/", "destination": "/affiliate-disclosure.html" }
-  ],
   "functions": {
     "api/**/*.js": {
-      "runtime": "@vercel/node"
+      "runtime": "@vercel/node@20.x"
     }
   }
 }
