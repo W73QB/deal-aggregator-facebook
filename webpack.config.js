@@ -9,6 +9,18 @@ module.exports = {
     filename: 'bundle.[contenthash].js',
     clean: true,
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   module: {
     rules: [
       {
