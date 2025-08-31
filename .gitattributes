@@ -1,0 +1,62 @@
+# 🔒 DealRadarUS Git Attributes - Security Protection
+# ==================================================
+
+# ==============================================
+# PROTECT .ENV FILES FROM EVER BEING TRACKED
+# ==============================================
+.env                    export-ignore
+.env.*                  export-ignore
+config/.env.*           export-ignore
+**/.env                 export-ignore
+**/.env.*               export-ignore
+
+# Exception: Allow safe templates
+.env.template          text
+.env.example          text
+config/.env.template.json  text
+
+# ==============================================
+# BINARY FILES HANDLING
+# ==============================================
+*.png                   binary
+*.jpg                   binary
+*.jpeg                  binary
+*.gif                   binary
+*.ico                   binary
+*.svg                   binary
+*.woff                  binary
+*.woff2                 binary
+*.ttf                   binary
+*.eot                   binary
+
+# ==============================================
+# TEXT FILES WITH LINE ENDING NORMALIZATION
+# ==============================================
+*.html                  text eol=lf
+*.css                   text eol=lf
+*.js                    text eol=lf
+*.json                  text eol=lf
+*.md                    text eol=lf
+*.txt                   text eol=lf
+*.xml                   text eol=lf
+*.yml                   text eol=lf
+*.yaml                  text eol=lf
+
+# ==============================================
+# DEVELOPMENT FILES
+# ==============================================
+*.log                   export-ignore
+.DS_Store               export-ignore
+Thumbs.db               export-ignore
+.vscode/                export-ignore
+.idea/                  export-ignore
+
+# ==============================================
+# SECURITY: NEVER EXPORT SENSITIVE PATTERNS
+# ==============================================
+*secret*                export-ignore
+*password*              export-ignore
+*credential*            export-ignore
+*token*                 export-ignore
+*key*                   export-ignore
+secrets/                export-ignore

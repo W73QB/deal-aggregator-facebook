@@ -10,16 +10,33 @@ config/.env.local.json
 # Logs
 *.log
 
-# Environment variables - ALL .env files with real credentials
+# 🔒 BULLETPROOF .ENV PROTECTION
+# ==============================================
+# Block ALL .env files with secrets from being tracked
 .env
 .env.*
-!.env.example
-!.env.template
 .env.local
 .env.production
 .env.development
-.env.dealradarus.*
 .env.test
+.env.staging
+.env.dealradarus.*
+
+# Config directory protection  
+config/.env.*
+config/*.env.*
+
+# Exception: ONLY allow safe templates
+!.env.template
+!.env.example
+!config/.env.template.json
+
+# Additional patterns to catch variations
+*.env.local
+*.env.production
+*.env.development
+*.env.test
+*.env.staging
 
 # API keys and tokens
 *.key
