@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DealRadarUS - M3.4 UGC Frontend Demo</title><meta name="description" content="DealRadarUS User Generated Content (UGC) system with reviews, comments, and moderation features"><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com"><style>/* Loading spinner for initial page load */
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DealRadarUS - M3.4 UGC Frontend Demo</title><meta name="description" content="DealRadarUS User Generated Content (UGC) system with reviews, comments, and moderation features"><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://www.googletagmanager.com"><style>/* Loading spinner for initial page load */
     .initial-loading {
       position: fixed;
       top: 0;
@@ -54,7 +54,42 @@
         animation: none;
         border-top-color: #666;
       }
-    }</style><script defer="defer" src="bundle.c403ece63610e0276b5f.js"></script><script defer="defer" src="bundle.f40f33f0d905552fe114.js"></script></head><body><div class="initial-loading"><div class="loading-spinner" role="status" aria-label="Loading"></div><div class="loading-text">Loading DealRadarUS UGC Demo...</div></div><div id="root"></div><noscript><div style="position: fixed;
+    }</style><script defer="defer" src="bundle.c403ece63610e0276b5f.js"></script><script defer="defer" src="bundle.f40f33f0d905552fe114.js"></script>    <!-- Google tag (gtag.js) with duplicate-load guard -->
+    <script>
+      // GA4 One-time Load Guard
+      if (!window.__GA4_LOADED__) {
+        window.__GA4_LOADED__ = true;
+        
+        // Load gtag.js script
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03';
+        document.head.appendChild(script);
+        
+        // Initialize GA4
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9ZVTTTBD03', {
+          'anonymize_ip': true,
+          'send_page_view': true
+        });
+
+        // Track outbound clicks for affiliate links
+        document.addEventListener('click', function(e) {
+          let link = e.target.closest('a');
+          if (link && link.hostname !== window.location.hostname) {
+            gtag('event', 'click_outbound', {
+              'event_category': 'outbound',
+              'event_label': link.href,
+              'transport_type': 'beacon'
+            });
+          }
+        });
+      }
+    </script>
+</head><body><div class="initial-loading"><div class="loading-spinner" role="status" aria-label="Loading"></div><div class="loading-text">Loading DealRadarUS UGC Demo...</div></div><div id="root"></div><noscript><div style="position: fixed;
       top: 0;
       left: 0;
       right: 0;
@@ -90,4 +125,4 @@
       if (process.env.NODE_ENV === 'development') {
         console.error('Unhandled promise rejection:', e.reason);
       }
-    });</script></body></html>
+    });</script><script src="/js/analytics-ga4-enhanced.js"></script><script src="/js/analytics-enhanced.js"></script></body></html>

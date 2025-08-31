@@ -55,3 +55,10 @@ SECRETS-DISCOVERY-REPORT.md
 **/secrets.json
 **/all-secrets.json
 .vercel
+
+# Environment files with secrets
+.env.dealradarus.local
+.env.test
+.env.*
+!.env.template
+!.env.example

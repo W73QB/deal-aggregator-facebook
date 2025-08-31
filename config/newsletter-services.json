@@ -70,6 +70,27 @@
       ],
       "documentation": "https://www.emailjs.com/docs/"
     },
+    "zoho_smtp": {
+      "name": "Zoho SMTP Direct",
+      "endpoint": "smtp://smtp.zoho.com:587",
+      "method": "SMTP",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload_template": {
+        "to": "deals@dealradarus.com",
+        "subject": "New Newsletter Subscription - {source}",
+        "html": "<h2>New Newsletter Subscription</h2><p><strong>Email:</strong> {email}</p><p><strong>Source:</strong> {source}</p><p><strong>Time:</strong> {timestamp}</p><p><strong>User Agent:</strong> {user_agent}</p><p><strong>Referrer:</strong> {referrer}</p>",
+        "text": "New Newsletter Subscription\\n\\nEmail: {email}\\nSource: {source}\\nTime: {timestamp}\\nUser Agent: {user_agent}\\nReferrer: {referrer}"
+      },
+      "config_required": [
+        "SMTP_HOST",
+        "SMTP_PORT", 
+        "SMTP_USER",
+        "SMTP_PASS",
+        "FROM_EMAIL"
+      ]
+    },
     "custom_api": {
       "name": "Custom API Endpoint",
       "endpoint": "{custom_endpoint}",

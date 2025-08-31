@@ -59,8 +59,8 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Newsletter signup endpoint
-app.post('/api/newsletter', createNewsletterRoute('emailjs'));
+// Newsletter signup endpoint - Using Zoho SMTP
+app.post('/api/newsletter', createNewsletterRoute('zoho_smtp'));
 
 // Newsletter status endpoint (optional)
 app.get('/api/newsletter/status', (req, res) => {

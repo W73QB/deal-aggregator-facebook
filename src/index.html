@@ -9,6 +9,11 @@
   
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  
+  <!-- Google Analytics 4 (GA4) -->
+  
+  
   
   <!-- Critical CSS for loading states -->
   <style>
@@ -19,7 +24,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #f8f9fa;
+      background: https://www.facebook.com/DealRadarUSf8f9fa;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -30,8 +35,8 @@
     .loading-spinner {
       width: 48px;
       height: 48px;
-      border: 4px solid #e9ecef;
-      border-top: 4px solid #007bff;
+      border: 4px solid https://www.facebook.com/DealRadarUSe9ecef;
+      border-top: 4px solid https://www.facebook.com/DealRadarUS007bff;
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
@@ -40,7 +45,7 @@
       margin-top: 16px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 16px;
-      color: #666;
+      color: https://www.facebook.com/DealRadarUS666;
     }
     
     @keyframes spin {
@@ -57,7 +62,7 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-      background: #f8f9fa;
+      background: https://www.facebook.com/DealRadarUSf8f9fa;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -66,10 +71,45 @@
     @media (prefers-reduced-motion: reduce) {
       .loading-spinner {
         animation: none;
-        border-top-color: #666;
+        border-top-color: https://www.facebook.com/DealRadarUS666;
       }
     }
   </style>
+    <!-- Google tag (gtag.js) with duplicate-load guard -->
+    <script>
+      // GA4 One-time Load Guard
+      if (!window.__GA4_LOADED__) {
+        window.__GA4_LOADED__ = true;
+        
+        // Load gtag.js script
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03';
+        document.head.appendChild(script);
+        
+        // Initialize GA4
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9ZVTTTBD03', {
+          'anonymize_ip': true,
+          'send_page_view': true
+        });
+
+        // Track outbound clicks for affiliate links
+        document.addEventListener('click', function(e) {
+          let link = e.target.closest('a');
+          if (link && link.hostname !== window.location.hostname) {
+            gtag('event', 'click_outbound', {
+              'event_category': 'outbound',
+              'event_label': link.href,
+              'transport_type': 'beacon'
+            });
+          }
+        });
+      }
+    </script>
 </head>
 <body>
   <!-- Fallback loading indicator -->
@@ -98,15 +138,15 @@
       text-align: center;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     ">
-      <h1 style="color: #dc3545; margin-bottom: 16px;">JavaScript Required</h1>
-      <p style="color: #666; margin-bottom: 20px;">
+      <h1 style="color: https://www.facebook.com/DealRadarUSdc3545; margin-bottom: 16px;">JavaScript Required</h1>
+      <p style="color: https://www.facebook.com/DealRadarUS666; margin-bottom: 20px;">
         This UGC demo requires JavaScript to be enabled. Please enable JavaScript 
         in your browser settings and reload the page.
       </p>
-      <p style="color: #666; font-size: 14px;">
+      <p style="color: https://www.facebook.com/DealRadarUS666; font-size: 14px;">
         The DealRadarUS UGC system includes interactive features like:
       </p>
-      <ul style="color: #666; font-size: 14px; text-align: left; margin: 16px 0;">
+      <ul style="color: https://www.facebook.com/DealRadarUS666; font-size: 14px; text-align: left; margin: 16px 0;">
         <li>Star ratings and reviews</li>
         <li>Threaded comments and replies</li>
         <li>Real-time notifications</li>
@@ -143,5 +183,11 @@
       }
     });
   </script>
+
+  <!-- Enhanced GA4 Tracking -->
+  <script src="/js/analytics-ga4-enhanced.js"></script>
+  
+  <!-- Load existing analytics -->
+  <script src="/js/analytics-enhanced.js"></script>
 </body>
 </html>

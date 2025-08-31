@@ -195,6 +195,11 @@ class NewsletterHandler {
 
   async submitToNewsletterService(subscriptionData) {
     try {
+      // Handle SMTP services separately
+      if (this.service.method === 'SMTP') {
+        return await this.handleSMTPService(subscriptionData);
+      }
+
       const payload = this.buildServicePayload(subscriptionData);
       const headers = this.buildServiceHeaders();
       
@@ -214,6 +219,32 @@ class NewsletterHandler {
         success: false, 
         error: 'service_unavailable',
         details: error.message 
+      };
+    }
+  }
+
+  async handleSMTPService(subscriptionData) {
+    try {
+      const SMTPHandler = require('./smtp-handler');
+      const smtpHandler = new SMTPHandler();
+      
+      const initialized = await smtpHandler.initialize();
+      if (!initialized) {
+        return {
+          success: false,
+          error: 'smtp_init_failed',
+          details: 'Failed to initialize SMTP handler'
+        };
+      }
+
+      return await smtpHandler.handleSubscription(subscriptionData);
+      
+    } catch (error) {
+      console.error('SMTP service error:', error);
+      return {
+        success: false,
+        error: 'smtp_error',
+        details: error.message
       };
     }
   }

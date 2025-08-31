@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GA4 Test - DealRadarUS</title>
+  
+  <!-- Google Analytics 4 (GA4) -->
+  
+  
+    <!-- Google tag (gtag.js) with duplicate-load guard -->
+    <script>
+      // GA4 One-time Load Guard
+      if (!window.__GA4_LOADED__) {
+        window.__GA4_LOADED__ = true;
+        
+        // Load gtag.js script
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9ZVTTTBD03';
+        document.head.appendChild(script);
+        
+        // Initialize GA4
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9ZVTTTBD03', {
+          'anonymize_ip': true,
+          'send_page_view': true
+        });
+
+        // Track outbound clicks for affiliate links
+        document.addEventListener('click', function(e) {
+          let link = e.target.closest('a');
+          if (link && link.hostname !== window.location.hostname) {
+            gtag('event', 'click_outbound', {
+              'event_category': 'outbound',
+              'event_label': link.href,
+              'transport_type': 'beacon'
+            });
+          }
+        });
+      }
+    </script>
+</head>
+<body>
+  <h1>🧪 GA4 Testing Page</h1>
+  <p>Testing Google Analytics 4 integration for DealRadarUS</p>
+  
+  <div style="max-width: 600px; margin: 50px auto; padding: 20px; background: https://www.facebook.com/DealRadarUSf8f9fa; border-radius: 8px;">
+    <h2>✅ GA4 Setup Verification</h2>
+    <ul>
+      <li><strong>Measurement ID:</strong> G-9ZVTTTBD03</li>
+      <li><strong>Privacy Settings:</strong> IP Anonymization enabled</li>
+      <li><strong>Ad Personalization:</strong> Disabled</li>
+      <li><strong>Enhanced Ecommerce:</strong> Enabled</li>
+      <li><strong>Currency:</strong> USD</li>
+    </ul>
+    
+    <h3>🎯 Test Events</h3>
+    <button onclick="testDealView()" style="margin: 10px; padding: 10px 20px; background: https://www.facebook.com/DealRadarUS007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      Test Deal View Event
+    </button>
+    
+    <button onclick="testNewsletterSignup()" style="margin: 10px; padding: 10px 20px; background: https://www.facebook.com/DealRadarUS28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      Test Newsletter Signup
+    </button>
+    
+    <button onclick="testSearch()" style="margin: 10px; padding: 10px 20px; background: https://www.facebook.com/DealRadarUSffc107; color: black; border: none; border-radius: 5px; cursor: pointer;">
+      Test Search Event
+    </button>
+    
+    <div id="test-results" style="margin-top: 30px; padding: 20px; background: white; border-radius: 5px; min-height: 100px;">
+      <h4>📊 Event Test Results:</h4>
+      <p>Click buttons above to test GA4 events. Check browser console for detailed logs.</p>
+    </div>
+  </div>
+
+  <script>
+    let testCounter = 0;
+    
+    function logTestResult(eventName, status) {
+      testCounter++;
+      const results = document.getElementById('test-results');
+      const timestamp = new Date().toLocaleTimeString();
+      results.innerHTML += `<p>[${timestamp}] <strong>${eventName}</strong>: ${status}</p>`;
+      console.log(`📊 GA4 Test Event ${testCounter}: ${eventName} - ${status}`);
+    }
+    
+    function testDealView() {
+      gtag('event', 'view_item', {
+        currency: 'USD',
+        value: 29.99,
+        items: [{
+          item_id: 'test_deal_123',
+          item_name: 'Test MacBook Pro Deal',
+          item_category: 'electronics',
+          item_variant: 'amazon',
+          price: 29.99,
+          discount: 70,
+          quantity: 1
+        }]
+      });
+      
+      logTestResult('view_item (Deal View)', '✅ Sent to GA4');
+    }
+    
+    function testNewsletterSignup() {
+      gtag('event', 'sign_up', {
+        method: 'email',
+        content_type: 'newsletter',
+        source: 'test_page'
+      });
+      
+      gtag('event', 'generate_lead', {
+        currency: 'USD',
+        value: 5.00,
+        lead_type: 'newsletter_subscription'
+      });
+      
+      logTestResult('sign_up + generate_lead', '✅ Newsletter events sent');
+    }
+    
+    function testSearch() {
+      gtag('event', 'search', {
+        search_term: 'macbook pro deals',
+        content_type: 'deals'
+      });
+      
+      logTestResult('search', '✅ Search event sent');
+    }
+    
+    // Auto-test on page load
+    setTimeout(() => {
+      gtag('event', 'page_load_complete', {
+        load_time: Math.round(performance.now()),
+        session_id: 'test_session_' + Date.now(),
+        page_type: 'test_page'
+      });
+      
+      logTestResult('page_load_complete', '✅ Auto-sent on page load');
+    }, 2000);
+  </script>
+  
+  <!-- Load enhanced analytics for testing -->
+  <script src="js/analytics-ga4-enhanced.js"></script>
+</body>
+</html>

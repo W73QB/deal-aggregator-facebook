@@ -1,0 +1,54 @@
+{
+  "recaptcha": {
+    "version": "v2",
+    "siteKey": "6LcpALkrAAAAANYUsEs_wFFMyv3qqzPCe8UJCLzZ",
+    "secretKey": "6LcpALkrAAAAALAJOR8jQuvkPJ4I7S4Z_grvEZ-O",
+    "theme": "light",
+    "size": "normal",
+    "tabindex": 0
+  },
+  "endpoints": {
+    "verify": "https://www.google.com/recaptcha/api/siteverify",
+    "api": "https://www.google.com/recaptcha/api.js"
+  },
+  "forms": {
+    "contact": {
+      "selector": "#contact-form",
+      "required": true,
+      "errorMessage": "Please complete the reCAPTCHA verification to proceed.",
+      "successMessage": "reCAPTCHA verified successfully!"
+    },
+    "newsletter": {
+      "selector": ".newsletter-form",
+      "required": true,
+      "errorMessage": "Please verify you're not a robot before subscribing.",
+      "successMessage": "Verification complete!"
+    },
+    "comment": {
+      "selector": ".comment-form",
+      "required": false,
+      "errorMessage": "Please complete the verification to post your comment.",
+      "successMessage": "Ready to post!"
+    }
+  },
+  "validation": {
+    "timeout": 120,
+    "retryAttempts": 3,
+    "blockSuspiciousIPs": true,
+    "rateLimitPerHour": 50,
+    "enableAnalytics": true
+  },
+  "customization": {
+    "loadingText": "Verifying...",
+    "retryText": "Verification failed. Please try again.",
+    "expiredText": "Verification expired. Please complete again.",
+    "networkErrorText": "Network error. Please check connection and retry."
+  },
+  "security": {
+    "score_threshold": 0.5,
+    "enable_enterprise_features": false,
+    "log_attempts": true,
+    "block_vpn": false,
+    "allowed_domains": ["dealradarus.com", "www.dealradarus.com"]
+  }
+}
