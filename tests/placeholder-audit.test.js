@@ -87,7 +87,6 @@ class PlaceholderAuditTester {
 
       const auditor = new PlaceholderAuditor();
       const result = await this.runAuditorOnFile(testFile);
-      
       return result.findings.some(f => f.findings.length >= 3);
     });
 
@@ -122,8 +121,21 @@ class PlaceholderAuditTester {
 
       const auditor = new PlaceholderAuditor();
       const result = await this.runAuditorOnFile(testFile);
-      
       return result.findings.some(f => f.findings.length >= 4);
+    });
+
+    // Test 4: De-duplication of findings
+    await this.runTest('De-duplication of findings', async () => {
+      const testFile = path.join(this.testDir, 'deduplication-test.js');
+      fs.writeFileSync(testFile, `
+        const domain = "localhost"; // This should only be reported as 'Generic Placeholders' (high), not 'Example Domains' (medium)
+      `);
+
+      const auditor = new PlaceholderAuditor();
+      const result = await this.runAuditorOnFile(testFile);
+
+      const findings = result.findings[0].findings;
+      return findings.length === 1 && findings[0].severity === 'medium';
     });
   }
 
@@ -161,12 +173,11 @@ class PlaceholderAuditTester {
       fs.writeFileSync(testFile, `
         NODE_ENV=development
         API_KEY_HERE=test-key
-        DATABASE_URL=postgres://localhost/test
+        DATABASE_URL=postgres://user:pass@localhost:5432/test
       `);
 
       const auditor = new PlaceholderAuditor();
       const result = await this.runAuditorOnFile(testFile);
-      
       // Development should be more permissive
       const criticalErrors = result.envErrors.filter(e => e.severity === 'critical');
       return criticalErrors.length === 0;
@@ -195,8 +206,9 @@ GA4_MEASUREMENT_ID=G-XXXXXXXXXX
       
       // Mock the fix map loading
       const fixMap = {
-        'your-api-key-here': 'fixed-api-key-value',
-        'postgres://localhost/test': 'postgres://user:pass@localhost:5432/fixed_db'
+        'API_KEY_HERE': 'fixed-api-key-value',
+        'DATABASE_URL': 'postgres://user:pass@localhost:5432/fixed_db',
+        'GA4_MEASUREMENT_ID': 'G-FIXED123456'
       };
 
       await auditor.fixEnvFile(path.relative(process.cwd(), testFile), fixMap);
@@ -352,9 +364,8 @@ GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 
       const auditor = new PlaceholderAuditor();
       const result = await this.runAuditorOnFile(testFile);
-      
       // Should classify password as critical, API key as high, domain as medium/low
-      const severities = result.envErrors.map(e => e.severity);
+      const severities = result.findings[0].findings.map(f => f.severity);
       return severities.includes('critical');
     });
 

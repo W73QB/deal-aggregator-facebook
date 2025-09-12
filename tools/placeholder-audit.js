@@ -63,18 +63,18 @@ const PLACEHOLDER_PATTERNS = [
   // Generic placeholders
   {
     name: 'Generic Placeholders',
-    pattern: /\b(placeholder|change[_-]?me|replace[_-]?me|to[_-]?be[_-]?filled|your[_-]?(key|id|token|domain|secret)|dummy|sample|tbd|todo|fixme|hack)\b/i,
+    pattern: /\b(placeholder|change[_-]?me|replace[_-]?me|to[_-]?be[_-]?filled|your-api-key-here|dummy|sample|tbd|todo|fixme|hack)\b/i,
     severity: 'high'
   },
   // Analytics placeholders
   {
     name: 'Analytics Placeholders',
-    pattern: /\b(G-(TEST[0-9A-Z]*|XXXX|YYYY|ZZZZ|MEASUREMENT_ID|AAAAAAAAAA|123456789))\b/,
+    pattern: /\b(G-(TEST[0-9A-Z]*|XXXX|YYYY|ZZZZ|MEASUREMENT_ID|AAAAAAAAAA|123456789|[A-Z0-9]{10}))\b/,
     severity: 'critical'
   },
   {
     name: 'GTM Placeholders', 
-    pattern: /\b(GTM-(TEST[0-9A-Z]*|XXXX|YYYY|ZZZZ|CONTAINER_ID))\b/,
+    pattern: /\b(GTM-(TEST[0-9A-Z]*|XXXX|YYYY|ZZZZ|CONTAINER_ID|[A-Z0-9]{7}))\b/,
     severity: 'critical'
   },
   {
@@ -413,21 +413,34 @@ class PlaceholderAuditor {
     try {
       const content = fs.readFileSync(path.join(ROOT, filePath), 'utf8');
       const lines = content.split(/\r?\n/);
+      const findingsMap = new Map();
+      const severityOrder = {
+        critical: 4,
+        high: 3,
+        medium: 2,
+        low: 1
+      };
 
       // Scan for placeholder patterns
       lines.forEach((line, index) => {
+        const lineNumber = index + 1;
         PLACEHOLDER_PATTERNS.forEach(patternObj => {
           if (patternObj.pattern.test(line)) {
-            result.findings.push({
-              line: index + 1,
-              pattern: patternObj.name,
-              severity: patternObj.severity,
-              snippet: line.trim().slice(0, 200),
-              fullPattern: patternObj.pattern.toString()
-            });
+            const existingFinding = findingsMap.get(lineNumber);
+            if (!existingFinding || severityOrder[patternObj.severity] > severityOrder[existingFinding.severity]) {
+              findingsMap.set(lineNumber, {
+                line: lineNumber,
+                pattern: patternObj.name,
+                severity: patternObj.severity,
+                snippet: line.trim().slice(0, 200),
+                fullPattern: patternObj.pattern.toString()
+              });
+            }
           }
         });
       });
+
+      result.findings = Array.from(findingsMap.values());
 
       // Validate environment files
       if (/\.env($|\.)/i.test(filePath)) {
@@ -1035,6 +1048,12 @@ if (!isMainThread) {
     const envErrors = [];
     let filesWithPlaceholders = 0;
     let placeholdersFound = 0;
+    const severityOrder = {
+      critical: 4,
+      high: 3,
+      medium: 2,
+      low: 1
+    };
     
     for (const filePath of batch) {
       try {
@@ -1046,21 +1065,28 @@ if (!isMainThread) {
 
         const content = fs.readFileSync(path.join(process.cwd(), filePath), 'utf8');
         const lines = content.split(/\r?\n/);
+        const findingsMap = new Map();
 
         // Scan for placeholder patterns
         lines.forEach((line, index) => {
+          const lineNumber = index + 1;
           patterns.forEach(patternObj => {
             if (patternObj.pattern.test(line)) {
-              result.findings.push({
-                line: index + 1,
-                pattern: patternObj.name,
-                severity: patternObj.severity,
-                snippet: line.trim().slice(0, 200),
-                fullPattern: patternObj.pattern.toString()
-              });
+              const existingFinding = findingsMap.get(lineNumber);
+              if (!existingFinding || severityOrder[patternObj.severity] > severityOrder[existingFinding.severity]) {
+                findingsMap.set(lineNumber, {
+                  line: lineNumber,
+                  pattern: patternObj.name,
+                  severity: patternObj.severity,
+                  snippet: line.trim().slice(0, 200),
+                  fullPattern: patternObj.pattern.toString()
+                });
+              }
             }
           });
         });
+
+        result.findings = Array.from(findingsMap.values());
 
         // Validate environment files
         if (/\.env($|\.)/i.test(filePath)) {
