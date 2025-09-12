@@ -1,0 +1,22 @@
+{
+  "migration_start": "2025-09-06T03:03:52.159Z",
+  "old_page": {
+    "name": "dealradarus",
+    "status": "restricted",
+    "followers_at_restriction": "unknown",
+    "last_active": "2025-09-02"
+  },
+  "new_page": {
+    "name": "DealRadarUS Official",
+    "created": "2025-09-06T03:03:52.159Z",
+    "target_followers_30_days": 100,
+    "target_followers_90_days": 500,
+    "target_engagement_rate": 2.5
+  },
+  "migration_metrics": {
+    "daily_follower_growth": [],
+    "engagement_rates": [],
+    "website_traffic_from_facebook": [],
+    "compliance_score": []
+  }
+}

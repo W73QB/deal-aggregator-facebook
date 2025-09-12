@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.dealradarus.dailyautomation</string>
+    
+    <key>Program</key>
+    <string>/Users/admin/projects/deal-aggregator-facebook/automation/startup-automation.sh</string>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <true/>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/admin/projects/deal-aggregator-facebook/automation/logs/launchd.out</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/admin/projects/deal-aggregator-facebook/automation/logs/launchd.err</string>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/admin/projects/deal-aggregator-facebook</string>
+    
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin</string>
+        <key>NODE_ENV</key>
+        <string>production</string>
+    </dict>
+    
+    <!-- Wait for network availability -->
+    <key>LaunchOnlyOnce</key>
+    <false/>
+    
+    <!-- Restart if crashes -->
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+    
+</dict>
+</plist>

@@ -1,0 +1,12 @@
+{
+  "paused": true,
+  "reason": "facebook_business_restriction",
+  "pausedAt": "2025-09-06T02:53:34.049Z",
+  "restrictionDetails": {
+    "detected": true,
+    "dateRestricted": "2025-09-02",
+    "restrictionType": "business_account_limited",
+    "canAppeal": true,
+    "automationPaused": false
+  }
+}
