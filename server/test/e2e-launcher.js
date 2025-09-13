@@ -90,7 +90,7 @@ class E2ELauncher {
     
     backendProcess.stdout.on('data', (data) => {
       const output = data.toString();
-      if (output.includes('server running on port 3001')) {
+      if (output.includes('DealRadarUS server running on port')) {
         startupComplete = true;
       }
       if (process.env.E2E_VERBOSE) {
