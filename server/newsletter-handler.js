@@ -431,7 +431,7 @@ if (require.main === module) {
       console.log('Newsletter handler ready for testing');
       
       // Test validation
-      const testEmail = 'test@example.com';
+      const testEmail = 'test@dealradarus.com';
       const validation = handler.validateSubscriptionRequest(testEmail, '127.0.0.1');
       console.log('Validation test:', validation);
       
