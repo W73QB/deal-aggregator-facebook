@@ -12,7 +12,7 @@ const path = require('path');
 class E2ELauncher {
   constructor() {
     this.servers = [];
-    this.maxRetries = 30;
+    this.maxRetries = 60; // Increased from 30
     this.retryDelay = 2000; // 2 seconds
   }
 

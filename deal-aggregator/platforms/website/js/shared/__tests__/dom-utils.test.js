@@ -70,16 +70,11 @@ describe('DOM Utilities', () => {
       
       syncURL({ category: 'tech', search: 'laptop' });
       
-      expect(window.history.replaceState).toHaveBeenCalledWith(
-        {},
-        '',
-        expect.stringContaining('category=tech')
-      );
-      expect(window.history.replaceState).toHaveBeenCalledWith(
-        {},
-        '',
-        expect.stringContaining('search=laptop')
-      );
+      const [[, , url]] = window.history.replaceState.mock.calls;
+      const urlParams = new URL(url).searchParams;
+
+      expect(urlParams.get('category')).toBe('tech');
+      expect(urlParams.get('search')).toBe('laptop');
       
       window.history.replaceState = originalReplaceState;
     });
@@ -123,15 +118,17 @@ describe('DOM Utilities', () => {
     });
 
     test('should handle localStorage errors', () => {
-      const originalSetItem = localStorage.setItem;
-      localStorage.setItem = jest.fn(() => {
+      const originalSetItem = Storage.prototype.setItem;
+      // Mock setItem on the Storage prototype
+      Storage.prototype.setItem = jest.fn(() => {
         throw new Error('Storage error');
       });
       
       const result = saveState('testKey', { test: 'data' });
       expect(result).toBe(false);
       
-      localStorage.setItem = originalSetItem;
+      // Restore original method
+      Storage.prototype.setItem = originalSetItem;
     });
   });
 

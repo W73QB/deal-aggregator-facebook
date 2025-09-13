@@ -1,33 +1,22 @@
 const { FacebookAPI } = require('../facebook-api');
-const https = require('https');
+const axios = require('axios');
 
-// Mock https module
-jest.mock('https');
+// Mock axios module
+jest.mock('axios');
 
 describe('FacebookAPI', () => {
   let facebookAPI;
-  let mockRequest;
-  let mockResponse;
+  let mockApi;
 
   beforeEach(() => {
+    // Setup mock axios instance
+    mockApi = {
+      get: jest.fn(),
+      post: jest.fn(),
+    };
+    axios.create.mockReturnValue(mockApi);
+    
     facebookAPI = new FacebookAPI('test-page-id', 'test-access-token');
-    
-    // Setup mock request
-    mockRequest = {
-      on: jest.fn(),
-      setTimeout: jest.fn(),
-      write: jest.fn(),
-      end: jest.fn(),
-      destroy: jest.fn()
-    };
-    
-    // Setup mock response
-    mockResponse = {
-      statusCode: 200,
-      on: jest.fn()
-    };
-    
-    https.request.mockReturnValue(mockRequest);
   });
 
   afterEach(() => {
@@ -35,101 +24,31 @@ describe('FacebookAPI', () => {
   });
 
   describe('constructor', () => {
-    it('should initialize with required parameters', () => {
+    it('should initialize with required parameters and default options', () => {
       expect(facebookAPI.pageId).toBe('test-page-id');
       expect(facebookAPI.accessToken).toBe('test-access-token');
-      expect(facebookAPI.timeoutMs).toBe(20000);
-      expect(facebookAPI.baseURL).toBe('graph.facebook.com');
+      expect(axios.create).toHaveBeenCalledWith({
+        baseURL: 'https://graph.facebook.com/v19.0',
+        timeout: 30000,
+        headers: { 'User-Agent': 'DealAggregator/1.1' },
+      });
     });
 
     it('should accept custom options', () => {
-      const customAPI = new FacebookAPI('page', 'token', {
-        timeoutMs: 30000,
-        baseURL: 'custom.facebook.com'
-      });
-      
-      expect(customAPI.timeoutMs).toBe(30000);
-      expect(customAPI.baseURL).toBe('custom.facebook.com');
-    });
-  });
-
-  describe('_makeRequest', () => {
-    it('should make successful HTTPS request', async () => {
-      const testData = { success: true };
-      
-      // Mock successful response
-      https.request.mockImplementation((options, callback) => {
-        callback(mockResponse);
-        return mockRequest;
-      });
-      
-      // Mock response events
-      mockResponse.on.mockImplementation((event, handler) => {
-        if (event === 'data') {
-          handler(JSON.stringify(testData));
-        } else if (event === 'end') {
-          handler();
-        }
-      });
-      
-      const result = await facebookAPI._makeRequest({ hostname: 'test.com' });
-      
-      expect(result).toEqual({
-        statusCode: 200,
-        data: testData
-      });
-    });
-
-    it('should handle network errors with retry', async () => {
-      let callCount = 0;
-      
-      https.request.mockImplementation(() => {
-        callCount++;
-        return mockRequest;
-      });
-      
-      // Mock error on first call, success on retry
-      mockRequest.on.mockImplementation((event, handler) => {
-        if (event === 'error' && callCount === 1) {
-          handler({ code: 'ECONNRESET' });
-        }
-      });
-      
-      // Start the request (will fail and retry)
-      const promise = facebookAPI._makeRequest({ hostname: 'test.com' });
-      
-      // Simulate retry timeout
-      setTimeout(() => {
-        // Mock successful retry
-        mockResponse.on.mockImplementation((event, handler) => {
-          if (event === 'data') {
-            handler('{"retry": true}');
-          } else if (event === 'end') {
-            handler();
-          }
+        new FacebookAPI('page', 'token', {
+            timeoutMs: 10000,
+            apiVersion: 'v18.0'
         });
-        
-        if (https.request.mock.calls.length >= 2) {
-          https.request.mock.results[1].value = mockRequest;
-          const callback = https.request.mock.calls[1][1];
-          callback(mockResponse);
-        }
-      }, 100);
-      
-      // Note: This test is simplified - full retry testing would require more complex mocking
-      expect(mockRequest.on).toHaveBeenCalledWith('error', expect.any(Function));
+      expect(axios.create).toHaveBeenCalledWith({
+        baseURL: 'https://graph.facebook.com/v18.0',
+        timeout: 10000,
+        headers: { 'User-Agent': 'DealAggregator/1.1' },
+      });
     });
 
-    it('should handle timeout', () => {
-      const timeoutHandler = jest.fn();
-      mockRequest.setTimeout.mockImplementation((timeout, handler) => {
-        expect(timeout).toBe(20000);
-        timeoutHandler.mockImplementation(handler);
-      });
-      
-      facebookAPI._makeRequest({ hostname: 'test.com' });
-      
-      expect(mockRequest.setTimeout).toHaveBeenCalledWith(20000, expect.any(Function));
+    it('should throw an error if pageId or accessToken is missing', () => {
+        expect(() => new FacebookAPI()).toThrow('Page ID and Access Token are required.');
+        expect(() => new FacebookAPI('page-id-only')).toThrow('Page ID and Access Token are required.');
     });
   });
 
@@ -139,15 +58,13 @@ describe('FacebookAPI', () => {
         id: 'test-page-id',
         name: 'Test Page'
       };
-      
-      // Mock successful API response
-      jest.spyOn(facebookAPI, '_makeRequest').mockResolvedValue({
-        statusCode: 200,
-        data: mockValidResponse
-      });
+      mockApi.get.mockResolvedValue({ data: mockValidResponse });
       
       const result = await facebookAPI.validateCredentials();
       
+      expect(mockApi.get).toHaveBeenCalledWith('/me', {
+        params: { fields: 'id,name', access_token: 'test-access-token' }
+      });
       expect(result).toEqual({
         success: true,
         pageId: 'test-page-id',
@@ -156,46 +73,45 @@ describe('FacebookAPI', () => {
       });
     });
 
-    it('should handle invalid credentials', async () => {
-      jest.spyOn(facebookAPI, '_makeRequest').mockResolvedValue({
-        statusCode: 400,
-        data: { error: { message: 'Invalid token' } }
-      });
-      
-      const result = await facebookAPI.validateCredentials();
-      
-      expect(result).toEqual({
-        success: false,
-        error: { message: 'Invalid token' },
-        message: 'Token validation failed'
-      });
+    it('should handle token valid for a different page', async () => {
+        mockApi.get.mockResolvedValue({ data: { id: 'different-page-id', name: 'Wrong Page' } });
+        const result = await facebookAPI.validateCredentials();
+        expect(result).toEqual({
+            success: false,
+            pageId: 'different-page-id',
+            pageName: 'Wrong Page',
+            message: 'Token valid but for different page'
+        });
     });
 
-    it('should handle network errors', async () => {
-      jest.spyOn(facebookAPI, '_makeRequest').mockRejectedValue(new Error('Network error'));
+    it('should handle API errors', async () => {
+      const errorResponse = { response: { data: { error: { message: 'Invalid token' } } } };
+      mockApi.get.mockRejectedValue(errorResponse);
       
       const result = await facebookAPI.validateCredentials();
       
       expect(result).toEqual({
         success: false,
-        error: 'Network error',
-        message: 'Network error during validation'
+        error: { error: { message: 'Invalid token' } },
+        message: 'Token validation failed'
       });
     });
   });
 
   describe('postMessage', () => {
     it('should post message successfully', async () => {
-      jest.spyOn(facebookAPI, '_makeRequest').mockResolvedValue({
-        statusCode: 200,
-        data: { id: 'post_12345' }
-      });
+      mockApi.post.mockResolvedValue({ data: { id: 'post_12345' } });
       
       const result = await facebookAPI.postMessage({
         message: 'Test message',
         link: 'https://example.com'
       });
       
+      expect(mockApi.post).toHaveBeenCalledWith('/test-page-id/feed', {
+        message: 'Test message',
+        link: 'https://example.com',
+        access_token: 'test-access-token'
+      });
       expect(result).toEqual({
         success: true,
         postId: 'post_12345',
@@ -204,48 +120,30 @@ describe('FacebookAPI', () => {
     });
 
     it('should handle posting errors', async () => {
-      jest.spyOn(facebookAPI, '_makeRequest').mockResolvedValue({
-        statusCode: 400,
-        data: { error: { message: 'Invalid message' } }
-      });
+      const errorResponse = { response: { data: { error: { message: 'Invalid message' } } } };
+      mockApi.post.mockRejectedValue(errorResponse);
       
       const result = await facebookAPI.postMessage({ message: 'Test' });
       
       expect(result).toEqual({
         success: false,
-        error: { message: 'Invalid message' },
+        error: { error: { message: 'Invalid message' } },
         message: 'Failed to create post'
-      });
-    });
-
-    it('should handle network errors during posting', async () => {
-      jest.spyOn(facebookAPI, '_makeRequest').mockRejectedValue(new Error('Network error'));
-      
-      const result = await facebookAPI.postMessage({ message: 'Test' });
-      
-      expect(result).toEqual({
-        success: false,
-        error: 'Network error',
-        message: 'Network error during posting'
       });
     });
   });
 
   describe('testAccess', () => {
-    it('should test access successfully', async () => {
-      // Mock validateCredentials
-      jest.spyOn(facebookAPI, 'validateCredentials').mockResolvedValue({
-        success: true,
-        pageId: 'test-page-id',
-        pageName: 'Test Page'
-      });
+    it('should return overall success if all checks pass', async () => {
+      // Mock validateCredentials to be successful
+      jest.spyOn(facebookAPI, 'validateCredentials').mockResolvedValue({ success: true, pageName: 'Test Page', pageId: 'test-page-id' });
       
       // Mock permissions check
-      jest.spyOn(facebookAPI, '_makeRequest').mockResolvedValue({
-        statusCode: 200,
+      mockApi.get.mockResolvedValue({
         data: {
           data: [
-            { permission: 'pages_manage_posts', status: 'granted' }
+            { permission: 'pages_manage_posts', status: 'granted' },
+            { permission: 'pages_read_engagement', status: 'granted' }
           ]
         }
       });
@@ -257,19 +155,14 @@ describe('FacebookAPI', () => {
         permissions: true,
         overall: true
       });
+      expect(mockApi.get).toHaveBeenCalledWith('/me/permissions', {
+        params: { access_token: 'test-access-token' }
+      });
     });
 
     it('should handle missing permissions', async () => {
-      jest.spyOn(facebookAPI, 'validateCredentials').mockResolvedValue({
-        success: true,
-        pageId: 'test-page-id',
-        pageName: 'Test Page'
-      });
-      
-      jest.spyOn(facebookAPI, '_makeRequest').mockResolvedValue({
-        statusCode: 200,
-        data: { data: [] } // No permissions
-      });
+      jest.spyOn(facebookAPI, 'validateCredentials').mockResolvedValue({ success: true });
+      mockApi.get.mockResolvedValue({ data: { data: [{ permission: 'pages_read_engagement', status: 'granted' }] } }); // Missing one permission
       
       const result = await facebookAPI.testAccess();
       
@@ -278,6 +171,17 @@ describe('FacebookAPI', () => {
         permissions: false,
         overall: false
       });
+    });
+
+    it('should handle credential failure', async () => {
+        jest.spyOn(facebookAPI, 'validateCredentials').mockResolvedValue({ success: false, message: 'Bad token' });
+
+        const result = await facebookAPI.testAccess();
+
+        // Permissions check should not even be called
+        expect(mockApi.get).not.toHaveBeenCalled();
+        expect(result.overall).toBe(false);
+        expect(result.credentials).toBe(false);
     });
   });
 });

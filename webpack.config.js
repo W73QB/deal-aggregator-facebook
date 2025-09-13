@@ -61,6 +61,10 @@ module.exports = {
       'Access-Control-Allow-Origin': '*'
     },
     proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
       '/auth': {
         target: 'http://localhost:3001',
         changeOrigin: true

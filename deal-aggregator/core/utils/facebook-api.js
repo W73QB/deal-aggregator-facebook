@@ -179,6 +179,13 @@ class FacebookAPI {
     } else {
       console.log(`   Error: ${credentialTest.message}`);
       if (credentialTest.error) console.log(`   Details: ${JSON.stringify(credentialTest.error)}`);
+      // If credentials fail, no point in checking permissions.
+      return {
+        credentials: false,
+        permissions: false,
+        overall: false,
+        error: credentialTest.error
+      }
     }
     
     try {

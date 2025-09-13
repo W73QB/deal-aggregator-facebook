@@ -321,6 +321,13 @@ describe('M3.5 Analytics & Monitoring E2E Tests', () => {
     });
 
     it('should track JavaScript errors', () => {
+      // Temporarily prevent Cypress from failing on this expected error
+      cy.on('uncaught:exception', (err) => {
+        if (err.message.includes('Test error for analytics')) {
+          return false; // returning false here prevents Cypress from failing the test
+        }
+      });
+
       // Trigger a JavaScript error
       cy.window().then((win) => {
         // Simulate an error
@@ -337,6 +344,9 @@ describe('M3.5 Analytics & Monitoring E2E Tests', () => {
       cy.window().then((win) => {
         const errorEvents = win.dataLayer.filter(event => event.event === 'error_occurred');
         expect(errorEvents).to.have.length.greaterThan(0);
+        const errEvent = errorEvents[0];
+        expect(errEvent.error_message).to.contain('Test error for analytics');
+        expect(errEvent.error_source).to.contain('test.js');
       });
     });
   });

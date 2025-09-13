@@ -10,8 +10,10 @@ describe('Basic Frontend Connectivity Test', () => {
     cy.window().its('store').should('exist');
   });
 
-  it('should be able to make API calls through proxy', () => {
-    cy.request('/health').then((response) => {
+  it('should be able to make API calls to the backend', () => {
+    // Note: This test calls the backend directly, bypassing the proxy,
+    // because the E2E test launcher runs two separate servers without a unified proxy.
+    cy.request('http://localhost:3001/health').then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body).to.have.property('status', 'healthy');
     });

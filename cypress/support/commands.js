@@ -199,29 +199,31 @@ Cypress.Commands.add('measurePerformance', (label) => {
 
 // Add data-cy attributes programmatically for testing
 Cypress.Commands.add('addTestIds', () => {
-  cy.window().then((win) => {
-    const addTestId = (element, id) => {
-      if (!element.getAttribute('data-cy')) {
-        element.setAttribute('data-cy', id);
-      }
-    };
-    
-    // Add common test IDs
-    const selectors = {
-      'button:contains("Write a Review")': 'write-review-btn',
-      'button:contains("Post Review")': 'submit-review',
-      'button:contains("Post Comment")': 'submit-comment',
-      'button:contains("Report")': 'report-btn',
-      'input[placeholder*="title"]': 'review-title',
-      'textarea[placeholder*="review"]': 'review-content',
-      'textarea[placeholder*="comment"]': 'comment-textarea',
-      '.rating-stars': 'rating-stars',
-      '.notification-toast': 'notification'
-    };
-    
-    Object.entries(selectors).forEach(([selector, testId]) => {
-      const elements = win.document.querySelectorAll(selector);
-      elements.forEach(el => addTestId(el, testId));
+  // First, wait for a key element to be visible, ensuring the app has hydrated.
+  cy.get('[data-cy=review-list]', { timeout: 10000 }).should('be.visible');
+
+  // Use Cypress's selectors which support :contains, and handle errors gracefully
+  const selectors = {
+    'button:contains("Write a Review")': 'write-review-btn',
+    'button:contains("Post Review")': 'submit-review',
+    'button:contains("Post Comment")': 'submit-comment',
+    'button:contains("Report")': 'report-btn',
+    'input[placeholder*="title"]': 'review-title',
+    'textarea[placeholder*="review"]': 'review-content',
+    'textarea[placeholder*="comment"]': 'comment-textarea',
+    '.rating-stars': 'rating-stars',
+    '.notification-toast': 'notification'
+  };
+
+  Object.entries(selectors).forEach(([selector, testId]) => {
+    // Use { log: false } to avoid cluttering the command log
+    // Use an empty error handler to prevent test failure if element doesn't exist on a page
+    cy.get(selector, { log: false }).then($elements => {
+      $elements.each((index, el) => {
+        if (!el.getAttribute('data-cy')) {
+          el.setAttribute('data-cy', testId);
+        }
+      });
     });
   });
 });
