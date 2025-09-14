@@ -97,7 +97,10 @@ class DistImageReplacer {
     console.log('🖼️  Running Dist Image Replacement...\n');
     
     const distFiles = [
-      'dist/pages/index.html',
+      'dist/index.html',        // Root index file
+      'dist/deals.html',        // Root deals file  
+      'dist/blog.html',         // Root blog file
+      'dist/pages/index.html',  // Pages subdirectory
       'dist/pages/deals.html',
       'dist/pages/blog.html'
     ];
