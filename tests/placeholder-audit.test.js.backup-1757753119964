@@ -80,7 +80,7 @@ class PlaceholderAuditTester {
       fs.writeFileSync(testFile, `
         const config = {
           apiKey: "your-api-key-here",
-          domain: "dealradarus.com",
+          domain: "example.com",
           gaId: "G-XXXXXXXXXX"
         };
       `);
@@ -222,7 +222,7 @@ GA4_MEASUREMENT_ID=G-XXXXXXXXXX
     await this.runTest('Configuration File Auto-Fix', async () => {
       const testFile = path.join(this.testDir, 'config.json');
       const config = {
-        domain: "dealradarus.com",
+        domain: "example.com",
         api: "your-api-key-here",
         tracking: "G-XXXXXXXXXX"
       };
