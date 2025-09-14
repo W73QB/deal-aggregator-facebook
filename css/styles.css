@@ -275,9 +275,10 @@ body {
     background: var(--light-grey);
 }
 
+/* Fix deal card layout overlapping */
 .deal-card.featured {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 2rem auto;
     background: var(--white);
     border-radius: 15px;
     overflow: hidden;
@@ -285,6 +286,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: relative;
+    min-height: 400px;
 }
 
 .deal-badge {
@@ -707,9 +709,19 @@ body {
         font-size: 2.5rem;
     }
     
-    .deal-card.featured {
-        grid-template-columns: 1fr;
-    }
+    /* Fix deal card layout overlapping */
+.deal-card.featured {
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    min-height: 400px;
+}
     
     .hero-cta {
         justify-content: center;
@@ -1216,6 +1228,7 @@ body {
 }
 
 /* Countdown Timer */
+/* Fix countdown timer overlapping issues */
 .countdown-timer {
     background: linear-gradient(135deg, #ff6b6b, #ff8e53);
     color: white;
@@ -1224,6 +1237,9 @@ body {
     margin-bottom: 0.75rem;
     text-align: center;
     box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    position: relative;
+    z-index: 1;
+    clear: both;
 }
 
 .countdown-timer .timer-label {
@@ -1385,10 +1401,18 @@ body {
 }
 
 /* Featured Deal Enhanced Styling */
+/* Fix deal card layout overlapping */
 .deal-card.featured {
-    border: 3px solid transparent;
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(135deg, #1A73E8, #4285F4) border-box;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    min-height: 400px;
 }
 
 .deal-card.featured .deal-title {
@@ -1410,10 +1434,19 @@ body {
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
-    .countdown-timer {
-        padding: 0.4rem;
-        margin-bottom: 0.5rem;
-    }
+    /* Fix countdown timer overlapping issues */
+.countdown-timer {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    position: relative;
+    z-index: 1;
+    clear: both;
+}
     
     .countdown-timer .timer-display {
         gap: 0.15rem;
