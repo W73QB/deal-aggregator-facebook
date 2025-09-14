@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build:static",
+  "buildCommand": "npm run build:static && echo 'Build cache cleared'",
   "outputDirectory": "dist",
   "devCommand": "npm run dev:frontend",
   "installCommand": "npm install",
