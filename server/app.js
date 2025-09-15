@@ -240,6 +240,7 @@ class DealRadarUSApp {
     this.app.use('/comments', commentsRoutes);
     this.app.use('/reports', reportsRoutes);
     this.app.use('/notifications', notificationsRoutes);
+    this.app.use('/api/deals', dealsRoutes);
     this.app.use('/metrics', metricsRoutes);
 
     // Production: Serve static files from dist directory with M3.7 optimization
