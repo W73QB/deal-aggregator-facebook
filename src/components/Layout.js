@@ -19,27 +19,58 @@ const Layout = ({ children }) => {
           <div className="header-content">
             <div className="logo">
               <Link to="/" className="logo-link">
-                <div className="logo-icon">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="14" fill="url(#logoGradient)" stroke="url(#logoStroke)" strokeWidth="2"/>
-                    <path d="M16 6C16 6 24 10 24 16C24 22 16 26 16 26C16 26 8 22 8 16C8 10 16 6 16 6Z" fill="white" fillOpacity="0.9"/>
-                    <circle cx="16" cy="16" r="3" fill="#0070f3"/>
-                    <path d="M13 13L19 19M19 13L13 19" stroke="#0070f3" strokeWidth="1.5" strokeLinecap="round"/>
+                <div className="logo-animated">
+                  <svg width="140" height="42" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
                     <defs>
-                      <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#0070f3"/>
+                      <linearGradient id="radarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#1A73E8"/>
                         <stop offset="100%" stopColor="#0056b3"/>
                       </linearGradient>
-                      <linearGradient id="logoStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#0056b3"/>
-                        <stop offset="100%" stopColor="#003d82"/>
-                      </linearGradient>
                     </defs>
+
+                    {/* Radar circles */}
+                    <g transform="translate(30, 30)">
+                      {/* Outer radar circle */}
+                      <circle cx="0" cy="0" r="25" fill="none" stroke="url(#radarGradient)" strokeWidth="2" opacity="0.3"/>
+                      {/* Middle radar circle */}
+                      <circle cx="0" cy="0" r="18" fill="none" stroke="url(#radarGradient)" strokeWidth="2" opacity="0.5"/>
+                      {/* Inner radar circle */}
+                      <circle cx="0" cy="0" r="11" fill="none" stroke="url(#radarGradient)" strokeWidth="2" opacity="0.7"/>
+
+                      {/* Radar sweep line */}
+                      <line x1="0" y1="0" x2="22" y2="-8" stroke="url(#radarGradient)" strokeWidth="3" strokeLinecap="round">
+                        <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" dur="3s" repeatCount="indefinite"/>
+                      </line>
+
+                      {/* Center dot */}
+                      <circle cx="0" cy="0" r="3" fill="url(#radarGradient)"/>
+
+                      {/* Deal indicators (small dots) */}
+                      <circle cx="12" cy="-6" r="2" fill="#FF3B30" opacity="0.8">
+                        <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                      </circle>
+                      <circle cx="-8" cy="15" r="2" fill="#FF3B30" opacity="0.6">
+                        <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/>
+                      </circle>
+                      <circle cx="18" cy="12" r="2" fill="#FF3B30" opacity="0.7">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="1.8s" repeatCount="indefinite"/>
+                      </circle>
+                    </g>
+
+                    {/* Shopping cart element integrated into radar */}
+                    <g transform="translate(45, 35)">
+                      <path d="M2 2h2l.4 2h7.6l-1.4 6H5L3 4H1" fill="none" stroke="url(#radarGradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="6" cy="15" r="1" fill="url(#radarGradient)"/>
+                      <circle cx="11" cy="15" r="1" fill="url(#radarGradient)"/>
+                    </g>
+
+                    {/* Company name */}
+                    <text x="75" y="25" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" fill="#1A73E8">DealRadar</text>
+                    <text x="75" y="42" fontFamily="Arial, sans-serif" fontSize="12" fontWeight="normal" fill="#6C757D">US</text>
                   </svg>
                 </div>
-                <div className="logo-text">
-                  <h1>DealRadarUS</h1>
-                  <span className="tagline">Your Radar for the Best Deals</span>
+                <div className="logo-tagline">
+                  <span>Your Radar for the Best Deals</span>
                 </div>
               </Link>
             </div>

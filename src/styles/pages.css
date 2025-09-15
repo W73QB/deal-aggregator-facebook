@@ -33,46 +33,45 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 0.75rem 0;
   gap: 2rem;
+  min-height: 70px;
 }
 
 .logo-link {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
-.logo-link:hover .logo-icon {
-  transform: rotate(5deg) scale(1.05);
+.logo-link:hover .logo-animated {
+  transform: scale(1.02);
 }
 
-.logo-icon {
+.logo-animated {
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
 }
 
-.logo-text h1 {
-  font-size: 1.5rem;
-  color: #0070f3;
-  margin: 0;
-  font-weight: 700;
-  background: linear-gradient(135deg, #0070f3, #0056b3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.logo-animated svg {
+  max-width: 140px;
+  height: auto;
 }
 
-.logo-text .tagline {
-  font-size: 0.8rem;
+.logo-tagline {
+  margin-top: -4px;
+  margin-left: 75px;
+}
+
+.logo-tagline span {
+  font-size: 0.75rem;
   color: #666;
-  display: block;
-  margin-top: -2px;
   font-weight: 500;
+  font-style: italic;
 }
 
 .main-nav .nav-menu {
@@ -872,6 +871,20 @@
 @media (max-width: 768px) {
   .header-content {
     flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .logo-animated svg {
+    max-width: 120px;
+  }
+
+  .logo-tagline {
+    margin-left: 65px;
+  }
+
+  .logo-tagline span {
+    font-size: 0.7rem;
   }
 
   .main-nav {
