@@ -2,5 +2,28 @@
   "buildCommand": "rm -rf dist && npm run build:static && echo 'EMERGENCY_DEPLOY_$(date +%s)'",
   "outputDirectory": "dist",
   "cleanUrls": false,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate, max-age=0"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
+          "key": "Expires",
+          "value": "0"
+        },
+        {
+          "key": "X-Force-Refresh",
+          "value": "1757904615"
+        }
+      ]
+    }
+  ]
 }
