@@ -36,7 +36,7 @@ filesToFix.forEach(filePath => {
 });
 
 // 2. Check and fix CSS issues for text overlap
-const cssFile = 'css/styles.css';
+const cssFile = 'css/main-1757840397.css';
 if (fs.existsSync(cssFile)) {
     let cssContent = fs.readFileSync(cssFile, 'utf8');
     let cssFixed = false;
