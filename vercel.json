@@ -1,35 +1,18 @@
 {
-  "buildCommand": "rm -rf dist && npm run build:static && echo 'SPA_ROUTING_DEPLOY_$(date +%s)'",
-  "outputDirectory": "dist",
-  "cleanUrls": false,
-  "trailingSlash": false,
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/((?!api|assets|css|js|images|favicon.ico|robots.txt|sitemap.xml).*)",
-      "destination": "/index.html"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "server/app.js",
+      "use": "@vercel/node"
     }
   ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate, max-age=0"
-        },
-        {
-          "key": "Pragma",
-          "value": "no-cache"
-        },
-        {
-          "key": "Expires",
-          "value": "0"
-        },
-        {
-          "key": "X-SPA-Routing",
-          "value": "enabled"
-        }
-      ]
-    }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/server/app.js" },
+    { "source": "/((?!api/|assets/|css/|js/|favicon.ico|robots.txt|sitemap.xml|.*\\..*).*)", "destination": "/index.html" }
   ]
 }
