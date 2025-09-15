@@ -57,7 +57,7 @@ function findHtmlFiles(dir) {
 const htmlFiles = findHtmlFiles('.');
 let totalReplacements = 0;
 let filesModified = 0;
-let platformStats = { Facebook: 0, TikTok: 0, YouTube: 0 };
+const platformStats = { Facebook: 0, TikTok: 0, YouTube: 0 };
 
 console.log(`🔍 Updating to OFFICIAL social media URLs...`);
 console.log(`📘 Facebook: ${officialUrls.facebook}`);

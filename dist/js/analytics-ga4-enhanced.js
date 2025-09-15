@@ -177,7 +177,7 @@ class GA4EnhancedTracking {
     });
 
     // Track time on page
-    let startTime = Date.now();
+    const startTime = Date.now();
     window.addEventListener('beforeunload', () => {
       const timeOnPage = Math.round((Date.now() - startTime) / 1000);
       this.trackEvent('page_engagement', {

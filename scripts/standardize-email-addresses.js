@@ -79,7 +79,7 @@ function standardizeEmailsInFile(filePath) {
     console.log(`\n🔧 Processing: ${filePath}`);
     let content = fs.readFileSync(filePath, 'utf8');
     let changes = 0;
-    let originalContent = content;
+    const originalContent = content;
 
     // Apply email replacements
     emailReplacements.forEach(replacement => {

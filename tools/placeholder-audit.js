@@ -650,7 +650,7 @@ class PlaceholderAuditor {
   async fixEnvFile(envFile, fixMap) {
     try {
       const filePath = path.join(ROOT, envFile);
-      let content = fs.readFileSync(filePath, 'utf8');
+      const content = fs.readFileSync(filePath, 'utf8');
       let changed = false;
       const changes = [];
 

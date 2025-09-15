@@ -55,7 +55,7 @@ function fixSocialLinks(filePath) {
     console.log(`\n🔧 Processing: ${filePath}`);
     let content = fs.readFileSync(filePath, 'utf8');
     let changes = 0;
-    let originalContent = content;
+    const originalContent = content;
 
     // Fix follow/profile links (footer social icons)
     const followMappings = [

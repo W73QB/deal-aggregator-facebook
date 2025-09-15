@@ -384,7 +384,7 @@ class PreflightValidator {
     const alertRetryMax = parseInt(process.env.ALERT_RETRY_MAX || '3');
     
     let status = 'PASS';
-    let issues = [];
+    const issues = [];
     
     if (emailEnabled && !smtpConfigured) {
       status = 'FAIL';

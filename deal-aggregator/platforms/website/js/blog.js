@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const copyBlogLink = $('#copyBlogLink');
 
     // State management
-    let state = {
+    const state = {
         category: 'all',
         search: '',
         currentPage: 1,

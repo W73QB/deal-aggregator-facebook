@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Email and Social media click tracking
     document.addEventListener('click', function(e) {
-        let link = e.target.closest('a');
+        const link = e.target.closest('a');
         if (link) {
             // Track mailto: clicks
             if (link.href.startsWith('mailto:')) {

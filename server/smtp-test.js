@@ -35,7 +35,7 @@ async function testSMTPConnection() {
   console.log(`Secure: ${smtpConfig.secure}`);
   console.log('');
 
-  let testResults = {
+  const testResults = {
     timestamp: timestamp,
     smtp_config: {
       host: smtpConfig.host,

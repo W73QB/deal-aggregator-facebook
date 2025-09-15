@@ -92,7 +92,7 @@ class HttpCacheManager {
       immutable = false
     } = options;
 
-    let cacheControl = [];
+    const cacheControl = [];
 
     if (noStore) {
       cacheControl.push('no-store');

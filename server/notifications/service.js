@@ -438,8 +438,8 @@ class NotificationService {
    */
   async recordStatus(notificationId, status, metadata = {}) {
     try {
-      let updateFields = ['status = $2', 'updated_at = NOW()'];
-      let queryParams = [notificationId, status];
+      const updateFields = ['status = $2', 'updated_at = NOW()'];
+      const queryParams = [notificationId, status];
       let paramIndex = 3;
 
       if (status === 'sent' && metadata.deliveredAt) {
