@@ -1,6 +1,7 @@
 {
   "buildCommand": "rm -rf dist && npm run build:static && echo 'Fresh build completed'",
   "outputDirectory": "dist",
+  "ignoreCommand": "exit 0",
   "devCommand": "npm run dev:frontend",
   "installCommand": "npm install",
   "framework": null,
