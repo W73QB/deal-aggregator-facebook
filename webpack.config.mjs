@@ -1,8 +1,12 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -26,6 +30,9 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+        resolve: {
+          fullySpecified: false,
+        },
         use: {
           loader: 'babel-loader',
           options: {
@@ -42,7 +49,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      inject: true
+      inject: 'body',
+      scriptLoading: 'module'
     }),
     new webpack.DefinePlugin({
       'window.ANALYTICS_ENABLED': JSON.stringify(process.env.ANALYTICS_ENABLED || 'true'),
@@ -92,6 +100,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fullySpecified: false
   }
 };

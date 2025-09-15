@@ -2277,3 +2277,33 @@ AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from h
 2025-09-15T08:12:00.377Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:29h, Errors:2
 2025-09-15T09:12:00.420Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:30h, Errors:2
 2025-09-15T09:12:00.422Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:30h, Errors:2
+2025-09-15T10:12:00.550Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:31h, Errors:2
+2025-09-15T10:12:00.551Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:31h, Errors:2
+2025-09-15T11:42:17.474Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:33h, Errors:2
+2025-09-15T11:42:17.474Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:33h, Errors:2
+2025-09-15T12:53:56.237Z - 📱 Publishing morning Facebook post...
+2025-09-15T12:53:56.237Z - 📱 Publishing morning Facebook post...
+2025-09-15T12:53:56.268Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:34h, Errors:2
+2025-09-15T12:53:56.271Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:34h, Errors:2
+2025-09-15T12:53:59.172Z - ❌ Database query failed: getaddrinfo ENOTFOUND ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech
+2025-09-15T12:53:59.172Z - ❌ Database query failed: getaddrinfo ENOTFOUND ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech
+AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
+AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
+2025-09-15T12:53:59.189Z - ❌ Facebook posting failed: getaddrinfo ENOTFOUND graph.facebook.com
+2025-09-15T12:53:59.189Z - ❌ Facebook posting failed: getaddrinfo ENOTFOUND graph.facebook.com
+2025-09-15T13:01:21.515Z - 📝 Creating viral blog with multi-platform distribution...
+2025-09-15T13:01:21.515Z - 📝 Creating viral blog with multi-platform distribution...
+2025-09-15T13:01:21.538Z - ❌ Database query failed: getaddrinfo ENOTFOUND ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech
+2025-09-15T13:01:21.548Z - 🔍 Analyzing trending topics...
+🔍 Analyzing current trends for deal content...
+2025-09-15T13:01:21.549Z - ❌ Database query failed: getaddrinfo ENOTFOUND ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech
+2025-09-15T13:01:21.550Z - 🔍 Analyzing trending topics...
+🔍 Analyzing current trends for deal content...
+❌ Trend analysis failed, using fallback trends
+2025-09-15T13:01:21.552Z - 👤 Using budgetGuru personality...
+❌ Trend analysis failed, using fallback trends
+2025-09-15T13:01:21.553Z - 👤 Using dealHunter personality...
+❌ Human blog creation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
+❌ Human blog creation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
+2025-09-15T13:01:21.557Z - ❌ Viral blog creation failed: Cannot read properties of undefined (reading 'tone')
+2025-09-15T13:01:21.558Z - ❌ Viral blog creation failed: Cannot read properties of undefined (reading 'tone')
