@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import DealsPage from './pages/DealsPage';
 import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 import NotificationContainer from './components/ui/NotificationToast';
 import ReportModal from './components/reports/ReportModal';
 import ConsentBanner from './components/ui/ConsentBanner';
@@ -27,7 +28,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/deals" element={<DealsPage />} />
             <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             {/* Add more routes as needed */}
           </Routes>
         </Layout>
