@@ -66,6 +66,7 @@
     "marketplace"
   ],
   "author": "Generated with Claude Code",
+  "type": "module",
   "license": "MIT",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.0",
