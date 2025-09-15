@@ -50,6 +50,22 @@ const Layout = ({ children }) => {
                     📝 Blog
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    to="/about"
+                    className={`nav-link ${isActivePath('/about') ? 'active' : ''}`}
+                  >
+                    ℹ️ About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className={`nav-link ${isActivePath('/contact') ? 'active' : ''}`}
+                  >
+                    ✉️ Contact
+                  </Link>
+                </li>
               </ul>
             </nav>
 

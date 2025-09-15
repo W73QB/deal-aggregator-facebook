@@ -28,8 +28,10 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/deals" element={<DealsPage />} />
             <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
-            {/* Add more routes as needed */}
+            <Route path="/blog/:slug" element={<BlogPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              {/* Add more routes as needed */}
           </Routes>
         </Layout>
 
