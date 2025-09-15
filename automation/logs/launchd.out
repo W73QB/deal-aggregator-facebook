@@ -2259,3 +2259,5 @@ AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from h
 2025-09-14T23:46:40.216Z - ❌ Facebook posting failed: getaddrinfo ENOTFOUND graph.facebook.com
 2025-09-15T00:11:39.951Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:21h, Errors:2
 2025-09-15T00:11:39.951Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:21h, Errors:2
+2025-09-15T01:11:39.775Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:22h, Errors:2
+2025-09-15T01:11:39.775Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:22h, Errors:2
