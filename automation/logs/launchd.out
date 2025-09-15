@@ -2307,3 +2307,5 @@ AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from h
 ❌ Human blog creation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
 2025-09-15T13:01:21.557Z - ❌ Viral blog creation failed: Cannot read properties of undefined (reading 'tone')
 2025-09-15T13:01:21.558Z - ❌ Viral blog creation failed: Cannot read properties of undefined (reading 'tone')
+2025-09-15T13:53:56.169Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:35h, Errors:4
+2025-09-15T13:53:56.173Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:35h, Errors:4
