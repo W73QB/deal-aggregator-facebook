@@ -9,7 +9,7 @@ const BlogPage = () => {
       author: "DealRadar Team",
       date: "November 15, 2024",
       readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.pexels.com/photos/5650026/pexels-photo-5650026.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Black Friday", "Tech Deals", "Shopping Tips"]
     },
     {
@@ -19,18 +19,18 @@ const BlogPage = () => {
       author: "Sarah Johnson",
       date: "November 10, 2024",
       readTime: "4 min read",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80",
+      image: "https://images.pexels.com/photos/7988086/pexels-photo-7988086.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Buying Guide", "Refurbished", "Electronics"]
     },
     {
       id: 3,
-      title: "iPhone 15 vs iPhone 14: Is the Upgrade Worth It?",
-      excerpt: "Comparing the latest iPhone models to help you decide if upgrading is worth the cost, especially when considering refurbished options.",
+      title: "Prime Day Secrets: How to Find the Best Deals",
+      excerpt: "Amazon Prime Day is a huge sale event. Learn the secrets to finding the best deals and making the most of your Prime membership.",
       author: "Mike Chen",
       date: "November 5, 2024",
       readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2187&q=80",
-      tags: ["iPhone", "Comparison", "Apple"]
+      image: "https://m.media-amazon.com/images/G/01/prime/marketing/slash-prime-pride-logo-2-0._CB589033053_.png",
+      tags: ["Prime Day", "Amazon", "Deals"]
     },
     {
       id: 4,
@@ -39,7 +39,7 @@ const BlogPage = () => {
       author: "Emma Davis",
       date: "October 28, 2024",
       readTime: "7 min read",
-      image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.pexels.com/photos/39284/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Smart Home", "Budget", "IoT"]
     },
     {
@@ -49,18 +49,18 @@ const BlogPage = () => {
       author: "Alex Rodriguez",
       date: "October 20, 2024",
       readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2157&q=80",
+      image: "https://images.pexels.com/photos/7915427/pexels-photo-7915427.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Gaming", "Laptops", "Buying Guide"]
     },
     {
       id: 6,
-      title: "The Rise of Sustainable Electronics: Why Refurbished Matters",
-      excerpt: "Learn how buying refurbished electronics helps reduce e-waste and contributes to a more sustainable future while saving money.",
+      title: "The Ultimate Audio Gear Guide for Audiophiles",
+      excerpt: "From headphones to speakers, we break down the best audio gear for every budget. Find the perfect sound for your setup.",
       author: "DealRadar Team",
       date: "October 15, 2024",
       readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2113&q=80",
-      tags: ["Sustainability", "Environment", "Electronics"]
+      image: "https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      tags: ["Audio", "Headphones", "Speakers"]
     }
   ];
 

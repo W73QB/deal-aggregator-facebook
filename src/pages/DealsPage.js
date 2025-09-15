@@ -8,7 +8,7 @@ const DealsPage = () => {
     {
       id: 1,
       title: "iPhone 14 Pro - Refurbished",
-      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-7inch-deeppurple?wid=2560&hei=1440&fmt=jpeg&qlt=95&.v=1663703841896",
+      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-storage-select-202209-6-1inch-deeppurple",
       originalPrice: 999,
       salePrice: 749,
       discount: 25,
@@ -19,8 +19,8 @@ const DealsPage = () => {
     },
     {
       id: 2,
-      title: "MacBook Pro M2 - Open Box",
-      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-spacegray-select-202206?wid=904&hei=840&fmt=jpeg&qlt=95&.v=1653493200207",
+      title: "MacBook Air M2 - Open Box",
+      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-midnight-select-20220606",
       originalPrice: 1299,
       salePrice: 999,
       discount: 23,
@@ -31,20 +31,20 @@ const DealsPage = () => {
     },
     {
       id: 3,
-      title: "Samsung Galaxy Watch 5 Pro",
-      image: "https://images.samsung.com/is/image/samsung/p6pim/us/2208/gallery/us-galaxy-watch5-pro-r920-sm-r920nzeaxar-534494958?$650_519_PNG$",
-      originalPrice: 449,
-      salePrice: 299,
-      discount: 33,
+      title: "Samsung Galaxy S23",
+      image: "https://image-us.samsung.com/SamsungUS/home/mobile/phones/galaxy-s/galaxy-s23/gallery/SM-S911_GalaxyS23_Gallery_Lavender_1.jpg",
+      originalPrice: 799,
+      salePrice: 599,
+      discount: 25,
       rating: 4.6,
-      category: "wearables",
+      category: "smartphones",
       badge: "Best Value",
       seller: "Samsung Direct"
     },
     {
       id: 4,
       title: "Nintendo Switch OLED - Like New",
-      image: "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000000964/811316ca888713aa5cde47fb6cb26d0a3fede983f3bf43ae4d9aa1bf2c1d7e70",
+      image: "https://assets.nintendo.com/image/upload/f_auto,q_auto,w_1920,h_1080/v1/ncom/en_US/hardware/switch/oled/gallery/image01",
       originalPrice: 349,
       salePrice: 279,
       discount: 20,
@@ -56,7 +56,7 @@ const DealsPage = () => {
     {
       id: 5,
       title: "AirPods Pro 2nd Gen - Refurbished",
-      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1660803972361",
+      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1660803972361",
       originalPrice: 249,
       salePrice: 179,
       discount: 28,
@@ -68,7 +68,7 @@ const DealsPage = () => {
     {
       id: 6,
       title: "Sony WH-1000XM5 - Open Box",
-      image: "https://sony.scene7.com/is/image/sonyglobalsolutions/wh-1000xm5_Primary_image?$categorypdpnav$&fmt=png-alpha",
+      image: "https://www.sony.com/image/5d02da5df55283e84e344c8952469462?fmt=pjpeg&wid=1440&hei=1440&bgcolor=F1F5F9",
       originalPrice: 399,
       salePrice: 299,
       discount: 25,
@@ -76,6 +76,42 @@ const DealsPage = () => {
       category: "audio",
       badge: "Editor's Choice",
       seller: "Sony Direct"
+    },
+    {
+        id: 7,
+        title: "Google Pixel 7 - Open Box",
+        image: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google_Pixel_7_Pro_and_Pixel_7.width-1000.format-webp.webp",
+        originalPrice: 599,
+        salePrice: 449,
+        discount: 25,
+        rating: 4.7,
+        category: "smartphones",
+        badge: "Great Value",
+        seller: "Google Store"
+    },
+    {
+        id: 8,
+        title: "Dell XPS 15 Laptop",
+        image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/touch-platinum-silver/notebook-xps-15-9530-t-platinum-silver-gallery-1.psd?fmt=pjpg&pscan=auto&scl=1&wid=3782&hei=2988&qlt=100,0&resMode=sharp2&size=3782,2988",
+        originalPrice: 1899,
+        salePrice: 1399,
+        discount: 26,
+        rating: 4.6,
+        category: "laptops",
+        badge: "Powerhouse",
+        seller: "Dell Outlet"
+    },
+    {
+        id: 9,
+        title: "Amazon Echo Show 8",
+        image: "https://m.media-amazon.com/images/I/61yZ38kP9KL._AC_SL1000_.jpg",
+        originalPrice: 129,
+        salePrice: 89,
+        discount: 31,
+        rating: 4.7,
+        category: "smart-home",
+        badge: "Smart Display",
+        seller: "Amazon"
     }
   ];
 
@@ -85,7 +121,8 @@ const DealsPage = () => {
     { id: 'laptops', name: 'Laptops', count: deals.filter(d => d.category === 'laptops').length },
     { id: 'gaming', name: 'Gaming', count: deals.filter(d => d.category === 'gaming').length },
     { id: 'audio', name: 'Audio', count: deals.filter(d => d.category === 'audio').length },
-    { id: 'wearables', name: 'Wearables', count: deals.filter(d => d.category === 'wearables').length }
+    { id: 'wearables', name: 'Wearables', count: deals.filter(d => d.category === 'wearables').length },
+    { id: 'smart-home', name: 'Smart Home', count: deals.filter(d => d.category === 'smart-home').length }
   ];
 
   const filteredDeals = filterCategory === 'all'
