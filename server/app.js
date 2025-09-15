@@ -18,6 +18,7 @@ const reviewsRoutes = require('./auth/routes/reviews');
 const commentsRoutes = require('./auth/routes/comments');
 const reportsRoutes = require('./auth/routes/reports');
 const notificationsRoutes = require('./notifications/routes');
+const dealsRoutes = require('./routes/deals'); // Import the new deals route
 const metricsRoutes = require('./routes/metrics');
 
 // Import middleware
