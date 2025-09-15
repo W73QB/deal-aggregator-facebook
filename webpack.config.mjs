@@ -53,6 +53,7 @@ export default {
       scriptLoading: 'module'
     }),
     new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
       'window.ANALYTICS_ENABLED': JSON.stringify(process.env.ANALYTICS_ENABLED || 'true'),
       'window.PRIVACY_DNT_RESPECT': JSON.stringify(process.env.PRIVACY_DNT_RESPECT || 'true'),
       'window.GTM_CONTAINER_ID': JSON.stringify(process.env.GTM_CONTAINER_ID || ''),
