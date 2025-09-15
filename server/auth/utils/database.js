@@ -22,7 +22,7 @@ class DatabaseConnection {
     
     this.pool = new Pool({
       connectionString: this.connectionString,
-      ssl: { rejectUnauthorized: false },
+      ssl: true,
       max: 5,
       idleTimeoutMillis: 60000,
       connectionTimeoutMillis: 10000,
