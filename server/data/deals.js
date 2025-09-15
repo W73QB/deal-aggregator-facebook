@@ -2,7 +2,7 @@ const deals = [
     {
       id: 1,
       title: "iPhone 14 Pro - Refurbished",
-      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-storage-select-202209-6-1inch-deeppurple",
+      image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop",
       originalPrice: 999,
       salePrice: 749,
       discount: 25,
@@ -14,7 +14,7 @@ const deals = [
     {
       id: 2,
       title: "MacBook Air M2 - Open Box",
-      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-midnight-select-20220606",
+      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop",
       originalPrice: 1299,
       salePrice: 999,
       discount: 23,
@@ -26,7 +26,7 @@ const deals = [
     {
       id: 3,
       title: "Samsung Galaxy S23",
-      image: "https://image-us.samsung.com/SamsungUS/home/mobile/phones/galaxy-s/galaxy-s23/gallery/SM-S911_GalaxyS23_Gallery_Lavender_1.jpg",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop",
       originalPrice: 799,
       salePrice: 599,
       discount: 25,
@@ -38,7 +38,7 @@ const deals = [
     {
       id: 4,
       title: "Nintendo Switch OLED - Like New",
-      image: "https://assets.nintendo.com/image/upload/f_auto,q_auto,w_1920,h_1080/v1/ncom/en_US/hardware/switch/oled/gallery/image01",
+      image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop",
       originalPrice: 349,
       salePrice: 279,
       discount: 20,
@@ -50,7 +50,7 @@ const deals = [
     {
       id: 5,
       title: "AirPods Pro 2nd Gen - Refurbished",
-      image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1660803972361",
+      image: "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=400&h=400&fit=crop",
       originalPrice: 249,
       salePrice: 179,
       discount: 28,
