@@ -1,49 +1,6 @@
 {
-  "buildCommand": "rm -rf dist && npm run build:static && echo 'Fresh build completed'",
+  "buildCommand": "rm -rf dist && npm run build:static && echo 'EMERGENCY_DEPLOY_$(date +%s)'",
   "outputDirectory": "dist",
-  "ignoreCommand": "exit 0",
-  "devCommand": "npm run dev:frontend",
-  "installCommand": "npm install",
-  "framework": null,
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/deals",
-      "destination": "/deals.html"
-    },
-    {
-      "source": "/deals/",
-      "destination": "/deals.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog.html"
-    },
-    {
-      "source": "/blog/",
-      "destination": "/blog.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        },
-        {
-          "key": "Pragma",
-          "value": "no-cache"
-        },
-        {
-          "key": "Expires",
-          "value": "0"
-        }
-      ]
-    }
-  ]
+  "cleanUrls": false,
+  "trailingSlash": false
 }
