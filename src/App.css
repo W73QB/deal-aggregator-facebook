@@ -359,6 +359,9 @@
   }
 }
 
+/* Import page styles */
+@import './styles/pages.css';
+
 /* Global styles */
 * {
   box-sizing: border-box;
