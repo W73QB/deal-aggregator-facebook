@@ -18,7 +18,7 @@
     "test:auth": "node server/test/auth-flow-test.js",
     "build": "webpack --mode production",
     "build:static": "webpack --mode production && npm run build:copy-assets && node assets/products/dist-image-replacer.js",
-    "build:copy-assets": "cp robots.txt sitemap*.xml dist/ && cp favicon.ico dist/ && mkdir -p dist/pages && cp -r pages/* dist/pages/ && cp public/index.html dist/index.html && cp pages/deals.html dist/deals.html && cp pages/blog.html dist/blog.html && mkdir -p dist/js && cp js/*.js dist/js/ && mkdir -p dist/css && cp css/styles.css dist/css/ && cp -r assets dist/",
+    "build:copy-assets": "cp robots.txt sitemap*.xml dist/ && cp favicon.ico dist/ && mkdir -p dist/pages && cp -r pages/* dist/pages/ && cp public/index.html dist/index.html && cp pages/deals.html dist/deals.html && cp pages/blog.html dist/blog.html && mkdir -p dist/js && cp js/*.js dist/js/ && mkdir -p dist/css && cp css/*.css dist/css/ && cp -r assets dist/",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test:e2e": "node server/test/e2e-launcher.js",
