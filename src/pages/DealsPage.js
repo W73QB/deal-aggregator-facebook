@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 const DealsPage = () => {
   const [sortBy, setSortBy] = useState('featured');
   const [filterCategory, setFilterCategory] = useState('all');
+  const [priceLimit, setPriceLimit] = useState(2000);
+  const [filterMerchant, setFilterMerchant] = useState('all');
 
   const deals = [
     {
@@ -115,19 +117,31 @@ const DealsPage = () => {
     }
   ];
 
-  const categories = [
-    { id: 'all', name: 'All Deals', count: deals.length },
-    { id: 'smartphones', name: 'Smartphones', count: deals.filter(d => d.category === 'smartphones').length },
-    { id: 'laptops', name: 'Laptops', count: deals.filter(d => d.category === 'laptops').length },
-    { id: 'gaming', name: 'Gaming', count: deals.filter(d => d.category === 'gaming').length },
-    { id: 'audio', name: 'Audio', count: deals.filter(d => d.category === 'audio').length },
-    { id: 'wearables', name: 'Wearables', count: deals.filter(d => d.category === 'wearables').length },
-    { id: 'smart-home', name: 'Smart Home', count: deals.filter(d => d.category === 'smart-home').length }
-  ];
+  const categories = useMemo(() => {
+    const allCategories = ['all', ...new Set(deals.map(d => d.category))];
+    return allCategories.map(cat => ({
+        id: cat,
+        name: cat.charAt(0).toUpperCase() + cat.slice(1).replace('-', ' '),
+        count: cat === 'all' ? deals.length : deals.filter(d => d.category === cat).length
+    }));
+  }, [deals]);
 
-  const filteredDeals = filterCategory === 'all'
-    ? deals
-    : deals.filter(deal => deal.category === filterCategory);
+  const merchants = useMemo(() => {
+    const allMerchants = ['all', ...new Set(deals.map(d => d.seller))];
+    return allMerchants.map(merch => ({
+        id: merch,
+        name: merch
+    }));
+  }, [deals]);
+
+  const filteredDeals = useMemo(() => {
+    return deals.filter(deal => {
+      const categoryMatch = filterCategory === 'all' || deal.category === filterCategory;
+      const merchantMatch = filterMerchant === 'all' || deal.seller === filterMerchant;
+      const priceMatch = deal.salePrice <= priceLimit;
+      return categoryMatch && merchantMatch && priceMatch;
+    });
+  }, [deals, filterCategory, filterMerchant, priceLimit]);
 
   const sortedDeals = [...filteredDeals].sort((a, b) => {
     switch (sortBy) {
@@ -167,18 +181,36 @@ const DealsPage = () => {
             </div>
 
             <div className="sort-controls">
-              <label htmlFor="sort">Sort by:</label>
-              <select
-                id="sort"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-              >
-                <option value="featured">Featured</option>
-                <option value="discount">Biggest Discount</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-              </select>
+                <div className="filter-group">
+                    <label htmlFor="merchant-filter">Merchant:</label>
+                    <select id="merchant-filter" value={filterMerchant} onChange={(e) => setFilterMerchant(e.target.value)}>
+                        {merchants.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
+                    </select>
+                </div>
+                <div className="filter-group">
+                    <label htmlFor="sort">Sort by:</label>
+                    <select id="sort" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                        <option value="featured">Featured</option>
+                        <option value="discount">Biggest Discount</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+          </div>
+          <div className="filter-row">
+            <div className="price-filter">
+                <label htmlFor="price-range">Price Range: Up to ${priceLimit}</label>
+                <input
+                    type="range"
+                    id="price-range"
+                    min="0"
+                    max="2000"
+                    step="10"
+                    value={priceLimit}
+                    onChange={(e) => setPriceLimit(Number(e.target.value))}
+                />
             </div>
           </div>
         </div>
