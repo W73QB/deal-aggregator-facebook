@@ -18,9 +18,29 @@ const Layout = ({ children }) => {
         <div className="container">
           <div className="header-content">
             <div className="logo">
-              <Link to="/">
-                <h1>DealRadarUS</h1>
-                <span className="tagline">Your Radar for the Best Deals</span>
+              <Link to="/" className="logo-link">
+                <div className="logo-icon">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" fill="url(#logoGradient)" stroke="url(#logoStroke)" strokeWidth="2"/>
+                    <path d="M16 6C16 6 24 10 24 16C24 22 16 26 16 26C16 26 8 22 8 16C8 10 16 6 16 6Z" fill="white" fillOpacity="0.9"/>
+                    <circle cx="16" cy="16" r="3" fill="#0070f3"/>
+                    <path d="M13 13L19 19M19 13L13 19" stroke="#0070f3" strokeWidth="1.5" strokeLinecap="round"/>
+                    <defs>
+                      <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#0070f3"/>
+                        <stop offset="100%" stopColor="#0056b3"/>
+                      </linearGradient>
+                      <linearGradient id="logoStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#0056b3"/>
+                        <stop offset="100%" stopColor="#003d82"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <div className="logo-text">
+                  <h1>DealRadarUS</h1>
+                  <span className="tagline">Your Radar for the Best Deals</span>
+                </div>
               </Link>
             </div>
 
