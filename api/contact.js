@@ -1,5 +1,4 @@
-// File: /api/contact.js
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 // Basic input validation
 function validateInput(data) {
@@ -25,21 +24,16 @@ export default async function handler(req, res) {
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  // Basic honeypot check
-  if (req.body.website_url) {
-    return res.status(400).json({ message: 'Spam detected' });
-  }
-
   const validationError = validateInput(req.body);
   if (validationError) {
     return res.status(400).json({ message: validationError });
   }
 
-  // Nodemailer transporter setup - using environment variables
+  // Nodemailer transporter setup
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT || '587', 10),
-    secure: parseInt(process.env.SMTP_PORT || '587', 10) === 465, // true for 465, false for other ports
+    secure: parseInt(process.env.SMTP_PORT || '587', 10) === 465,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -50,7 +44,7 @@ export default async function handler(req, res) {
 
   const mailOptions = {
     from: `"${name}" <${process.env.FROM_EMAIL}>`,
-    to: process.env.SMTP_USER, // Send to your own email
+    to: process.env.SMTP_USER,
     replyTo: email,
     subject: `New Contact Form Submission: ${subject || 'No Subject'}`,
     text: message,
@@ -58,9 +52,7 @@ export default async function handler(req, res) {
   };
 
   try {
-    // Verify transporter connection
     await transporter.verify();
-    // Send mail
     await transporter.sendMail(mailOptions);
     return res.status(200).json({ message: 'Message sent successfully!' });
   } catch (error) {
