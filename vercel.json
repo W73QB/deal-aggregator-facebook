@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/((?!api/|assets/|css/|js/|favicon.ico|robots.txt|sitemap.xml|.*\\..*).*)", "destination": "/index.html" }
+  ]
+}
