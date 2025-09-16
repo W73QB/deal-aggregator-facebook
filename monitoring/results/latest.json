@@ -1,0 +1,118 @@
+{
+  "timestamp": "2025-09-16T06:21:23.933Z",
+  "status": "degraded",
+  "checks": [
+    {
+      "endpoint": "/",
+      "url": "https://deal-aggregator-facebook.vercel.app/",
+      "status": 200,
+      "responseTime": 1229,
+      "healthy": true,
+      "contentLength": 17066,
+      "timestamp": "2025-09-16T06:21:25.165Z"
+    },
+    {
+      "endpoint": "/about",
+      "url": "https://deal-aggregator-facebook.vercel.app/about",
+      "status": 200,
+      "responseTime": 423,
+      "healthy": true,
+      "contentLength": 16817,
+      "timestamp": "2025-09-16T06:21:25.588Z"
+    },
+    {
+      "endpoint": "/deals",
+      "url": "https://deal-aggregator-facebook.vercel.app/deals",
+      "status": 200,
+      "responseTime": 550,
+      "healthy": true,
+      "contentLength": 16806,
+      "timestamp": "2025-09-16T06:21:26.138Z"
+    },
+    {
+      "endpoint": "/blog",
+      "url": "https://deal-aggregator-facebook.vercel.app/blog",
+      "status": 200,
+      "responseTime": 551,
+      "healthy": true,
+      "contentLength": 15031,
+      "timestamp": "2025-09-16T06:21:26.689Z"
+    },
+    {
+      "endpoint": "/contact",
+      "url": "https://deal-aggregator-facebook.vercel.app/contact",
+      "status": 200,
+      "responseTime": 434,
+      "healthy": true,
+      "contentLength": 16986,
+      "timestamp": "2025-09-16T06:21:27.123Z"
+    },
+    {
+      "endpoint": "/api/deals",
+      "url": "https://deal-aggregator-facebook.vercel.app/api/deals",
+      "status": 200,
+      "responseTime": 524,
+      "healthy": true,
+      "contentLength": 2662,
+      "timestamp": "2025-09-16T06:21:27.647Z"
+    }
+  ],
+  "metrics": {
+    "lighthouse": {
+      "performance": 95,
+      "accessibility": 98,
+      "bestPractices": 92,
+      "seo": 96,
+      "lcp": 1800,
+      "fid": 45,
+      "cls": 0.05
+    },
+    "coreWebVitals": {
+      "lcp": 1800,
+      "fid": 45,
+      "cls": 0.05
+    },
+    "seo": {
+      "hasTitle": true,
+      "hasMetaDescription": true,
+      "hasOgTags": true,
+      "hasStructuredData": false,
+      "hasCanonical": true,
+      "hasRobotsMeta": false
+    },
+    "seoScore": 67,
+    "database": {
+      "connected": true,
+      "source": "unknown",
+      "responseTime": 526,
+      "recordCount": 0
+    }
+  },
+  "alerts": [
+    {
+      "level": "warning",
+      "message": "SEO score 67% below optimal (90%+)",
+      "score": 67,
+      "failedChecks": [
+        "hasStructuredData",
+        "hasRobotsMeta"
+      ],
+      "timestamp": "2025-09-16T06:21:28.077Z"
+    },
+    {
+      "level": "info",
+      "message": "Database using fallback mode (static data)",
+      "timestamp": "2025-09-16T06:21:28.605Z"
+    }
+  ],
+  "summary": {
+    "availability": 100,
+    "avgResponseTime": 619,
+    "healthyEndpoints": "6/6",
+    "alertCounts": {
+      "critical": 0,
+      "warning": 1,
+      "info": 1
+    }
+  }
+}

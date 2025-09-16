@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../lib/store/store';
 import Layout from '../components/Layout';
@@ -17,16 +18,38 @@ export default function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+    <>
+      <Head>
+        <meta name="robots" content="index, follow" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/logo-concept.svg" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "DealRadar US",
+            "url": "https://deal-aggregator-facebook.vercel.app",
+            "logo": "https://deal-aggregator-facebook.vercel.app/logo-concept.svg",
+            "description": "Find the best deals from top US retailers. Smart deal aggregation platform with real-time price tracking and exclusive offers.",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://deal-aggregator-facebook.vercel.app/deals?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+      </Head>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
 
-      {/* Global UI Components */}
-      <NotificationContainer />
-      <ReportModal />
-      <ConsentBanner />
-      <NotificationCenter />
-    </Provider>
+        {/* Global UI Components */}
+        <NotificationContainer />
+        <ReportModal />
+        <ConsentBanner />
+        <NotificationCenter />
+      </Provider>
+    </>
   );
 }

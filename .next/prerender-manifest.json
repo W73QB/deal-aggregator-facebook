@@ -5,7 +5,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": null,
-      "dataRoute": "/_next/data/3I4pVkWHBM5sVACY_yNk8/deals.json",
+      "dataRoute": "/_next/data/8AwrsQoHVTZJz4LRAqjC4/deals.json",
       "allowHeader": [
         "host",
         "x-matched-path",
