@@ -1,60 +1,60 @@
 {
-  "timestamp": "2025-09-16T06:51:04.273Z",
+  "timestamp": "2025-09-16T07:26:07.704Z",
   "status": "healthy",
   "checks": [
     {
       "endpoint": "/",
       "url": "https://deal-aggregator-facebook.vercel.app/",
       "status": 200,
-      "responseTime": 1150,
+      "responseTime": 1346,
       "healthy": true,
-      "contentLength": 18357,
-      "timestamp": "2025-09-16T06:51:05.426Z"
+      "contentLength": 18491,
+      "timestamp": "2025-09-16T07:26:09.053Z"
     },
     {
       "endpoint": "/about",
       "url": "https://deal-aggregator-facebook.vercel.app/about",
       "status": 200,
-      "responseTime": 538,
+      "responseTime": 559,
       "healthy": true,
-      "contentLength": 17843,
-      "timestamp": "2025-09-16T06:51:05.964Z"
+      "contentLength": 17963,
+      "timestamp": "2025-09-16T07:26:09.612Z"
     },
     {
       "endpoint": "/deals",
       "url": "https://deal-aggregator-facebook.vercel.app/deals",
       "status": 200,
-      "responseTime": 623,
+      "responseTime": 882,
       "healthy": true,
-      "contentLength": 17338,
-      "timestamp": "2025-09-16T06:51:06.587Z"
+      "contentLength": 17458,
+      "timestamp": "2025-09-16T07:26:10.494Z"
     },
     {
       "endpoint": "/blog",
       "url": "https://deal-aggregator-facebook.vercel.app/blog",
       "status": 200,
-      "responseTime": 386,
+      "responseTime": 538,
       "healthy": true,
-      "contentLength": 16057,
-      "timestamp": "2025-09-16T06:51:06.973Z"
+      "contentLength": 16203,
+      "timestamp": "2025-09-16T07:26:11.032Z"
     },
     {
       "endpoint": "/contact",
       "url": "https://deal-aggregator-facebook.vercel.app/contact",
       "status": 200,
-      "responseTime": 386,
+      "responseTime": 535,
       "healthy": true,
-      "contentLength": 18012,
-      "timestamp": "2025-09-16T06:51:07.359Z"
+      "contentLength": 18156,
+      "timestamp": "2025-09-16T07:26:11.567Z"
     },
     {
       "endpoint": "/api/deals",
       "url": "https://deal-aggregator-facebook.vercel.app/api/deals",
       "status": 200,
-      "responseTime": 649,
+      "responseTime": 692,
       "healthy": true,
       "contentLength": 2662,
-      "timestamp": "2025-09-16T06:51:08.008Z"
+      "timestamp": "2025-09-16T07:26:12.259Z"
     }
   ],
   "metrics": {
@@ -84,7 +84,7 @@
     "database": {
       "connected": true,
       "source": "unknown",
-      "responseTime": 529,
+      "responseTime": 518,
       "recordCount": 0
     }
   },
@@ -92,12 +92,12 @@
     {
       "level": "info",
       "message": "Database using fallback mode (static data)",
-      "timestamp": "2025-09-16T06:51:08.966Z"
+      "timestamp": "2025-09-16T07:26:13.208Z"
     }
   ],
   "summary": {
     "availability": 100,
-    "avgResponseTime": 622,
+    "avgResponseTime": 759,
     "healthyEndpoints": "6/6",
     "alertCounts": {
       "critical": 0,

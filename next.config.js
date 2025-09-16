@@ -24,7 +24,7 @@ const nextConfig = {
 
   // Enhanced experimental features
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false, // Disable CSS optimization causing media="print"
     scrollRestoration: true,
   },
 

@@ -132,7 +132,7 @@
   "dataRoutes": [
     {
       "page": "/deals",
-      "dataRouteRegex": "^/_next/data/mZRIMPlEu\\-_MYYtBJaHoh/deals\\.json$"
+      "dataRouteRegex": "^/_next/data/YzO9I3RB4LuhTWYlXd_6S/deals\\.json$"
     }
   ],
   "rsc": {

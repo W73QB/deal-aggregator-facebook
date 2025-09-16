@@ -5,7 +5,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": null,
-      "dataRoute": "/_next/data/mZRIMPlEu-_MYYtBJaHoh/deals.json",
+      "dataRoute": "/_next/data/YzO9I3RB4LuhTWYlXd_6S/deals.json",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -19,8 +19,8 @@
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "875cf455e7a484346e93656c184214b8",
-    "previewModeSigningKey": "28fcd913be7a45d565e033691a8449e2b1d297022f7cb84569d50a04b39f2ff6",
-    "previewModeEncryptionKey": "922b5bdba73fee4d8254d6edcc2bd900a4f67eb47a2be330966373e01850be87"
+    "previewModeId": "5187a09e042be5071abb103533290da3",
+    "previewModeSigningKey": "e26a1496621a16ab0c5cd5655e4c063bebe315b2ebfd8b10fce1efd2f27690d5",
+    "previewModeEncryptionKey": "a8f7257f13b195014646e5af685808dcf82f7636a1c842f5038cb2d36ba7bcb0"
   }
 }
