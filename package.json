@@ -34,7 +34,11 @@
     "audit:placeholders:fix": "node tools/placeholder-audit.js --verbose --fix",
     "audit:placeholders:report": "node tools/placeholder-audit.js --verbose --report PLACEHOLDER-AUDIT-REPORT.md",
     "audit:placeholders:ci": "node tools/placeholder-audit.js --report CI-PLACEHOLDER-AUDIT.md",
-    "precommit:audit": "node tools/placeholder-audit.js"
+    "precommit:audit": "node tools/placeholder-audit.js",
+    "verify:deployment": "node scripts/post-deploy-verification.js",
+    "purge:cache": "node scripts/vercel-purge-cache.js",
+    "deploy:full": "npm run deploy && npm run purge:cache && sleep 15 && npm run verify:deployment https://dealradarus.com",
+    "deploy:verify": "npm run deploy && npm run verify:deployment https://dealradarus.com"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
