@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+
+# High-priority crawl paths
+Allow: /deals
+Allow: /blog
+Allow: /api/deals
+
+# Block admin and internal paths
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/auth/
+Disallow: /.vercel/
+
+# SEO optimizations
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://deal-aggregator-facebook.vercel.app/sitemap.xml
+
+# Special instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: facebookexternalhit
+Allow: /

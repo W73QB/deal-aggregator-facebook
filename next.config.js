@@ -4,26 +4,33 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  trailingSlash: false,
 
-  // Optimize images
+  // Enhanced images configuration for 10/10 performance
   images: {
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     domains: [
       'images.unsplash.com',
       'via.placeholder.com',
-      'dealradarus.com'
+      'deal-aggregator-facebook.vercel.app',
+      'cdn.jsdelivr.net'
     ],
+    minimumCacheTTL: 31536000, // 1 year cache
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Enable experimental features for better performance
+  // Enhanced experimental features
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
+    esmExternals: true,
+    swcMinify: true,
   },
 
-  // SEO and performance headers
+  // Enhanced security and performance headers
   async headers() {
     return [
       {
@@ -41,23 +48,110 @@ const nextConfig = {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
           },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "img-src 'self' data: https: blob:",
+              "connect-src 'self' https://www.google-analytics.com https://vitals.vercel-analytics.com",
+              "frame-src 'self'",
+              "base-uri 'self'",
+              "form-action 'self'"
+            ].join('; ')
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()'
+          }
         ],
       },
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      {
+        source: '/api/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=3600, stale-while-revalidate=86400'
+          }
+        ]
+      }
     ]
   },
 
-  // Redirect old routes if needed
+  // Performance redirects
   async redirects() {
     return [
-      // Add redirects for old routes here if needed
+      {
+        source: '/legacy/:path*',
+        destination: '/:path*',
+        permanent: true
+      },
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true
+      }
     ]
   },
 
-  // Custom webpack config if needed
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Custom webpack configurations
-    return config
+  // Performance optimizations
+  async rewrites() {
+    return [
+      {
+        source: '/api/deals',
+        destination: '/api/deals?cache=true'
+      }
+    ];
   },
+
+  // Webpack optimizations for 10/10 build
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    // Production optimizations
+    if (!dev) {
+      config.optimization.splitChunks.chunks = 'all';
+      config.optimization.splitChunks.cacheGroups = {
+        ...config.optimization.splitChunks.cacheGroups,
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+          priority: 10
+        },
+        common: {
+          name: 'common',
+          minChunks: 2,
+          chunks: 'all',
+          priority: 5
+        }
+      };
+    }
+
+    return config;
+  },
+
+  // Build optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+    styledComponents: true
+  },
+
+  compress: true,
+  poweredByHeader: false,
 }
 
 export default nextConfig
