@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchReportStats } from '../../src/store/slices/reportsSlice';
+import { fetchReportStats } from '../../lib/store/slices/reportsSlice';
 import './AdminNotificationBadge.css';
 
 const AdminNotificationBadge = ({ className = '' }) => {

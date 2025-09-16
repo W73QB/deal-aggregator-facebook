@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DOMPurify from 'dompurify';
-import { deleteComment, toggleReplies } from '../../src/store/slices/commentsSlice';
-import { addNotification } from '../../src/store/slices/notificationSlice';
+import { deleteComment, toggleReplies } from '../../lib/store/slices/commentsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
 import CommentForm from './CommentForm';
 import './CommentCard.css';
 

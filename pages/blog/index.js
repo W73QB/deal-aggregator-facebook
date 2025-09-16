@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import BlogPage from '../../src/pages/BlogPage';
+import BlogPage from '../../components/pages/BlogPage';
 
 export default function Blog() {
   return (

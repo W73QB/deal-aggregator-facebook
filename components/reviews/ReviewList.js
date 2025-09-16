@@ -4,7 +4,7 @@ import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import RatingStars from '../ui/RatingStars';
-import { fetchReviewsByDeal, clearError, setCurrentDeal, clearReviews } from '../../src/store/slices/reviewsSlice';
+import { fetchReviewsByDeal, clearError, setCurrentDeal, clearReviews } from '../../lib/store/slices/reviewsSlice';
 import './ReviewList.css';
 
 const ReviewList = ({ dealId }) => {

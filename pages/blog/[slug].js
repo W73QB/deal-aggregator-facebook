@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import BlogPostPage from '../../src/pages/BlogPostPage';
+import BlogPostPage from '../../components/pages/BlogPostPage';
 
 export default function BlogPost() {
   const router = useRouter();

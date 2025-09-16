@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import ContactPage from '../src/pages/ContactPage';
+import ContactPage from '../components/pages/ContactPage';
 
 export default function Contact() {
   return (

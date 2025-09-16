@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RatingStars from '../ui/RatingStars';
 import LoadingSpinner from '../ui/LoadingSpinner';
-import { createReview, updateReview } from '../../src/store/slices/reviewsSlice';
-import { addNotification } from '../../src/store/slices/notificationSlice';
+import { createReview, updateReview } from '../../lib/store/slices/reviewsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
 import './ReviewForm.css';
 
 const ReviewForm = ({ dealId, editingReview = null, onClose, onSuccess }) => {

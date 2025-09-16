@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DOMPurify from 'dompurify';
 import RatingStars from '../ui/RatingStars';
-import { voteOnReview, deleteReview } from '../../src/store/slices/reviewsSlice';
-import { addNotification } from '../../src/store/slices/notificationSlice';
+import { voteOnReview, deleteReview } from '../../lib/store/slices/reviewsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
 import './ReviewCard.css';
 
 const ReviewCard = ({ review, onEdit, showActions = true }) => {

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeNotification } from '../../src/store/slices/notificationSlice';
-import './NotificationToast.css';
+import { removeNotification } from '../../lib/store/slices/notificationSlice';
 
 const NOTIFICATION_ICONS = {
   success: '✅',

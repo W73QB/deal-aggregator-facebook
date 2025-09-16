@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingSpinner from '../ui/LoadingSpinner';
-import { createReport, hideReportModal } from '../../src/store/slices/reportsSlice';
-import { addNotification } from '../../src/store/slices/notificationSlice';
-import './ReportModal.css';
+import { createReport, hideReportModal } from '../../lib/store/slices/reportsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
 
 const REPORT_REASONS = {
   spam: 'Spam or Unwanted Commercial Content',

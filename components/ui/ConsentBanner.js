@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { setConsent, getConsentStatus } from '../../src/analytics/dataLayer';
+import { setConsent, getConsentStatus } from '../../lib/analytics/dataLayer';
 
 const ConsentBanner = () => {
   const [showBanner, setShowBanner] = useState(false);

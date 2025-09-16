@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingSpinner from '../ui/LoadingSpinner';
-import { createComment, updateComment } from '../../src/store/slices/commentsSlice';
-import { addNotification } from '../../src/store/slices/notificationSlice';
+import { createComment, updateComment } from '../../lib/store/slices/commentsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
 import './CommentForm.css';
 
 const CommentForm = ({ 

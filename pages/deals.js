@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import DealsPage from '../src/pages/DealsPage';
+import DealsPage from '../components/pages/DealsPage';
 import deals from '../server/data/deals.js';
 
 export default function Deals({ dealsData }) {

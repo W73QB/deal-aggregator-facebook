@@ -27,14 +27,13 @@ import {
   selectHighlightedId,
   selectStatusFilter,
   selectHasUnread
-} from '../../src/store/slices/inAppNotificationsSlice';
+} from '../../lib/store/slices/inAppNotificationsSlice';
 import { 
   trackNotificationClick, 
   trackNotificationOpen,
   trackNotificationCenterAction,
   trackInAppNotificationInteraction
-} from '../../src/analytics/events';
-import './NotificationCenter.css';
+} from '../../lib/analytics/events';
 
 const NotificationCenter = ({ className = '' }) => {
   const dispatch = useDispatch();

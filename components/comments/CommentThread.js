@@ -11,8 +11,8 @@ import {
   clearError,
   updateComment,
   createComment
-} from '../../src/store/slices/commentsSlice';
-import { addNotification } from '../../src/store/slices/notificationSlice';
+} from '../../lib/store/slices/commentsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
 import './CommentThread.css';
 
 const CommentThread = ({ dealId, reviewId }) => {

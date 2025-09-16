@@ -11,9 +11,8 @@ import {
   selectUnreadCount,
   selectIsOpen,
   selectHasUnread
-} from '../../src/store/slices/inAppNotificationsSlice';
-import { trackNotificationOpen } from '../../src/analytics/events';
-import './NotificationBadge.css';
+} from '../../lib/store/slices/inAppNotificationsSlice';
+import { trackNotificationOpen } from '../../lib/analytics/events';
 
 const NotificationBadge = ({ className = '' }) => {
   const dispatch = useDispatch();

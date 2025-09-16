@@ -8,8 +8,8 @@ import {
   fetchReportStats,
   setCurrentFilter,
   clearError 
-} from '../../src/store/slices/reportsSlice';
-import { addNotification } from '../../src/store/slices/notificationSlice';
+} from '../../lib/store/slices/reportsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
 import './ModerationDashboard.css';
 
 const FILTER_OPTIONS = {

@@ -1,5 +1,4 @@
 import React from 'react';
-import './RatingStars.css';
 
 const RatingStars = ({ 
   rating = 0, 

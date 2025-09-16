@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import AboutPage from '../src/pages/AboutPage';
+import AboutPage from '../components/pages/AboutPage';
 
 export default function About() {
   return (

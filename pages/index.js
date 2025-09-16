@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import HomePage from '../src/pages/HomePage';
+import HomePage from '../components/pages/HomePage';
 
 export default function Home() {
   return (

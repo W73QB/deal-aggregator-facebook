@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import DOMPurify from 'dompurify';
 import LoadingSpinner from '../ui/LoadingSpinner';
-import { updateReportStatus } from '../../src/store/slices/reportsSlice';
-import { addNotification } from '../../src/store/slices/notificationSlice';
+import { updateReportStatus } from '../../lib/store/slices/reportsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
 import './ReportCard.css';
 
 const STATUS_CONFIG = {

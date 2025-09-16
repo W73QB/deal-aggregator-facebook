@@ -1,5 +1,4 @@
 import React from 'react';
-import './LoadingSpinner.css';
 
 const LoadingSpinner = ({ size = 'medium', color = '#007bff', text = null }) => {
   const sizeClass = `loading-spinner--${size}`;
