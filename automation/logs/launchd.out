@@ -2309,3 +2309,31 @@ AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from h
 2025-09-15T13:01:21.558Z - ❌ Viral blog creation failed: Cannot read properties of undefined (reading 'tone')
 2025-09-15T13:53:56.169Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:35h, Errors:4
 2025-09-15T13:53:56.173Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:35h, Errors:4
+2025-09-15T14:55:16.095Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:36h, Errors:4
+2025-09-15T14:55:16.095Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:36h, Errors:4
+2025-09-15T16:48:22.387Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:38h, Errors:4
+2025-09-15T16:48:22.387Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:38h, Errors:4
+2025-09-15T19:55:25.004Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:41h, Errors:4
+2025-09-15T19:55:25.049Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:41h, Errors:4
+2025-09-15T19:55:25.279Z - 📱 Publishing lunch Facebook post...
+2025-09-15T19:55:25.303Z - 📱 Publishing lunch Facebook post...
+2025-09-15T19:55:28.412Z - ❌ Database query failed: getaddrinfo ENOTFOUND ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech
+2025-09-15T19:55:28.421Z - ❌ Database query failed: getaddrinfo ENOTFOUND ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech
+AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
+AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
+2025-09-15T23:18:50.382Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:44h, Errors:4
+2025-09-15T23:18:50.384Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:44h, Errors:4
+2025-09-15T23:18:50.714Z - 📱 Publishing evening Facebook post...
+2025-09-15T23:18:50.740Z - 📱 Publishing evening Facebook post...
+2025-09-15T23:18:51.513Z - ❌ Facebook posting failed: getaddrinfo ENOTFOUND graph.facebook.com
+2025-09-15T23:18:51.513Z - ❌ Facebook posting failed: getaddrinfo ENOTFOUND graph.facebook.com
+2025-09-16T00:02:27.549Z - ❌ Database query failed: getaddrinfo ENOTFOUND ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech
+2025-09-16T00:02:27.555Z - ❌ Database query failed: getaddrinfo ENOTFOUND ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech
+AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
+AI Facebook generation failed: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetch failed
+2025-09-16T00:02:36.127Z - ❌ Facebook posting failed: getaddrinfo ENOTFOUND graph.facebook.com
+2025-09-16T00:02:36.130Z - ❌ Facebook posting failed: getaddrinfo ENOTFOUND graph.facebook.com
+2025-09-16T00:25:00.735Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:46h, Errors:6
+2025-09-16T00:25:00.736Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:46h, Errors:6
+2025-09-16T01:25:00.445Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:47h, Errors:6
+2025-09-16T01:25:00.446Z - 📊 Stats: FB:2, Blogs:2, Reach:24,600, Runtime:47h, Errors:6

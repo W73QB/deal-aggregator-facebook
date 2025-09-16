@@ -1,0 +1,207 @@
+/**
+ * M3.6 Notification Badge Styles
+ * Compact notification indicator with count and animations
+ */
+
+.notification-badge {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 18px;
+}
+
+.notification-badge:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+.notification-badge:active {
+  transform: translateY(0);
+}
+
+.notification-badge--active {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.notification-badge__icon {
+  display: block;
+  filter: grayscale(0.2);
+  transition: filter 0.2s ease;
+}
+
+.notification-badge:hover .notification-badge__icon,
+.notification-badge--active .notification-badge__icon {
+  filter: grayscale(0);
+}
+
+/* Count Badge */
+.notification-badge__count {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #dc2626;
+  color: white;
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Pulse Animation */
+.notification-badge__pulse {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #dc2626;
+  opacity: 0.7;
+  animation: notification-pulse 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes notification-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .notification-badge:hover {
+    background: rgba(96, 165, 250, 0.1);
+  }
+
+  .notification-badge--active {
+    background: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+  }
+
+  .notification-badge__count {
+    background: #ef4444;
+    border-color: #1a202c;
+  }
+
+  .notification-badge__pulse {
+    background: #ef4444;
+  }
+}
+
+/* Focus indicator for accessibility */
+.notification-badge:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.notification-badge:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.notification-badge:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .notification-badge__count {
+    border-width: 3px;
+    font-weight: 700;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .notification-badge {
+    transition: none;
+  }
+
+  .notification-badge:hover {
+    transform: none;
+  }
+
+  .notification-badge:active {
+    transform: none;
+  }
+
+  .notification-badge__pulse {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .notification-badge__icon {
+    transition: none;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .notification-badge {
+    padding: 12px;
+    font-size: 20px;
+  }
+
+  .notification-badge__count {
+    top: 4px;
+    right: 4px;
+    font-size: 10px;
+    min-width: 16px;
+    height: 16px;
+  }
+
+  .notification-badge__pulse {
+    top: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .notification-badge {
+    font-size: 20px;
+  }
+
+  .notification-badge__count {
+    font-size: 12px;
+    min-width: 20px;
+    height: 20px;
+    top: 0;
+    right: 0;
+  }
+
+  .notification-badge__pulse {
+    width: 20px;
+    height: 20px;
+    top: 0;
+    right: 0;
+  }
+}
