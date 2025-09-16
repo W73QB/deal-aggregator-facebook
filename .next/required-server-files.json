@@ -23,7 +23,7 @@
       "jsx",
       "js"
     ],
-    "poweredByHeader": true,
+    "poweredByHeader": false,
     "compress": true,
     "images": {
       "deviceSizes": [
@@ -32,7 +32,9 @@
         828,
         1080,
         1200,
-        1920
+        1920,
+        2048,
+        3840
       ],
       "imageSizes": [
         16,
@@ -50,16 +52,17 @@
       "domains": [
         "images.unsplash.com",
         "via.placeholder.com",
-        "dealradarus.com"
+        "deal-aggregator-facebook.vercel.app",
+        "cdn.jsdelivr.net"
       ],
       "disableStaticImages": false,
-      "minimumCacheTTL": 60,
+      "minimumCacheTTL": 31536000,
       "formats": [
-        "image/webp",
-        "image/avif"
+        "image/avif",
+        "image/webp"
       ],
-      "dangerouslyAllowSVG": false,
-      "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+      "dangerouslyAllowSVG": true,
+      "contentSecurityPolicy": "default-src 'self'; script-src 'none'; sandbox;",
       "contentDispositionType": "attachment",
       "remotePatterns": [],
       "unoptimized": false
@@ -89,7 +92,9 @@
       "keepAlive": true
     },
     "logging": {},
-    "compiler": {},
+    "compiler": {
+      "removeConsole": true
+    },
     "expireTime": 31536000,
     "staticPageGenerationTimeout": 60,
     "modularizeImports": {
@@ -288,10 +293,32 @@
     "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight",
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.js",
+    "swcMinify": true,
     "turbopack": {
       "root": "/Users/admin/projects/deal-aggregator-facebook"
     },
-    "_originalRedirects": []
+    "_originalRewrites": {
+      "beforeFiles": [],
+      "afterFiles": [
+        {
+          "source": "/api/deals",
+          "destination": "/api/deals?cache=true"
+        }
+      ],
+      "fallback": []
+    },
+    "_originalRedirects": [
+      {
+        "source": "/legacy/:path*",
+        "destination": "/:path*",
+        "permanent": true
+      },
+      {
+        "source": "/home",
+        "destination": "/",
+        "permanent": true
+      }
+    ]
   },
   "appDir": "/Users/admin/projects/deal-aggregator-facebook",
   "relativeAppDir": "",

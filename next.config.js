@@ -26,8 +26,6 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
-    esmExternals: true,
-    swcMinify: true,
   },
 
   // Enhanced security and performance headers
@@ -147,7 +145,6 @@ const nextConfig = {
   // Build optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
-    styledComponents: true
   },
 
   compress: true,

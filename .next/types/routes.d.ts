@@ -4,18 +4,21 @@
 type AppRoutes = never
 type PageRoutes = "/" | "/about" | "/blog" | "/blog/[slug]" | "/contact" | "/deals"
 type LayoutRoutes = never
-type RedirectRoutes = never
-type RewriteRoutes = never
+type RedirectRoutes = "/home" | "/legacy/[[...path]]"
+type RewriteRoutes = "/api/deals"
 type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRoutes
 
 
 interface ParamMap {
   "/": {}
   "/about": {}
+  "/api/deals": {}
   "/blog": {}
   "/blog/[slug]": { "slug": string; }
   "/contact": {}
   "/deals": {}
+  "/home": {}
+  "/legacy/[[...path]]": { "path"?: string[]; }
 }
 
 
