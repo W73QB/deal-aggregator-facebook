@@ -33,9 +33,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0;
+  padding: 1rem 0;
   gap: 2rem;
-  min-height: 70px;
+  min-height: 110px;
 }
 
 .logo-link {
@@ -44,6 +44,8 @@
   align-items: flex-start;
   text-decoration: none;
   transition: all 0.3s ease;
+  min-height: 85px;
+  justify-content: center;
 }
 
 .logo-link:hover .logo-animated {
@@ -58,20 +60,23 @@
 }
 
 .logo-animated svg {
-  max-width: 140px;
-  height: auto;
+  width: 200px;
+  height: 60px;
+  max-width: none;
 }
 
 .logo-tagline {
-  margin-top: -4px;
+  margin-top: -2px;
   margin-left: 75px;
+  line-height: 1;
 }
 
 .logo-tagline span {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #666;
   font-weight: 500;
   font-style: italic;
+  letter-spacing: 0.5px;
 }
 
 .main-nav .nav-menu {

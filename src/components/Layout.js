@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
             <div className="logo">
               <Link to="/" className="logo-link">
                 <div className="logo-animated">
-                  <svg width="140" height="42" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+                  <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
                     <defs>
                       <linearGradient id="radarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stopColor="#1A73E8"/>
