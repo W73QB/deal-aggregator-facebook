@@ -1,108 +1,78 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
+import RatingStars from '../ui/RatingStars';
+import CategoryIcon from '../icons/CategoryIcon';
+import styles from './HomePage.module.css';
 
-const HomePage = () => {
+// Memoized Deal Card component for performance
+const DealCard = memo(({ deal }) => (
+  <div className={`${styles.dealCard} ${deal.featured ? styles.featured : ''}`}>
+    {deal.badge && <div className={styles.dealBadge}>{deal.badge}</div>}
+    <img src={deal.image} alt={deal.title} loading="lazy" />
+    <div className={styles.dealInfo}>
+      <h3>{deal.title}</h3>
+      <div className={styles.rating}>
+        <RatingStars rating={deal.rating} showValue={true} size="small" />
+      </div>
+      <div className={styles.price}>
+        <span className={styles.originalPrice}>${deal.originalPrice}</span>
+        <span className={styles.newPrice}>${deal.salePrice || deal.price}</span>
+        <span className={styles.discount}>{deal.discount}% OFF</span>
+      </div>
+      <a href="/deals" className={styles.dealButton}>View Deal</a>
+    </div>
+  </div>
+));
+
+DealCard.displayName = 'DealCard';
+
+const HomePage = memo(({ featuredDeals = [] }) => {
+  // Memoize featured deals slice for performance
+  const displayDeals = useMemo(() =>
+    featuredDeals.slice(0, 5),
+    [featuredDeals]
+  );
   return (
-    <div className="page-content">
+    <div className={styles.pageContent}>
       {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
           <h1>DealRadarUS - Your Radar for the Best Deals in the US</h1>
           <p>Discover amazing discounts on refurbished tech, smart home devices, and open-box electronics. Daily deals from trusted retailers with up to 70% off.</p>
-          <div className="hero-cta">
-            <a href="/deals" className="btn-primary">Browse Deals</a>
-            <a href="#newsletter" className="btn-secondary">Get Deal Alerts</a>
+          <div className={styles.heroCta}>
+            <a href="/deals" className={styles.btnPrimary}>Browse Deals</a>
+            <a href="#newsletter" className={styles.btnSecondary}>Get Deal Alerts</a>
           </div>
         </div>
       </section>
 
       {/* Featured Deals */}
-      <section className="featured-deals">
-        <div className="container">
+      <section className={styles.featuredDeals}>
+        <div className={styles.container}>
           <h2>🔥 Featured Deals</h2>
-          <div className="deals-grid">
-            {/* Featured Deal Card */}
-            <div className="deal-card featured">
-              <div className="deal-badge">Featured</div>
-              <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-silver-select-202206" alt="MacBook Pro 13-inch M1" />
-              <div className="deal-info">
-                <h3>MacBook Pro M1 - Open Box</h3>
-                <div className="rating">⭐⭐⭐⭐⭐ (4.9)</div>
-                <div className="price">
-                  <span className="original-price">$1,299</span>
-                  <span className="new-price">$899</span>
-                  <span className="discount">31% OFF</span>
-                </div>
-                <a href="/deals" className="deal-button">View Deal</a>
+          <div className={styles.dealsGrid}>
+            {displayDeals.length > 0 ? (
+              displayDeals.map(deal => (
+                <DealCard key={deal.id} deal={deal} />
+              ))
+            ) : (
+              // Fallback content when no deals are available
+              <div className={styles.noDeals}>
+                <h3>Loading featured deals...</h3>
+                <p>We're updating our deals catalog. Check back in a moment!</p>
+                <a href="/deals" className={styles.btnPrimary}>Browse All Deals</a>
               </div>
-            </div>
-
-            {/* Other Deal Cards */}
-            <div className="deal-card">
-              <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-max-deep-purple-select-202209" alt="iPhone 14 Pro Max" />
-              <div className="deal-info">
-                <h3>iPhone 14 Pro Max - Refurbished</h3>
-                <div className="rating">⭐⭐⭐⭐⭐ (4.8)</div>
-                <div className="price">
-                  <span className="original-price">$1,099</span>
-                  <span className="new-price">$799</span>
-                  <span className="discount">27% OFF</span>
-                </div>
-                <a href="/deals" className="deal-button">View Deal</a>
-              </div>
-            </div>
-
-            <div className="deal-card">
-              <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6519/6519321_sd.jpg" alt="Amazon Echo Dot 5th Gen" />
-              <div className="deal-info">
-                <h3>Amazon Echo Dot (5th Gen)</h3>
-                <div className="rating">⭐⭐⭐⭐☆ (4.5)</div>
-                <div className="price">
-                  <span className="original-price">$49.99</span>
-                  <span className="new-price">$24.99</span>
-                  <span className="discount">50% OFF</span>
-                </div>
-                <a href="/deals" className="deal-button">View Deal</a>
-              </div>
-            </div>
-            
-            <div className="deal-card">
-              <img src="https://dlcdnwebimgs.asus.com/gain/C3346E22-C523-4543-8563-125458B3B29C/w717/h717" alt="27 inch Gaming Monitor" />
-              <div className="deal-info">
-                <h3>27" Gaming Monitor</h3>
-                <div className="rating">⭐⭐⭐⭐⭐ (4.7)</div>
-                <div className="price">
-                  <span className="original-price">$329</span>
-                  <span className="new-price">$229</span>
-                  <span className="discount">30% OFF</span>
-                </div>
-                <a href="/deals" className="deal-button">View Deal</a>
-              </div>
-            </div>
-            
-            <div className="deal-card">
-              <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1660803972361" alt="AirPods Pro 2nd Generation" />
-              <div className="deal-info">
-                <h3>AirPods Pro (2nd Gen)</h3>
-                <div className="rating">⭐⭐⭐⭐⭐ (4.8)</div>
-                <div className="price">
-                  <span className="original-price">$249</span>
-                  <span className="new-price">$189</span>
-                  <span className="discount">24% OFF</span>
-                </div>
-                <a href="/deals" className="deal-button">View Deal</a>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* Newsletter Signup */}
-      <section id="newsletter" className="newsletter">
-        <div className="container">
-          <div className="newsletter-content">
+      <section id="newsletter" className={styles.newsletter}>
+        <div className={styles.container}>
+          <div className={styles.newsletterContent}>
             <h2>🎯 Never Miss a Deal!</h2>
             <p>Get the best deals delivered to your inbox daily. Join 25K+ deal hunters!</p>
-            <form className="newsletter-form">
+            <form className={styles.newsletterForm}>
               <input type="email" placeholder="Enter your email address" required />
               <button type="submit">Get Deal Alerts</button>
             </form>
@@ -111,27 +81,35 @@ const HomePage = () => {
       </section>
 
       {/* Categories */}
-      <section className="categories">
-        <div className="container">
+      <section className={styles.categories}>
+        <div className={styles.container}>
           <h2>🛍️ Shop by Category</h2>
-          <div className="categories-grid">
-            <div className="category-card">
-              <div className="category-icon">📱</div>
+          <div className={styles.categoriesGrid}>
+            <div className={styles.categoryCard}>
+              <div className={styles.categoryIcon}>
+                <CategoryIcon category="refurbished-tech" size={32} />
+              </div>
               <h3>Refurbished Tech</h3>
               <p>Smartphones, laptops, tablets</p>
             </div>
-            <div className="category-card">
-              <div className="category-icon">🏠</div>
+            <div className={styles.categoryCard}>
+              <div className={styles.categoryIcon}>
+                <CategoryIcon category="smart-home" size={32} />
+              </div>
               <h3>Smart Home</h3>
               <p>Speakers, thermostats, security</p>
             </div>
-            <div className="category-card">
-              <div className="category-icon">📦</div>
+            <div className={styles.categoryCard}>
+              <div className={styles.categoryIcon}>
+                <CategoryIcon category="open-box" size={32} />
+              </div>
               <h3>Open Box</h3>
               <p>Like-new electronics</p>
             </div>
-            <div className="category-card">
-              <div className="category-icon">🎮</div>
+            <div className={styles.categoryCard}>
+              <div className={styles.categoryIcon}>
+                <CategoryIcon category="gaming" size={32} />
+              </div>
               <h3>Gaming</h3>
               <p>Consoles, games, accessories</p>
             </div>
@@ -140,6 +118,8 @@ const HomePage = () => {
       </section>
     </div>
   );
-};
+});
+
+HomePage.displayName = 'HomePage';
 
 export default HomePage;

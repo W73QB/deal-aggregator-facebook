@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 
 const BlogPostPage = () => {
-  const { slug } = useParams();
+  const router = useRouter();
+  const { slug } = router.query;
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

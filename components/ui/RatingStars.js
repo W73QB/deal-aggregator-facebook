@@ -1,9 +1,10 @@
 import React from 'react';
+import styles from './RatingStars.module.css';
 
-const RatingStars = ({ 
-  rating = 0, 
-  maxRating = 5, 
-  interactive = false, 
+const RatingStars = ({
+  rating = 0,
+  maxRating = 5,
+  interactive = false,
   size = 'medium',
   onRatingChange = null,
   showValue = false
@@ -14,7 +15,7 @@ const RatingStars = ({
     }
   };
 
-  const handleStarKeyPress = (e, starValue) => {
+  const handleStarKeyDown = (e, starValue) => {
     if ((e.key === 'Enter' || e.key === ' ') && interactive && onRatingChange) {
       e.preventDefault();
       onRatingChange(starValue);
@@ -22,24 +23,23 @@ const RatingStars = ({
   };
 
   const getStarClass = (starIndex) => {
-    const baseClass = 'rating-star';
-    const classes = [baseClass, `rating-star--${size}`];
-    
+    const classes = [styles.ratingStar, styles[`ratingStar--${size}`]];
+
     if (interactive) {
-      classes.push('rating-star--interactive');
+      classes.push(styles['ratingStar--interactive']);
     }
-    
+
     if (starIndex <= rating) {
-      classes.push('rating-star--filled');
+      classes.push(styles['ratingStar--filled']);
     } else if (starIndex - 0.5 <= rating) {
-      classes.push('rating-star--half');
+      classes.push(styles['ratingStar--half']);
     }
-    
+
     return classes.join(' ');
   };
 
   return (
-    <div className="rating-stars" role={interactive ? 'radiogroup' : 'img'} aria-label={`Rating: ${rating} out of ${maxRating} stars`}>
+    <div className={styles.ratingStars} role={interactive ? 'radiogroup' : 'img'} aria-label={`Rating: ${rating} out of ${maxRating} stars`}>
       {[...Array(maxRating)].map((_, index) => {
         const starValue = index + 1;
         return (
@@ -47,7 +47,7 @@ const RatingStars = ({
             key={index}
             className={getStarClass(starValue)}
             onClick={() => handleStarClick(starValue)}
-            onKeyPress={(e) => handleStarKeyPress(e, starValue)}
+            onKeyDown={(e) => handleStarKeyDown(e, starValue)}
             tabIndex={interactive ? 0 : -1}
             role={interactive ? 'radio' : undefined}
             aria-checked={interactive ? starValue === Math.ceil(rating) : undefined}
@@ -58,7 +58,7 @@ const RatingStars = ({
         );
       })}
       {showValue && (
-        <span className="rating-value" aria-hidden="true">
+        <span className={styles.ratingValue} aria-hidden="true">
           ({rating.toFixed(1)})
         </span>
       )}
