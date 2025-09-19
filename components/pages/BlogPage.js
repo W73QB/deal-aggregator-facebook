@@ -1,34 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-const BlogPage = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+const BlogPage = ({ initialPosts = [], initialCategories = [], error = false }) => {
+  const [posts, setPosts] = useState(initialPosts);
+  const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [popularPosts, setPopularPosts] = useState([]);
+  const [categories, setCategories] = useState(initialCategories);
 
+  // Initialize popular posts from initial data
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/posts');
-        const data = await response.json();
-        setPosts(data.posts);
+    if (initialPosts.length > 0) {
+      const popular = initialPosts
+        .sort((a, b) => {
+          const aViews = parseInt(a.views?.replace(/[KM]/g, '') || '0');
+          const bViews = parseInt(b.views?.replace(/[KM]/g, '') || '0');
+          return bViews - aViews;
+        })
+        .slice(0, 3);
+      setPopularPosts(popular);
+    }
+  }, [initialPosts]);
 
-        // Get popular posts (sorted by views)
-        const popular = data.posts
-          .sort((a, b) => parseInt(b.views.replace('K', '')) - parseInt(a.views.replace('K', '')))
-          .slice(0, 3);
-        setPopularPosts(popular);
-      } catch (error) {
-        console.error('Failed to fetch posts:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Fallback API call only if no initial data and not in error state
+  useEffect(() => {
+    if (!error && posts.length === 0) {
+      const fetchPosts = async () => {
+        try {
+          setLoading(true);
+          const response = await fetch('/api/posts');
+          if (!response.ok) throw new Error('Failed to fetch posts');
 
-    fetchPosts();
-  }, []);
+          const data = await response.json();
+          setPosts(data.posts || []);
+          setCategories(data.categories || []);
+
+          // Get popular posts (sorted by views)
+          const popular = (data.posts || [])
+            .sort((a, b) => {
+              const aViews = parseInt(a.views?.replace(/[KM]/g, '') || '0');
+              const bViews = parseInt(b.views?.replace(/[KM]/g, '') || '0');
+              return bViews - aViews;
+            })
+            .slice(0, 3);
+          setPopularPosts(popular);
+        } catch (error) {
+          console.error('Failed to fetch posts:', error);
+          // Keep initial data if fetch fails
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchPosts();
+    }
+  }, [error, posts.length]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -53,14 +79,17 @@ const BlogPage = () => {
     ? posts
     : posts.filter(post => post.category === selectedCategory);
 
-  const categories = [
-    { label: "All Posts", value: "all" },
-    { label: "Deal Alerts", value: "deal-alerts" },
-    { label: "Buying Guides", value: "buying-guide" },
-    { label: "Tech Reviews", value: "tech-reviews" },
-    { label: "Smart Home", value: "smart-home" },
-    { label: "Gaming", value: "gaming" }
-  ];
+  // Use categories from props or fallback to static categories
+  const displayCategories = categories.length > 0
+    ? categories.map(cat => ({ label: cat.name, value: cat.id, count: cat.count }))
+    : [
+        { label: "All Posts", value: "all", count: posts.length },
+        { label: "Deal Alerts", value: "deal-alerts", count: posts.filter(p => p.category === 'deal-alerts').length },
+        { label: "Buying Guides", value: "buying-guide", count: posts.filter(p => p.category === 'buying-guide').length },
+        { label: "Tech Reviews", value: "tech-reviews", count: posts.filter(p => p.category === 'tech-reviews').length },
+        { label: "Smart Home", value: "smart-home", count: posts.filter(p => p.category === 'smart-home').length },
+        { label: "Gaming", value: "gaming", count: posts.filter(p => p.category === 'gaming').length }
+      ];
 
   return (
     <div className="blog-page">
@@ -78,13 +107,14 @@ const BlogPage = () => {
             <div className="sidebar-section">
               <h3>Categories</h3>
               <ul className="category-list">
-                {categories.map((category, index) => (
+                {displayCategories.map((category, index) => (
                   <li key={index}>
                     <button
                       onClick={() => setSelectedCategory(category.value)}
                       className={selectedCategory === category.value ? 'active' : ''}
                     >
                       {category.label}
+                      {category.count && <span className="count">({category.count})</span>}
                     </button>
                   </li>
                 ))}
@@ -105,7 +135,7 @@ const BlogPage = () => {
               <div className="popular-posts">
                 {popularPosts.map((post) => (
                   <div key={post.id} className="popular-post">
-                    <Link to={`/blog/${post.slug}`}>
+                    <Link href={`/blog/${post.slug}`}>
                       <h4>{post.title}</h4>
                       <span className="post-meta">{post.views} views</span>
                     </Link>
@@ -133,24 +163,24 @@ const BlogPage = () => {
                     <div className="post-content">
                       <div className="post-meta">
                         <span className="author">By {post.author}</span>
-                        <span className="date">{formatDate(post.publishDate)}</span>
+                        <span className="date">{formatDate(post.publishedAt || post.publishDate)}</span>
                         <span className="read-time">{post.readTime}</span>
                       </div>
 
                       <h2 className="post-title">
-                        <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                       </h2>
 
                       <p className="post-excerpt">{post.excerpt}</p>
 
                       <div className="post-footer">
                         <div className="post-tags">
-                          {post.tags.map((tag, index) => (
+                          {post.tags && post.tags.map((tag, index) => (
                             <span key={index} className="tag">#{tag}</span>
                           ))}
                         </div>
 
-                        <Link to={`/blog/${post.slug}`} className="read-more">
+                        <Link href={`/blog/${post.slug}`} className="read-more">
                           Read More →
                         </Link>
                       </div>
