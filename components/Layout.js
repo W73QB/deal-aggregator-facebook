@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AuthButtons from './ui/AuthButtons';
@@ -6,6 +6,10 @@ import SearchBox from './ui/SearchBox';
 
 const Layout = ({ children }) => {
   const router = useRouter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState('idle'); // idle, loading, success, error
+  const [newsletterMessage, setNewsletterMessage] = useState('');
 
   const isActivePath = (path) => {
     if (path === '/') {
@@ -14,20 +18,54 @@ const Layout = ({ children }) => {
     return router.pathname.startsWith(path);
   };
 
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setNewsletterStatus('loading');
+    setNewsletterMessage('');
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: newsletterEmail }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+
+      setNewsletterStatus('success');
+      setNewsletterMessage(data.message);
+      setNewsletterEmail('');
+    } catch (error) {
+      setNewsletterStatus('error');
+      setNewsletterMessage(error.message);
+    }
+  };
+
   return (
     <div className="app-layout">
+      {/* Skip to main content - A11y enhancement */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+
       {/* Header */}
-      <header className="main-header">
+      <header className="main-header" role="banner">
         <div className="container">
           <div className="header-content">
             <div className="logo">
-              <Link href="/" className="logo-link">
+              <Link href="/" className="logo-link" aria-label="DealRadarUS - Home">
                 <div className="logo-animated">
-                  <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+                  <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" role="img" aria-labelledby="logo-title" aria-describedby="logo-desc">
+                    <title id="logo-title">DealRadarUS Logo</title>
+                    <desc id="logo-desc">Animated radar scanning for deals with shopping cart</desc>
                     <defs>
                       <linearGradient id="radarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#1A73E8"/>
-                        <stop offset="100%" stopColor="#0056b3"/>
+                        <stop offset="0%" stopColor="var(--primary-blue)"/>
+                        <stop offset="100%" stopColor="var(--primary-blue-dark)"/>
                       </linearGradient>
                     </defs>
 
@@ -41,23 +79,15 @@ const Layout = ({ children }) => {
                       <circle cx="0" cy="0" r="11" fill="none" stroke="url(#radarGradient)" strokeWidth="2" opacity="0.7"/>
 
                       {/* Radar sweep line */}
-                      <line x1="0" y1="0" x2="22" y2="-8" stroke="url(#radarGradient)" strokeWidth="3" strokeLinecap="round">
-                        <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" dur="3s" repeatCount="indefinite"/>
-                      </line>
+                      <line x1="0" y1="0" x2="22" y2="-8" stroke="url(#radarGradient)" strokeWidth="3" strokeLinecap="round" className="radar-sweep"/>
 
                       {/* Center dot */}
                       <circle cx="0" cy="0" r="3" fill="url(#radarGradient)"/>
 
                       {/* Deal indicators (small dots) */}
-                      <circle cx="12" cy="-6" r="2" fill="#FF3B30" opacity="0.8">
-                        <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
-                      </circle>
-                      <circle cx="-8" cy="15" r="2" fill="#FF3B30" opacity="0.6">
-                        <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/>
-                      </circle>
-                      <circle cx="18" cy="12" r="2" fill="#FF3B30" opacity="0.7">
-                        <animate attributeName="opacity" values="0.3;1;0.3" dur="1.8s" repeatCount="indefinite"/>
-                      </circle>
+                      <circle cx="12" cy="-6" r="2" fill="var(--urgent-red)" opacity="0.8" className="deal-indicator deal-indicator-1"></circle>
+                      <circle cx="-8" cy="15" r="2" fill="var(--urgent-red)" opacity="0.6" className="deal-indicator deal-indicator-2"></circle>
+                      <circle cx="18" cy="12" r="2" fill="var(--urgent-red)" opacity="0.7" className="deal-indicator deal-indicator-3"></circle>
                     </g>
 
                     {/* Shopping cart element integrated into radar */}
@@ -68,8 +98,8 @@ const Layout = ({ children }) => {
                     </g>
 
                     {/* Company name */}
-                    <text x="75" y="25" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" fill="#1A73E8">DealRadar</text>
-                    <text x="75" y="42" fontFamily="Arial, sans-serif" fontSize="12" fontWeight="normal" fill="#6C757D">US</text>
+                    <text x="75" y="25" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" fill="var(--primary-blue)">DealRadar</text>
+                    <text x="75" y="42" fontFamily="Arial, sans-serif" fontSize="12" fontWeight="normal" fill="var(--text-tertiary)">US</text>
                   </svg>
                 </div>
                 <div className="logo-tagline">
@@ -78,58 +108,73 @@ const Layout = ({ children }) => {
               </Link>
             </div>
 
-            <nav className="main-nav">
-              <ul className="nav-menu">
-                <li>
+            <nav className={`main-nav ${isMenuOpen ? 'active' : ''}`} role="navigation" aria-label="Main navigation">
+              <ul className="nav-menu" role="menubar">
+                <li role="none">
                   <Link
                     href="/"
                     className={`nav-link ${isActivePath('/') ? 'active' : ''}`}
+                    role="menuitem"
+                    aria-current={isActivePath('/') ? 'page' : undefined}
+                    aria-label="Home - Navigate to homepage"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                     </svg>
                     Home
                   </Link>
                 </li>
-                <li>
+                <li role="none">
                   <Link
                     href="/deals"
                     className={`nav-link ${isActivePath('/deals') ? 'active' : ''}`}
+                    role="menuitem"
+                    aria-current={isActivePath('/deals') ? 'page' : undefined}
+                    aria-label="Deals - Browse all current deals"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                     Deals
                   </Link>
                 </li>
-                <li>
+                <li role="none">
                   <Link
                     href="/blog"
                     className={`nav-link ${isActivePath('/blog') ? 'active' : ''}`}
+                    role="menuitem"
+                    aria-current={isActivePath('/blog') ? 'page' : undefined}
+                    aria-label="Blog - Read articles and buying guides"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
                     </svg>
                     Blog
                   </Link>
                 </li>
-                <li>
+                <li role="none">
                   <Link
                     href="/about"
                     className={`nav-link ${isActivePath('/about') ? 'active' : ''}`}
+                    role="menuitem"
+                    aria-current={isActivePath('/about') ? 'page' : undefined}
+                    aria-label="About - Learn about DealRadarUS"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
                     </svg>
                     About
                   </Link>
                 </li>
-                <li>
+                <li role="none">
                   <Link
                     href="/contact"
                     className={`nav-link ${isActivePath('/contact') ? 'active' : ''}`}
+                    role="menuitem"
+                    aria-current={isActivePath('/contact') ? 'page' : undefined}
+                    aria-label="Contact - Get in touch with us"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                     </svg>
                     Contact
@@ -143,20 +188,38 @@ const Layout = ({ children }) => {
 
               <AuthButtons />
 
-              <div className="social-links">
-                <a href="https://facebook.com/dealradarus" target="_blank" rel="noopener noreferrer" className="social-link facebook">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <div className="social-links" aria-label="Follow us on social media">
+                <a
+                  href="https://facebook.com/dealradarus"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link facebook"
+                  aria-label="Follow DealRadarUS on Facebook - 25K followers"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
-                  25K
+                  <span aria-hidden="true">25K</span>
                 </a>
-                <a href="https://twitter.com/dealradarus" target="_blank" rel="noopener noreferrer" className="social-link twitter">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <a
+                  href="https://twitter.com/dealradarus"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link twitter"
+                  aria-label="Follow DealRadarUS on Twitter"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
                   </svg>
                 </a>
-                <a href="https://instagram.com/dealradarus" target="_blank" rel="noopener noreferrer" className="social-link instagram">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <a
+                  href="https://instagram.com/dealradarus"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link instagram"
+                  aria-label="Follow DealRadarUS on Instagram"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                   </svg>
                 </a>
@@ -164,7 +227,7 @@ const Layout = ({ children }) => {
             </div>
 
             {/* Mobile Menu Button */}
-            <button className="mobile-menu-btn" aria-label="Toggle menu">
+            <button className="mobile-menu-btn" aria-label="Toggle menu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-expanded={isMenuOpen}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
               </svg>
@@ -174,12 +237,12 @@ const Layout = ({ children }) => {
       </header>
 
       {/* Main Content */}
-      <main className="main-content">
+      <main id="main-content" className="main-content" role="main">
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="main-footer">
+      <footer className="main-footer" role="contentinfo">
         <div className="container">
           <div className="footer-content">
             <div className="footer-section">
@@ -240,11 +303,22 @@ const Layout = ({ children }) => {
             <div className="footer-section">
               <h4>🔔 Deal Alerts</h4>
               <p>Get the best deals in your inbox!</p>
-              <form className="footer-newsletter">
-                <input type="email" placeholder="Your email" required />
-                <button type="submit">Subscribe</button>
+              <form className="footer-newsletter" onSubmit={handleNewsletterSubmit}>
+                <input 
+                  type="email" 
+                  placeholder="Your email" 
+                  required 
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  disabled={newsletterStatus === 'loading'}
+                />
+                <button type="submit" disabled={newsletterStatus === 'loading'}>
+                  {newsletterStatus === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                </button>
               </form>
-              <small>Join 25K+ deal hunters</small>
+              {newsletterStatus === 'success' && <small className="newsletter-success">{newsletterMessage}</small>}
+              {newsletterStatus === 'error' && <small className="newsletter-error">{newsletterMessage}</small>}
+              {newsletterStatus !== 'success' && newsletterStatus !== 'error' && <small>Join 25K+ deal hunters</small>}
             </div>
           </div>
 

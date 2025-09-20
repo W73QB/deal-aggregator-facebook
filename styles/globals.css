@@ -579,6 +579,57 @@ select:focus {
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
+.main-nav.active {
+  display: flex !important;
+}
+
+/* Radar sweep animation */
+@keyframes radar-sweep-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep {
+  transform-origin: center;
+  animation: radar-sweep-animation 3s linear infinite;
+}
+
+/* Deal indicators animations */
+.deal-indicator {
+  animation-fill-mode: both;
+}
+
+.deal-indicator-1 {
+  animation: deal-pulse-1 2s ease-in-out infinite;
+}
+
+.deal-indicator-2 {
+  animation: deal-pulse-2 2.5s ease-in-out infinite;
+}
+
+.deal-indicator-3 {
+  animation: deal-pulse-3 1.8s ease-in-out infinite;
+}
+
+@keyframes deal-pulse-1 {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes deal-pulse-2 {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes deal-pulse-3 {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {
@@ -1561,7 +1612,6 @@ select:focus {
   33% { transform: translateX(30px) translateY(-30px); }
   66% { transform: translateX(-20px) translateY(20px); }
 }
-}
 
 .newsletter-content h2 {
   font-size: 2.5rem;
@@ -1773,6 +1823,17 @@ select:focus {
   background: #0056b3;
 }
 
+.newsletter-success {
+  color: var(--accent-green);
+  font-weight: 500;
+}
+
+.newsletter-error {
+  color: var(--urgent-red);
+  font-weight: 500;
+}
+
+/* Footer Bottom */
 .footer-bottom {
   border-top: 1px solid #34495E;
   padding-top: 2rem;
