@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import RatingStars from '../ui/RatingStars';
 import { voteOnReview, deleteReview } from '../../lib/store/slices/reviewsSlice';
 import { addNotification } from '../../lib/store/slices/notificationSlice';
-import './ReviewCard.css';
+import styles from './ReviewCard.module.css';
 
 const ReviewCard = ({ review, onEdit, showActions = true }) => {
   const dispatch = useDispatch();
@@ -100,40 +100,40 @@ const ReviewCard = ({ review, onEdit, showActions = true }) => {
   };
 
   return (
-    <div className="review-card" role="article" aria-labelledby={`review-title-${review.id}`}>
-      <div className="review-header">
-        <div className="review-author">
-          <div className="author-info">
-            <h4 className="author-name">
+    <div className={styles.reviewCard} role="article" aria-labelledby={`review-title-${review.id}`}>
+      <div className={styles.reviewHeader}>
+        <div className={styles.reviewAuthor}>
+          <div className={styles.authorInfo}>
+            <h4 className={styles.authorName}>
               {review.user.first_name} {review.user.last_name}
             </h4>
             {review.is_verified && (
-              <span className="verified-badge" aria-label="Verified reviewer">
+              <span className={styles.verifiedBadge} aria-label="Verified reviewer">
                 ✓ Verified
               </span>
             )}
           </div>
-          <div className="review-meta">
+          <div className={styles.reviewMeta}>
             <RatingStars rating={review.rating} size="small" />
-            <span className="review-date">
+            <span className={styles.reviewDate}>
               {updatedDate && updatedDate !== createdDate ? `Updated ${updatedDate}` : createdDate}
             </span>
           </div>
         </div>
         
         {showActions && (
-          <div className="review-actions">
+          <div className={styles.reviewActions}>
             {isOwner ? (
               <>
                 <button 
-                  className="action-btn action-btn--edit"
+                  className={`${styles.actionBtn} ${styles.actionBtnEdit}`}
                   onClick={() => onEdit(review)}
                   aria-label="Edit review"
                 >
                   Edit
                 </button>
                 <button 
-                  className="action-btn action-btn--delete"
+                  className={`${styles.actionBtn} ${styles.actionBtnDelete}`}
                   onClick={handleDelete}
                   aria-label="Delete review"
                 >
@@ -142,7 +142,7 @@ const ReviewCard = ({ review, onEdit, showActions = true }) => {
               </>
             ) : (
               <button 
-                className="action-btn action-btn--report"
+                className={`${styles.actionBtn} ${styles.actionBtnReport}`}
                 onClick={handleReport}
                 aria-label="Report review"
               >
@@ -153,22 +153,22 @@ const ReviewCard = ({ review, onEdit, showActions = true }) => {
         )}
       </div>
 
-      <div className="review-content">
-        <h5 id={`review-title-${review.id}`} className="review-title">
+      <div className={styles.reviewContent}>
+        <h5 id={`review-title-${review.id}`} className={styles.reviewTitle}>
           {review.title}
         </h5>
         <div 
-          className="review-text"
+          className={styles.reviewText}
           dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
       </div>
 
-      <div className="review-footer">
-        <div className="vote-section">
-          <span className="vote-label">Was this helpful?</span>
-          <div className="vote-buttons">
+      <div className={styles.reviewFooter}>
+        <div className={styles.voteSection}>
+          <span className={styles.voteLabel}>Was this helpful?</span>
+          <div className={styles.voteButtons}>
             <button
-              className={`vote-btn vote-btn--helpful ${voting ? 'vote-btn--loading' : ''}`}
+              className={`${styles.voteBtn} ${styles.voteBtnHelpful} ${voting ? styles.voteBtnLoading : ''}`}
               onClick={() => handleVote(true)}
               disabled={voting || isOwner}
               aria-label="Mark as helpful"
@@ -176,7 +176,7 @@ const ReviewCard = ({ review, onEdit, showActions = true }) => {
               👍 Helpful ({review.helpful_count})
             </button>
             <button
-              className={`vote-btn vote-btn--not-helpful ${voting ? 'vote-btn--loading' : ''}`}
+              className={`${styles.voteBtn} ${styles.voteBtnNotHelpful} ${voting ? styles.voteBtnLoading : ''}`}
               onClick={() => handleVote(false)}
               disabled={voting || isOwner}
               aria-label="Mark as not helpful"
@@ -186,9 +186,9 @@ const ReviewCard = ({ review, onEdit, showActions = true }) => {
           </div>
         </div>
         
-        <div className="vote-stats">
+        <div className={styles.voteStats}>
           {review.total_votes > 0 && (
-            <span className="vote-count">
+            <span className={styles.voteCount}>
               {review.total_votes} of {review.total_votes} found this helpful
             </span>
           )}

@@ -4,7 +4,27 @@ import DOMPurify from 'dompurify';
 import { deleteComment, toggleReplies } from '../../lib/store/slices/commentsSlice';
 import { addNotification } from '../../lib/store/slices/notificationSlice';
 import CommentForm from './CommentForm';
-import './CommentCard.css';
+import styles from './CommentCard.module.css';
+
+const STATUS_CONFIG = {
+  pending: { label: 'Pending', color: '#ffc107', icon: '⏳' },
+  reviewing: { label: 'Under Review', color: '#007bff', icon: '👀' },
+  dismissed: { label: 'Dismissed', color: '#28a745', icon: '✅' },
+  action_taken: { label: 'Action Taken', color: '#dc3545', icon: '⚡' }
+};
+
+const REASON_LABELS = {
+  spam: 'Spam',
+  harassment: 'Harassment',
+  inappropriate: 'Inappropriate Content',
+  misinformation: 'Misinformation',
+  hate_speech: 'Hate Speech',
+  copyright: 'Copyright',
+  personal_info: 'Personal Information',
+  fake_account: 'Fake Account',
+  off_topic: 'Off Topic',
+  other: 'Other'
+};
 
 const CommentCard = ({ comment, depth = 0, onReply, onEdit }) => {
   const dispatch = useDispatch();
@@ -106,39 +126,39 @@ const CommentCard = ({ comment, depth = 0, onReply, onEdit }) => {
 
   return (
     <div 
-      className={`comment-card comment-card--depth-${Math.min(depth, maxDepth)}`}
+      className={`${styles.commentCard} ${styles[`comment-card--depth-${Math.min(depth, maxDepth)}`]}`}
       style={indentationStyle}
     >
-      <div className="comment-content">
+      <div className={styles.commentContent}>
         {/* Comment Header */}
-        <div className="comment-header">
-          <div className="comment-author">
-            <span className="author-name">
+        <div className={styles.commentHeader}>
+          <div className={styles.commentAuthor}>
+            <span className={styles.authorName}>
               {comment.user?.first_name} {comment.user?.last_name}
             </span>
-            <span className="comment-date">
+            <span className={styles.commentDate}>
               {updatedDate && updatedDate !== createdDate 
                 ? `Updated ${updatedDate}` 
                 : createdDate
               }
             </span>
             {comment.isOptimistic && (
-              <span className="comment-status">Posting...</span>
+              <span className={styles.commentStatus}>Posting...</span>
             )}
           </div>
           
-          <div className="comment-actions">
+          <div className={styles.commentActions}>
             {isOwner ? (
               <>
                 <button 
-                  className="comment-action-btn comment-action-btn--edit"
+                  className={`${styles.commentActionBtn} ${styles.commentActionBtnEdit}`}
                   onClick={handleEdit}
                   aria-label="Edit comment"
                 >
                   Edit
                 </button>
                 <button 
-                  className="comment-action-btn comment-action-btn--delete"
+                  className={`${styles.commentActionBtn} ${styles.commentActionBtnDelete}`}
                   onClick={handleDelete}
                   aria-label="Delete comment"
                 >
@@ -147,7 +167,7 @@ const CommentCard = ({ comment, depth = 0, onReply, onEdit }) => {
               </>
             ) : (
               <button 
-                className="comment-action-btn comment-action-btn--report"
+                className={`${styles.commentActionBtn} ${styles.commentActionBtnReport}`}
                 onClick={handleReport}
                 aria-label="Report comment"
               >
@@ -173,15 +193,15 @@ const CommentCard = ({ comment, depth = 0, onReply, onEdit }) => {
           />
         ) : (
           <div 
-            className="comment-body"
+            className={styles.commentBody}
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
         )}
 
         {/* Comment Footer */}
-        <div className="comment-footer">
+        <div className={styles.commentFooter}>
           <button 
-            className="comment-reply-btn"
+            className={styles.commentReplyBtn}
             onClick={handleReply}
             disabled={depth >= maxDepth}
           >
@@ -190,7 +210,7 @@ const CommentCard = ({ comment, depth = 0, onReply, onEdit }) => {
           
           {hasReplies && (
             <button 
-              className="comment-toggle-btn"
+              className={styles.commentToggleBtn}
               onClick={handleToggleReplies}
               aria-expanded={isExpanded}
               aria-label={`${isExpanded ? 'Hide' : 'Show'} ${comment.replies.length} replies`}
@@ -203,7 +223,7 @@ const CommentCard = ({ comment, depth = 0, onReply, onEdit }) => {
 
         {/* Reply Form */}
         {showReplyForm && (
-          <div className="comment-reply-form">
+          <div className={styles.commentReplyForm}>
             <CommentForm
               parentId={comment.id}
               onSubmit={(content) => {
@@ -222,7 +242,7 @@ const CommentCard = ({ comment, depth = 0, onReply, onEdit }) => {
 
       {/* Nested Replies */}
       {hasReplies && isExpanded && (
-        <div className="comment-replies">
+        <div className={styles.commentReplies}>
           {comment.replies.map((reply) => (
             <CommentCard 
               key={reply.id}

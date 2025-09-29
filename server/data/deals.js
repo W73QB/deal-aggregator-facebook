@@ -109,4 +109,4 @@ const deals = [
     }
   ];
 
-export default deals;
+module.exports = deals;

@@ -97,3 +97,41 @@ COMMENT ON TABLE public.email_verifications IS 'Email verification tokens for ne
 COMMENT ON COLUMN public.users.preferences IS 'JSON object storing user preferences like saved filters, notification settings';
 COMMENT ON COLUMN public.sessions.refresh_token IS 'Secure token for refreshing JWT access tokens';
 COMMENT ON COLUMN public.users.email IS 'Case-insensitive email using CITEXT extension';
+
+-- Deals table - stores deal information
+CREATE TABLE IF NOT EXISTS public.deals (
+  id               SERIAL PRIMARY KEY,
+  title            TEXT NOT NULL,
+  description      TEXT,
+  image            TEXT,
+  original_price   NUMERIC(10, 2) NOT NULL,
+  sale_price       NUMERIC(10, 2) NOT NULL,
+  discount         INTEGER,
+  rating           NUMERIC(2, 1),
+  category         TEXT,
+  featured         BOOLEAN NOT NULL DEFAULT FALSE,
+  store            TEXT,
+  affiliate_url    TEXT,
+  tags             TEXT,
+  stock_count      INTEGER,
+  active           BOOLEAN NOT NULL DEFAULT TRUE,
+  expires_at       TIMESTAMPTZ,
+  created_at       TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- Indexes for deals table
+CREATE INDEX IF NOT EXISTS idx_deals_category ON public.deals (category);
+CREATE INDEX IF NOT EXISTS idx_deals_featured ON public.deals (featured);
+CREATE INDEX IF NOT EXISTS idx_deals_sale_price ON public.deals (sale_price);
+CREATE INDEX IF NOT EXISTS idx_deals_rating ON public.deals (rating);
+CREATE INDEX IF NOT EXISTS idx_deals_created_at ON public.deals (created_at);
+
+-- Apply trigger to deals table
+DROP TRIGGER IF EXISTS trigger_update_deals_updated_at ON public.deals;
+CREATE TRIGGER trigger_update_deals_updated_at
+    BEFORE UPDATE ON public.deals
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+COMMENT ON TABLE public.deals IS 'Stores all deal information scraped or submitted';

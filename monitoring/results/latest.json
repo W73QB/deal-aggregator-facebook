@@ -1,60 +1,60 @@
 {
-  "timestamp": "2025-09-16T07:26:07.704Z",
+  "timestamp": "2025-09-18T13:07:13.683Z",
   "status": "healthy",
   "checks": [
     {
       "endpoint": "/",
       "url": "https://deal-aggregator-facebook.vercel.app/",
       "status": 200,
-      "responseTime": 1346,
+      "responseTime": 678,
       "healthy": true,
       "contentLength": 18491,
-      "timestamp": "2025-09-16T07:26:09.053Z"
+      "timestamp": "2025-09-18T13:07:14.366Z"
     },
     {
       "endpoint": "/about",
       "url": "https://deal-aggregator-facebook.vercel.app/about",
       "status": 200,
-      "responseTime": 559,
+      "responseTime": 55,
       "healthy": true,
       "contentLength": 17963,
-      "timestamp": "2025-09-16T07:26:09.612Z"
+      "timestamp": "2025-09-18T13:07:14.421Z"
     },
     {
       "endpoint": "/deals",
       "url": "https://deal-aggregator-facebook.vercel.app/deals",
       "status": 200,
-      "responseTime": 882,
+      "responseTime": 961,
       "healthy": true,
-      "contentLength": 17458,
-      "timestamp": "2025-09-16T07:26:10.494Z"
+      "contentLength": 17488,
+      "timestamp": "2025-09-18T13:07:15.383Z"
     },
     {
       "endpoint": "/blog",
       "url": "https://deal-aggregator-facebook.vercel.app/blog",
       "status": 200,
-      "responseTime": 538,
+      "responseTime": 337,
       "healthy": true,
       "contentLength": 16203,
-      "timestamp": "2025-09-16T07:26:11.032Z"
+      "timestamp": "2025-09-18T13:07:15.721Z"
     },
     {
       "endpoint": "/contact",
       "url": "https://deal-aggregator-facebook.vercel.app/contact",
       "status": 200,
-      "responseTime": 535,
+      "responseTime": 378,
       "healthy": true,
       "contentLength": 18156,
-      "timestamp": "2025-09-16T07:26:11.567Z"
+      "timestamp": "2025-09-18T13:07:16.100Z"
     },
     {
       "endpoint": "/api/deals",
       "url": "https://deal-aggregator-facebook.vercel.app/api/deals",
       "status": 200,
-      "responseTime": 692,
+      "responseTime": 921,
       "healthy": true,
       "contentLength": 2662,
-      "timestamp": "2025-09-16T07:26:12.259Z"
+      "timestamp": "2025-09-18T13:07:17.021Z"
     }
   ],
   "metrics": {
@@ -84,7 +84,7 @@
     "database": {
       "connected": true,
       "source": "unknown",
-      "responseTime": 518,
+      "responseTime": 362,
       "recordCount": 0
     }
   },
@@ -92,12 +92,12 @@
     {
       "level": "info",
       "message": "Database using fallback mode (static data)",
-      "timestamp": "2025-09-16T07:26:13.208Z"
+      "timestamp": "2025-09-18T13:07:17.432Z"
     }
   ],
   "summary": {
     "availability": 100,
-    "avgResponseTime": 759,
+    "avgResponseTime": 555,
     "healthyEndpoints": "6/6",
     "alertCounts": {
       "critical": 0,

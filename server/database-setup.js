@@ -56,34 +56,45 @@ class DatabaseSetup {
   }
 
   async runMigration() {
-    console.log('\n📄 Loading Migration Schema...');
+    console.log('\n📄 Loading Migration Schemas...');
+    const schemaDir = path.join(__dirname, 'auth/schema');
 
     try {
-      const migrationPath = path.join(__dirname, 'auth/schema/001_users.sql');
-      const migrationSql = await fs.readFile(migrationPath, 'utf8');
+      const files = await fs.readdir(schemaDir);
+      const sqlFiles = files.filter(f => f.endsWith('.sql')).sort();
 
-      console.log(`✅ Migration file loaded: ${migrationPath}`);
-      console.log(`   Size: ${migrationSql.length} characters`);
-      
-      // Count expected tables
-      const tableMatches = migrationSql.match(/CREATE TABLE IF NOT EXISTS public\.(\w+)/g) || [];
-      const expectedTables = tableMatches.map(match => match.split('.')[1]);
-      
+      if (sqlFiles.length === 0) {
+        console.warn('No SQL migration files found.');
+        return '';
+      }
+
+      console.log(`✅ Found ${sqlFiles.length} migration files:`);
+      let fullSql = '';
+      const allExpectedTables = [];
+
+      for (const file of sqlFiles) {
+        console.log(`   - Loading ${file}...`);
+        const migrationPath = path.join(schemaDir, file);
+        const migrationSql = await fs.readFile(migrationPath, 'utf8');
+        fullSql += migrationSql + '\n';
+
+        const tableMatches = migrationSql.match(/CREATE TABLE IF NOT EXISTS public.(\w+)/g) || [];
+        const expectedTables = tableMatches.map(match => match.split('.')[1]);
+        allExpectedTables.push(...expectedTables);
+      }
+
       this.results.schema = {
-        migration_file: '001_users.sql',
-        expected_tables: expectedTables,
-        table_count: expectedTables.length,
-        has_extensions: migrationSql.includes('CREATE EXTENSION'),
-        has_indexes: migrationSql.includes('CREATE INDEX'),
-        has_triggers: migrationSql.includes('CREATE TRIGGER')
+        migration_files: sqlFiles,
+        expected_tables: allExpectedTables,
+        table_count: allExpectedTables.length,
+        has_extensions: fullSql.includes('CREATE EXTENSION'),
+        has_indexes: fullSql.includes('CREATE INDEX'),
+        has_triggers: fullSql.includes('CREATE TRIGGER')
       };
 
-      console.log(`   Expected Tables: ${expectedTables.join(', ')}`);
-      console.log(`   Extensions: ${this.results.schema.has_extensions ? 'Yes' : 'No'}`);
-      console.log(`   Indexes: ${this.results.schema.has_indexes ? 'Yes' : 'No'}`);
-      console.log(`   Triggers: ${this.results.schema.has_triggers ? 'Yes' : 'No'}`);
+      console.log(`\n   Total Expected Tables: ${allExpectedTables.join(', ')}`);
+      return fullSql;
 
-      return migrationSql;
     } catch (error) {
       this.results.errors.push(`Migration loading error: ${error.message}`);
       throw error;

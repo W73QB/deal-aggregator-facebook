@@ -34,6 +34,7 @@ import {
   trackNotificationCenterAction,
   trackInAppNotificationInteraction
 } from '../../lib/analytics/events';
+import styles from './NotificationCenter.module.css';
 
 const NotificationCenter = ({ className = '' }) => {
   const dispatch = useDispatch();
@@ -206,12 +207,12 @@ const NotificationCenter = ({ className = '' }) => {
         if (payload?.deals?.length > 0) {
           const deal = payload.deals[0];
           return (
-            <div className="notification-deal">
-              <div className="notification-deal__title">{deal.title}</div>
-              <div className="notification-deal__price">
+            <div className={styles.notificationDeal}>
+              <div className={styles.notificationDeal__title}>{deal.title}</div>
+              <div className={styles.notificationDeal__price}>
                 ${deal.price}
                 {deal.originalPrice && (
-                  <span className="notification-deal__savings">
+                  <span className={styles.notificationDeal__savings}>
                     Save ${(deal.originalPrice - deal.price).toFixed(2)}
                   </span>
                 )}
@@ -224,11 +225,11 @@ const NotificationCenter = ({ className = '' }) => {
       case 'deal-digest':
         if (payload?.totalDeals) {
           return (
-            <div className="notification-digest">
-              <div className="notification-digest__summary">
+            <div className={styles.notificationDigest}>
+              <div className={styles.notificationDigest__summary}>
                 {payload.totalDeals} new deals found
               </div>
-              <div className="notification-digest__stats">
+              <div className={styles.notificationDigest__stats}>
                 {payload.categories?.length} categories • Best saving: ${payload.bestSaving}
               </div>
             </div>
@@ -238,14 +239,14 @@ const NotificationCenter = ({ className = '' }) => {
         
       default:
         return (
-          <div className="notification-generic">
+          <div className={styles.notificationGeneric}>
             {payload?.message || 'New notification'}
           </div>
         );
     }
     
     return (
-      <div className="notification-generic">
+      <div className={styles.notificationGeneric}>
         Notification content
       </div>
     );
@@ -254,19 +255,19 @@ const NotificationCenter = ({ className = '' }) => {
   if (!isOpen) return null;
 
   return (
-    <div className={`notification-center ${className}`} ref={panelRef}>
+    <div className={`${styles.notificationCenter} ${className}`} ref={panelRef}>
       {/* Header */}
-      <div className="notification-center__header">
-        <div className="notification-center__title">
+      <div className={styles.notificationCenter__header}>
+        <div className={styles.notificationCenter__title}>
           <h3>Notifications</h3>
           {unreadCount > 0 && (
-            <span className="notification-center__badge">{unreadCount}</span>
+            <span className={styles.notificationCenter__badge}>{unreadCount}</span>
           )}
         </div>
         
-        <div className="notification-center__actions">
+        <div className={styles.notificationCenter__actions}>
           <button
-            className="notification-center__action-btn"
+            className={styles.notificationCenter__actionBtn}
             onClick={() => setShowFilters(!showFilters)}
             title="Filter notifications"
             aria-label="Filter notifications"
@@ -275,7 +276,7 @@ const NotificationCenter = ({ className = '' }) => {
           </button>
           
           <button
-            className="notification-center__action-btn"
+            className={styles.notificationCenter__actionBtn}
             onClick={handleRefresh}
             disabled={loading}
             title="Refresh notifications"
@@ -286,7 +287,7 @@ const NotificationCenter = ({ className = '' }) => {
           
           {hasUnread && (
             <button
-              className="notification-center__action-btn"
+              className={styles.notificationCenter__actionBtn}
               onClick={handleMarkAllRead}
               title="Mark all as read"
               aria-label="Mark all notifications as read"
@@ -296,7 +297,7 @@ const NotificationCenter = ({ className = '' }) => {
           )}
           
           <button
-            className="notification-center__close-btn"
+            className={styles.notificationCenter__closeBtn}
             onClick={() => dispatch(closePanel())}
             title="Close notifications"
             aria-label="Close notification panel"
@@ -308,21 +309,21 @@ const NotificationCenter = ({ className = '' }) => {
 
       {/* Filters */}
       {showFilters && (
-        <div className="notification-center__filters">
+        <div className={styles.notificationCenter__filters}>
           <button
-            className={`filter-btn ${statusFilter === null ? 'filter-btn--active' : ''}`}
+            className={`${styles.filterBtn} ${statusFilter === null ? styles.filterBtnActive : ''}`}
             onClick={() => handleFilterChange(null)}
           >
             All
           </button>
           <button
-            className={`filter-btn ${statusFilter === 'sent' ? 'filter-btn--active' : ''}`}
+            className={`${styles.filterBtn} ${statusFilter === 'sent' ? styles.filterBtnActive : ''}`}
             onClick={() => handleFilterChange('sent')}
           >
             Delivered
           </button>
           <button
-            className={`filter-btn ${statusFilter === 'failed' ? 'filter-btn--active' : ''}`}
+            className={`${styles.filterBtn} ${statusFilter === 'failed' ? styles.filterBtnActive : ''}`}
             onClick={() => handleFilterChange('failed')}
           >
             Failed
@@ -331,13 +332,13 @@ const NotificationCenter = ({ className = '' }) => {
       )}
 
       {/* Content */}
-      <div className="notification-center__content" ref={listRef}>
+      <div className={styles.notificationCenter__content} ref={listRef}>
         {error && (
-          <div className="notification-center__error">
-            <span className="error-icon">⚠️</span>
+          <div className={styles.notificationCenter__error}>
+            <span className={styles.errorIcon}>⚠️</span>
             {error}
             <button 
-              className="retry-btn"
+              className={styles.retryBtn}
               onClick={handleRefresh}
             >
               Retry
@@ -346,57 +347,57 @@ const NotificationCenter = ({ className = '' }) => {
         )}
 
         {loading && notifications.length === 0 && (
-          <div className="notification-center__loading">
-            <div className="loading-spinner"></div>
+          <div className={styles.notificationCenter__loading}>
+            <div className={styles.loadingSpinner}></div>
             Loading notifications...
           </div>
         )}
 
         {!loading && !error && notifications.length === 0 && (
-          <div className="notification-center__empty">
-            <span className="empty-icon">🔔</span>
+          <div className={styles.notificationCenter__empty}>
+            <span className={styles.emptyIcon}>🔔</span>
             <h4>No notifications yet</h4>
             <p>We'll notify you when there are new deals matching your filters.</p>
           </div>
         )}
 
         {notifications.length > 0 && (
-          <div className="notification-center__list">
+          <div className={styles.notificationCenter__list}>
             {notifications.map((notification) => (
               <div
                 key={notification.id}
                 id={`notification-${notification.id}`}
-                className={`notification-item ${
-                  !notification.opened_at ? 'notification-item--unread' : ''
+                className={`${styles.notificationItem} ${
+                  !notification.opened_at ? styles.notificationItemUnread : ''
                 } ${
-                  notification.id === highlightedId ? 'notification-item--highlighted' : ''
+                  notification.id === highlightedId ? styles.notificationItemHighlighted : ''
                 } ${
-                  notification.status === 'failed' ? 'notification-item--failed' : ''
+                  notification.status === 'failed' ? styles.notificationItemFailed : ''
                 }`}
                 onClick={() => handleNotificationClick(notification)}
               >
-                <div className="notification-item__icon">
+                <div className={styles.notificationItem__icon}>
                   {getNotificationIcon(notification.template, notification.status)}
                 </div>
                 
-                <div className="notification-item__content">
-                  <div className="notification-item__body">
+                <div className={styles.notificationItem__content}>
+                  <div className={styles.notificationItem__body}>
                     {renderNotificationContent(notification)}
                   </div>
                   
-                  <div className="notification-item__meta">
-                    <span className="notification-item__time">
+                  <div className={styles.notificationItem__meta}>
+                    <span className={styles.notificationItem__time}>
                       {formatNotificationTime(notification.created_at)}
                     </span>
                     
                     {notification.status === 'failed' && (
-                      <span className="notification-item__status notification-item__status--failed">
+                      <span className={`${styles.notificationItem__status} ${styles.notificationItem__statusFailed}`}>
                         Failed
                       </span>
                     )}
                     
                     {notification.clicked_at && (
-                      <span className="notification-item__status notification-item__status--clicked">
+                      <span className={`${styles.notificationItem__status} ${styles.notificationItem__statusClicked}`}>
                         Clicked
                       </span>
                     )}
@@ -404,22 +405,22 @@ const NotificationCenter = ({ className = '' }) => {
                 </div>
                 
                 {!notification.opened_at && (
-                  <div className="notification-item__unread-indicator" aria-label="Unread"></div>
+                  <div className={styles.notificationItem__unreadIndicator} aria-label="Unread"></div>
                 )}
               </div>
             ))}
             
             {loadingMore && (
-              <div className="notification-center__loading-more">
-                <div className="loading-spinner"></div>
+              <div className={styles.notificationCenter__loadingMore}>
+                <div className={styles.loadingSpinner}></div>
                 Loading more...
               </div>
             )}
             
             {!loadingMore && pagination.hasMore && (
-              <div className="notification-center__load-more">
+              <div className={styles.notificationCenter__loadMore}>
                 <button
-                  className="load-more-btn"
+                  className={styles.loadMoreBtn}
                   onClick={() => dispatch(fetchHistory({
                     limit: 20,
                     offset: pagination.offset + pagination.limit,
@@ -436,19 +437,19 @@ const NotificationCenter = ({ className = '' }) => {
       </div>
 
       {/* Footer */}
-      <div className="notification-center__footer">
-        <div className="notification-center__stats">
+      <div className={styles.notificationCenter__footer}>
+        <div className={styles.notificationCenter__stats}>
           {totalCount > 0 && (
-            <span className="stats-text">
+            <span className={styles.statsText}>
               Showing {notifications.length} of {totalCount}
             </span>
           )}
         </div>
         
-        <div className="notification-center__settings">
+        <div className={styles.notificationCenter__settings}>
           <a 
             href="/settings/notifications" 
-            className="settings-link"
+            className={styles.settingsLink}
             target="_blank"
             rel="noopener noreferrer"
           >

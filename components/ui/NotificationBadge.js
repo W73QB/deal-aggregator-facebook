@@ -13,6 +13,7 @@ import {
   selectHasUnread
 } from '../../lib/store/slices/inAppNotificationsSlice';
 import { trackNotificationOpen } from '../../lib/analytics/events';
+import styles from './NotificationBadge.module.css';
 
 const NotificationBadge = ({ className = '' }) => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const NotificationBadge = ({ className = '' }) => {
 
   return (
     <button
-      className={`notification-badge ${isOpen ? 'notification-badge--active' : ''} ${className}`}
+      className={`${styles.notificationBadge} ${isOpen ? styles.notificationBadgeActive : ''} ${className}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       title={`${unreadCount} unread notifications`}
@@ -50,19 +51,19 @@ const NotificationBadge = ({ className = '' }) => {
       aria-expanded={isOpen}
       aria-haspopup="dialog"
     >
-      <span className="notification-badge__icon">
+      <span className={styles.notificationBadge__icon}>
         🔔
       </span>
       
       {hasUnread && (
-        <span className="notification-badge__count" aria-hidden="true">
+        <span className={styles.notificationBadge__count} aria-hidden="true">
           {unreadCount > 99 ? '99+' : unreadCount}
         </span>
       )}
       
       {/* Pulse animation for new notifications */}
       {hasUnread && (
-        <span className="notification-badge__pulse" aria-hidden="true"></span>
+        <span className={styles.notificationBadge__pulse} aria-hidden="true"></span>
       )}
     </button>
   );

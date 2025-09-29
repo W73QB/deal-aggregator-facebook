@@ -61,7 +61,7 @@
         "image/avif",
         "image/webp"
       ],
-      "dangerouslyAllowSVG": true,
+      "dangerouslyAllowSVG": false,
       "contentSecurityPolicy": "default-src 'self'; script-src 'none'; sandbox;",
       "contentDispositionType": "attachment",
       "remotePatterns": [],
@@ -314,6 +314,71 @@
       },
       {
         "source": "/home",
+        "destination": "/",
+        "permanent": true
+      },
+      {
+        "source": "/index.html",
+        "destination": "/",
+        "permanent": true
+      },
+      {
+        "source": "/home.html",
+        "destination": "/",
+        "permanent": true
+      },
+      {
+        "source": "/deals.html",
+        "destination": "/deals",
+        "permanent": true
+      },
+      {
+        "source": "/blog.html",
+        "destination": "/blog",
+        "permanent": true
+      },
+      {
+        "source": "/about.html",
+        "destination": "/about",
+        "permanent": true
+      },
+      {
+        "source": "/contact.html",
+        "destination": "/contact",
+        "permanent": true
+      },
+      {
+        "source": "/privacy.html",
+        "destination": "/privacy",
+        "permanent": true
+      },
+      {
+        "source": "/terms-of-service.html",
+        "destination": "/terms-of-service",
+        "permanent": true
+      },
+      {
+        "source": "/affiliate-disclosure.html",
+        "destination": "/affiliate-disclosure",
+        "permanent": true
+      },
+      {
+        "source": "/blog/:slug.html",
+        "destination": "/blog/:slug",
+        "permanent": true
+      },
+      {
+        "source": "/pages/:path*.html",
+        "destination": "/:path*",
+        "permanent": true
+      },
+      {
+        "source": "/index.php",
+        "destination": "/",
+        "permanent": true
+      },
+      {
+        "source": "/home.php",
         "destination": "/",
         "permanent": true
       }

@@ -10,7 +10,7 @@ import {
   clearError 
 } from '../../lib/store/slices/reportsSlice';
 import { addNotification } from '../../lib/store/slices/notificationSlice';
-import './ModerationDashboard.css';
+import styles from './ModerationDashboard.module.css';
 
 const FILTER_OPTIONS = {
   all: 'All Reports',
@@ -106,8 +106,8 @@ const ModerationDashboard = () => {
 
   if (!isAdmin) {
     return (
-      <div className="moderation-dashboard">
-        <div className="access-denied">
+      <div className={styles.moderationDashboard}>
+        <div className={styles.accessDenied}>
           <h2>Access Denied</h2>
           <p>You need administrator privileges to access the moderation dashboard.</p>
         </div>
@@ -116,17 +116,17 @@ const ModerationDashboard = () => {
   }
 
   return (
-    <div className="moderation-dashboard">
+    <div className={styles.moderationDashboard}>
       {/* Dashboard Header */}
-      <div className="dashboard-header">
-        <div className="header-content">
+      <div className={styles.dashboardHeader}>
+        <div className={styles.headerContent}>
           <h1>Content Moderation Dashboard</h1>
           <p>Review and manage reported content</p>
         </div>
         
-        <div className="header-actions">
+        <div className={styles.headerActions}>
           <button 
-            className="refresh-btn"
+            className={styles.refreshBtn}
             onClick={handleRefresh}
             disabled={refreshing}
           >
@@ -149,38 +149,38 @@ const ModerationDashboard = () => {
 
       {/* Error Display */}
       {error && (
-        <div className="dashboard-error" role="alert">
+        <div className={styles.dashboardError} role="alert">
           <p>⚠️ {error}</p>
-          <button className="retry-btn" onClick={loadData}>
+          <button className={styles.retryBtn} onClick={loadData}>
             Retry
           </button>
         </div>
       )}
 
       {/* Filter Tabs */}
-      <div className="filter-tabs">
+      <div className={styles.filterTabs}>
         {Object.entries(FILTER_OPTIONS).map(([value, label]) => (
           <button
             key={value}
-            className={`filter-tab ${currentFilter === value ? 'filter-tab--active' : ''}`}
+            className={`${styles.filterTab} ${currentFilter === value ? styles.filterTabActive : ''}`}
             onClick={() => handleFilterChange(value)}
             disabled={loading}
           >
             {label}
             {stats[value] > 0 && (
-              <span className="filter-badge">{stats[value]}</span>
+              <span className={styles.filterBadge}>{stats[value]}</span>
             )}
           </button>
         ))}
       </div>
 
       {/* Reports List */}
-      <div className="reports-section">
+      <div className={styles.reportsSection}>
         {loading && !reports.length ? (
           <LoadingSpinner size="large" text="Loading reports..." />
         ) : reports.length > 0 ? (
           <>
-            <div className="reports-list">
+            <div className={styles.reportsList}>
               {reports.map((report) => (
                 <ReportCard 
                   key={report.id}
@@ -192,9 +192,9 @@ const ModerationDashboard = () => {
             
             {/* Load More */}
             {pagination.has_next && (
-              <div className="load-more-section">
+              <div className={styles.loadMoreSection}>
                 <button
-                  className="load-more-btn"
+                  className={styles.loadMoreBtn}
                   onClick={handleLoadMore}
                   disabled={loading}
                 >
@@ -208,8 +208,8 @@ const ModerationDashboard = () => {
             )}
           </>
         ) : (
-          <div className="no-reports">
-            <div className="no-reports-content">
+          <div className={styles.noReports}>
+            <div className={styles.noReportsContent}>
               <h3>No reports found</h3>
               <p>
                 {currentFilter === 'all' 

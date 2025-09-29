@@ -1,0 +1,46 @@
+{
+  "id": "backup-1758269696007",
+  "timestamp": "2025-09-19T08:14:56.007Z",
+  "type": "full",
+  "status": "completed",
+  "components": {
+    "code": {
+      "type": "git-bundle",
+      "path": "code/repository.bundle",
+      "commit": "19014056afda56b06c3d223d8baf9a360cff7bc2",
+      "timestamp": "2025-09-19T08:15:23.262Z"
+    },
+    "database": {
+      "type": "schema-files",
+      "path": "database/schema/",
+      "timestamp": "2025-09-19T08:15:23.264Z"
+    },
+    "assets": {
+      "type": "static-files",
+      "path": "assets/public/",
+      "size": 225081,
+      "timestamp": "2025-09-19T08:15:23.289Z"
+    },
+    "configuration": {
+      "type": "config-files",
+      "path": "config/",
+      "files": 5,
+      "timestamp": "2025-09-19T08:15:23.292Z"
+    },
+    "deployment": {
+      "type": "deployment-state",
+      "path": "deployment/state.json",
+      "timestamp": "2025-09-19T08:15:23.558Z"
+    }
+  },
+  "metadata": {
+    "timestamp": "2025-09-19T08:15:23.292Z",
+    "url": "https://dealradarus.com",
+    "nodeVersion": "v22.17.0",
+    "npmVersion": "10.9.2",
+    "buildId": "i5gPSVWLCVPYqFxlKBljB",
+    "environment": "production",
+    "packageVersion": "0.1.0"
+  },
+  "completedAt": "2025-09-19T08:15:23.559Z"
+}

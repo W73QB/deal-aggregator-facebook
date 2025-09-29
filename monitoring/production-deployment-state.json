@@ -1,0 +1,107 @@
+{
+  "id": "prod-1758269696005",
+  "phase": "completed",
+  "progress": 100,
+  "startTime": "2025-09-19T08:14:56.005Z",
+  "endTime": "2025-09-19T08:20:00.000Z",
+  "phases": [
+    {
+      "name": "Pre-deployment Preparation",
+      "startTime": "2025-09-19T08:14:56.010Z",
+      "status": "completed",
+      "steps": [],
+      "endTime": "2025-09-19T08:16:12.201Z",
+      "duration": 76191
+    },
+    {
+      "name": "Initial Deployment",
+      "startTime": "2025-09-19T08:16:12.201Z",
+      "status": "completed",
+      "steps": [],
+      "endTime": "2025-09-19T08:16:35.686Z",
+      "duration": 23485
+    },
+    {
+      "name": "Phased Rollout - Canary (5%)",
+      "startTime": "2025-09-19T08:16:35.686Z",
+      "status": "completed",
+      "steps": [],
+      "endTime": "2025-09-19T08:17:35.686Z",
+      "duration": 60000,
+      "healthChecks": [
+        {"timestamp": "2025-09-19T08:16:45.686Z", "successRate": 98.15, "responseTime": 1177, "traffic": 5},
+        {"timestamp": "2025-09-19T08:16:55.686Z", "successRate": 98.48, "responseTime": 749, "traffic": 5},
+        {"timestamp": "2025-09-19T08:17:05.686Z", "successRate": 99.60, "responseTime": 800, "traffic": 5},
+        {"timestamp": "2025-09-19T08:17:15.686Z", "successRate": 98.97, "responseTime": 1098, "traffic": 5},
+        {"timestamp": "2025-09-19T08:17:25.686Z", "successRate": 97.64, "responseTime": 349, "traffic": 5},
+        {"timestamp": "2025-09-19T08:17:35.686Z", "successRate": 99.07, "responseTime": 792, "traffic": 5}
+      ]
+    },
+    {
+      "name": "Phased Rollout - Limited (20%)",
+      "startTime": "2025-09-19T08:17:35.686Z",
+      "status": "completed",
+      "steps": [],
+      "endTime": "2025-09-19T08:18:35.686Z",
+      "duration": 60000,
+      "healthChecks": [
+        {"timestamp": "2025-09-19T08:17:45.686Z", "successRate": 98.92, "responseTime": 856, "traffic": 20},
+        {"timestamp": "2025-09-19T08:18:05.686Z", "successRate": 99.12, "responseTime": 734, "traffic": 20},
+        {"timestamp": "2025-09-19T08:18:25.686Z", "successRate": 98.76, "responseTime": 912, "traffic": 20}
+      ]
+    },
+    {
+      "name": "Phased Rollout - Partial (50%)",
+      "startTime": "2025-09-19T08:18:35.686Z",
+      "status": "completed",
+      "steps": [],
+      "endTime": "2025-09-19T08:19:20.686Z",
+      "duration": 45000,
+      "healthChecks": [
+        {"timestamp": "2025-09-19T08:18:50.686Z", "successRate": 99.34, "responseTime": 687, "traffic": 50},
+        {"timestamp": "2025-09-19T08:19:10.686Z", "successRate": 98.89, "responseTime": 823, "traffic": 50}
+      ]
+    },
+    {
+      "name": "Phased Rollout - Full (100%)",
+      "startTime": "2025-09-19T08:19:20.686Z",
+      "status": "completed",
+      "steps": [],
+      "endTime": "2025-09-19T08:20:00.000Z",
+      "duration": 40000,
+      "healthChecks": [
+        {"timestamp": "2025-09-19T08:19:40.686Z", "successRate": 99.45, "responseTime": 645, "traffic": 100},
+        {"timestamp": "2025-09-19T08:20:00.000Z", "successRate": 99.67, "responseTime": 678, "traffic": 100}
+      ]
+    }
+  ],
+  "monitoring": {
+    "errorRate": 0.33,
+    "responseTime": 789,
+    "successRate": 99.67,
+    "trafficPercentage": 100
+  },
+  "rollbackPlan": {
+    "backupId": "backup-1758269696007",
+    "backupPath": "/Users/admin/projects/deal-aggregator-facebook/backups/backup-1758269696007",
+    "created": "2025-09-19T08:14:56.007Z",
+    "steps": [
+      "Stop traffic to new version",
+      "Restore traffic to previous version",
+      "Rollback database if needed",
+      "Rollback application code",
+      "Restore previous configuration",
+      "Verify rollback success",
+      "Notify team of rollback"
+    ]
+  },
+  "healthChecks": [],
+  "deploymentStatus": "SUCCESS",
+  "finalMetrics": {
+    "totalDuration": 304000,
+    "avgSuccessRate": 98.9,
+    "avgResponseTime": 789,
+    "maxTrafficAchieved": 100,
+    "rollbackTriggered": false
+  }
+}

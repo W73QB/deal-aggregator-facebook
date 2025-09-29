@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import { createReport, hideReportModal } from '../../lib/store/slices/reportsSlice';
 import { addNotification } from '../../lib/store/slices/notificationSlice';
+import styles from './ReportModal.module.css';
 
 const REPORT_REASONS = {
   spam: 'Spam or Unwanted Commercial Content',
@@ -136,17 +137,17 @@ const ReportModal = () => {
 
   return (
     <div 
-      className="report-modal-backdrop" 
+      className={styles.reportModalBackdrop} 
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
       aria-labelledby="report-modal-title"
     >
-      <div className="report-modal">
-        <div className="report-modal-header">
+      <div className={styles.reportModal}>
+        <div className={styles.reportModalHeader}>
           <h2 id="report-modal-title">Report Content</h2>
           <button 
-            className="report-modal-close"
+            className={styles.reportModalClose}
             onClick={handleClose}
             disabled={submitting}
             aria-label="Close report modal"
@@ -155,14 +156,14 @@ const ReportModal = () => {
           </button>
         </div>
         
-        <div className="report-modal-content">
-          <div className="content-preview">
+        <div className={styles.reportModalContent}>
+          <div className={styles.contentPreview}>
             <h4>You are reporting this {reportingContent.type}:</h4>
-            <div className="content-snippet">
+            <div className={styles.contentSnippet}>
               {reportingContent.title && (
-                <div className="content-title">"{reportingContent.title}"</div>
+                <div className={styles.contentTitle}>"{reportingContent.title}"</div>
               )}
-              <div className="content-text">
+              <div className={styles.contentText}>
                 {reportingContent.content.substring(0, 200)}
                 {reportingContent.content.length > 200 && '...'}
               </div>
@@ -170,14 +171,14 @@ const ReportModal = () => {
           </div>
           
           <form onSubmit={handleSubmit} noValidate>
-            <div className="form-group">
-              <label className="form-label">
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>
                 Why are you reporting this content? *
               </label>
               
-              <div className="reason-options">
+              <div className={styles.reasonOptions}>
                 {Object.entries(REPORT_REASONS).map(([value, label]) => (
-                  <label key={value} className="reason-option">
+                  <label key={value} className={styles.reasonOption}>
                     <input
                       type="radio"
                       name="reason"
@@ -186,19 +187,19 @@ const ReportModal = () => {
                       onChange={() => handleReasonChange(value)}
                       disabled={submitting}
                     />
-                    <span className="reason-label">{label}</span>
+                    <span className={styles.reasonLabel}>{label}</span>
                   </label>
                 ))}
               </div>
             </div>
             
-            <div className="form-group">
-              <label htmlFor="report-description" className="form-label">
+            <div className={styles.formGroup}>
+              <label htmlFor="report-description" className={styles.formLabel}>
                 Additional Details {selectedReason === 'other' ? '*' : '(Optional)'}
               </label>
               <textarea
                 id="report-description"
-                className="form-textarea"
+                className={styles.formTextarea}
                 value={description}
                 onChange={handleDescriptionChange}
                 placeholder={
@@ -210,21 +211,21 @@ const ReportModal = () => {
                 maxLength={1000}
                 disabled={submitting}
               />
-              <div className="form-help">
+              <div className={styles.formHelp}>
                 {description.length}/1000 characters
               </div>
             </div>
             
             {error && (
-              <div className="form-error" role="alert">
+              <div className={styles.formError} role="alert">
                 {error}
               </div>
             )}
             
-            <div className="form-actions">
+            <div className={styles.formActions}>
               <button 
                 type="button" 
-                className="btn btn--secondary"
+                className={`${styles.btn} ${styles.btnSecondary}`}
                 onClick={handleClose}
                 disabled={submitting}
               >
@@ -232,7 +233,7 @@ const ReportModal = () => {
               </button>
               <button 
                 type="submit" 
-                className="btn btn--primary"
+                className={`${styles.btn} ${styles.btnPrimary}`}
                 disabled={submitting || !selectedReason}
               >
                 {submitting ? (

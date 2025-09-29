@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchReportStats } from '../../lib/store/slices/reportsSlice';
-import './AdminNotificationBadge.css';
+import styles from './AdminNotificationBadge.module.css';
 
 const AdminNotificationBadge = ({ className = '' }) => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const AdminNotificationBadge = ({ className = '' }) => {
 
   if (totalNeedsAttention === 0) {
     return (
-      <div className={`admin-badge admin-badge--clean ${className}`} title="No pending reports">
+      <div className={`${styles['admin-badge']} ${styles['admin-badge--clean']} ${className}`} title="No pending reports">
         🛡️
       </div>
     );
@@ -82,44 +82,44 @@ const AdminNotificationBadge = ({ className = '' }) => {
 
   return (
     <div 
-      className={`admin-badge admin-badge--${priorityLevel} ${pulseAnimation ? 'admin-badge--pulse' : ''} ${className}`}
+      className={`${styles['admin-badge']} ${styles[`admin-badge--${priorityLevel}`]} ${pulseAnimation ? styles['admin-badge--pulse'] : ''} ${className}`}
       title={getBadgeMessage()}
       role="status"
       aria-label={getBadgeMessage()}
     >
-      <div className="badge-icon">
+      <div className={styles['badge-icon']}>
         🚨
       </div>
       
-      <div className="badge-count">
+      <div className={styles['badge-count']}>
         {totalNeedsAttention}
       </div>
       
       {pendingReports > 0 && (
-        <div className="badge-urgent">
+        <div className={styles['badge-urgent']}>
           !
         </div>
       )}
       
       {/* Tooltip for detailed breakdown */}
-      <div className="badge-tooltip">
-        <div className="tooltip-header">Moderation Status</div>
+      <div className={styles['badge-tooltip']}>
+        <div className={styles['tooltip-header']}>Moderation Status</div>
         
         {pendingReports > 0 && (
-          <div className="tooltip-item tooltip-item--pending">
-            <span className="tooltip-icon">⏳</span>
-            <span className="tooltip-text">{pendingReports} Pending Review</span>
+          <div className={`${styles['tooltip-item']} ${styles['tooltip-item--pending']}`}>
+            <span className={styles['tooltip-icon']}>⏳</span>
+            <span className={styles['tooltip-text']}>{pendingReports} Pending Review</span>
           </div>
         )}
         
         {reviewingReports > 0 && (
-          <div className="tooltip-item tooltip-item--reviewing">
-            <span className="tooltip-icon">👀</span>
-            <span className="tooltip-text">{reviewingReports} Under Review</span>
+          <div className={`${styles['tooltip-item']} ${styles['tooltip-item--reviewing']}`}>
+            <span className={styles['tooltip-icon']}>👀</span>
+            <span className={styles['tooltip-text']}>{reviewingReports} Under Review</span>
           </div>
         )}
         
-        <div className="tooltip-footer">
+        <div className={styles['tooltip-footer']}>
           Click to view dashboard
         </div>
       </div>

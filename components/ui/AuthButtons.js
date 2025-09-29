@@ -326,13 +326,15 @@ const AuthButtons = () => {
         }
 
         .auth-btn.login {
-          color: #374151;
+          color: #1A73E8;
           border-color: #d1d5db;
+          font-weight: 600;
         }
 
         .auth-btn.login:hover {
-          background: #f9fafb;
-          border-color: #9ca3af;
+          background: #eef4ff;
+          border-color: #1A73E8;
+          color: #1557b0;
         }
 
         .auth-btn.signup {

@@ -5,7 +5,7 @@ import ReviewForm from './ReviewForm';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import RatingStars from '../ui/RatingStars';
 import { fetchReviewsByDeal, clearError, setCurrentDeal, clearReviews } from '../../lib/store/slices/reviewsSlice';
-import './ReviewList.css';
+import styles from './ReviewList.module.css';
 
 const ReviewList = ({ dealId }) => {
   const dispatch = useDispatch();
@@ -91,45 +91,45 @@ const ReviewList = ({ dealId }) => {
 
   if (loading && !reviews.length) {
     return (
-      <div className="reviews-section">
+      <div className={styles.reviewsSection}>
         <LoadingSpinner size="large" text="Loading reviews..." />
       </div>
     );
   }
 
   return (
-    <div className="reviews-section">
+    <div className={styles.reviewsSection}>
       {/* Reviews Header & Stats */}
-      <div className="reviews-header">
-        <div className="reviews-stats">
-          <h2 className="reviews-title">Customer Reviews</h2>
-          <div className="rating-summary">
+      <div className={styles.reviewsHeader}>
+        <div className={styles.reviewsStats}>
+          <h2 className={styles.reviewsTitle}>Customer Reviews</h2>
+          <div className={styles.ratingSummary}>
             {dealStats.review_count > 0 ? (
               <>
-                <div className="overall-rating">
+                <div className={styles.overallRating}>
                   <RatingStars 
                     rating={dealStats.avg_rating} 
                     size="large" 
                     showValue={true}
                   />
-                  <span className="review-count">
+                  <span className={styles.reviewCount}>
                     Based on {dealStats.review_count} review{dealStats.review_count !== 1 ? 's' : ''}
                   </span>
                 </div>
               </>
             ) : (
-              <div className="no-reviews-summary">
+              <div className={styles.noReviewsSummary}>
                 <RatingStars rating={0} size="large" />
-                <span className="no-reviews-text">No reviews yet</span>
+                <span className={styles.noReviewsText}>No reviews yet</span>
               </div>
             )}
           </div>
         </div>
         
-        <div className="reviews-actions">
+        <div className={styles.reviewsActions}>
           {isAuthenticated && (
             <button 
-              className="write-review-btn"
+              className={styles.writeReviewBtn}
               onClick={handleWriteReview}
               disabled={showForm}
             >
@@ -151,10 +151,10 @@ const ReviewList = ({ dealId }) => {
 
       {/* Error Display */}
       {error && (
-        <div className="reviews-error" role="alert">
+        <div className={styles.reviewsError} role="alert">
           <p>⚠️ {error}</p>
           <button 
-            className="retry-btn"
+            className={styles.retryBtn}
             onClick={() => loadReviews(1, sortOrder, true)}
           >
             Try Again
@@ -164,14 +164,14 @@ const ReviewList = ({ dealId }) => {
 
       {/* Reviews Controls */}
       {reviews.length > 0 && (
-        <div className="reviews-controls">
-          <div className="sort-controls">
-            <label htmlFor="sort-select" className="sort-label">
+        <div className={styles.reviewsControls}>
+          <div className={styles.sortControls}>
+            <label htmlFor="sort-select" className={styles.sortLabel}>
               Sort by:
             </label>
             <select
               id="sort-select"
-              className="sort-select"
+              className={styles.sortSelect}
               value={sortOrder}
               onChange={(e) => handleSortChange(e.target.value)}
             >
@@ -186,7 +186,7 @@ const ReviewList = ({ dealId }) => {
       )}
 
       {/* Reviews List */}
-      <div className="reviews-list">
+      <div className={styles.reviewsList}>
         {reviews.length > 0 ? (
           <>
             {reviews.map((review) => (
@@ -200,9 +200,9 @@ const ReviewList = ({ dealId }) => {
             
             {/* Load More Button */}
             {pagination.has_next && (
-              <div className="load-more-section">
+              <div className={styles.loadMoreSection}>
                 <button
-                  className="load-more-btn"
+                  className={styles.loadMoreBtn}
                   onClick={handleLoadMore}
                   disabled={loadingMore}
                 >
@@ -216,13 +216,13 @@ const ReviewList = ({ dealId }) => {
             )}
           </>
         ) : !loading && (
-          <div className="no-reviews">
-            <div className="no-reviews-content">
+          <div className={styles.noReviews}>
+            <div className={styles.noReviewsContent}>
               <h3>No reviews yet</h3>
               <p>Be the first to share your experience with this deal!</p>
               {isAuthenticated && (
                 <button 
-                  className="first-review-btn"
+                  className={styles.firstReviewBtn}
                   onClick={handleWriteReview}
                 >
                   Write the First Review

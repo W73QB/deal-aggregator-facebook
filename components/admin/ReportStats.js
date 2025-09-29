@@ -1,6 +1,6 @@
 import React from 'react';
 import LoadingSpinner from '../ui/LoadingSpinner';
-import './ReportStats.css';
+import styles from './ReportStats.module.css';
 
 const STAT_CONFIG = {
   pending: {
@@ -38,7 +38,7 @@ const ReportStats = ({ stats, loading, onFilterSelect, currentFilter }) => {
 
   if (loading && stats.total === 0) {
     return (
-      <div className="report-stats">
+      <div className={styles.reportStats}>
         <LoadingSpinner size="medium" text="Loading statistics..." />
       </div>
     );
@@ -50,16 +50,16 @@ const ReportStats = ({ stats, loading, onFilterSelect, currentFilter }) => {
   };
 
   return (
-    <div className="report-stats">
-      <div className="stats-header">
+    <div className={styles.reportStats}>
+      <div className={styles.statsHeader}>
         <h2>Moderation Statistics</h2>
-        <div className="total-reports">
-          <span className="total-number">{stats.total}</span>
-          <span className="total-label">Total Reports</span>
+        <div className={styles.totalReports}>
+          <span className={styles.totalNumber}>{stats.total}</span>
+          <span className={styles.totalLabel}>Total Reports</span>
         </div>
       </div>
       
-      <div className="stats-grid">
+      <div className={styles.statsGrid}>
         {Object.entries(STAT_CONFIG).map(([key, config]) => {
           const count = stats[key] || 0;
           const percentage = getPercentage(count);
@@ -68,41 +68,41 @@ const ReportStats = ({ stats, loading, onFilterSelect, currentFilter }) => {
           return (
             <button
               key={key}
-              className={`stat-card ${isActive ? 'stat-card--active' : ''} ${count === 0 ? 'stat-card--empty' : ''}`}
+              className={`${styles.statCard} ${isActive ? styles.statCardActive : ''} ${count === 0 ? styles.statCardEmpty : ''}`}
               onClick={() => handleStatClick(key)}
               aria-label={`${config.label}: ${count} reports`}
             >
-              <div className="stat-icon" style={{ color: config.color }}>
+              <div className={styles.statIcon} style={{ color: config.color }}>
                 {config.icon}
               </div>
               
-              <div className="stat-content">
-                <div className="stat-number" style={{ color: config.color }}>
+              <div className={styles.statContent}>
+                <div className={styles.statNumber} style={{ color: config.color }}>
                   {count}
                 </div>
-                <div className="stat-label">
+                <div className={styles.statLabel}>
                   {config.label}
                 </div>
-                <div className="stat-description">
+                <div className={styles.statDescription}>
                   {config.description}
                 </div>
               </div>
               
-              <div className="stat-visual">
+              <div className={styles.statVisual}>
                 <div 
-                  className="stat-bar"
+                  className={styles.statBar}
                   style={{ 
                     width: `${percentage}%`,
                     backgroundColor: config.color
                   }}
                 />
-                <div className="stat-percentage">
+                <div className={styles.statPercentage}>
                   {percentage}%
                 </div>
               </div>
               
               {count > 0 && (
-                <div className="stat-badge" style={{ backgroundColor: config.color }}>
+                <div className={styles.statBadge} style={{ backgroundColor: config.color }}>
                   {count}
                 </div>
               )}
@@ -112,9 +112,9 @@ const ReportStats = ({ stats, loading, onFilterSelect, currentFilter }) => {
       </div>
       
       {/* Quick Actions */}
-      <div className="quick-actions">
+      <div className={styles.quickActions}>
         <button 
-          className={`quick-action ${currentFilter === 'all' ? 'quick-action--active' : ''}`}
+          className={`${styles.quickAction} ${currentFilter === 'all' ? styles.quickActionActive : ''}`}
           onClick={() => handleStatClick('all')}
         >
           📊 View All Reports
@@ -122,7 +122,7 @@ const ReportStats = ({ stats, loading, onFilterSelect, currentFilter }) => {
         
         {stats.pending > 0 && (
           <button 
-            className={`quick-action ${currentFilter === 'pending' ? 'quick-action--active' : ''}`}
+            className={`${styles.quickAction} ${currentFilter === 'pending' ? styles.quickActionActive : ''}`}
             onClick={() => handleStatClick('pending')}
           >
             🔴 {stats.pending} Need{stats.pending === 1 ? 's' : ''} Attention
@@ -131,9 +131,9 @@ const ReportStats = ({ stats, loading, onFilterSelect, currentFilter }) => {
       </div>
       
       {/* Health Indicator */}
-      <div className="moderation-health">
-        <div className="health-label">Moderation Health:</div>
-        <div className={`health-indicator ${getHealthStatus(stats)}`}>
+      <div className={`${styles.moderationHealth} ${styles[getHealthStatus(stats)]}`}>
+        <div className={styles.healthLabel}>Moderation Health:</div>
+        <div className={`${styles.healthIndicator} ${styles[getHealthStatus(stats)]}`}>
           {getHealthMessage(stats)}
         </div>
       </div>

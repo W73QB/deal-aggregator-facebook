@@ -13,12 +13,34 @@ const ConsentBanner = () => {
   useEffect(() => {
     // Check if consent has already been given or denied
     const consentStatus = getConsentStatus();
-    
+
     if (consentStatus === null) {
       // No consent decision made yet, show banner
       setShowBanner(true);
     }
   }, []);
+
+  // Add/remove body padding when banner is shown/hidden to prevent CTA blocking
+  useEffect(() => {
+    if (showBanner) {
+      // Add bottom padding to prevent CTA blocking
+      document.body.style.paddingBottom = '100px'; // Height of compact banner + extra space
+      document.body.style.transition = 'padding-bottom 0.3s ease';
+    } else {
+      // Remove padding when banner is hidden
+      document.body.style.paddingBottom = '0';
+      // Clean up transition after animation
+      setTimeout(() => {
+        document.body.style.transition = '';
+      }, 300);
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.paddingBottom = '0';
+      document.body.style.transition = '';
+    };
+  }, [showBanner]);
 
   const handleAccept = async () => {
     setIsLoading(true);
@@ -77,16 +99,14 @@ const ConsentBanner = () => {
             🍪 We Value Your Privacy
           </h3>
           <p id="consent-banner-description" className="consent-banner__description">
-            We use analytics to improve your experience and understand how our platform is used. 
-            This helps us make DealRadarUS better for everyone. We never sell your personal data.
-            <br />
-            <a 
-              href="/privacy-policy" 
+            We use analytics to improve your experience. We never sell your data. {' '}
+            <a
+              href="/privacy-policy"
               className="consent-banner__link"
               target="_blank"
               rel="noopener noreferrer"
             >
-              View our Privacy Policy
+              Privacy Policy
             </a>
           </p>
         </div>
@@ -120,10 +140,11 @@ const ConsentBanner = () => {
           right: 0;
           background: #ffffff;
           border-top: 1px solid #e1e5e9;
-          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-          padding: 20px;
+          box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
+          padding: 16px 20px;
           z-index: 10000;
-          animation: slideUp 0.3s ease-out;
+          animation: slideUp 0.4s ease-out;
+          backdrop-filter: blur(10px);
         }
 
         @keyframes slideUp {
@@ -141,7 +162,7 @@ const ConsentBanner = () => {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 20px;
+          gap: 16px;
         }
 
         .consent-banner__text {
@@ -149,15 +170,15 @@ const ConsentBanner = () => {
         }
 
         .consent-banner__title {
-          margin: 0 0 8px 0;
-          font-size: 16px;
+          margin: 0 0 6px 0;
+          font-size: 15px;
           font-weight: 600;
           color: #1a1a1a;
         }
 
         .consent-banner__description {
           margin: 0;
-          font-size: 14px;
+          font-size: 13px;
           line-height: 1.4;
           color: #555555;
         }
@@ -218,32 +239,35 @@ const ConsentBanner = () => {
         /* Mobile responsiveness */
         @media (max-width: 768px) {
           .consent-banner {
-            padding: 16px;
+            padding: 12px 16px;
           }
 
           .consent-banner__content {
             flex-direction: column;
             align-items: flex-start;
-            gap: 16px;
+            gap: 12px;
           }
 
           .consent-banner__actions {
             width: 100%;
-            justify-content: flex-end;
+            justify-content: space-between;
           }
 
           .consent-banner__button {
-            min-width: 80px;
+            min-width: 85px;
             padding: 8px 16px;
             font-size: 13px;
+            flex: 1;
+            max-width: 120px;
           }
 
           .consent-banner__title {
-            font-size: 15px;
+            font-size: 14px;
           }
 
           .consent-banner__description {
-            font-size: 13px;
+            font-size: 12px;
+            line-height: 1.3;
           }
         }
 

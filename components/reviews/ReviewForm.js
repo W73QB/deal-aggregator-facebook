@@ -4,7 +4,7 @@ import RatingStars from '../ui/RatingStars';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import { createReview, updateReview } from '../../lib/store/slices/reviewsSlice';
 import { addNotification } from '../../lib/store/slices/notificationSlice';
-import './ReviewForm.css';
+import styles from './ReviewForm.module.css';
 
 const ReviewForm = ({ dealId, editingReview = null, onClose, onSuccess }) => {
   const dispatch = useDispatch();
@@ -140,20 +140,20 @@ const ReviewForm = ({ dealId, editingReview = null, onClose, onSuccess }) => {
 
   if (!isAuthenticated) {
     return (
-      <div className="review-form-message">
+      <div className={styles.reviewFormMessage}>
         <p>Please login to write a review for this deal.</p>
       </div>
     );
   }
 
   return (
-    <form className="review-form" onSubmit={handleSubmit} noValidate>
-      <div className="form-header">
+    <form className={styles.reviewForm} onSubmit={handleSubmit} noValidate>
+      <div className={styles.formHeader}>
         <h3>{editingReview ? 'Edit Review' : 'Write a Review'}</h3>
         {onClose && (
           <button 
             type="button" 
-            className="form-close-btn"
+            className={styles.formCloseBtn}
             onClick={onClose}
             aria-label="Close form"
           >
@@ -163,35 +163,35 @@ const ReviewForm = ({ dealId, editingReview = null, onClose, onSuccess }) => {
       </div>
 
       {/* Rating Input */}
-      <div className="form-group">
-        <label className="form-label" id="rating-label">
+      <div className={styles.formGroup}>
+        <label className={styles.formLabel} id="rating-label">
           Rating *
         </label>
-        <div className="rating-input" role="group" aria-labelledby="rating-label">
+        <div className={styles.ratingInput} role="group" aria-labelledby="rating-label">
           <RatingStars
             rating={formData.rating}
             interactive={true}
             size="large"
             onRatingChange={(rating) => handleInputChange('rating', rating)}
           />
-          <span className="rating-text" aria-live="polite">
+          <span className={styles.ratingText} aria-live="polite">
             {formData.rating > 0 && `${formData.rating} star${formData.rating > 1 ? 's' : ''}`}
           </span>
         </div>
         {touched.rating && errors.rating && (
-          <span className="form-error" role="alert">{errors.rating}</span>
+          <span className={styles.formError} role="alert">{errors.rating}</span>
         )}
       </div>
 
       {/* Title Input */}
-      <div className="form-group">
-        <label htmlFor="review-title" className="form-label">
+      <div className={styles.formGroup}>
+        <label htmlFor="review-title" className={styles.formLabel}>
           Review Title *
         </label>
         <input
           id="review-title"
           type="text"
-          className={`form-input ${touched.title && errors.title ? 'form-input--error' : ''}`}
+          className={`${styles.formInput} ${touched.title && errors.title ? styles.formInputError : ''}`}
           value={formData.title}
           onChange={(e) => handleInputChange('title', e.target.value)}
           onBlur={() => handleBlur('title')}
@@ -199,22 +199,22 @@ const ReviewForm = ({ dealId, editingReview = null, onClose, onSuccess }) => {
           maxLength={200}
           aria-describedby={touched.title && errors.title ? 'title-error' : 'title-help'}
         />
-        <div className="form-help" id="title-help">
+        <div className={styles.formHelp} id="title-help">
           {formData.title.length}/200 characters
         </div>
         {touched.title && errors.title && (
-          <span id="title-error" className="form-error" role="alert">{errors.title}</span>
+          <span id="title-error" className={styles.formError} role="alert">{errors.title}</span>
         )}
       </div>
 
       {/* Content Input */}
-      <div className="form-group">
-        <label htmlFor="review-content" className="form-label">
+      <div className={styles.formGroup}>
+        <label htmlFor="review-content" className={styles.formLabel}>
           Your Review *
         </label>
         <textarea
           id="review-content"
-          className={`form-textarea ${touched.content && errors.content ? 'form-input--error' : ''}`}
+          className={`${styles.formTextarea} ${touched.content && errors.content ? styles.formInputError : ''}`}
           value={formData.content}
           onChange={(e) => handleInputChange('content', e.target.value)}
           onBlur={() => handleBlur('content')}
@@ -223,20 +223,20 @@ const ReviewForm = ({ dealId, editingReview = null, onClose, onSuccess }) => {
           maxLength={5000}
           aria-describedby={touched.content && errors.content ? 'content-error' : 'content-help'}
         />
-        <div className="form-help" id="content-help">
+        <div className={styles.formHelp} id="content-help">
           {formData.content.length}/5000 characters
         </div>
         {touched.content && errors.content && (
-          <span id="content-error" className="form-error" role="alert">{errors.content}</span>
+          <span id="content-error" className={styles.formError} role="alert">{errors.content}</span>
         )}
       </div>
 
       {/* Form Actions */}
-      <div className="form-actions">
+      <div className={styles.formActions}>
         {onClose && (
           <button 
             type="button" 
-            className="form-btn form-btn--secondary"
+            className={`${styles.formBtn} ${styles.formBtnSecondary}`}
             onClick={handleCancel}
             disabled={submitting}
           >
@@ -245,7 +245,7 @@ const ReviewForm = ({ dealId, editingReview = null, onClose, onSuccess }) => {
         )}
         <button 
           type="submit" 
-          className="form-btn form-btn--primary"
+          className={`${styles.formBtn} ${styles.formBtnPrimary}`}
           disabled={submitting || Object.keys(validateForm()).length > 0}
         >
           {submitting ? (

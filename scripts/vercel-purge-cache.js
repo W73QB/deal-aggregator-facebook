@@ -11,7 +11,7 @@ class VercelCachePurge {
   constructor() {
     this.vercelToken = process.env.VERCEL_TOKEN;
     this.teamId = process.env.VERCEL_TEAM_ID;
-    this.projectId = process.env.VERCEL_PROJECT_ID || 'deal-aggregator-facebook';
+    this.projectId = process.env.VERCEL_PROJECT_ID || 'prj_3Yd80u1Ze6lZbgkvFEAqP7D4whfl';
   }
 
   async makeRequest(options, data = null) {

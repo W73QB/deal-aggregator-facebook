@@ -2,36 +2,76 @@
 // Enhanced with PostgreSQL integration and fallback to static data
 import staticDeals from '../../server/data/deals.js';
 
-// Dynamic import for CommonJS database module
-let DatabaseConnection = null;
+// Dynamic import for CommonJS database module with robust instance handling
+let databaseModule = null;
+let cachedDbInstance = null;
 
 async function loadDatabaseModule() {
-  if (!DatabaseConnection) {
+  if (!databaseModule) {
     try {
-      const module = await import('../../server/auth/utils/database.js');
-      DatabaseConnection = module.default || module.DatabaseConnection;
+      databaseModule = await import('../../server/auth/utils/database.js');
     } catch (error) {
       console.warn('Could not load database module:', error.message);
       return null;
     }
   }
-  return DatabaseConnection;
+  return databaseModule;
 }
 
-let dbInstance = null;
-
 async function getDbConnection() {
-  if (!dbInstance) {
-    const DbClass = await loadDatabaseModule();
-    if (!DbClass) {
-      return { useFallback: true };
-    }
-    dbInstance = new DbClass();
-    if (dbInstance.initialize) {
-      await dbInstance.initialize();
-    }
+  if (cachedDbInstance) {
+    return cachedDbInstance;
   }
-  return dbInstance;
+
+  const moduleNamespace = await loadDatabaseModule();
+  if (!moduleNamespace) {
+    return { useFallback: true };
+  }
+
+  try {
+    // 1. Prefer explicit getInstance helper
+    if (typeof moduleNamespace.getInstance === 'function') {
+      cachedDbInstance = moduleNamespace.getInstance();
+    }
+
+    // 2. Support default export already being an initialized instance
+    if (!cachedDbInstance) {
+      const defaultExport = moduleNamespace.default;
+      if (defaultExport?.query) {
+        cachedDbInstance = defaultExport;
+      }
+
+      // 3. Handle default export as constructor function/class
+      if (!cachedDbInstance && typeof defaultExport === 'function') {
+        if (!global._dealAggregatorDbInstance) {
+          global._dealAggregatorDbInstance = new defaultExport();
+        }
+        cachedDbInstance = global._dealAggregatorDbInstance;
+      }
+    }
+
+    // 4. Fall back to named DatabaseConnection constructor
+    if (!cachedDbInstance && typeof moduleNamespace.DatabaseConnection === 'function') {
+      if (!global._dealAggregatorDbInstance) {
+        global._dealAggregatorDbInstance = new moduleNamespace.DatabaseConnection();
+      }
+      cachedDbInstance = global._dealAggregatorDbInstance;
+    }
+
+    // Ensure instance initialization is honoured once
+    if (cachedDbInstance?.initialize && !cachedDbInstance.__initialized) {
+      await cachedDbInstance.initialize();
+      cachedDbInstance.__initialized = true;
+    }
+
+    if (cachedDbInstance?.query) {
+      return cachedDbInstance;
+    }
+  } catch (error) {
+    console.error('Failed to prepare database instance:', error);
+  }
+
+  return { useFallback: true };
 }
 
 async function fetchDealsFromDB(filters = {}) {

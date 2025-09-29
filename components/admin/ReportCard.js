@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import { updateReportStatus } from '../../lib/store/slices/reportsSlice';
 import { addNotification } from '../../lib/store/slices/notificationSlice';
-import './ReportCard.css';
+import styles from './ReportCard.module.css';
 
 const STATUS_CONFIG = {
   pending: { label: 'Pending', color: '#ffc107', icon: '⏳' },
@@ -80,21 +80,21 @@ const ReportCard = ({ report, onUpdate }) => {
     const highPriority = ['harassment', 'hate_speech', 'personal_info'];
     const mediumPriority = ['spam', 'inappropriate', 'fake_account'];
     
-    if (highPriority.includes(report.reason)) return 'report-card--high';
-    if (mediumPriority.includes(report.reason)) return 'report-card--medium';
-    return 'report-card--low';
+    if (highPriority.includes(report.reason)) return styles.reportCardHigh;
+    if (mediumPriority.includes(report.reason)) return styles.reportCardMedium;
+    return styles.reportCardLow;
   };
 
   return (
-    <div className={`report-card ${getSeverityClass()}`}>
+    <div className={`${styles.reportCard} ${getSeverityClass()}`}>
       {/* Report Header */}
-      <div className="report-header">
-        <div className="report-meta">
-          <div className="report-id">#{report.id.substring(0, 8)}</div>
-          <div className="report-type">{report.content_type}</div>
-          <div className="report-date">{reportDate}</div>
+      <div className={styles.reportHeader}>
+        <div className={styles.reportMeta}>
+          <div className={styles.reportId}>#{report.id.substring(0, 8)}</div>
+          <div className={styles.reportType}>{report.content_type}</div>
+          <div className={styles.reportDate}>{reportDate}</div>
           <div 
-            className="report-status"
+            className={styles.reportStatus}
             style={{ 
               backgroundColor: statusConfig.color,
               color: 'white'
@@ -105,7 +105,7 @@ const ReportCard = ({ report, onUpdate }) => {
         </div>
         
         <button 
-          className="expand-btn"
+          className={styles.expandBtn}
           onClick={toggleExpanded}
           aria-expanded={isExpanded}
           aria-label={`${isExpanded ? 'Collapse' : 'Expand'} report details`}
@@ -115,44 +115,44 @@ const ReportCard = ({ report, onUpdate }) => {
       </div>
 
       {/* Report Reason */}
-      <div className="report-reason">
-        <span className="reason-label">Reason:</span>
-        <span className="reason-value">
+      <div className={styles.reportReason}>
+        <span className={styles.reasonLabel}>Reason:</span>
+        <span className={styles.reasonValue}>
           {REASON_LABELS[report.reason] || report.reason}
         </span>
       </div>
 
       {/* Report Description */}
       {report.description && (
-        <div className="report-description">
+        <div className={styles.reportDescription}>
           <strong>Reporter's note:</strong> {report.description}
         </div>
       )}
 
       {/* Reported Content Preview */}
-      <div className="content-preview">
-        <div className="content-header">
+      <div className={styles.contentPreview}>
+        <div className={styles.contentHeader}>
           <h4>Reported {report.content_type}:</h4>
           {report.content?.title && (
-            <div className="content-title">"{report.content.title}"</div>
+            <div className={styles.contentTitle}>"{report.content.title}"</div>
           )}
         </div>
         
-        <div className="content-body">
+        <div className={styles.contentBody}>
           <div 
-            className={`content-text ${!isExpanded ? 'content-text--truncated' : ''}`}
+            className={`${styles.contentText} ${!isExpanded ? styles.contentTextTruncated : ''}`}
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
           
           {!isExpanded && sanitizedContent.length > 200 && (
-            <button className="show-more-btn" onClick={toggleExpanded}>
+            <button className={styles.showMoreBtn} onClick={toggleExpanded}>
               Show more...
             </button>
           )}
         </div>
 
         {report.content?.user && (
-          <div className="content-author">
+          <div className={styles.contentAuthor}>
             by {report.content.user.first_name} {report.content.user.last_name}
           </div>
         )}
@@ -160,14 +160,14 @@ const ReportCard = ({ report, onUpdate }) => {
 
       {/* Expanded Actions */}
       {isExpanded && (
-        <div className="report-actions">
+        <div className={styles.reportActions}>
           {report.status === 'pending' && (
-            <div className="action-group">
+            <div className={styles.actionGroup}>
               <h5>Take Action:</h5>
               
-              <div className="action-buttons">
+              <div className={styles.actionButtons}>
                 <button
-                  className="action-btn action-btn--review"
+                  className={`${styles.actionBtn} ${styles.actionBtnReview}`}
                   onClick={() => handleStatusUpdate('reviewing')}
                   disabled={updating}
                 >
@@ -175,7 +175,7 @@ const ReportCard = ({ report, onUpdate }) => {
                 </button>
                 
                 <button
-                  className="action-btn action-btn--dismiss"
+                  className={`${styles.actionBtn} ${styles.actionBtnDismiss}`}
                   onClick={() => handleStatusUpdate('dismissed')}
                   disabled={updating}
                 >
@@ -183,7 +183,7 @@ const ReportCard = ({ report, onUpdate }) => {
                 </button>
                 
                 <button
-                  className="action-btn action-btn--action"
+                  className={`${styles.actionBtn} ${styles.actionBtnAction}`}
                   onClick={() => handleStatusUpdate('action_taken')}
                   disabled={updating}
                 >
@@ -194,10 +194,10 @@ const ReportCard = ({ report, onUpdate }) => {
           )}
 
           {report.status === 'reviewing' && (
-            <div className="action-group">
+            <div className={styles.actionGroup}>
               <h5>Complete Review:</h5>
               
-              <div className="action-textarea">
+              <div className={styles.actionTextarea}>
                 <textarea
                   placeholder="Optional: Add reason for your decision..."
                   value={actionReason}
@@ -205,12 +205,12 @@ const ReportCard = ({ report, onUpdate }) => {
                   rows={3}
                   maxLength={500}
                 />
-                <div className="char-count">{actionReason.length}/500</div>
+                <div className={styles.charCount}>{actionReason.length}/500</div>
               </div>
               
-              <div className="action-buttons">
+              <div className={styles.actionButtons}>
                 <button
-                  className="action-btn action-btn--dismiss"
+                  className={`${styles.actionBtn} ${styles.actionBtnDismiss}`}
                   onClick={() => handleStatusUpdate('dismissed')}
                   disabled={updating}
                 >
@@ -218,7 +218,7 @@ const ReportCard = ({ report, onUpdate }) => {
                 </button>
                 
                 <button
-                  className="action-btn action-btn--action"
+                  className={`${styles.actionBtn} ${styles.actionBtnAction}`}
                   onClick={() => handleStatusUpdate('action_taken')}
                   disabled={updating}
                 >
@@ -229,12 +229,12 @@ const ReportCard = ({ report, onUpdate }) => {
           )}
 
           {(report.status === 'dismissed' || report.status === 'action_taken') && (
-            <div className="action-group">
-              <div className="final-status">
-                <span className="status-icon">{statusConfig.icon}</span>
+            <div className={styles.actionGroup}>
+              <div className={styles.finalStatus}>
+                <span className={styles.statusIcon}>{statusConfig.icon}</span>
                 <span>This report has been {statusConfig.label.toLowerCase()}</span>
                 {report.admin_reason && (
-                  <div className="admin-reason">
+                  <div className={styles.adminReason}>
                     <strong>Admin note:</strong> {report.admin_reason}
                   </div>
                 )}
@@ -242,7 +242,7 @@ const ReportCard = ({ report, onUpdate }) => {
               
               {report.status !== 'pending' && (
                 <button
-                  className="action-btn action-btn--reopen"
+                  className={`${styles.actionBtn} ${styles.actionBtnReopen}`}
                   onClick={() => handleStatusUpdate('pending')}
                   disabled={updating}
                 >
@@ -253,7 +253,7 @@ const ReportCard = ({ report, onUpdate }) => {
           )}
 
           {updating && (
-            <div className="updating-overlay">
+            <div className={styles.updatingOverlay}>
               <LoadingSpinner size="small" text="Updating..." />
             </div>
           )}

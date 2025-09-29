@@ -1,11 +1,39 @@
 {
   "version": 4,
   "routes": {
-    "/deals": {
-      "initialRevalidateSeconds": 3600,
+    "/blog": {
+      "initialRevalidateSeconds": 1800,
       "initialExpireSeconds": 31536000,
       "srcRoute": null,
-      "dataRoute": "/_next/data/YzO9I3RB4LuhTWYlXd_6S/deals.json",
+      "dataRoute": "/_next/data/vryVRmCFfH8JrY9zwGxDR/blog.json",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/": {
+      "initialRevalidateSeconds": 300,
+      "initialExpireSeconds": 31536000,
+      "srcRoute": null,
+      "dataRoute": "/_next/data/vryVRmCFfH8JrY9zwGxDR/index.json",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/deals": {
+      "initialRevalidateSeconds": 60,
+      "initialExpireSeconds": 31536000,
+      "srcRoute": null,
+      "dataRoute": "/_next/data/vryVRmCFfH8JrY9zwGxDR/deals.json",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -19,8 +47,8 @@
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "5187a09e042be5071abb103533290da3",
-    "previewModeSigningKey": "e26a1496621a16ab0c5cd5655e4c063bebe315b2ebfd8b10fce1efd2f27690d5",
-    "previewModeEncryptionKey": "a8f7257f13b195014646e5af685808dcf82f7636a1c842f5038cb2d36ba7bcb0"
+    "previewModeId": "519b6a3ce9ff3971e3d3e15d0114c374",
+    "previewModeSigningKey": "b92bfafd5878cc9d3cafae440b31b887643e490f1c36d3abc9e083167ae6905d",
+    "previewModeEncryptionKey": "3135eff0242c2a6aeb385f99e7702df7764111021970977140377a1fe73641d0"
   }
 }

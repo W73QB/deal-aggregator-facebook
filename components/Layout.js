@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AuthButtons from './ui/AuthButtons';
 import SearchBox from './ui/SearchBox';
+import ThemeToggle from './ui/ThemeToggle';
 
 const Layout = ({ children }) => {
   const router = useRouter();
@@ -118,9 +119,7 @@ const Layout = ({ children }) => {
                     aria-current={isActivePath('/') ? 'page' : undefined}
                     aria-label="Home - Navigate to homepage"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                    </svg>
+                    <span className="material-icons nav-icon" aria-hidden="true">home</span>
                     Home
                   </Link>
                 </li>
@@ -132,9 +131,7 @@ const Layout = ({ children }) => {
                     aria-current={isActivePath('/deals') ? 'page' : undefined}
                     aria-label="Deals - Browse all current deals"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
+                    <span className="material-icons nav-icon" aria-hidden="true">local_offer</span>
                     Deals
                   </Link>
                 </li>
@@ -146,9 +143,7 @@ const Layout = ({ children }) => {
                     aria-current={isActivePath('/blog') ? 'page' : undefined}
                     aria-label="Blog - Read articles and buying guides"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                    </svg>
+                    <span className="material-icons nav-icon" aria-hidden="true">article</span>
                     Blog
                   </Link>
                 </li>
@@ -160,9 +155,7 @@ const Layout = ({ children }) => {
                     aria-current={isActivePath('/about') ? 'page' : undefined}
                     aria-label="About - Learn about DealRadarUS"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                    </svg>
+                    <span className="material-icons nav-icon" aria-hidden="true">info</span>
                     About
                   </Link>
                 </li>
@@ -174,9 +167,7 @@ const Layout = ({ children }) => {
                     aria-current={isActivePath('/contact') ? 'page' : undefined}
                     aria-label="Contact - Get in touch with us"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
+                    <span className="material-icons nav-icon" aria-hidden="true">contact_mail</span>
                     Contact
                   </Link>
                 </li>
@@ -185,6 +176,8 @@ const Layout = ({ children }) => {
 
             <div className="header-actions">
               <SearchBox />
+
+              <ThemeToggle />
 
               <AuthButtons />
 
@@ -228,9 +221,9 @@ const Layout = ({ children }) => {
 
             {/* Mobile Menu Button */}
             <button className="mobile-menu-btn" aria-label="Toggle menu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-expanded={isMenuOpen}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-              </svg>
+              <span className="material-icons" aria-hidden="true">
+                {isMenuOpen ? 'close' : 'menu'}
+              </span>
             </button>
           </div>
         </div>

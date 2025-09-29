@@ -666,5 +666,113 @@
         "info": 1
       }
     }
+  },
+  {
+    "timestamp": "2025-09-16T07:45:23.277Z",
+    "status": "healthy",
+    "checks": [
+      {
+        "endpoint": "/",
+        "url": "https://deal-aggregator-facebook.vercel.app/",
+        "status": 200,
+        "responseTime": 1739,
+        "healthy": true,
+        "contentLength": 18491,
+        "timestamp": "2025-09-16T07:45:25.020Z"
+      },
+      {
+        "endpoint": "/about",
+        "url": "https://deal-aggregator-facebook.vercel.app/about",
+        "status": 200,
+        "responseTime": 438,
+        "healthy": true,
+        "contentLength": 17963,
+        "timestamp": "2025-09-16T07:45:25.458Z"
+      },
+      {
+        "endpoint": "/deals",
+        "url": "https://deal-aggregator-facebook.vercel.app/deals",
+        "status": 200,
+        "responseTime": 542,
+        "healthy": true,
+        "contentLength": 17458,
+        "timestamp": "2025-09-16T07:45:26.000Z"
+      },
+      {
+        "endpoint": "/blog",
+        "url": "https://deal-aggregator-facebook.vercel.app/blog",
+        "status": 200,
+        "responseTime": 412,
+        "healthy": true,
+        "contentLength": 16203,
+        "timestamp": "2025-09-16T07:45:26.413Z"
+      },
+      {
+        "endpoint": "/contact",
+        "url": "https://deal-aggregator-facebook.vercel.app/contact",
+        "status": 200,
+        "responseTime": 406,
+        "healthy": true,
+        "contentLength": 18156,
+        "timestamp": "2025-09-16T07:45:26.819Z"
+      },
+      {
+        "endpoint": "/api/deals",
+        "url": "https://deal-aggregator-facebook.vercel.app/api/deals",
+        "status": 200,
+        "responseTime": 657,
+        "healthy": true,
+        "contentLength": 2662,
+        "timestamp": "2025-09-16T07:45:27.476Z"
+      }
+    ],
+    "metrics": {
+      "lighthouse": {
+        "performance": 95,
+        "accessibility": 98,
+        "bestPractices": 92,
+        "seo": 96,
+        "lcp": 1800,
+        "fid": 45,
+        "cls": 0.05
+      },
+      "coreWebVitals": {
+        "lcp": 1800,
+        "fid": 45,
+        "cls": 0.05
+      },
+      "seo": {
+        "hasTitle": true,
+        "hasMetaDescription": true,
+        "hasOgTags": true,
+        "hasStructuredData": true,
+        "hasCanonical": true,
+        "hasRobotsMeta": true
+      },
+      "seoScore": 100,
+      "database": {
+        "connected": true,
+        "source": "unknown",
+        "responseTime": 531,
+        "recordCount": 0
+      }
+    },
+    "alerts": [
+      {
+        "level": "info",
+        "message": "Database using fallback mode (static data)",
+        "timestamp": "2025-09-16T07:45:28.317Z"
+      }
+    ],
+    "summary": {
+      "availability": 100,
+      "avgResponseTime": 699,
+      "healthyEndpoints": "6/6",
+      "alertCounts": {
+        "critical": 0,
+        "warning": 0,
+        "info": 1
+      }
+    }
   }
 ]

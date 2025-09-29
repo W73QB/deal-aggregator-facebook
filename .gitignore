@@ -79,3 +79,12 @@ SECRETS-DISCOVERY-REPORT.md
 .env.*
 !.env.template
 !.env.example
+
+# Legacy backup files (duplicate content prevention)
+backup/
+*.backup*
+*.cachebak
+*.guard_backup
+
+# Next.js build artefacts
+.next/

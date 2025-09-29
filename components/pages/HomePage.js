@@ -4,24 +4,37 @@ import CategoryIcon from '../icons/CategoryIcon';
 import styles from './HomePage.module.css';
 
 // Memoized Deal Card component for performance
-const DealCard = memo(({ deal }) => (
-  <div className={`${styles.dealCard} ${deal.featured ? styles.featured : ''}`}>
-    {deal.badge && <div className={styles.dealBadge}>{deal.badge}</div>}
-    <img src={deal.image} alt={deal.title} loading="lazy" />
-    <div className={styles.dealInfo}>
-      <h3>{deal.title}</h3>
-      <div className={styles.rating}>
-        <RatingStars rating={deal.rating} showValue={true} size="small" />
+const DealCard = memo(({ deal }) => {
+  const handleImageError = (e) => {
+    e.target.onerror = null; // Prevent infinite loop
+    e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yMDAgMTUwQzIwNyAxNTAgMjEzIDE0NiAyMTcgMTQwQzIyMSAxMzQgMjIxIDEyNiAyMTcgMTIwQzIxMyAxMTQgMjA3IDExMCAyMDAgMTEwQzE5MyAxMTAgMTg3IDExNCAxODMgMTIwQzE3OSAxMjYgMTc5IDEzNCAxODMgMTQwQzE4NyAxNDYgMTkzIDE1MCAyMDAgMTUwWiIgZmlsbD0iIzlDQTNBRiIvPgo8cGF0aCBkPSJNMjM1IDE5MEwxNjUgMTkwQzE2MiAxOTAgMTYwIDE4OCAxNjAgMTg1VjE3NUMxNjAgMTY4IDE2NSAxNjMgMTcyIDE2M0gyMjhDMjM1IDE2MyAyNDAgMTY4IDI0MCAxNzVWMTg1QzI0MCAxODggMjM4IDE5MCAyMzUgMTkwWiIgZmlsbD0iIzlDQTNBRiIvPgo8L3N2Zz4K';
+    e.target.alt = `${deal.title} - Image not available`;
+  };
+
+  return (
+    <div className={`${styles.dealCard} ${deal.featured ? styles.featured : ''}`}>
+      {deal.badge && <div className={styles.dealBadge}>{deal.badge}</div>}
+      <img
+        src={deal.image}
+        alt={deal.title}
+        loading="lazy"
+        onError={handleImageError}
+      />
+      <div className={styles.dealInfo}>
+        <h3>{deal.title}</h3>
+        <div className={styles.rating}>
+          <RatingStars rating={deal.rating} showValue={true} size="small" />
+        </div>
+        <div className={styles.price}>
+          <span className={styles.originalPrice}>${deal.originalPrice}</span>
+          <span className={styles.newPrice}>${deal.salePrice || deal.price}</span>
+          <span className={styles.discount}>{deal.discount}% OFF</span>
+        </div>
+        <a href="/deals" className={styles.dealButton}>View Deal</a>
       </div>
-      <div className={styles.price}>
-        <span className={styles.originalPrice}>${deal.originalPrice}</span>
-        <span className={styles.newPrice}>${deal.salePrice || deal.price}</span>
-        <span className={styles.discount}>{deal.discount}% OFF</span>
-      </div>
-      <a href="/deals" className={styles.dealButton}>View Deal</a>
     </div>
-  </div>
-));
+  );
+});
 
 DealCard.displayName = 'DealCard';
 

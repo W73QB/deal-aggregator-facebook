@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeNotification } from '../../lib/store/slices/notificationSlice';
+import styles from './NotificationToast.module.css';
 
 const NOTIFICATION_ICONS = {
   success: '✅',
@@ -55,7 +56,7 @@ const NotificationToast = ({ notification }) => {
 
   return (
     <div 
-      className={`notification-toast notification-toast--${type}`}
+      className={`${styles.notificationToast} ${styles[`notification-toast--${type}`]}`}
       role="alert"
       aria-live="polite"
       style={{
@@ -63,17 +64,17 @@ const NotificationToast = ({ notification }) => {
         '--progress-width': progressBarWidth
       }}
     >
-      <div className="notification-content">
-        <div className="notification-icon">
+      <div className={styles.notificationContent}>
+        <div className={styles.notificationIcon}>
           {NOTIFICATION_ICONS[type]}
         </div>
         
-        <div className="notification-message">
+        <div className={styles.notificationMessage}>
           {message}
         </div>
         
         <button
-          className="notification-close"
+          className={styles.notificationClose}
           onClick={handleClose}
           onKeyPress={handleKeyPress}
           aria-label="Close notification"
@@ -85,7 +86,7 @@ const NotificationToast = ({ notification }) => {
       
       {autoHide && duration > 0 && (
         <div 
-          className="notification-progress"
+          className={styles.notificationProgress}
           style={{ 
             width: progressBarWidth,
             backgroundColor: NOTIFICATION_COLORS[type]
@@ -104,7 +105,7 @@ const NotificationContainer = () => {
   }
 
   return (
-    <div className="notification-container" role="region" aria-label="Notifications">
+    <div className={styles.notificationContainer} role="region" aria-label="Notifications">
       {notifications.map((notification) => (
         <NotificationToast
           key={notification.id}

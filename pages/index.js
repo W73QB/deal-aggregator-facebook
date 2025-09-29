@@ -86,7 +86,7 @@ export async function getStaticProps() {
       {
         id: 1,
         title: "MacBook Pro M1 - Open Box",
-        image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-silver-select-202206",
+        image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop&auto=format",
         originalPrice: 1299,
         salePrice: 899,
         price: 899,
@@ -99,7 +99,7 @@ export async function getStaticProps() {
       {
         id: 2,
         title: "iPhone 14 Pro Max - Refurbished",
-        image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-max-deep-purple-select-202209",
+        image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop&auto=format",
         originalPrice: 1099,
         salePrice: 799,
         price: 799,

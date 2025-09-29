@@ -13,7 +13,7 @@ import {
   createComment
 } from '../../lib/store/slices/commentsSlice';
 import { addNotification } from '../../lib/store/slices/notificationSlice';
-import './CommentThread.css';
+import styles from './CommentThread.module.css';
 
 const CommentThread = ({ dealId, reviewId }) => {
   const dispatch = useDispatch();
@@ -103,8 +103,8 @@ const CommentThread = ({ dealId, reviewId }) => {
 
   if (loading && !commentTree.length) {
     return (
-      <div className="comment-thread">
-        <div className="comments-header">
+      <div className={styles.commentThread}>
+        <div className={styles.commentsHeader}>
           <h3>Comments</h3>
         </div>
         <LoadingSpinner size="medium" text="Loading comments..." />
@@ -113,9 +113,9 @@ const CommentThread = ({ dealId, reviewId }) => {
   }
 
   return (
-    <div className="comment-thread">
+    <div className={styles.commentThread}>
       {/* Comments Header */}
-      <div className="comments-header">
+      <div className={styles.commentsHeader}>
         <h3>
           Comments {pagination.total_items > 0 && `(${pagination.total_items})`}
         </h3>
@@ -123,16 +123,16 @@ const CommentThread = ({ dealId, reviewId }) => {
 
       {/* Error Display */}
       {error && (
-        <div className="comments-error" role="alert">
+        <div className={styles.commentsError} role="alert">
           <p>⚠️ {error}</p>
-          <button className="retry-btn" onClick={handleRetry}>
+          <button className={styles.retryBtn} onClick={handleRetry}>
             Try Again
           </button>
         </div>
       )}
 
       {/* New Comment Form */}
-      <div className="new-comment-section">
+      <div className={styles.newCommentSection}>
         <CommentForm
           dealId={dealId}
           reviewId={reviewId}
@@ -142,7 +142,7 @@ const CommentThread = ({ dealId, reviewId }) => {
       </div>
 
       {/* Comments List */}
-      <div className="comments-list">
+      <div className={styles.commentsList}>
         {commentTree.length > 0 ? (
           <>
             {commentTree.map((comment) => (
@@ -157,9 +157,9 @@ const CommentThread = ({ dealId, reviewId }) => {
             
             {/* Load More Section (for future pagination) */}
             {pagination.has_next && (
-              <div className="load-more-comments">
+              <div className={styles.loadMoreComments}>
                 <button
-                  className="load-more-btn"
+                  className={styles.loadMoreBtn}
                   onClick={() => {
                     // Implementation for loading more comments
                     dispatch(addNotification({
@@ -175,8 +175,8 @@ const CommentThread = ({ dealId, reviewId }) => {
             )}
           </>
         ) : !loading && (
-          <div className="no-comments">
-            <div className="no-comments-content">
+          <div className={styles.noComments}>
+            <div className={styles.noCommentsContent}>
               <h4>No comments yet</h4>
               <p>
                 {isAuthenticated 

@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-09-19T08:15:51.090Z",
+  "passed": [
+    "✅ No dependency vulnerabilities found",
+    "✅ Environment file .env.example appears secure",
+    "✅ Environment file .env.template appears secure",
+    "✅ Environment files properly ignored by git",
+    "✅ package.json has secure permissions",
+    "✅ next.config.js has secure permissions",
+    "✅ Security headers configuration found",
+    "✅ Content Security Policy configured",
+    "✅ Authentication present in pages/api/auth/me.js",
+    "✅ Input validation in pages/api/auth/me.js",
+    "✅ Input validation in pages/api/deals.js",
+    "✅ Input validation in pages/api/posts.js",
+    "✅ CSP headers configured",
+    "✅ Token-based authentication found",
+    "✅ Logout functionality implemented",
+    "✅ Protected pages found: profile.js, settings.js"
+  ],
+  "warnings": [
+    "⚠️  Wildcard CORS in pages/api/analytics.js",
+    "⚠️  Wildcard CORS in pages/api/auth/me.js",
+    "⚠️  Wildcard CORS in pages/api/errors/summary.js",
+    "⚠️  Wildcard CORS in pages/api/errors.js",
+    "⚠️  Wildcard CORS in pages/api/posts.js"
+  ],
+  "critical": [],
+  "score": 64,
+  "recommendations": []
+}

@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useDeals } from '../../hooks';
 import RatingStars from '../ui/RatingStars';
 import CategoryIcon from '../icons/CategoryIcon';
 
@@ -8,17 +7,60 @@ const DealsPage = ({ initialDeals = [] }) => {
   const [filterCategory, setFilterCategory] = useState('all');
   const [priceLimit, setPriceLimit] = useState(2000);
   const [filterMerchant, setFilterMerchant] = useState('all');
+  const [clientDeals, setClientDeals] = useState([]);
+  const [isClientLoading, setIsClientLoading] = useState(false);
 
-  // Use our custom hook for data fetching with filtering
-  const { deals, loading, error, refetch, meta } = useDeals({
-    category: filterCategory,
-    sort: sortBy,
-    max_price: priceLimit,
-    limit: 50
-  });
+  // Use initial deals as primary data source, API calls only for filtering
+  const [effectiveDeals, setEffectiveDeals] = useState(initialDeals);
 
-  // Use initial deals from SSG/SSR if available and no API data yet
-  const effectiveDeals = deals.length > 0 ? deals : initialDeals;
+  // Only fetch from API when filtering changes (not on initial load)
+  useEffect(() => {
+    // If filters are at default values, use initial SSG data
+    if (sortBy === 'featured' && filterCategory === 'all' && priceLimit === 2000 && filterMerchant === 'all') {
+      setEffectiveDeals(initialDeals);
+      return;
+    }
+
+    // Only make API call for filtered results
+    const fetchFilteredDeals = async () => {
+      try {
+        setIsClientLoading(true);
+
+        const params = new URLSearchParams();
+        if (filterCategory !== 'all') params.append('category', filterCategory);
+        if (priceLimit !== 2000) params.append('max_price', priceLimit);
+        if (sortBy !== 'featured') params.append('sort', sortBy);
+        params.append('limit', '50');
+
+        const response = await fetch(`/api/deals?${params.toString()}`);
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.deals) {
+            setClientDeals(data.deals);
+            setEffectiveDeals(data.deals);
+          }
+        } else {
+          // Fallback to client-side filtering of initial data
+          console.warn('API filtering failed, using client-side filtering');
+          setEffectiveDeals(initialDeals);
+        }
+      } catch (error) {
+        console.error('Filtered deals fetch failed:', error);
+        // Fallback to initial data
+        setEffectiveDeals(initialDeals);
+      } finally {
+        setIsClientLoading(false);
+      }
+    };
+
+    // Debounce API calls
+    const timeoutId = setTimeout(fetchFilteredDeals, 500);
+    return () => clearTimeout(timeoutId);
+  }, [filterCategory, sortBy, priceLimit, filterMerchant, initialDeals]);
+
+  // Use effective deals (either SSG or filtered API data)
+  const loading = isClientLoading;
 
   const categories = useMemo(() => {
     const allCategories = ['all', ...new Set(effectiveDeals.map(d => d.category))];
@@ -37,13 +79,24 @@ const DealsPage = ({ initialDeals = [] }) => {
     }));
   }, [effectiveDeals]);
 
+  // Client-side filtering (used when using SSG data or as fallback)
   const filteredDeals = useMemo(() => {
-    return effectiveDeals.filter(deal => {
-      const categoryMatch = filterCategory === 'all' || deal.category === filterCategory;
-      const merchantMatch = filterMerchant === 'all' || (deal.seller || deal.store) === filterMerchant;
-      const priceMatch = (deal.salePrice || deal.price) <= priceLimit;
-      return categoryMatch && merchantMatch && priceMatch;
-    });
+    let filtered = [...effectiveDeals];
+
+    // Apply category filter
+    if (filterCategory !== 'all') {
+      filtered = filtered.filter(deal => deal.category === filterCategory);
+    }
+
+    // Apply merchant filter
+    if (filterMerchant !== 'all') {
+      filtered = filtered.filter(deal => (deal.seller || deal.store) === filterMerchant);
+    }
+
+    // Apply price filter
+    filtered = filtered.filter(deal => (deal.salePrice || deal.price) <= priceLimit);
+
+    return filtered;
   }, [effectiveDeals, filterCategory, filterMerchant, priceLimit]);
 
   const sortedDeals = [...filteredDeals].sort((a, b) => {
@@ -78,8 +131,9 @@ const DealsPage = ({ initialDeals = [] }) => {
     );
   }
 
-  // Handle error state
-  if (error) {
+  // Error state is now handled within the useEffect and doesn't need global error
+  // Keeping this section for future error handling if needed
+  if (false) { // Disabled since we're using fallback patterns
     return (
       <div className="deals-page">
         <div className="page-header">

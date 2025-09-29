@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import { createComment, updateComment } from '../../lib/store/slices/commentsSlice';
 import { addNotification } from '../../lib/store/slices/notificationSlice';
-import './CommentForm.css';
+import styles from './CommentForm.module.css';
 
 const CommentForm = ({ 
   dealId,
@@ -150,7 +150,7 @@ const CommentForm = ({
 
   if (!isAuthenticated && !isEditing) {
     return (
-      <div className="comment-form-message">
+      <div className={styles.commentFormMessage}>
         <p>Please login to post comments.</p>
       </div>
     );
@@ -160,13 +160,13 @@ const CommentForm = ({
   const showFullForm = isFocused || content.trim() || isEditing || parentId;
 
   return (
-    <div className={`comment-form ${showFullForm ? 'comment-form--expanded' : ''}`}>
+    <div className={`${styles.commentForm} ${showFullForm ? styles.commentFormExpanded : ''}`}>
       <form onSubmit={handleSubmit} noValidate>
-        <div className="comment-form-content">
-          <div className="comment-textarea-container">
+        <div className={styles.commentFormContent}>
+          <div className={styles.commentTextareaContainer}>
             <textarea
               ref={textareaRef}
-              className={`comment-textarea ${error ? 'comment-textarea--error' : ''}`}
+              className={`${styles.commentTextarea} ${error ? styles.commentTextareaError : ''}`}
               value={content}
               onChange={handleContentChange}
               onInput={handleTextareaResize}
@@ -180,24 +180,24 @@ const CommentForm = ({
             />
             
             {showFullForm && (
-              <div className="comment-form-help" id="comment-help">
+              <div className={styles.commentFormHelp} id="comment-help">
                 {content.length}/2000 characters
               </div>
             )}
             
             {error && (
-              <div id="comment-error" className="comment-form-error" role="alert">
+              <div id="comment-error" className={styles.commentFormError} role="alert">
                 {error}
               </div>
             )}
           </div>
 
           {showFullForm && (
-            <div className="comment-form-actions">
+            <div className={styles.commentFormActions}>
               {(onCancel || isEditing) && (
                 <button 
                   type="button" 
-                  className="comment-form-btn comment-form-btn--secondary"
+                  className={`${styles.commentFormBtn} ${styles.commentFormBtnSecondary}`}
                   onClick={handleCancel}
                   disabled={submitting}
                 >
@@ -207,7 +207,7 @@ const CommentForm = ({
               
               <button 
                 type="submit" 
-                className="comment-form-btn comment-form-btn--primary"
+                className={`${styles.commentFormBtn} ${styles.commentFormBtnPrimary}`}
                 disabled={submitting || !content.trim() || !!error}
               >
                 {submitting ? (
