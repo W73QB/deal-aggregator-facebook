@@ -1,0 +1,30 @@
+Vercel CLI 46.1.0
+Fetching deployment "deal-aggregator-facebook-eol8bzc3p-qbws-projects.vercel.app" in qbws-projects
+> Fetched deployment "deal-aggregator-facebook-eol8bzc3p-qbws-projects.vercel.app" in qbws-projects [613ms]
+
+  General
+
+    id		dpl_6SHznnmCDaVmd4oYVkKJ7v28dYX8
+    name	deal-aggregator-facebook
+    target	preview
+    status	● Ready
+    url		https://deal-aggregator-facebook-eol8bzc3p-qbws-projects.vercel.app
+    created	Tue Sep 30 2025 06:38:54 GMT+0700 (Indochina Time) [10m ago]
+
+
+  Aliases
+
+    ╶ https://deal-aggregator-facebook-hoanggiangwqb-3118-qbws-projects.vercel.app
+    
+
+  Builds
+
+    ┌ .        [0ms]
+    ├── λ api/webhooks/facebook (3.86KB) [iad1]
+    ├── λ api/hello (3.58KB) [iad1]
+    ├── λ api/posts/[slug] (27.36KB) [iad1]
+    ├── λ api/analytics (32.79KB) [iad1]
+    ├── λ api/auth/me (32.79KB) [iad1]
+    └── 16 output items hidden
+    
+
