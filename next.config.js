@@ -32,7 +32,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: '/((?!api/).*)',
         headers: [
           {
             key: 'Cache-Control',
@@ -97,7 +97,15 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, s-maxage=3600, stale-while-revalidate=86400'
+            value: 'no-store, no-cache, must-revalidate, max-age=0'
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache'
+          },
+          {
+            key: 'Expires',
+            value: '0'
           }
         ]
       }
