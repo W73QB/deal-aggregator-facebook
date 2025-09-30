@@ -217,15 +217,24 @@ external-api/
 
 **Status**: ⏳ **WAITING FOR USER ACTION**
 
-**User Must Complete**:
-1. Install Railway CLI manually (see RAILWAY_DEPLOYMENT.md)
-2. Run `railway login` (opens browser authentication)
-3. Run `railway init` (create project: deal-aggregator-api)
-4. Set environment variables (DATABASE_URL, SUPABASE_URL, etc.)
-5. Run `railway up` (deploy to production)
-6. Save deployment URL for Phase 4
+**Railway CLI Installation Resolution**:
+- [x] Cloned Railway CLI from GitHub: https://github.com/railwayapp/cli.git
+- [x] Ran install.sh script successfully
+- [x] Railway CLI v4.10.0 installed and verified
+- [x] Created RAILWAY_NEXT_STEPS.md with complete deployment guide
 
-**Blocked By**: Network connectivity issues preventing Railway CLI installation
+**Status**: ✅ **RAILWAY CLI READY - USER CAN NOW DEPLOY**
+
+**User Must Complete** (Next Steps):
+1. ✅ ~~Install Railway CLI~~ → **DONE**
+2. ⏳ Run `railway login` (opens browser authentication)
+3. ⏳ Run `railway init` (create project: deal-aggregator-api)
+4. ⏳ Set environment variables (DATABASE_URL, SUPABASE_URL, NODE_ENV)
+5. ⏳ Run `railway up` (deploy to production)
+6. ⏳ Test all 9 endpoints with curl
+7. ⏳ Save deployment URL for Phase 4
+
+**Guide Available**: See `RAILWAY_NEXT_STEPS.md` for detailed walkthrough
 
 ### Phase 4: Frontend Integration 🔄 **IN PROGRESS**
 **Time**: 15:45 GMT - Present
