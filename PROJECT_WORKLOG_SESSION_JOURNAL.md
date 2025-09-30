@@ -260,17 +260,58 @@ external-api/
 - ✅ Environment variable detection working
 - ✅ Fallback to local `/api` routes if external API not configured
 
-**What Needs Completion** (Depends on Phase 3):
-- ⏳ Add `NEXT_PUBLIC_API_URL` to `.env.production` (after Railway deployment)
+### Phase 3: Railway Deployment ✅ **COMPLETE**
+**Time**: 13:40-13:48 GMT (8 minutes)
+
+**Railway CLI Installation**:
+- [x] Cloned from GitHub source after npm/brew timeouts
+- [x] Railway CLI v4.10.0 installed successfully
+- [x] User logged in: Giang Hoang (hoanggiangwqb@gmail.com)
+
+**Deployment Steps Completed**:
+- [x] `railway init` - Created project: deal-aggregator-api
+- [x] `railway link` - Linked to project (7e8dda6e-081d-48de-b60a-8ff1b5b081c0)
+- [x] `railway up` - Deployed successfully
+- [x] `railway domain` - Got URL: https://deal-aggregator-api-production.up.railway.app
+- [x] `railway variables --set` - Configured DATABASE_URL_POOLER and NODE_ENV
+- [x] Auto-redeploy triggered - Service now healthy
+
+**Test Results**:
+- ✅ `/api/simple-test` - Returns correct response (NOT blog posts!)
+- ✅ `/api/posts` - Returns 5 blog posts
+- ✅ `/api/health` - **Status: HEALTHY** (database connected, 2698ms response)
+- ✅ `/api/deals` - Returns 9 deals from static/database
+- ✅ Core endpoints verified working
+
+**Environment Variables Configured**:
+```
+DATABASE_URL_POOLER=postgresql://neondb_owner:npg_DOvMB0x2AJut@ep-bold-night-adnxdrn9-pooler...
+NODE_ENV=production
+RAILWAY_PUBLIC_DOMAIN=deal-aggregator-api-production.up.railway.app
+```
+
+**Status**: ✅ **DEPLOYMENT SUCCESSFUL - All core endpoints working with database**
+
+### Phase 4: Frontend Integration 🔄 **IN PROGRESS**
+**Time**: 15:45 GMT - Present
+
+**API Client Ready**:
+- [x] `lib/apiClient.js` - All 9 endpoint functions implemented
+- [x] Auto-routing logic working
+
+**Environment Configuration**:
+- [x] Added `NEXT_PUBLIC_API_URL=https://deal-aggregator-api-production.up.railway.app` to `.env.production`
+
+**What Needs Completion**:
 - ⏳ Refactor frontend pages to use `apiClient` instead of direct fetch
-- ⏳ Test with Railway URL
-- ⏳ Build and verify locally
+- ⏳ Test with Railway URL locally
+- ⏳ Build and verify
 
 **Next Steps**:
-1. User completes Railway deployment (Phase 3)
-2. Update `.env.production` with Railway URL
-3. Refactor pages/components to use apiClient
-4. Test locally → Deploy to staging → Production
+1. Refactor pages/components to use apiClient
+2. Test locally: `npm run build && npm run start`
+3. Deploy to staging
+4. Verify end-to-end functionality
 
 ---
 
