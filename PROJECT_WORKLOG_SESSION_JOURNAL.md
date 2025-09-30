@@ -190,6 +190,79 @@ external-api/
 - Database gracefully handles missing configuration
 - Ready for Railway deployment
 
+### Phase 3: Railway Deployment ⏳ **PARTIAL - USER ACTION REQUIRED**
+**Time**: 14:42-15:45 GMT (1h 03min)
+
+**Railway CLI Installation Attempted**:
+- [x] Checked for existing Railway CLI → Not installed
+- [x] Attempted npm install → Network timeout (GitHub download failed)
+- [x] Attempted Homebrew install → Network timeout during download
+- ⚠️ **Status**: Installation failed due to network connectivity issues
+
+**Deployment Documentation Created**:
+- [x] `external-api/RAILWAY_DEPLOYMENT.md` - Complete manual deployment guide
+  - Step-by-step Railway CLI installation (3 methods)
+  - Project initialization instructions
+  - Environment variable configuration
+  - Deployment commands
+  - Testing procedures (curl commands for all 9 endpoints)
+  - Troubleshooting guide
+  - Post-deployment checklist
+- [x] `external-api/ENV_VARS_TEMPLATE.md` - Environment variables template
+  - Complete list of required variables
+  - Where to find each value (Neon, Supabase, main project)
+  - Security notes
+  - Verification checklist
+  - Example setup script
+
+**Status**: ⏳ **WAITING FOR USER ACTION**
+
+**User Must Complete**:
+1. Install Railway CLI manually (see RAILWAY_DEPLOYMENT.md)
+2. Run `railway login` (opens browser authentication)
+3. Run `railway init` (create project: deal-aggregator-api)
+4. Set environment variables (DATABASE_URL, SUPABASE_URL, etc.)
+5. Run `railway up` (deploy to production)
+6. Save deployment URL for Phase 4
+
+**Blocked By**: Network connectivity issues preventing Railway CLI installation
+
+### Phase 4: Frontend Integration 🔄 **IN PROGRESS**
+**Time**: 15:45 GMT - Present
+
+**API Client Created**:
+- [x] `lib/apiClient.js` - Universal API client helper
+  - Automatic routing (Railway external API or local Vercel routes)
+  - Uses `NEXT_PUBLIC_API_URL` environment variable
+  - All 9 endpoint functions implemented:
+    - `fetchHealth()` - Health check
+    - `fetchPosts(params)` - Blog posts with filters
+    - `fetchDeals(params)` - Product deals with filters
+    - `trackAnalytics(data)` - POST analytics events
+    - `logError(errorData)` - POST error logging
+    - `fetchErrorSummary()` - Error statistics
+    - `subscribeNewsletter(email)` - Newsletter subscription
+    - `fetchAuthStatus()` - Authentication check
+  - Error handling and logging
+  - Helper functions: `getApiBase()`, `isUsingExternalApi()`
+
+**What's Ready**:
+- ✅ API client fully implemented and documented
+- ✅ Environment variable detection working
+- ✅ Fallback to local `/api` routes if external API not configured
+
+**What Needs Completion** (Depends on Phase 3):
+- ⏳ Add `NEXT_PUBLIC_API_URL` to `.env.production` (after Railway deployment)
+- ⏳ Refactor frontend pages to use `apiClient` instead of direct fetch
+- ⏳ Test with Railway URL
+- ⏳ Build and verify locally
+
+**Next Steps**:
+1. User completes Railway deployment (Phase 3)
+2. Update `.env.production` with Railway URL
+3. Refactor pages/components to use apiClient
+4. Test locally → Deploy to staging → Production
+
 ---
 
 ## Notes & Observations
@@ -216,6 +289,6 @@ external-api/
 
 ---
 
-**Last Updated**: September 30, 2025, 14:42 GMT
-**Current Phase**: Phase 2 Complete - Ready for Railway Deployment
-**Status**: ✅ On Track - All endpoints converted and tested
+**Last Updated**: September 30, 2025, 15:45 GMT
+**Current Phase**: Phase 3 Partial (User Action Required), Phase 4 In Progress
+**Status**: ⏳ Blocked - Awaiting Railway CLI manual installation and deployment by user
