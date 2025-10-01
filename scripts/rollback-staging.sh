@@ -39,8 +39,8 @@ else
 fi
 
 echo ""
-echo -e "${BLUE}▶ Step 2: Redeploying without external API...${NC}"
-vercel --prod --force
+echo -e "${BLUE}▶ Step 2: Redeploying staging without external API...${NC}"
+vercel --prebuilt --yes
 
 echo ""
 echo -e "${BLUE}▶ Step 3: Cleaning up temporary files...${NC}"
