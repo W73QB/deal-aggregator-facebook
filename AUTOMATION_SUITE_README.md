@@ -46,6 +46,12 @@ This automation suite handles the complete deployment lifecycle from staging to 
 
 ## 📚 Detailed Documentation
 
+### Quick Reference Guide
+
+For a condensed command reference, see **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - includes all commands, troubleshooting quick fixes, and success criteria on a single page.
+
+---
+
 ### 1. Pre-Flight Checks
 
 **Script:** `scripts/preflight-checks.sh`
@@ -391,10 +397,12 @@ NEXT STEPS
 **Duration:** ~2 minutes
 **Recovery Time:** < 5 minutes
 
+> **⚠️ Bug Fix Notice (Enhancement v1.1):** Fixed critical command error in line 43. Previously used `vercel --prod --force` which would rollback production instead of staging. Now correctly uses `vercel --prebuilt --yes` to target staging environment.
+
 #### What It Does:
 
 1. Removes `NEXT_PUBLIC_API_URL` from preview environment
-2. Redeploys without external API (`vercel --prod --force`)
+2. Redeploys without external API (`vercel --prebuilt --yes`)
 3. Cleans up temporary files (`.staging-url.txt`)
 4. Provides backup branch info for manual restoration
 
@@ -416,6 +424,78 @@ vercel --prod --force
 # Verify
 curl https://dealradarus.com/api/health | jq '.'
 ```
+
+---
+
+### 6. Deployment Verification
+
+**Script:** `scripts/verify-deployment.sh`
+**Duration:** ~30 seconds
+**Tests:** 7 automated checks
+
+#### Features:
+
+✅ **Quick validation** - Runs 7 comprehensive tests in < 30 seconds
+✅ **Auto-detection** - Reads staging URL from `.staging-url.txt` automatically
+✅ **Flexible** - Test any URL (staging, production, or custom)
+✅ **Clear output** - Color-coded PASS/FAIL with summary
+
+#### What It Tests:
+
+1. **Homepage Accessibility** - Verifies site is reachable
+2. **Health Endpoint** - Tests `/api/health` returns valid JSON
+3. **Deals API** - Tests `/api/deals?limit=5` returns data array
+4. **Posts API** - Tests `/api/posts?limit=5` returns data array
+5. **Simple Test** - Tests `/api/simple-test` basic functionality
+6. **Response Time** - Verifies all endpoints respond within 3 seconds
+7. **Railway Detection** - Confirms Railway API is being used (not Vercel bug)
+
+#### Usage:
+
+```bash
+# Auto-detect staging URL
+./scripts/verify-deployment.sh
+
+# Test specific URL
+./scripts/verify-deployment.sh https://staging-url.vercel.app
+
+# Test production
+./scripts/verify-deployment.sh https://dealradarus.com
+```
+
+#### Output Example:
+
+```
+Testing: Homepage accessibility... ✅ PASS
+Testing: Health endpoint... ✅ PASS
+Testing: Deals API... ✅ PASS
+Testing: Posts API... ✅ PASS
+Testing: Simple test... ✅ PASS
+Testing: Response time < 3s... ✅ PASS
+Testing: Railway API detection... ✅ PASS
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+VERIFICATION RESULTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+URL tested: https://staging-url.vercel.app
+
+✅ PASSED: 7/7 tests
+❌ FAILED: 0/7 tests
+
+Status: ✅ ALL TESTS PASSED
+```
+
+**Exit Codes:**
+- `0`: All tests passed
+- `1`: One or more tests failed
+
+#### When to Use:
+
+- After staging deployment completes
+- Before production cutover
+- For quick health checks anytime
+- When troubleshooting issues
 
 ---
 
@@ -532,6 +612,8 @@ railway login
 
 ### Documentation References:
 
+- **[DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md)** - Interactive 988-line checklist with 500+ checkboxes for complete deployment workflow (Enhancement v1.1)
+- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Fast command reference (416 lines)
 - **PRODUCTION_CUTOVER_PLAN.md** - Detailed cutover procedure
 - **PHASE_7_MONITORING_SETUP.md** - Monitoring configuration
 - **COST_TRACKING.md** - Cost tracking templates
