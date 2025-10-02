@@ -96,9 +96,9 @@ automated_go_nogo_checks() {
     # Check 3: Railway response time
     ((TOTAL++))
     log_info "Check 3: Railway response time"
-    local START_MS=$(date +%s%3N)
+    local START_MS=$(python3 -c 'import time; print(int(time.time()*1000))')
     curl -s --max-time 10 "$RAILWAY_URL/api/simple-test" > /dev/null 2>&1
-    local END_MS=$(date +%s%3N)
+    local END_MS=$(python3 -c 'import time; print(int(time.time()*1000))')
     local RESPONSE_TIME=$((END_MS - START_MS))
     if [ "$RESPONSE_TIME" -lt 2000 ]; then
         log_success "Response time: ${RESPONSE_TIME}ms (< 2s)"

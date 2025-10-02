@@ -79,9 +79,9 @@ run_test "Simple test" "curl -s --max-time 10 '$TARGET_URL/api/simple-test' | jq
 
 # Test 6: Response time check
 echo -n "Testing: Response time... "
-START_MS=$(date +%s%3N)
+START_MS=$(python3 -c 'import time; print(int(time.time()*1000))')
 curl -s --max-time 10 "$TARGET_URL/api/health" > /dev/null 2>&1 || true
-END_MS=$(date +%s%3N)
+END_MS=$(python3 -c 'import time; print(int(time.time()*1000))')
 RESPONSE_TIME=$((END_MS - START_MS))
 
 ((TOTAL_TESTS++))

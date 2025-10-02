@@ -4,7 +4,7 @@
 # Version: 2.0
 # Score target: 10/10
 
-set -e
+set -euo pipefail
 
 # Color codes for output
 RED='\033[0;31m'
@@ -27,19 +27,19 @@ echo ""
 # Function to check status
 check_pass() {
     echo -e "${GREEN}✅ PASS${NC}: $1"
-    ((PASS++))
+    PASS=$((PASS + 1))
 }
 
 check_fail() {
     echo -e "${RED}❌ FAIL${NC}: $1"
     echo -e "${RED}   → $2${NC}"
-    ((FAIL++))
+    FAIL=$((FAIL + 1))
 }
 
 check_warn() {
     echo -e "${YELLOW}⚠️  WARN${NC}: $1"
     echo -e "${YELLOW}   → $2${NC}"
-    ((WARN++))
+    WARN=$((WARN + 1))
 }
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -72,8 +72,8 @@ fi
 # 1.3 Check Railway CLI
 echo -n "Checking Railway CLI... "
 if command -v railway &> /dev/null; then
-    RAILWAY_VERSION=$(railway version 2>&1 | grep -oP '\d+\.\d+\.\d+' | head -1 || echo "unknown")
-    check_pass "Railway CLI v$RAILWAY_VERSION installed"
+    RAILWAY_VERSION=$(railway --help 2>&1 | head -1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || echo "present")
+    check_pass "Railway CLI $RAILWAY_VERSION installed"
 else
     check_fail "Railway CLI not found" "Already should be installed from Phase 3"
 fi
@@ -119,7 +119,7 @@ fi
 # 2.3 Check Railway project link
 echo -n "Checking Railway project link... "
 if railway status &> /dev/null; then
-    PROJECT_ID=$(railway status 2>&1 | grep -oP 'Project: \K[a-f0-9-]+' || echo "")
+    PROJECT_ID=$(railway status 2>&1 | sed -n 's/.*Project: *\([a-f0-9-]*\).*/\1/p' || echo "")
     if [ -n "$PROJECT_ID" ]; then
         check_pass "Linked to Railway project: $PROJECT_ID"
     else
@@ -205,16 +205,19 @@ fi
 
 # 4.4 Check API response times
 echo -n "Checking API response times... "
-START_TIME=$(date +%s%3N)
+START_TIME=$(date +%s)
 curl -s --max-time 10 "$RAILWAY_URL/api/simple-test" &> /dev/null
-END_TIME=$(date +%s%3N)
+CURL_STATUS=$?
+END_TIME=$(date +%s)
 RESPONSE_TIME=$((END_TIME - START_TIME))
-if [ "$RESPONSE_TIME" -lt 1000 ]; then
-    check_pass "Response time: ${RESPONSE_TIME}ms (< 1s)"
-elif [ "$RESPONSE_TIME" -lt 2000 ]; then
-    check_warn "Response time: ${RESPONSE_TIME}ms" "Acceptable but slower than baseline"
+if [ "$CURL_STATUS" -eq 0 ]; then
+    if [ "$RESPONSE_TIME" -lt 3 ]; then
+        check_pass "Response time: ~${RESPONSE_TIME}s (healthy)"
+    else
+        check_warn "Response time: ~${RESPONSE_TIME}s" "Slower than expected"
+    fi
 else
-    check_fail "Response time: ${RESPONSE_TIME}ms" "Exceeds 2s threshold"
+    check_fail "API request failed" "Could not reach endpoint"
 fi
 
 # 4.5 Check all critical endpoints

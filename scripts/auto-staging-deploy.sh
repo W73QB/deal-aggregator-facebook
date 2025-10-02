@@ -190,7 +190,7 @@ deploy_to_staging() {
 
     # Deploy with output capture
     local DEPLOY_OUTPUT
-    DEPLOY_OUTPUT=$(vercel --prebuilt --yes 2>&1 || echo "DEPLOY_FAILED")
+    DEPLOY_OUTPUT=$(vercel --yes 2>&1 || echo "DEPLOY_FAILED")
 
     if echo "$DEPLOY_OUTPUT" | grep -q "DEPLOY_FAILED"; then
         log_error "Deployment command failed"
@@ -202,8 +202,8 @@ deploy_to_staging() {
     echo "$DEPLOY_OUTPUT" >> "$LOG_FILE"
 
     # Extract URLs from output
-    local INSPECT_URL=$(echo "$DEPLOY_OUTPUT" | grep -oP 'Inspect: \Khttps://[^\s]+' | head -1)
-    local PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep -oP 'Preview: \Khttps://[^\s]+' | head -1)
+    local INSPECT_URL=$(echo "$DEPLOY_OUTPUT" | grep 'Inspect:' | grep -oE 'https://[^[:space:]]+' | head -1)
+    local PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep 'Preview:' | grep -oE 'https://[^[:space:]]+' | head -1)
 
     if [ -n "$INSPECT_URL" ]; then
         log_info "Inspect: $INSPECT_URL"
@@ -217,7 +217,7 @@ deploy_to_staging() {
         log_info "Attempting alternative extraction method..."
 
         # Alternative: use vercel ls to get latest deployment
-        PREVIEW_URL=$(vercel ls --yes 2>&1 | grep -oP 'https://[^\s]+\.vercel\.app' | head -1)
+        PREVIEW_URL=$(vercel ls --yes 2>&1 | grep -oE 'https://[^[:space:]]+\.vercel\.app' | head -1)
 
         if [ -n "$PREVIEW_URL" ]; then
             log_success "Found URL: $PREVIEW_URL"

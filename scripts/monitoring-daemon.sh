@@ -64,10 +64,10 @@ log_info() {
 
 check_railway_health() {
     local URL=$1
-    local START_MS=$(date +%s%3N)
+    local START_MS=$(python3 -c 'import time; print(int(time.time()*1000))')
 
     local RESPONSE=$(curl -s --max-time 10 "$URL/api/health" 2>/dev/null || echo '{"status":"error"}')
-    local END_MS=$(date +%s%3N)
+    local END_MS=$(python3 -c 'import time; print(int(time.time()*1000))')
     local DURATION=$((END_MS - START_MS))
 
     local STATUS=$(echo "$RESPONSE" | jq -r '.status // "error"' 2>/dev/null || echo "error")
@@ -79,10 +79,10 @@ check_railway_health() {
 check_endpoint() {
     local URL=$1
     local ENDPOINT=$2
-    local START_MS=$(date +%s%3N)
+    local START_MS=$(python3 -c 'import time; print(int(time.time()*1000))')
 
     local HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$URL$ENDPOINT" 2>/dev/null || echo "000")
-    local END_MS=$(date +%s%3N)
+    local END_MS=$(python3 -c 'import time; print(int(time.time()*1000))')
     local DURATION=$((END_MS - START_MS))
 
     local SUCCESS=false
@@ -94,6 +94,10 @@ check_endpoint() {
 }
 
 comprehensive_health_check() {
+    # Redirect stdout to stderr so logs don't interfere with JSON output
+    exec 3>&1  # Save original stdout
+    exec 1>&2  # Redirect stdout to stderr
+
     local TARGET_URL=$1
     local CHECK_TIME=$(date '+%Y-%m-%d %H:%M:%S')
 
@@ -101,7 +105,7 @@ comprehensive_health_check() {
 
     # Check Railway API
     local RAILWAY_HEALTH=$(check_railway_health "$RAILWAY_URL")
-    log_info "Railway health: $(echo $RAILWAY_HEALTH | jq -c '.')"
+    log_info "Railway health: $(echo "$RAILWAY_HEALTH" | jq -c '.')"
 
     # Check Staging endpoints
     local ENDPOINTS=(
@@ -140,11 +144,13 @@ comprehensive_health_check() {
     # Build JSON report
     local REPORT=$(jq -n \
         --arg time "$CHECK_TIME" \
-        --arg railway "$(echo $RAILWAY_HEALTH | jq -c '.')" \
+        --arg railway "$(echo "$RAILWAY_HEALTH" | jq -c '.')" \
         --argjson endpoints "$ENDPOINT_RESULTS" \
         --arg avg_rt "$AVG_RESPONSE_TIME" \
         --arg success_rate "$SUCCESS_RATE" \
         --arg error_rate "$ERROR_RATE" \
+        --arg total_checks "$TOTAL_CHECKS" \
+        --arg successful_checks "$SUCCESSFUL_CHECKS" \
         '{
             timestamp: $time,
             railway: $railway | fromjson,
@@ -153,11 +159,13 @@ comprehensive_health_check() {
                 avg_response_time_ms: $avg_rt | tonumber,
                 success_rate_pct: $success_rate | tonumber,
                 error_rate_pct: $error_rate | tonumber,
-                total_checks: '$TOTAL_CHECKS',
-                successful_checks: '$SUCCESSFUL_CHECKS'
+                total_checks: $total_checks | tonumber,
+                successful_checks: $successful_checks | tonumber
             }
         }')
 
+    # Restore stdout and output JSON
+    exec 1>&3  # Restore original stdout
     echo "$REPORT"
 }
 
@@ -274,7 +282,7 @@ start_daemon() {
     echo '{"start_time":"'$(date +%s)'","total_checks":0,"total_alerts":0,"status":"starting"}' > "$STATUS_FILE"
 
     # Fork to background
-    nohup bash "$0" _run_monitor "$STAGING_URL" >> "$MONITORING_LOG" 2>&1 &
+    nohup bash "$0" _run_monitor "$STAGING_URL" >> "$MONITORING_LOG" 2>> "$PROJECT_ROOT/logs/monitoring-daemon-errors.log" &
     local DAEMON_PID=$!
 
     echo "$DAEMON_PID" > "$DAEMON_PID_FILE"
