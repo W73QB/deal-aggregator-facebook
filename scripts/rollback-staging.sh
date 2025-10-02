@@ -40,7 +40,7 @@ fi
 
 echo ""
 echo -e "${BLUE}▶ Step 2: Redeploying staging without external API...${NC}"
-vercel --prebuilt --yes
+vercel --pre --force
 
 echo ""
 echo -e "${BLUE}▶ Step 3: Cleaning up temporary files...${NC}"

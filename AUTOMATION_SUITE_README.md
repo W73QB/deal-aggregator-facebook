@@ -397,12 +397,15 @@ NEXT STEPS
 **Duration:** ~2 minutes
 **Recovery Time:** < 5 minutes
 
-> **⚠️ Bug Fix Notice (Enhancement v1.1):** Fixed critical command error in line 43. Previously used `vercel --prod --force` which would rollback production instead of staging. Now correctly uses `vercel --prebuilt --yes` to target staging environment.
+> **⚠️ Bug Fix Notice (Enhancement v1.2):** Fixed critical command error in line 43.
+> - **v1.0:** Used `vercel --prod --force` (would rollback production - CRITICAL)
+> - **v1.1:** Changed to `vercel --prebuilt --yes` (fails without build artifacts)
+> - **v1.2:** Now uses `vercel --pre --force` (correct - rebuilds and redeploys preview)
 
 #### What It Does:
 
 1. Removes `NEXT_PUBLIC_API_URL` from preview environment
-2. Redeploys without external API (`vercel --prebuilt --yes`)
+2. Redeploys without external API (`vercel --pre --force`)
 3. Cleans up temporary files (`.staging-url.txt`)
 4. Provides backup branch info for manual restoration
 
