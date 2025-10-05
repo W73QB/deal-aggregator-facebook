@@ -1,6 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import RatingStars from '../ui/RatingStars';
 import CategoryIcon from '../icons/CategoryIcon';
+import { useNewsletter } from '../../hooks';
 import styles from './HomePage.module.css';
 
 // Memoized Deal Card component for performance
@@ -30,7 +31,21 @@ const DealCard = memo(({ deal }) => {
           <span className={styles.newPrice}>${deal.salePrice || deal.price}</span>
           <span className={styles.discount}>{deal.discount}% OFF</span>
         </div>
-        <a href="/deals" className={styles.dealButton}>View Deal</a>
+        {deal.affiliateUrl ? (
+          <a
+            href={deal.affiliateUrl}
+            target="_blank"
+            rel="nofollow sponsored noopener noreferrer"
+            className={styles.dealButton}
+            aria-label={`View ${deal.title} deal`}
+          >
+            View Deal
+          </a>
+        ) : (
+          <a href="/deals" className={styles.dealButton}>
+            Browse Similar Deals
+          </a>
+        )}
       </div>
     </div>
   );
@@ -44,6 +59,10 @@ const HomePage = memo(({ featuredDeals = [] }) => {
     featuredDeals.slice(0, 5),
     [featuredDeals]
   );
+
+  // Newsletter hook
+  const { email, setEmail, status, message, handleSubmit, isLoading } = useNewsletter();
+
   return (
     <div className={styles.pageContent}>
       {/* Hero Section */}
@@ -85,9 +104,28 @@ const HomePage = memo(({ featuredDeals = [] }) => {
           <div className={styles.newsletterContent}>
             <h2>🎯 Never Miss a Deal!</h2>
             <p>Get the best deals delivered to your inbox daily. Join 25K+ deal hunters!</p>
-            <form className={styles.newsletterForm}>
-              <input type="email" placeholder="Enter your email address" required />
-              <button type="submit">Get Deal Alerts</button>
+            <form className={styles.newsletterForm} onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
+                aria-label="Email address for deal alerts"
+              />
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? 'Subscribing...' : 'Get Deal Alerts'}
+              </button>
+              {message && (
+                <div
+                  className={`${styles.newsletterMessage} ${styles[status]}`}
+                  role="alert"
+                  aria-live="polite"
+                >
+                  {message}
+                </div>
+              )}
             </form>
           </div>
         </div>

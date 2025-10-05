@@ -1639,6 +1639,13 @@ select:focus {
   color: var(--text-inverse);
 }
 
+.deal-button.disabled,
+.deal-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* Modern Newsletter Section */
 .newsletter {
   background: var(--gradient-primary);

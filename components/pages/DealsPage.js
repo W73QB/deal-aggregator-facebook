@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import RatingStars from '../ui/RatingStars';
 import CategoryIcon from '../icons/CategoryIcon';
+import { useNewsletter, useFavorites } from '../../hooks';
 
 const DealsPage = ({ initialDeals = [] }) => {
   const [sortBy, setSortBy] = useState('featured');
@@ -9,6 +10,13 @@ const DealsPage = ({ initialDeals = [] }) => {
   const [filterMerchant, setFilterMerchant] = useState('all');
   const [clientDeals, setClientDeals] = useState([]);
   const [isClientLoading, setIsClientLoading] = useState(false);
+
+  // Newsletter hook
+  const { email, setEmail, status, message, handleSubmit, isLoading } = useNewsletter();
+
+  // Favorites hook
+  const { toggleFavorite, loading: favLoading, error: favError, canUseFavorites } = useFavorites();
+  const [favorites, setFavorites] = useState(new Set());
 
   // Use initial deals as primary data source, API calls only for filtering
   const [effectiveDeals, setEffectiveDeals] = useState(initialDeals);
@@ -113,6 +121,24 @@ const DealsPage = ({ initialDeals = [] }) => {
         return 0; // featured order
     }
   });
+
+  // Handle save/favorite click
+  const handleSaveClick = async (dealId) => {
+    const isFavorited = favorites.has(dealId);
+    const result = await toggleFavorite(dealId, isFavorited);
+
+    if (result.success) {
+      setFavorites(prev => {
+        const newSet = new Set(prev);
+        if (result.favorited) {
+          newSet.add(dealId);
+        } else {
+          newSet.delete(dealId);
+        }
+        return newSet;
+      });
+    }
+  };
 
   // Handle loading state
   if (loading) {
@@ -249,6 +275,16 @@ const DealsPage = ({ initialDeals = [] }) => {
           </div>
         </div>
 
+        {favError && (
+          <div
+            className="favorites-error"
+            role="alert"
+            aria-live="polite"
+          >
+            ⚠️ {favError}
+          </div>
+        )}
+
         <div className="deals-grid">
           {sortedDeals.map(deal => (
             <div key={deal.id} className="deal-card">
@@ -284,11 +320,37 @@ const DealsPage = ({ initialDeals = [] }) => {
                 </div>
 
                 <div className="deal-actions">
-                  <button className="deal-button primary">
-                    🛒 Shop Deal
-                  </button>
-                  <button className="deal-button secondary">
-                    ❤️ Save
+                  {deal.affiliateUrl ? (
+                    <a
+                      href={deal.affiliateUrl}
+                      target="_blank"
+                      rel="nofollow sponsored noopener noreferrer"
+                      className="deal-button primary"
+                      aria-label={`Shop ${deal.title} at ${deal.store || 'retailer'}`}
+                    >
+                      🛒 Shop Deal
+                    </a>
+                  ) : (
+                    <button
+                      className="deal-button primary disabled"
+                      disabled
+                      aria-label="Link coming soon"
+                    >
+                      🛒 Coming Soon
+                    </button>
+                  )}
+                  <button
+                    className={`deal-button secondary ${favorites.has(deal.id) ? 'active' : ''}`}
+                    onClick={() => handleSaveClick(deal.id)}
+                    disabled={favLoading}
+                    aria-label={
+                      favorites.has(deal.id)
+                        ? `Remove ${deal.title} from favorites`
+                        : `Save ${deal.title} to favorites`
+                    }
+                    title={canUseFavorites ? undefined : 'Please log in to save favorites'}
+                  >
+                    {favorites.has(deal.id) ? '❤️ Saved' : '🤍 Save'}
                   </button>
                 </div>
               </div>
@@ -310,9 +372,28 @@ const DealsPage = ({ initialDeals = [] }) => {
           <div className="cta-content">
             <h2>🔔 Want More Deals Like These?</h2>
             <p>Join 25K+ deal hunters and get the best deals delivered to your inbox daily!</p>
-            <form className="newsletter-form">
-              <input type="email" placeholder="Enter your email" required />
-              <button type="submit">Get Deal Alerts</button>
+            <form className="newsletter-form" onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
+                aria-label="Email address for deal alerts"
+              />
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? 'Subscribing...' : 'Get Deal Alerts'}
+              </button>
+              {message && (
+                <div
+                  className={`newsletter-message ${status}`}
+                  role="alert"
+                  aria-live="polite"
+                >
+                  {message}
+                </div>
+              )}
             </form>
           </div>
         </div>

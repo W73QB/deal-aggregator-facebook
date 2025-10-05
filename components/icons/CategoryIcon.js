@@ -24,6 +24,8 @@ const CategoryIcon = ({ category, size = 24, className = '' }) => {
     height: size,
     viewBox: '0 0 24 24',
     fill: 'currentColor',
+    'aria-hidden': 'true',
+    focusable: 'false',
     className: `${styles.categoryIcon} ${getSizeClass()} ${getCategoryClass()} ${className}`.trim(),
   };
 

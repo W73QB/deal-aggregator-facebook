@@ -4,48 +4,27 @@ import { useRouter } from 'next/router';
 import AuthButtons from './ui/AuthButtons';
 import SearchBox from './ui/SearchBox';
 import ThemeToggle from './ui/ThemeToggle';
+import { useNewsletter } from '../hooks';
 
 const Layout = ({ children }) => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterStatus, setNewsletterStatus] = useState('idle'); // idle, loading, success, error
-  const [newsletterMessage, setNewsletterMessage] = useState('');
+
+  // Newsletter hook
+  const {
+    email: newsletterEmail,
+    setEmail: setNewsletterEmail,
+    status: newsletterStatus,
+    message: newsletterMessage,
+    handleSubmit: handleNewsletterSubmit,
+    isLoading: newsletterLoading
+  } = useNewsletter();
 
   const isActivePath = (path) => {
     if (path === '/') {
       return router.pathname === '/';
     }
     return router.pathname.startsWith(path);
-  };
-
-  const handleNewsletterSubmit = async (e) => {
-    e.preventDefault();
-    setNewsletterStatus('loading');
-    setNewsletterMessage('');
-
-    try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: newsletterEmail }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong');
-      }
-
-      setNewsletterStatus('success');
-      setNewsletterMessage(data.message);
-      setNewsletterEmail('');
-    } catch (error) {
-      setNewsletterStatus('error');
-      setNewsletterMessage(error.message);
-    }
   };
 
   return (
@@ -297,16 +276,16 @@ const Layout = ({ children }) => {
               <h4>🔔 Deal Alerts</h4>
               <p>Get the best deals in your inbox!</p>
               <form className="footer-newsletter" onSubmit={handleNewsletterSubmit}>
-                <input 
-                  type="email" 
-                  placeholder="Your email" 
-                  required 
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  required
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  disabled={newsletterStatus === 'loading'}
+                  disabled={newsletterLoading}
                 />
-                <button type="submit" disabled={newsletterStatus === 'loading'}>
-                  {newsletterStatus === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                <button type="submit" disabled={newsletterLoading}>
+                  {newsletterLoading ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </form>
               {newsletterStatus === 'success' && <small className="newsletter-success">{newsletterMessage}</small>}

@@ -611,6 +611,19 @@
   transform: translateY(-1px);
 }
 
+.newsletterMessage {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.newsletterMessage.success {
+  color: #28a745;
+}
+
+.newsletterMessage.error {
+  color: #dc3545;
+}
+
 /* Enhanced Categories Section */
 .categories {
   padding: clamp(60px, 12vh, 100px) 0;
