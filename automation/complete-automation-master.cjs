@@ -8,10 +8,10 @@
  */
 
 require('dotenv').config({ path: '.env.dealradarus.local' });
-const SmartContentGenerator = require('./smart-content-generator');
-const AdvancedBlogEngine = require('./advanced-blog-engine');
-const ViralDistributionEngine = require('./viral-distribution-engine');
-const FacebookComplianceSystem = require('./facebook-compliance-system');
+const SmartContentGenerator = require('./smart-content-generator.cjs');
+const AdvancedBlogEngine = require('./advanced-blog-engine.cjs');
+const ViralDistributionEngine = require('./viral-distribution-engine.cjs');
+const FacebookComplianceSystem = require('./facebook-compliance-system.cjs');
 const { Client } = require('pg');
 const axios = require('axios');
 const fs = require('fs');

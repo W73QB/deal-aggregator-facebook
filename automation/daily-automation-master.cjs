@@ -8,9 +8,9 @@
  */
 
 require('dotenv').config({ path: '.env.dealradarus.local' });
-const SmartContentGenerator = require('./smart-content-generator');
-const AdvancedBlogEngine = require('./advanced-blog-engine');
-const ViralDistributionEngine = require('./viral-distribution-engine');
+const SmartContentGenerator = require('./smart-content-generator.cjs');
+const AdvancedBlogEngine = require('./advanced-blog-engine.cjs');
+const ViralDistributionEngine = require('./viral-distribution-engine.cjs');
 const { Client } = require('pg');
 const axios = require('axios');
 const nodemailer = require('nodemailer');

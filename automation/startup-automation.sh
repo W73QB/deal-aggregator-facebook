@@ -26,7 +26,7 @@ export $(cat .env.dealradarus.local | xargs)
 
 # Start the complete automation master (viral edition)
 echo "$(date): 🤖 Starting Complete Automation Master (Viral Edition)..." >> automation/logs/startup.log
-node automation/complete-automation-master.js >> automation/logs/complete.log 2>&1 &
+node automation/complete-automation-master.cjs >> automation/logs/complete.log 2>&1 &
 
 # Log completion
 echo "$(date): ✅ Daily Automation Started Successfully" >> automation/logs/startup.log
