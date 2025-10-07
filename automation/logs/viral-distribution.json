@@ -1716,5 +1716,151 @@
         "linkedin"
       ]
     }
+  },
+  {
+    "blogTitle": "Amazing Daily Deals That'll Make Your Day Better!",
+    "timestamp": "2025-10-07T03:34:30.188Z",
+    "results": {
+      "facebook": {
+        "success": false,
+        "platform": "facebook",
+        "error": {
+          "error": {
+            "message": "Unsupported post request. Object with ID 'undefined' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api",
+            "type": "GraphMethodException",
+            "code": 100,
+            "error_subcode": 33,
+            "fbtrace_id": "A5rPz2pQQq6mzuVjdRGNUcz"
+          }
+        },
+        "content": "🔥 Just found some incredible deals that I had to share! MacBook Air 13\" M2 Chip is 31% off - that's $400.00 in savings! Check out my full breakdown: https://dealradarus.com/blog/2025-10-07.html",
+        "priority": 1
+      },
+      "twitter": {
+        "success": true,
+        "platform": "twitter",
+        "content": "{\"tweet1\": \"🔥 Deal alert! Found 3 incredible discounts today\", \"tweet2\": \"MacBook Air 13\" M2 Chip - 31% OFF!\", \"tweet3\": \"Full details: https://dealradarus.com/blog/2025-10-07.html\"}",
+        "note": "Content prepared - requires Twitter API setup for auto-posting",
+        "priority": 2
+      },
+      "pinterest": {
+        "success": true,
+        "platform": "pinterest",
+        "pins": [
+          "Amazing MacBook Air 13\" M2 Chip deal! Save 31% on this incredible find. Perfect for anyone looking for quality tech at unbeatable prices. Check out my full review and more deals: https://dealradarus.com/blog/2025-10-07.html"
+        ],
+        "boardSuggestion": "Daily Tech Deals",
+        "note": "Content prepared - requires Pinterest API for auto-posting",
+        "content": "Amazing MacBook Air 13\" M2 Chip deal! Save 31% on this incredible find. Perfect for anyone looking for quality tech at unbeatable prices. Check out my full review and more deals: https://dealradarus.com/blog/2025-10-07.html",
+        "priority": 3
+      },
+      "reddit": {
+        "success": true,
+        "platform": "reddit",
+        "posts": [
+          {
+            "subreddit": "deals",
+            "title": "Great deals on tech today",
+            "content": "Found some solid discounts worth sharing"
+          }
+        ],
+        "note": "Content prepared - requires manual posting to follow Reddit rules",
+        "content": "[{\"subreddit\": \"deals\", \"title\": \"Great deals on tech today\", \"content\": \"Found some solid discounts worth sharing\"}]",
+        "priority": 4
+      },
+      "linkedin": {
+        "success": true,
+        "platform": "linkedin",
+        "content": "Smart shopping update: Found some exceptional deals on quality products today. As someone who researches these extensively, I wanted to share the best ones. Full analysis: https://dealradarus.com/blog/2025-10-07.html",
+        "note": "Content prepared - requires LinkedIn API setup for auto-posting",
+        "priority": 5
+      }
+    },
+    "summary": {
+      "platformsTargeted": 5,
+      "successfulPosts": 4,
+      "failedPosts": 1,
+      "successRate": "80%",
+      "estimatedReach": 7300,
+      "topPerformingPlatforms": [
+        "twitter",
+        "pinterest",
+        "reddit",
+        "linkedin"
+      ]
+    }
+  },
+  {
+    "blogTitle": "Amazing Daily Deals That'll Make Your Day Better!",
+    "timestamp": "2025-10-07T03:43:07.418Z",
+    "results": {
+      "facebook": {
+        "success": false,
+        "platform": "facebook",
+        "error": {
+          "error": {
+            "message": "Unsupported post request. Object with ID 'undefined' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api",
+            "type": "GraphMethodException",
+            "code": 100,
+            "error_subcode": 33,
+            "fbtrace_id": "AUpUcvLYQDwtzqigv2eTCSz"
+          }
+        },
+        "content": "🔥 Just found some incredible deals that I had to share! MacBook Air 13\" M2 Chip is 31% off - that's $400.00 in savings! Check out my full breakdown: https://dealradarus.com/blog/2025-10-07.html",
+        "priority": 1
+      },
+      "twitter": {
+        "success": true,
+        "platform": "twitter",
+        "content": "{\"tweet1\": \"🔥 Deal alert! Found 3 incredible discounts today\", \"tweet2\": \"MacBook Air 13\" M2 Chip - 31% OFF!\", \"tweet3\": \"Full details: https://dealradarus.com/blog/2025-10-07.html\"}",
+        "note": "Content prepared - requires Twitter API setup for auto-posting",
+        "priority": 2
+      },
+      "pinterest": {
+        "success": true,
+        "platform": "pinterest",
+        "pins": [
+          "Amazing MacBook Air 13\" M2 Chip deal! Save 31% on this incredible find. Perfect for anyone looking for quality tech at unbeatable prices. Check out my full review and more deals: https://dealradarus.com/blog/2025-10-07.html"
+        ],
+        "boardSuggestion": "Daily Tech Deals",
+        "note": "Content prepared - requires Pinterest API for auto-posting",
+        "content": "Amazing MacBook Air 13\" M2 Chip deal! Save 31% on this incredible find. Perfect for anyone looking for quality tech at unbeatable prices. Check out my full review and more deals: https://dealradarus.com/blog/2025-10-07.html",
+        "priority": 3
+      },
+      "reddit": {
+        "success": true,
+        "platform": "reddit",
+        "posts": [
+          {
+            "subreddit": "deals",
+            "title": "Great deals on tech today",
+            "content": "Found some solid discounts worth sharing"
+          }
+        ],
+        "note": "Content prepared - requires manual posting to follow Reddit rules",
+        "content": "[{\"subreddit\": \"deals\", \"title\": \"Great deals on tech today\", \"content\": \"Found some solid discounts worth sharing\"}]",
+        "priority": 4
+      },
+      "linkedin": {
+        "success": true,
+        "platform": "linkedin",
+        "content": "Smart shopping update: Found some exceptional deals on quality products today. As someone who researches these extensively, I wanted to share the best ones. Full analysis: https://dealradarus.com/blog/2025-10-07.html",
+        "note": "Content prepared - requires LinkedIn API setup for auto-posting",
+        "priority": 5
+      }
+    },
+    "summary": {
+      "platformsTargeted": 5,
+      "successfulPosts": 4,
+      "failedPosts": 1,
+      "successRate": "80%",
+      "estimatedReach": 7300,
+      "topPerformingPlatforms": [
+        "twitter",
+        "pinterest",
+        "reddit",
+        "linkedin"
+      ]
+    }
   }
 ]

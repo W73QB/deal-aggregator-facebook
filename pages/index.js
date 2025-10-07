@@ -1,6 +1,36 @@
 import React from 'react';
 import Head from 'next/head';
 import HomePage from '../components/pages/HomePage';
+import { fetchDeals } from '../lib/apiClient';
+
+const FALLBACK_FEATURED_DEALS = [
+  {
+    id: 1,
+    title: "MacBook Pro M1 - Open Box",
+    image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop&auto=format",
+    originalPrice: 1299,
+    salePrice: 899,
+    price: 899,
+    discount: 31,
+    rating: 4.9,
+    category: "laptops",
+    featured: true,
+    badge: "Featured"
+  },
+  {
+    id: 2,
+    title: "iPhone 14 Pro Max - Refurbished",
+    image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop&auto=format",
+    originalPrice: 1099,
+    salePrice: 799,
+    price: 799,
+    discount: 27,
+    rating: 4.8,
+    category: "smartphones",
+    featured: true,
+    badge: "Popular"
+  }
+];
 
 export default function Home({ featuredDeals }) {
   return (
@@ -26,51 +56,60 @@ export default function Home({ featuredDeals }) {
 
 // This function gets called at build time and periodically regenerates
 export async function getStaticProps() {
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
-
   try {
-    console.log(`Fetching featured deals from: ${API_BASE_URL}/deals`);
-
-    const response = await fetch(`${API_BASE_URL}/deals?featured=true&limit=5&sort=rating`, {
-      headers: {
-        'Accept': 'application/json',
-      },
+    const response = await fetchDeals({
+      featured: 'true',
+      limit: '5',
+      sort: 'rating'
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: Failed to fetch featured deals`);
+    const apiDeals = Array.isArray(response?.data)
+      ? response.data
+      : Array.isArray(response?.deals)
+        ? response.deals
+        : Array.isArray(response)
+          ? response
+          : [];
+
+    if (!Array.isArray(apiDeals) || apiDeals.length === 0) {
+      // Allow ISR to retry soon if API returned empty unexpectedly
+      return {
+        props: {
+          featuredDeals: FALLBACK_FEATURED_DEALS,
+        },
+        revalidate: 60,
+      };
     }
 
-    const data = await response.json();
+    const transformedDeals = apiDeals.map((deal) => {
+      const salePrice = deal.salePrice ?? deal.sale_price ?? deal.price ?? 0;
+      const originalPrice = deal.originalPrice ?? deal.original_price ?? salePrice;
+      const savings = deal.savings ?? Math.max(0, originalPrice - salePrice);
 
-    if (data.success === false) {
-      throw new Error(data.message || 'API returned error');
-    }
-
-    // Transform API response to match component expectations
-    const transformedDeals = data.data.map(deal => ({
-      id: deal.id,
-      title: deal.title,
-      description: deal.description,
-      image: deal.image,
-      originalPrice: deal.originalPrice,
-      salePrice: deal.salePrice,
-      price: deal.salePrice, // Backward compatibility
-      discount: deal.discount,
-      savings: deal.savings,
-      rating: deal.rating,
-      category: deal.category,
-      featured: deal.featured,
-      store: deal.store,
-      seller: deal.store, // Backward compatibility
-      affiliateUrl: deal.affiliateUrl,
-      tags: deal.tags,
-      stockCount: deal.stockCount,
-      expiresAt: deal.expiresAt,
-      createdAt: deal.createdAt,
-      updatedAt: deal.updatedAt,
-      badge: deal.featured ? 'Featured' : null,
-    }));
+      return {
+        id: deal.id,
+        title: deal.title ?? 'Untitled Deal',
+        description: deal.description ?? '',
+        image: deal.image ?? '',
+        originalPrice,
+        salePrice,
+        price: salePrice,
+        discount: deal.discount ?? 0,
+        savings,
+        rating: deal.rating ?? 0,
+        category: deal.category ?? 'general',
+        featured: !!deal.featured,
+        store: deal.store ?? '',
+        seller: deal.store ?? '',
+        affiliateUrl: deal.affiliateUrl ?? '',
+        tags: Array.isArray(deal.tags) ? deal.tags : [],
+        stockCount: deal.stockCount ?? null,
+        expiresAt: deal.expiresAt ?? null,
+        createdAt: deal.createdAt ?? null,
+        updatedAt: deal.updatedAt ?? null,
+        badge: deal.featured ? 'Featured' : deal.badge || null,
+      };
+    });
 
     return {
       props: {
@@ -79,43 +118,13 @@ export async function getStaticProps() {
       revalidate: 300, // Regenerate page every 5 minutes for fresh data
     };
   } catch (error) {
-    console.error('Error fetching featured deals:', error);
-
-    // Fallback to hardcoded data if API fails
-    const fallbackDeals = [
-      {
-        id: 1,
-        title: "MacBook Pro M1 - Open Box",
-        image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop&auto=format",
-        originalPrice: 1299,
-        salePrice: 899,
-        price: 899,
-        discount: 31,
-        rating: 4.9,
-        category: "laptops",
-        featured: true,
-        badge: "Featured"
-      },
-      {
-        id: 2,
-        title: "iPhone 14 Pro Max - Refurbished",
-        image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop&auto=format",
-        originalPrice: 1099,
-        salePrice: 799,
-        price: 799,
-        discount: 27,
-        rating: 4.8,
-        category: "smartphones",
-        featured: true,
-        badge: "Popular"
-      }
-    ];
+    console.error('Error fetching featured deals via apiClient:', error);
 
     return {
       props: {
-        featuredDeals: fallbackDeals,
+        featuredDeals: FALLBACK_FEATURED_DEALS,
       },
-      revalidate: 300, // Regenerate page every 5 minutes for fresh data
+      revalidate: 60, // Retry more frequently if API fails
     };
   }
 }

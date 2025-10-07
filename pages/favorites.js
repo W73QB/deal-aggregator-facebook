@@ -6,6 +6,8 @@ import { useFavorites } from '../hooks';
 import RatingStars from '../components/ui/RatingStars';
 import CategoryIcon from '../components/icons/CategoryIcon';
 
+import { getApiBase } from '../lib/apiClient';
+
 export default function Favorites() {
   const router = useRouter();
   const { user, isAuthenticated, isLoading } = useAuth();
@@ -17,7 +19,7 @@ export default function Favorites() {
   const [sortBy, setSortBy] = useState('newest');
   const [filterCategory, setFilterCategory] = useState('all');
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  const API_BASE_URL = getApiBase();
 
   // Redirect if not authenticated
   useEffect(() => {

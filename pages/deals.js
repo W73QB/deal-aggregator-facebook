@@ -3,6 +3,8 @@ import Head from 'next/head';
 import DealsPage from '../components/pages/DealsPage';
 import { generateProductListSchema, generateBreadcrumbSchema, safeJSONStringify } from '../lib/schema/generators';
 
+import { fetchDeals } from '../lib/apiClient';
+
 export default function Deals({ dealsData, totalSavings, meta }) {
   const featuredDeals = dealsData.filter(deal => deal.featured);
   const savings = totalSavings || dealsData.reduce((sum, deal) => sum + (deal.originalPrice - (deal.salePrice || deal.price)), 0);
@@ -210,39 +212,35 @@ export async function getStaticProps() {
   ];
 
   try {
-    // Attempt to fetch fresh data from API
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://dealradarus.com';
-    const response = await fetch(`${baseUrl}/api/deals?limit=50&featured=true`, {
-      // Add timeout and better error handling
-      headers: {
-        'User-Agent': 'DealRadarUS-SSG/1.0',
-        'Accept': 'application/json',
-      },
-    });
+    const apiResponse = await fetchDeals({ limit: '50', featured: 'true', sort: 'rating' });
 
-    if (response.ok) {
-      const apiData = await response.json();
+    const dealsFromApi = Array.isArray(apiResponse?.data)
+      ? apiResponse.data
+      : Array.isArray(apiResponse?.deals)
+        ? apiResponse.deals
+        : Array.isArray(apiResponse)
+          ? apiResponse
+          : [];
 
-      if (apiData.success && apiData.deals && apiData.deals.length > 0) {
-        // Use API data if available and valid
-        const totalSavings = apiData.deals.reduce((sum, deal) =>
-          sum + (deal.originalPrice - (deal.salePrice || deal.price)), 0
-        );
+    if (dealsFromApi.length > 0) {
+      const totalSavings = dealsFromApi.reduce((sum, deal) => {
+        const original = deal.originalPrice ?? deal.original_price ?? deal.price ?? 0;
+        const sale = deal.salePrice ?? deal.sale_price ?? deal.price ?? 0;
+        return sum + Math.max(0, original - sale);
+      }, 0);
 
-        return {
-          props: {
-            dealsData: apiData.deals,
-            totalSavings: totalSavings,
-            meta: {
-              source: 'api',
-              total: apiData.deals.length,
-              lastFetch: new Date().toISOString()
-            },
+      return {
+        props: {
+          dealsData: dealsFromApi,
+          totalSavings,
+          meta: {
+            source: apiResponse?.meta?.source || 'api',
+            total: dealsFromApi.length,
+            lastFetch: new Date().toISOString()
           },
-          // Shorter revalidate for API data
-          revalidate: 300, // 5 minutes
-        };
-      }
+        },
+        revalidate: 300, // 5 minutes
+      };
     }
   } catch (error) {
     console.warn('Deals API fetch failed during SSG, using fallback data:', error.message);

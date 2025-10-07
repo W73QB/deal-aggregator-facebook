@@ -3,6 +3,11 @@ import path from 'path';
 import nextConfig from '../../next.config.js';
 import { getMonitoringDb } from '../../lib/monitoring/databaseLogger.js';
 
+// Force Node.js runtime for Vercel
+export const config = {
+  runtime: 'nodejs'
+};
+
 async function checkDatabase() {
   try {
     const db = await getMonitoringDb();

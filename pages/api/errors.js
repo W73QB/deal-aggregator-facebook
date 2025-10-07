@@ -1,5 +1,10 @@
 import { logErrorEvents, logSingleError } from '../../lib/monitoring/databaseLogger.js';
 
+// Force Node.js runtime for Vercel
+export const config = {
+  runtime: 'nodejs'
+};
+
 const MAX_ERRORS_PER_REQUEST = 100;
 
 function sanitizeErrorPayload(payload = {}, req) {

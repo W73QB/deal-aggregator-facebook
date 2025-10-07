@@ -11,11 +11,15 @@
 
 // Use global fetch (available in Node.js 18+)
 // If running locally with Jest, ensure jest.config.js has testEnvironment: 'node'
-const fetch = global.fetch || require('node-fetch');
+const fetch = global.fetch || require('cross-fetch');
 
-const BASE_URL = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+const CUSTOM_BASE_URL = process.env.ROUTING_TEST_BASE_URL;
+
+const BASE_URL = CUSTOM_BASE_URL
+  ? CUSTOM_BASE_URL.replace(/\/$/, '')
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
 
 describe('Vercel API Routing Issue - Response Differentiation', () => {
 

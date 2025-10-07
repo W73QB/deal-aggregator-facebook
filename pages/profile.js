@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useAuth } from '../contexts/AuthContext';
 
+import { getApiBase } from '../lib/apiClient';
+
 export default function Profile() {
   const router = useRouter();
   const { user, isAuthenticated, isLoading, updateUser } = useAuth();
@@ -18,7 +20,7 @@ export default function Profile() {
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  const API_BASE_URL = getApiBase();
 
   // Redirect if not authenticated
   useEffect(() => {

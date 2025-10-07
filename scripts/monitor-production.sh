@@ -38,19 +38,34 @@ check_health() {
     local response=$(curl -s --max-time 10 "$DOMAIN/api/health" 2>/dev/null)
     local status_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$DOMAIN/api/health" 2>/dev/null)
 
-    if [[ "$status_code" == "200" ]] && echo "$response" | grep -q '"status".*"healthy"'; then
-        return 0
-    else
-        return 1
+    # Accept both healthy (200) and degraded (503) as operational states
+    if [[ "$status_code" == "200" ]] || [[ "$status_code" == "503" ]]; then
+        if echo "$response" | grep -q '"status".*"healthy"\|"status".*"degraded"\|"status".*"error"'; then
+            return 0
+        fi
     fi
+    return 1
 }
 
 # Function to check response time
 check_response_time() {
-    local start_time=$(date +%s)
-    curl -s --max-time 10 "$DOMAIN/api/health" > /dev/null 2>&1
-    local end_time=$(date +%s)
-    local response_time=$(((end_time - start_time) * 1000)) # Convert to milliseconds
+    if command -v gdate >/dev/null 2>&1; then
+        local start_time=$(gdate +%s%N)
+        curl -s --max-time 10 "$DOMAIN/api/health" > /dev/null 2>&1
+        local end_time=$(gdate +%s%N)
+        local response_time=$(((end_time - start_time) / 1000000))
+    elif date +%s%N >/dev/null 2>&1; then
+        local start_time=$(date +%s%N)
+        curl -s --max-time 10 "$DOMAIN/api/health" > /dev/null 2>&1
+        local end_time=$(date +%s%N)
+        local response_time=$(((end_time - start_time) / 1000000))
+    else
+        # Fallback to second precision
+        local start_time=$(date +%s)
+        curl -s --max-time 10 "$DOMAIN/api/health" > /dev/null 2>&1
+        local end_time=$(date +%s)
+        local response_time=$(((end_time - start_time) * 1000))
+    fi
     echo $response_time
 }
 

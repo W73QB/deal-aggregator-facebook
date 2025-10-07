@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '../contexts/AuthContext';
 
+import { getApiBase } from '../lib/apiClient';
+
 export default function ResetPassword() {
   const router = useRouter();
   const { isAuthenticated, isLoading } = useAuth();
@@ -19,7 +21,7 @@ export default function ResetPassword() {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  const API_BASE_URL = getApiBase();
 
   // Redirect if already authenticated
   useEffect(() => {

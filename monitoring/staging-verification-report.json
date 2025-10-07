@@ -1,23 +1,23 @@
 {
-  "verificationId": "verify-1758269696007",
-  "stagingUrl": "https://staging.dealradarus.com",
-  "startTime": "2025-09-19T08:14:56.007Z",
-  "endTime": "2025-09-19T08:16:12.198Z",
-  "duration": "76s",
-  "status": "PASSED",
+  "verificationId": "verify-1759803964228",
+  "stagingUrl": "https://deal-aggregator-facebook-lee3l5iuv-qbws-projects.vercel.app",
+  "startTime": "2025-10-07T02:26:04.228Z",
+  "endTime": "2025-10-07T02:26:23.437Z",
+  "duration": "19s",
+  "status": "FAILED",
   "summary": {
     "totalTests": 45,
-    "passed": 44,
-    "failed": 0,
+    "passed": 42,
+    "failed": 2,
     "warnings": 1,
-    "successRate": "98%"
+    "successRate": "93%"
   },
   "performance": {
-    "initialResponseTime": 464,
+    "initialResponseTime": 620,
     "pageLoad": {
-      "loadTime": 1780,
-      "domReady": 1246,
-      "firstByte": 356
+      "loadTime": 1284,
+      "domReady": 898,
+      "firstByte": 257
     },
     "webVitals": {
       "LCP": 1800,
@@ -40,7 +40,7 @@
       {
         "name": "Response Time",
         "status": "pass",
-        "message": "Fast response: 464ms"
+        "message": "Fast response: 620ms"
       },
       {
         "name": "Homepage Load",
@@ -48,17 +48,7 @@
         "message": "Page loads correctly with all elements"
       },
       {
-        "name": "Deals Page Load",
-        "status": "pass",
-        "message": "Page loads correctly with all elements"
-      },
-      {
         "name": "About Page Load",
-        "status": "pass",
-        "message": "Page loads correctly with all elements"
-      },
-      {
-        "name": "Blog Page Load",
         "status": "pass",
         "message": "Page loads correctly with all elements"
       },
@@ -95,7 +85,7 @@
       {
         "name": "Page Load Speed",
         "status": "pass",
-        "message": "Good load time: 1780ms"
+        "message": "Good load time: 1284ms"
       },
       {
         "name": "Resource Optimization",
@@ -248,7 +238,18 @@
         "message": "3/3 breakpoints working"
       }
     ],
-    "failed": [],
+    "failed": [
+      {
+        "name": "Deals Page Load",
+        "status": "fail",
+        "message": "Simulated network error"
+      },
+      {
+        "name": "Blog Page Load",
+        "status": "fail",
+        "message": "Simulated network error"
+      }
+    ],
     "warnings": [
       {
         "name": "Server Headers",
@@ -257,11 +258,11 @@
       }
     ],
     "performance": {
-      "initialResponseTime": 464,
+      "initialResponseTime": 620,
       "pageLoad": {
-        "loadTime": 1780,
-        "domReady": 1246,
-        "firstByte": 356
+        "loadTime": 1284,
+        "domReady": 898,
+        "firstByte": 257
       },
       "webVitals": {
         "LCP": 1800,
@@ -271,5 +272,5 @@
     },
     "screenshots": []
   },
-  "recommendation": "✅ READY FOR PRODUCTION - Minor warnings can be addressed post-deployment"
+  "recommendation": "❌ NOT READY FOR PRODUCTION - Critical issues must be resolved"
 }

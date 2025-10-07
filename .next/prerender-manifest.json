@@ -1,11 +1,25 @@
 {
   "version": 4,
   "routes": {
-    "/blog": {
-      "initialRevalidateSeconds": 1800,
+    "/deals": {
+      "initialRevalidateSeconds": 60,
       "initialExpireSeconds": 31536000,
       "srcRoute": null,
-      "dataRoute": "/_next/data/vryVRmCFfH8JrY9zwGxDR/blog.json",
+      "dataRoute": "/_next/data/dP1hFu6QD7swG0LGV7xcl/deals.json",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/blog": {
+      "initialRevalidateSeconds": 60,
+      "initialExpireSeconds": 31536000,
+      "srcRoute": null,
+      "dataRoute": "/_next/data/dP1hFu6QD7swG0LGV7xcl/blog.json",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -16,24 +30,10 @@
       ]
     },
     "/": {
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": null,
-      "dataRoute": "/_next/data/vryVRmCFfH8JrY9zwGxDR/index.json",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/deals": {
       "initialRevalidateSeconds": 60,
       "initialExpireSeconds": 31536000,
       "srcRoute": null,
-      "dataRoute": "/_next/data/vryVRmCFfH8JrY9zwGxDR/deals.json",
+      "dataRoute": "/_next/data/dP1hFu6QD7swG0LGV7xcl/index.json",
       "allowHeader": [
         "host",
         "x-matched-path",

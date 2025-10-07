@@ -3,6 +3,8 @@ import Head from 'next/head';
 import BlogPage from '../../components/pages/BlogPage';
 import { generateBreadcrumbSchema, safeJSONStringify } from '../../lib/schema/generators';
 
+import { fetchPosts } from '../../lib/apiClient';
+
 export default function Blog({ posts, categories, totalPosts, error }) {
   // If we're in SSR mode, render a simplified version to avoid auth context issues
   const isSSR = typeof window === 'undefined';
@@ -143,21 +145,28 @@ export default function Blog({ posts, categories, totalPosts, error }) {
 // Static Site Generation with ISR for SEO optimization
 export async function getStaticProps() {
   try {
-    // Fetch blog posts at build time
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://dealradarus.com';
-    const response = await fetch(`${baseUrl}/api/posts?limit=50`);
+    const response = await fetchPosts({ limit: '50' });
 
-    if (!response.ok) {
-      throw new Error(`API responded with status: ${response.status}`);
+    const posts = Array.isArray(response?.posts)
+      ? response.posts
+      : Array.isArray(response?.data)
+        ? response.data
+        : Array.isArray(response)
+          ? response
+          : [];
+
+    const categories = Array.isArray(response?.categories) ? response.categories : [];
+    const totalPosts = typeof response?.totalPosts === 'number' ? response.totalPosts : posts.length;
+
+    if (posts.length === 0) {
+      throw new Error('No posts returned from API');
     }
-
-    const data = await response.json();
 
     return {
       props: {
-        posts: data.posts || [],
-        categories: data.categories || [],
-        totalPosts: data.totalPosts || 0,
+        posts,
+        categories,
+        totalPosts,
         error: false
       },
       // Revalidate every 30 minutes

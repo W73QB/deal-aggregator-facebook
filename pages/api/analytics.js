@@ -1,5 +1,10 @@
 import { logAnalyticsEvents, getMonitoringDb } from '../../lib/monitoring/databaseLogger.js';
 
+// Force Node.js runtime for Vercel
+export const config = {
+  runtime: 'nodejs'
+};
+
 const MAX_EVENTS_PER_REQUEST = 500;
 
 function validateEvents(events) {

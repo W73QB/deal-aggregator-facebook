@@ -104,7 +104,7 @@
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -128,14 +128,14 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://vitals.vercel-analytics.com; frame-src 'self'; base-uri 'self'; form-action 'self'"
+          "value": "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://vitals.vercel-analytics.com https://deal-aggregator-api-production.up.railway.app; frame-src 'self'; base-uri 'self'; form-action 'self'"
         },
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
         }
       ],
-      "regex": "^(?:/(.*))(?:/)?$"
+      "regex": "^(?:/((?!api/).*))(?:/)?$"
     },
     {
       "source": "/_next/static/(.*)",
@@ -162,7 +162,15 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, s-maxage=3600, stale-while-revalidate=86400"
+          "value": "no-store, no-cache, must-revalidate, max-age=0"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
+          "key": "Expires",
+          "value": "0"
         }
       ],
       "regex": "^/api(?:/(.*))(?:/)?$"
@@ -272,15 +280,15 @@
   "dataRoutes": [
     {
       "page": "/",
-      "dataRouteRegex": "^/_next/data/vryVRmCFfH8JrY9zwGxDR/index\\.json$"
+      "dataRouteRegex": "^/_next/data/dP1hFu6QD7swG0LGV7xcl/index\\.json$"
     },
     {
       "page": "/blog",
-      "dataRouteRegex": "^/_next/data/vryVRmCFfH8JrY9zwGxDR/blog\\.json$"
+      "dataRouteRegex": "^/_next/data/dP1hFu6QD7swG0LGV7xcl/blog\\.json$"
     },
     {
       "page": "/deals",
-      "dataRouteRegex": "^/_next/data/vryVRmCFfH8JrY9zwGxDR/deals\\.json$"
+      "dataRouteRegex": "^/_next/data/dP1hFu6QD7swG0LGV7xcl/deals\\.json$"
     }
   ],
   "rsc": {
