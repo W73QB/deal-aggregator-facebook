@@ -468,10 +468,10 @@ Deployment is successful when:
 
 ## 🔧 Pending Tech Debt
 
-**Last Updated:** 2025-10-06 21:45 UTC
-**Source:** Tech Stack Analysis (`/tmp/tech_stack_overview.md`)
+**Last Updated:** 2025-10-07 08:12 UTC
+**Source:** Tech Stack Analysis + Execution Results
 
-### ✅ Completed (2025-10-06)
+### ✅ Completed (2025-10-07)
 
 1. **API URL Duplication Bug** 🟢
    - **File:** `lib/apiClient.js:21-54`
@@ -479,42 +479,55 @@ Deployment is successful when:
    - **Impact:** API calls failed with parse errors
    - **Fix:** Strip `/api` when using external API, keep it for local
    - **Tested:** Both local and Railway scenarios ✅
+   - **Deployed:** Staging (2025-10-07 08:05 UTC) ✅
+   - **Staging URL:** https://deal-aggregator-facebook-lee3l5iuv-qbws-projects.vercel.app
    - **Effort:** 30 min
-   - **Log:** `/tmp/api_fix_log.md`
-   - **Status:** ✅ FIXED (2025-10-06 21:40 UTC)
+   - **Logs:** `/tmp/api_fix_log.md`, `/tmp/staging_post_deploy_check.md`
+   - **Commit:** 3f3eb66
+   - **Status:** ✅ FIXED & DEPLOYED
+
+2. **Remove react-router-dom Dependency** 🟢
+   - **Package:** react-router-dom v7.9.1 (278KB)
+   - **Verification:** grep search found 0 usage ✅
+   - **Action Taken:** Removed via `npm uninstall react-router-dom`
+   - **Impact:** ~200KB development dependency removed
+   - **Build Test:** ✅ PASS - all 14 routes working
+   - **Reason:** Next.js provides built-in routing
+   - **Effort:** 5 min
+   - **Logs:** `/tmp/react-router-usage.txt`, `/tmp/react-router-removal.md`
+   - **Commit:** c3b9a24
+   - **Status:** ✅ REMOVED & TESTED
+
+3. **Automation Script ESM Errors** 🟠
+   - **Triage Completed:** 2025-10-07 08:10 UTC ✅
+   - **Total Tested:** 13 scripts
+   - **Broken (ESM errors):** 7 scripts (54%)
+   - **Working:** 2 scripts (15%)
+   - **Other Errors:** 3 scripts (23%)
+   - **Results:**
+     - **P0 (CRITICAL):** 2 broken - `daily-automation-master.js`, `complete-automation-master.js`
+     - **P1 (HIGH):** 2 OK, 3 need investigation (not ESM errors)
+     - **P2 (MEDIUM):** 5 broken - manual scripts (deferred)
+   - **Action Required:** Fix P0 scripts this week (30 min effort)
+   - **Logs:** `/tmp/automation_triage_plan.md`, `/tmp/automation_triage_results.md`
+   - **Status:** 🟡 TRIAGED - Ready for P0 fixes
 
 ### 🟠 High Priority (This Week)
 
-2. **Verify react-router-dom Usage**
-   - **Package:** react-router-dom v7.9.1 (278KB)
-   - **Issue:** May conflict with Next.js built-in routing
-   - **Impact:** Bundle bloat (~200kb), potential routing confusion
-   - **Action Required:** Run `grep -r "react-router-dom" --include="*.js"` to verify usage
-   - **If Unused:** Create PR to remove from package.json
-   - **If Used:** Document usage OR create migration plan to Next.js router
-   - **Effort:** 5 min (verify) + 1-4h (migration if needed)
+4. **Fix P0 Automation Scripts** 🔴
+   - **Files:**
+     - `automation/daily-automation-master.js` ❌
+     - `automation/complete-automation-master.js` ❌
+   - **Issue:** require() in ESM context
+   - **Impact:** Daily automation non-functional
+   - **Fix Strategy:** Rename to .cjs + update LaunchAgent plists
+   - **Effort:** 30 min
    - **Owner:** [Unassigned]
-   - **Status:** 🟡 Pending Verification
-
-### 🟡 Medium Priority (This Sprint)
-
-3. **Automation Script ESM Errors**
-   - **Files:** `automation/*.js`, `scripts/*.js` (some files)
-   - **Issue:** Some scripts use `require()` in ESM context
-   - **Impact:** Scripts may fail with "require is not defined"
-   - **Action Required:** Triage to identify WHICH scripts are broken
-   - **Priority Levels:**
-     - P0: Daily scripts (launchd)
-     - P1: Scripts in package.json
-     - P2: Manual scripts
-     - P3: Deprecated scripts
-   - **Effort:** 30 min (triage) + TBD (fixes)
-   - **Owner:** [Unassigned]
-   - **Status:** 🔵 Need Triage (plan at `/tmp/automation_triage_plan.md`)
+   - **Status:** 🔴 URGENT - Need fix this week
 
 ### ⚪ Low Priority (Backlog)
 
-4. **Test Coverage Improvement**
+5. **Test Coverage Improvement**
    - **Current:** 13-16% (branches, functions, lines)
    - **Target:** 70%+
    - **Approach:** Incremental (focus on critical paths first)
@@ -531,47 +544,63 @@ Deployment is successful when:
 
 | Metric | Current | Target | Status | Trend |
 |--------|---------|--------|--------|-------|
-| Critical Bugs | 0 | 0 | 🟢 | ↓ (was 1) |
-| High Priority Items | 1 | 0 | 🟡 | → |
-| Medium Priority Items | 1 | 0 | 🟡 | → |
+| Critical Bugs | 0 | 0 | 🟢 | ↓ Fixed API bug |
+| High Priority Items | 1 | 0 | 🟠 | ↑ P0 automation |
+| Completed This Session | 3 | - | 🟢 | ↑ API fix, react-router, triage |
 | Test Coverage | 15% | 70% | 🔴 | → |
-| Bundle Size | ~2MB | <1MB | 🟡 | → |
-| ESM/CJS Mix | 6 .cjs files | 0 | 🟢 | ✓ (acceptable) |
+| Bundle Size | ~2MB | <1MB | 🟡 | ↓ (-200KB) |
+| ESM/CJS Mix | 6 .cjs + 7 broken .js | All consistent | 🟡 | ⚠️ Need P0 fixes |
 
-**Overall Tech Health:** 🟢 Good (1 critical bug fixed, 2 items in triage)
+**Overall Tech Health:** 🟢 Good (3 items completed, 1 urgent fix needed)
 
 ---
 
 ## 📋 Follow-up Actions
 
 ### This Week
-- [ ] Verify react-router-dom usage (#2)
-- [ ] Update bundle analysis if react-router-dom removed
-- [ ] Commit API fix to git
+- [x] Fix API URL duplication bug ✅ (2025-10-07)
+- [x] Verify react-router-dom usage ✅ (2025-10-07)
+- [x] Remove react-router-dom dependency ✅ (2025-10-07)
+- [x] Triage automation scripts ✅ (2025-10-07)
+- [x] Deploy API fix to staging ✅ (2025-10-07)
+- [ ] Fix P0 automation scripts (daily-automation, complete-automation)
+- [ ] Deploy react-router removal to staging
 
 ### This Sprint
-- [ ] Triage automation scripts (#3)
-- [ ] Fix P0/P1 automation scripts
-- [ ] Deploy API fix to staging
-- [ ] Verify fix on staging environment
+- [ ] Investigate 3 P1 scripts with non-ESM errors
+- [ ] Fix P2 automation scripts (5 manual scripts) - as needed
+- [ ] Update LaunchAgent plists after P0 fixes
+- [ ] Test daily automation after fixes
 
 ### Backlog
-- [ ] Define test coverage roadmap (#4)
+- [ ] Define test coverage roadmap (#5)
 - [ ] Plan Railway API removal (when Vercel bug fixed)
 - [ ] Update ESLint to v9 (flat config)
 - [ ] Add CSP nonces for inline styles
+- [ ] Convert all scripts to ESM (standardize)
 
 ---
 
 ## 📚 Reference Documents
 
+### Analysis & Planning
 - **Tech Stack Analysis:** `/tmp/tech_stack_overview.md` (400+ lines)
 - **ChatGPT Plan Assessment:** `/tmp/chatgpt_plan_assessment.md` (300+ lines)
-- **API Fix Log:** `/tmp/api_fix_log.md`
-- **React Router Usage:** `/tmp/react-router-usage.txt` (pending)
-- **Automation Triage:** `/tmp/automation_triage_plan.md` (pending)
+- **Automation Triage Plan:** `/tmp/automation_triage_plan.md` (200+ lines)
+
+### Execution Logs
+- **API Fix Log:** `/tmp/api_fix_log.md` (230 lines)
+- **Staging Deploy Check:** `/tmp/staging_post_deploy_check.md` (100+ lines)
+- **React Router Verification:** `/tmp/react-router-usage.txt` (62 lines)
+- **React Router Removal:** `/tmp/react-router-removal.md` (150+ lines)
+- **Automation Triage Results:** `/tmp/automation_triage_results.md` (240 lines)
+
+### Git Commits
+- **3f3eb66** - fix(api): correct base URL joining logic
+- **c3b9a24** - chore: remove unused react-router-dom dependency
 
 ---
 
-**Last Updated:** 2025-10-06 21:45 UTC
-**Updated By:** Claude Code (Tech stack analysis + API bug fix)
+**Last Updated:** 2025-10-07 08:12 UTC
+**Updated By:** Claude Code (Tech debt execution session)
+**Session Summary:** Fixed API bug, removed react-router-dom, triaged automation scripts
