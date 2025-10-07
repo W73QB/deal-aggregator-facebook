@@ -31,6 +31,20 @@ const CookieBanner = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    if (isVisible) {
+      document.body.classList.add('has-cookie-banner');
+    } else {
+      document.body.classList.remove('has-cookie-banner');
+    }
+
+    return () => {
+      document.body.classList.remove('has-cookie-banner');
+    };
+  }, [isVisible]);
+
   const applyConsent = useCallback((level) => {
     try {
       const collector = getDataCollector();

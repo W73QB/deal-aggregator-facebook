@@ -9,7 +9,9 @@ const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       className={`${styles.themeToggle} ${isDark ? styles.dark : styles.light}`}
-      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      role="switch"
+      aria-checked={isDark}
+      aria-label={`Toggle ${isDark ? 'dark' : 'light'} mode`}
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       <div className={styles.toggleTrack}>

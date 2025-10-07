@@ -41,7 +41,10 @@ const ChatWidget = () => {
   return (
     <>
       {/* Chat Widget Button */}
-      <div className={`${styles.chatWidget} ${isOpen ? styles.open : ''}`}>
+      <div
+        className={`${styles.chatWidget} ${isOpen ? styles.open : ''}`}
+        data-chat-widget
+      >
         <button
           onClick={toggleChat}
           className={styles.chatButton}

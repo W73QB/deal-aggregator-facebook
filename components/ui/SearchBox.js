@@ -116,6 +116,7 @@ const SearchBox = () => {
             onChange={handleInputChange}
             onFocus={handleInputFocus}
             className="search-input"
+            aria-label="Search for deals"
           />
           <button type="submit" className="search-button" disabled={isLoading}>
             {isLoading ? (
