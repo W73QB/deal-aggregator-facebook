@@ -961,7 +961,7 @@ select:focus {
   gap: 1rem;
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1439px) {
   .header-actions .social-links {
     display: none;
   }
