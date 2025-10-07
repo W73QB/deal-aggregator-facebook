@@ -512,22 +512,40 @@ Deployment is successful when:
    - **Logs:** `/tmp/automation_triage_plan.md`, `/tmp/automation_triage_results.md`
    - **Status:** 🟡 TRIAGED - Ready for P0 fixes
 
+4. **Fix P0 Automation Scripts** 🟢
+   - **Files Modified (6 total):**
+     - `automation/daily-automation-master.cjs` ✅
+     - `automation/complete-automation-master.cjs` ✅
+     - `automation/smart-content-generator.cjs` ✅
+     - `automation/advanced-blog-engine.cjs` ✅
+     - `automation/viral-distribution-engine.cjs` ✅
+     - `automation/facebook-compliance-system.cjs` ✅
+   - **References Updated:**
+     - `automation/startup-automation.sh` ✅
+     - require() paths in master scripts ✅
+   - **Issue:** ESM "require is not defined" errors ✅ FIXED
+   - **Secondary Issue Discovered:** Missing optional @google/generative-ai dependency
+   - **Impact:** AI features unavailable (scripts will fallback to templates)
+   - **Effort:** 15 min
+   - **Log:** `/tmp/automation_p0_fix_log.md`
+   - **Commit:** 22782c3
+   - **Status:** ✅ FIXED (ESM issue resolved, optional dependency noted)
+
 ### 🟠 High Priority (This Week)
 
-4. **Fix P0 Automation Scripts** 🔴
-   - **Files:**
-     - `automation/daily-automation-master.js` ❌
-     - `automation/complete-automation-master.js` ❌
-   - **Issue:** require() in ESM context
-   - **Impact:** Daily automation non-functional
-   - **Fix Strategy:** Rename to .cjs + update LaunchAgent plists
-   - **Effort:** 30 min
-   - **Owner:** [Unassigned]
-   - **Status:** 🔴 URGENT - Need fix this week
+5. **Deploy Latest Changes to Staging** 🟡
+   - **Pending Commits:**
+     - c3b9a24: react-router-dom removal
+     - 22782c3: P0 automation fixes
+   - **Current Staging:** 3f3eb66 (API fix only)
+   - **Impact:** ~200KB bundle reduction + automation fixes not deployed
+   - **Action:** Deploy latest commit to staging
+   - **Effort:** 10 min
+   - **Status:** 🟡 PENDING - Can deploy anytime
 
 ### ⚪ Low Priority (Backlog)
 
-5. **Test Coverage Improvement**
+6. **Test Coverage Improvement**
    - **Current:** 13-16% (branches, functions, lines)
    - **Target:** 70%+
    - **Approach:** Incremental (focus on critical paths first)
@@ -558,19 +576,22 @@ Deployment is successful when:
 ## 📋 Follow-up Actions
 
 ### This Week
-- [x] Fix API URL duplication bug ✅ (2025-10-07)
-- [x] Verify react-router-dom usage ✅ (2025-10-07)
-- [x] Remove react-router-dom dependency ✅ (2025-10-07)
-- [x] Triage automation scripts ✅ (2025-10-07)
-- [x] Deploy API fix to staging ✅ (2025-10-07)
-- [ ] Fix P0 automation scripts (daily-automation, complete-automation)
-- [ ] Deploy react-router removal to staging
+- [x] Fix API URL duplication bug ✅ (2025-10-07 08:00)
+- [x] Verify react-router-dom usage ✅ (2025-10-07 08:08)
+- [x] Remove react-router-dom dependency ✅ (2025-10-07 08:08)
+- [x] Triage automation scripts ✅ (2025-10-07 08:10)
+- [x] Deploy API fix to staging ✅ (2025-10-07 08:05)
+- [x] Fix P0 automation scripts ✅ (2025-10-07 08:25)
+- [x] Update LaunchAgent plist references ✅ (2025-10-07 08:25)
+- [x] Verify npm scripts status ✅ (2025-10-07 08:28)
+- [ ] Deploy latest changes to staging (c3b9a24 + 22782c3)
+- [ ] Install @google/generative-ai OR disable AI features
 
 ### This Sprint
-- [ ] Investigate 3 P1 scripts with non-ESM errors
+- [ ] Investigate 3 P1 scripts (false positives - don't support --help)
 - [ ] Fix P2 automation scripts (5 manual scripts) - as needed
-- [ ] Update LaunchAgent plists after P0 fixes
-- [ ] Test daily automation after fixes
+- [ ] Test daily automation with LaunchAgent
+- [ ] Document automation script dependencies
 
 ### Backlog
 - [ ] Define test coverage roadmap (#5)
@@ -594,13 +615,18 @@ Deployment is successful when:
 - **React Router Verification:** `/tmp/react-router-usage.txt` (62 lines)
 - **React Router Removal:** `/tmp/react-router-removal.md` (150+ lines)
 - **Automation Triage Results:** `/tmp/automation_triage_results.md` (240 lines)
+- **Automation P0 Fix Log:** `/tmp/automation_p0_fix_log.md` (196 lines)
+- **npm Scripts Check:** `/tmp/npm_scripts_check.md` (131 lines)
+- **Staging Route Check:** `/tmp/staging_route_check.md` (92 lines)
 
 ### Git Commits
 - **3f3eb66** - fix(api): correct base URL joining logic
 - **c3b9a24** - chore: remove unused react-router-dom dependency
+- **4b96994** - docs: update tech debt tracking with execution results
+- **22782c3** - fix(automation): convert P0 scripts to CommonJS (.cjs)
 
 ---
 
-**Last Updated:** 2025-10-07 08:12 UTC
-**Updated By:** Claude Code (Tech debt execution session)
-**Session Summary:** Fixed API bug, removed react-router-dom, triaged automation scripts
+**Last Updated:** 2025-10-07 08:42 UTC
+**Updated By:** Claude Code (Follow-up execution session)
+**Session Summary:** Fixed P0 automation scripts, verified npm scripts, checked staging routes
