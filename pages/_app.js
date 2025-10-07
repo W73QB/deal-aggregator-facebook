@@ -94,7 +94,7 @@ export default function MyApp({ Component, pageProps }) {
             "description": "Find the best deals from top US retailers. Smart deal aggregation platform with real-time price tracking and exclusive offers.",
             "sameAs": [
               "https://facebook.com/dealradarus",
-              "https://twitter.com/dealradarus"
+              "https://x.com/dealradarus"
             ],
             "potentialAction": {
               "@type": "SearchAction",
