@@ -7,15 +7,29 @@
  */
 
 require('dotenv').config({ path: '.env.dealradarus.local' });
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+
+// Optional AI dependency - gracefully handle if not installed
+let GoogleGenerativeAI;
+try {
+    GoogleGenerativeAI = require('@google/generative-ai').GoogleGenerativeAI;
+} catch (error) {
+    console.log('ℹ️  @google/generative-ai not installed - blog engine disabled');
+    GoogleGenerativeAI = null;
+}
+
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
 class AdvancedBlogEngine {
     constructor() {
-        this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        if (GoogleGenerativeAI) {
+            this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+            this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        } else {
+            this.genAI = null;
+            this.model = null;
+        }
         
         // Human personality traits for content
         this.personalities = {
@@ -70,6 +84,9 @@ Return as JSON array of trending topics with:
 }`;
 
         try {
+            if (!this.model) {
+                throw new Error('AI model not available');
+            }
             const result = await this.model.generateContent(trendPrompt);
             const response = await result.response.text();
             
@@ -159,6 +176,9 @@ Return as JSON:
 }`;
 
         try {
+            if (!this.model) {
+                throw new Error('AI model not available');
+            }
             const result = await this.model.generateContent(humanPrompt);
             const response = await result.response.text();
             
@@ -187,15 +207,20 @@ Return as JSON:
 
     // 🎨 CREATE COMPLETE HTML WITH HUMAN TOUCH
     createHumanBlogHTML(blogData, deals) {
+        if (!blogData) {
+            throw new Error('blogData is required for createHumanBlogHTML');
+        }
+
         const dateString = new Date().toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
-            month: 'long', 
+            month: 'long',
             day: 'numeric'
         });
 
-        const authorPersonality = this.personalities[blogData.personalityUsed];
-        const authorName = this.getAuthorName(blogData.personalityUsed);
+        const personalityKey = blogData.personalityUsed || 'dealHunter';
+        const authorPersonality = this.personalities[personalityKey] || this.personalities['dealHunter'];
+        const authorName = this.getAuthorName(personalityKey);
         
         return `<!DOCTYPE html>
 <html lang="en">
@@ -497,18 +522,27 @@ Return as JSON:
     }
 
     createFallbackHumanBlog(deals, personality) {
+        const validDeals = Array.isArray(deals) ? deals : [];
+
         return {
             title: "Amazing Daily Deals That'll Make Your Day Better!",
             metaDescription: "Discover incredible deals on tech, home, and lifestyle products. Save big today!",
             introduction: "Hey deal hunters! I've been scouring the web all morning and found some absolutely incredible deals that I just had to share with you. Trust me, these are the kind of finds that make my day!",
-            sections: deals.map(deal => ({
+            sections: validDeals.length > 0 ? validDeals.map(deal => ({
                 heading: `${deal.title} - This One's Special!`,
                 content: `I've been tracking ${deal.title} for weeks, and this ${deal.discount}% discount is the best I've seen all year! Here's why I think it's worth your attention...`,
                 dealId: deal.id
-            })),
+            })) : [{
+                heading: "Great Deals Coming Soon!",
+                content: "We're working on finding the best deals for you. Check back soon for amazing savings!",
+                dealId: null
+            }],
             conclusion: "These deals won't last forever, and I'd hate for you to miss out. Which one caught your eye? Let me know in the comments!",
             keywords: ["daily deals", "discounts", "savings", "tech deals"],
-            personalityUsed: personality
+            personalityUsed: personality || 'dealHunter',
+            trendsUsed: [], // Empty array for template rendering
+            generatedAt: new Date().toISOString(),
+            estimatedReadTime: 3
         };
     }
 }

@@ -362,10 +362,10 @@ class GeminiProContentGenerator {
     getFallbackTemplate(dealData, type) {
         // Import existing template system as fallback
         if (type === 'facebook') {
-            const FacebookTemplates = require('../content/facebook-post-templates');
+            const FacebookTemplates = require('../content/facebook-post-templates.cjs');
             return FacebookTemplates.generatePost(dealData);
         } else if (type === 'email') {
-            const EmailTemplates = require('../content/email-newsletter-templates');
+            const EmailTemplates = require('../content/email-newsletter-templates.cjs');
             return EmailTemplates.generateCompleteEmail([dealData]);
         }
         return null;

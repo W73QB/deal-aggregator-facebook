@@ -156,13 +156,23 @@ const HashtagSets = {
 
 // 🎲 RANDOM SELECTION FUNCTIONS
 function getRandomTemplate(category, subcategory = null) {
-    if (subcategory && FacebookPostTemplates[category][subcategory]) {
+    // Try subcategory first
+    if (subcategory && FacebookPostTemplates[category] && FacebookPostTemplates[category][subcategory]) {
         const templates = FacebookPostTemplates[category][subcategory];
         return templates[Math.floor(Math.random() * templates.length)];
     }
-    
-    const templates = FacebookPostTemplates[category];
-    return templates[Math.floor(Math.random() * templates.length)];
+
+    // Try category
+    if (FacebookPostTemplates[category]) {
+        const templates = FacebookPostTemplates[category];
+        if (Array.isArray(templates)) {
+            return templates[Math.floor(Math.random() * templates.length)];
+        }
+    }
+
+    // Fallback to dealAlerts if category not found
+    const fallbackTemplates = FacebookPostTemplates.dealAlerts;
+    return fallbackTemplates[Math.floor(Math.random() * fallbackTemplates.length)];
 }
 
 function getHashtagsForCategory(category) {

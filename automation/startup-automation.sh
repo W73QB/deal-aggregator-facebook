@@ -21,8 +21,9 @@ echo "$(date): ✅ Network connected" >> automation/logs/startup.log
 # Wait additional 30 seconds for system stability
 sleep 30
 
-# Load environment variables
-export $(cat .env.dealradarus.local | xargs)
+# Load environment variables (filter ALL comments - start of line, inline, emojis)
+# Only process lines with KEY=VALUE format (alphanumeric + underscore), strip inline comments
+export $(grep -E '^[A-Z_][A-Z0-9_]*=.+' .env.dealradarus.local | sed 's/#.*$//' | sed 's/[[:space:]]*$//' | xargs)
 
 # Start the complete automation master (viral edition)
 echo "$(date): 🤖 Starting Complete Automation Master (Viral Edition)..." >> automation/logs/startup.log

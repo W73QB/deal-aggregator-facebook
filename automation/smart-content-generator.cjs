@@ -8,19 +8,29 @@
  */
 
 require('dotenv').config({ path: '.env.dealradarus.local' });
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const FacebookTemplates = require('../content/facebook-post-templates');
-const EmailTemplates = require('../content/email-newsletter-templates');
+
+// Optional AI dependency - gracefully handle if not installed
+let GoogleGenerativeAI;
+try {
+    GoogleGenerativeAI = require('@google/generative-ai').GoogleGenerativeAI;
+} catch (error) {
+    console.log('ℹ️  @google/generative-ai not installed - AI features disabled, using templates');
+    GoogleGenerativeAI = null;
+}
+
+const FacebookTemplates = require('../content/facebook-post-templates.cjs');
+const EmailTemplates = require('../content/email-newsletter-templates.cjs');
 
 class SmartContentGenerator {
     constructor() {
-        this.aiEnabled = process.env.AI_CONTENT_ENABLED === 'true';
-        this.fallbackEnabled = process.env.AI_FALLBACK_TO_TEMPLATES === 'true';
-        
-        if (this.aiEnabled) {
+        this.aiEnabled = process.env.AI_CONTENT_ENABLED === 'true' && GoogleGenerativeAI !== null;
+        // Default to true for graceful degradation
+        this.fallbackEnabled = process.env.AI_FALLBACK_TO_TEMPLATES !== 'false';
+
+        if (this.aiEnabled && GoogleGenerativeAI) {
             this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-            this.model = this.genAI.getGenerativeModel({ 
-                model: process.env.GEMINI_MODEL || "gemini-1.5-flash" 
+            this.model = this.genAI.getGenerativeModel({
+                model: process.env.GEMINI_MODEL || "gemini-1.5-flash"
             });
         }
         

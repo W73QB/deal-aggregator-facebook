@@ -119,9 +119,9 @@ class CompleteAutomationMaster {
         
         try {
             // 1. Get trending deals
-            const deals = await this.getTrendingDeals(3);
-            if (deals.length === 0) {
-                deals.push(...this.createFallbackDeals());
+            let deals = await this.getTrendingDeals(3);
+            if (!deals || deals.length === 0) {
+                deals = this.createFallbackDeals();
             }
             
             // 2. Analyze trends
@@ -135,7 +135,11 @@ class CompleteAutomationMaster {
             
             // 4. Create human-like blog
             const blogData = await this.blogEngine.createHumanBlogPost(deals, personality);
-            
+
+            if (!blogData) {
+                throw new Error('Blog data generation returned null/undefined');
+            }
+
             // 5. Generate HTML
             const htmlContent = this.blogEngine.createHumanBlogHTML(blogData, deals);
             

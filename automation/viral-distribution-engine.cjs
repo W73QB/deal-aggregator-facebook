@@ -11,8 +11,19 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
+// Optional AI dependency - gracefully handle if not installed
+let GoogleGenerativeAI;
+try {
+    GoogleGenerativeAI = require('@google/generative-ai').GoogleGenerativeAI;
+} catch (error) {
+    console.log('ℹ️  @google/generative-ai not installed - viral distribution will use template fallback');
+    GoogleGenerativeAI = null;
+}
+
 class ViralDistributionEngine {
     constructor() {
+        this.aiEnabled = GoogleGenerativeAI !== null;
+        this.model = null;
         this.platforms = {
             facebook: { enabled: true, priority: 1 },
             twitter: { enabled: true, priority: 2 },
@@ -128,6 +139,10 @@ Make it valuable for business professionals interested in smart spending.`
             ).join('\n');
 
             const fullPrompt = prompt + '\n\nDeals context:\n' + dealsContext;
+
+            if (!this.model) {
+                throw new Error('AI model not available');
+            }
 
             const result = await this.model.generateContent(fullPrompt);
             const response = await result.response.text();
@@ -304,9 +319,13 @@ Make it valuable for business professionals interested in smart spending.`
         const results = {};
 
         // Initialize Gemini model here since it's needed for content creation
-        const { GoogleGenerativeAI } = require('@google/generative-ai');
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        this.model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        if (this.aiEnabled && GoogleGenerativeAI) {
+            const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+            this.model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        } else {
+            this.model = null;
+            console.log('⚠️  AI model not available - using template fallback for viral distribution');
+        }
 
         // Create and distribute content for each enabled platform
         for (const [platform, config] of Object.entries(this.platforms)) {
@@ -425,15 +444,23 @@ Make it valuable for business professionals interested in smart spending.`
 
     // 🛠️ UTILITY FUNCTIONS
     createFallbackContent(platform, blogData, deals) {
+        const validDeals = Array.isArray(deals) && deals.length > 0 ? deals : [];
+        const firstDeal = validDeals[0];
+        const dealCount = validDeals.length || 'several';
+
         const fallbackContent = {
-            facebook: `🔥 Just found some incredible deals that I had to share! ${deals[0]?.title} is ${deals[0]?.discount}% off - that's $${(deals[0]?.originalPrice - deals[0]?.price)?.toFixed(2)} in savings! Check out my full breakdown: https://dealradarus.com/blog/${this.getDateString()}.html`,
-            
-            twitter: `{"tweet1": "🔥 Deal alert! Found ${deals.length} incredible discounts today", "tweet2": "${deals[0]?.title} - ${deals[0]?.discount}% OFF!", "tweet3": "Full details: https://dealradarus.com/blog/${this.getDateString()}.html"}`,
-            
-            pinterest: `Amazing ${deals[0]?.title} deal! Save ${deals[0]?.discount}% on this incredible find. Perfect for anyone looking for quality tech at unbeatable prices. Check out my full review and more deals: https://dealradarus.com/blog/${this.getDateString()}.html`,
-            
+            facebook: firstDeal
+                ? `🔥 Just found some incredible deals that I had to share! ${firstDeal.title} is ${firstDeal.discount}% off - that's $${(firstDeal.originalPrice - firstDeal.price).toFixed(2)} in savings! Check out my full breakdown: https://dealradarus.com/blog/${this.getDateString()}.html`
+                : `🔥 Amazing deals discovered today! Check out my full breakdown: https://dealradarus.com/blog/${this.getDateString()}.html`,
+
+            twitter: `{"tweet1": "🔥 Deal alert! Found ${dealCount} incredible discounts today", "tweet2": "${firstDeal?.title || 'Great products'} - ${firstDeal?.discount || 'Big'}% OFF!", "tweet3": "Full details: https://dealradarus.com/blog/${this.getDateString()}.html"}`,
+
+            pinterest: firstDeal
+                ? `Amazing ${firstDeal.title} deal! Save ${firstDeal.discount}% on this incredible find. Perfect for anyone looking for quality tech at unbeatable prices. Check out my full review and more deals: https://dealradarus.com/blog/${this.getDateString()}.html`
+                : `Amazing deals discovered! Check out my full review: https://dealradarus.com/blog/${this.getDateString()}.html`,
+
             reddit: `[{"subreddit": "deals", "title": "Great deals on tech today", "content": "Found some solid discounts worth sharing"}]`,
-            
+
             linkedin: `Smart shopping update: Found some exceptional deals on quality products today. As someone who researches these extensively, I wanted to share the best ones. Full analysis: https://dealradarus.com/blog/${this.getDateString()}.html`
         };
 
