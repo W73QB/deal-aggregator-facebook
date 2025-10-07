@@ -147,7 +147,11 @@ body {
   transition: color 0.3s var(--ease-out-cubic), background-color 0.3s var(--ease-out-cubic);
 }
 
-html,
+html {
+  overflow-x: clip;
+  scrollbar-gutter: stable;
+}
+
 body {
   overflow-x: clip;
 }
@@ -867,6 +871,7 @@ select:focus {
   gap: 0.5rem;
   flex: 0 1 auto;
   min-width: 0;
+  max-width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -881,7 +886,8 @@ select:focus {
   align-items: center;
   position: relative;
   max-width: 400px;
-  flex: 1 1 200px;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .search-box input {
@@ -889,7 +895,7 @@ select:focus {
   border: 2px solid var(--gray-200);
   border-radius: var(--radius-full);
   width: 100%;
-  min-width: 200px;
+  min-width: 140px;
   outline: none;
   font-size: var(--text-sm);
   background: rgba(255, 255, 255, 0.9);
