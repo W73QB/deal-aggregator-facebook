@@ -15,17 +15,7 @@ export default function Document() {
           rel="stylesheet"
         />
 
-        {/* Preload critical images for LCP optimization */}
-        <link
-          rel="preload"
-          href="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop&auto=format"
-          as="image"
-        />
-        <link
-          rel="preload"
-          href="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop&auto=format"
-          as="image"
-        />
+        {/* Removed unused preload tags to eliminate console warnings */}
 
         {/* Critical CSS inline for LCP optimization */}
         <style>{`

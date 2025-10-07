@@ -62,7 +62,7 @@ const deals = [
     {
       id: 6,
       title: "Sony WH-1000XM5 - Open Box",
-      image: "https://www.sony.com/image/5d02da5df55283e84e344c8952469462?fmt=pjpeg&wid=1440&hei=1440&bgcolor=F1F5F9",
+      image: "/images/sony-wh1000xm5.jpg",
       originalPrice: 399,
       salePrice: 299,
       discount: 25,

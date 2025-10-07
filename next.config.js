@@ -62,7 +62,7 @@ const nextConfig = {
               "style-src 'self' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://www.google-analytics.com https://vitals.vercel-analytics.com",
+              "connect-src 'self' https://www.google-analytics.com https://vitals.vercel-analytics.com https://deal-aggregator-api-production.up.railway.app",
               "frame-src 'self'",
               "base-uri 'self'",
               "form-action 'self'"
