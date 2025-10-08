@@ -724,6 +724,7 @@ select:focus {
   align-items: center;
   min-height: 4rem;
   padding: 0;
+  padding-inline: clamp(16px, 3vw, 32px);
   gap: 1rem;
 }
 
@@ -737,7 +738,7 @@ select:focus {
   align-items: center;
   text-decoration: none;
   color: var(--primary-blue);
-  gap: 1rem;
+  gap: clamp(8px, 2vw, 16px);
 }
 
 .logo-animated {
@@ -766,7 +767,8 @@ select:focus {
 .main-nav {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-left: clamp(8px, 2vw, 24px);
 }
 
 @media (max-width: 768px) {
@@ -778,7 +780,7 @@ select:focus {
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 1.5rem);
   margin: 0;
   padding: 0;
 }
@@ -872,6 +874,7 @@ select:focus {
   flex: 0 1 auto;
   min-width: 0;
   max-width: 100%;
+  margin-left: auto;
 }
 
 @media (min-width: 640px) {
