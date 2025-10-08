@@ -1,11 +1,11 @@
 {
   "version": 4,
   "routes": {
-    "/deals": {
+    "/blog": {
       "initialRevalidateSeconds": 60,
       "initialExpireSeconds": 31536000,
       "srcRoute": null,
-      "dataRoute": "/_next/data/dP1hFu6QD7swG0LGV7xcl/deals.json",
+      "dataRoute": "/_next/data/fy-rN06yZHhCRUsVk2GMi/blog.json",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -15,11 +15,11 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog": {
+    "/deals": {
       "initialRevalidateSeconds": 60,
       "initialExpireSeconds": 31536000,
       "srcRoute": null,
-      "dataRoute": "/_next/data/dP1hFu6QD7swG0LGV7xcl/blog.json",
+      "dataRoute": "/_next/data/fy-rN06yZHhCRUsVk2GMi/deals.json",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -33,7 +33,7 @@
       "initialRevalidateSeconds": 60,
       "initialExpireSeconds": 31536000,
       "srcRoute": null,
-      "dataRoute": "/_next/data/dP1hFu6QD7swG0LGV7xcl/index.json",
+      "dataRoute": "/_next/data/fy-rN06yZHhCRUsVk2GMi/index.json",
       "allowHeader": [
         "host",
         "x-matched-path",

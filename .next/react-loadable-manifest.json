@@ -22,14 +22,14 @@
     "id": 2317,
     "files": [
       "static/css/9fd1dd071a8a9cf3.css",
-      "static/chunks/317.235458acbd38363b.js"
+      "static/chunks/317.e1e0c275a8d182c1.js"
     ]
   },
   "pages/_app.js -> ../components/ui/CookieBanner": {
     "id": 603,
     "files": [
       "static/css/f194c7fb187b58fb.css",
-      "static/chunks/603.3454e2f639ddacc9.js"
+      "static/chunks/603.a0da3151bb485087.js"
     ]
   },
   "pages/_app.js -> ../components/ui/NotificationCenter": {

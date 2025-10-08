@@ -3,7 +3,7 @@
   "functions": {
     "/api/analytics": {},
     "/api/errors": {},
-    "/api/simple-test": {},
-    "/api/health": {}
+    "/api/health": {},
+    "/api/simple-test": {}
   }
 }

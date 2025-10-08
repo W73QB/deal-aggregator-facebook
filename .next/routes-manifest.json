@@ -280,15 +280,15 @@
   "dataRoutes": [
     {
       "page": "/",
-      "dataRouteRegex": "^/_next/data/dP1hFu6QD7swG0LGV7xcl/index\\.json$"
+      "dataRouteRegex": "^/_next/data/fy\\-rN06yZHhCRUsVk2GMi/index\\.json$"
     },
     {
       "page": "/blog",
-      "dataRouteRegex": "^/_next/data/dP1hFu6QD7swG0LGV7xcl/blog\\.json$"
+      "dataRouteRegex": "^/_next/data/fy\\-rN06yZHhCRUsVk2GMi/blog\\.json$"
     },
     {
       "page": "/deals",
-      "dataRouteRegex": "^/_next/data/dP1hFu6QD7swG0LGV7xcl/deals\\.json$"
+      "dataRouteRegex": "^/_next/data/fy\\-rN06yZHhCRUsVk2GMi/deals\\.json$"
     }
   ],
   "rsc": {
