@@ -763,12 +763,12 @@ select:focus {
   margin-top: 0.2rem;
 }
 
-/* Navigation Styles */
+/* Navigation Styles - Centered Menu */
 .main-nav {
   flex: 1;
   display: flex;
-  justify-content: flex-start;
-  margin-left: clamp(8px, 2vw, 24px);
+  justify-content: center;
+  margin-left: 0;
 }
 
 @media (max-width: 768px) {
