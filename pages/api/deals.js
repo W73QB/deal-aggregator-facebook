@@ -80,7 +80,6 @@ async function fetchDealsFromDB(filters = {}) {
 
     if (db.useFallback) {
       // Fallback to static data when database is unavailable
-      console.log('Using static data fallback for deals');
       return applyFiltersToStaticData(staticDeals, filters);
     }
 

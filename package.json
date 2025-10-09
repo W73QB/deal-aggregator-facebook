@@ -89,7 +89,6 @@
       ]
     },
     "roots": [
-      "<rootDir>/deal-aggregator",
       "<rootDir>/__tests__",
       "<rootDir>/contexts",
       "<rootDir>/components",

@@ -8,8 +8,6 @@ export default function handler(req, res) {
     }
 
     // Simulate subscription process
-    console.log(`Subscribing email: ${email}`);
-    
     // In a real application, you would add the email to your database or mailing list service here.
 
     // Simulate a delay

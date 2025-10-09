@@ -2,6 +2,9 @@
  * Unified Express Backend Server
  * Single source of truth for all backend logic
  * Integrates with existing authentication system
+ *
+ * NOTE: Uses CommonJS (.cjs) for compatibility with Express middleware ecosystem
+ * and to avoid ESM/CJS interop issues with legacy dependencies (bcrypt, pg, etc.)
  */
 
 const express = require('express');

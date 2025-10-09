@@ -83,8 +83,14 @@ SECRETS-DISCOVERY-REPORT.md
 # Legacy backup files (duplicate content prevention)
 backup/
 *.backup*
+*.bak
 *.cachebak
 *.guard_backup
 
 # Next.js build artefacts
 .next/
+dist/
+
+# Testing and automation
+.playwright-mcp/
+automation/logs/*.json

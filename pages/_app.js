@@ -57,7 +57,6 @@ const trackAppVersion = () => {
 
     if (lastVersion !== currentVersion) {
       localStorage.setItem('app-version', currentVersion);
-      console.log(`🚀 App updated to version ${currentVersion}`);
     }
   }
 };

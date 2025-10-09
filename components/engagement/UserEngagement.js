@@ -75,8 +75,7 @@ const UserEngagement = ({ dealId, dealData, variant = 'full' }) => {
     saveUserAction('hasAlert', true);
     setShowAlertModal(false);
 
-    // In a real app, this would send to an API
-    console.log('Setting up alert:', { dealId, alertType, targetPrice, userEmail: user?.email });
+    // In a real app, this would send to an API endpoint for alert setup
   };
 
   const handleShare = (platform) => {
