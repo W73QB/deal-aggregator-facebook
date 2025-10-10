@@ -4,6 +4,7 @@
  */
 
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { resolveApiBaseUrl } from '../lib/utils/apiConfig';
 
 const AuthContext = createContext(null);
 
@@ -93,7 +94,7 @@ function authReducer(state, action) {
 export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  const API_BASE_URL = resolveApiBaseUrl();
 
   // Check authentication status on mount
   useEffect(() => {

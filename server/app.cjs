@@ -13,6 +13,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 require('dotenv').config({ path: '.env.dealradarus.local' });
 
 const app = express();
@@ -66,6 +67,12 @@ app.use(helmet({
 
 app.use(compression());
 app.use(globalRateLimit);
+
+const cookieSecret = process.env.COOKIE_SECRET || undefined;
+if (!cookieSecret) {
+  console.warn('COOKIE_SECRET not set; cookies will be unsigned');
+}
+app.use(cookieParser(cookieSecret));
 
 // CORS configuration
 const corsOptions = {

@@ -80,7 +80,10 @@ async function fetchDealsFromDB(filters = {}) {
 
     if (db.useFallback) {
       // Fallback to static data when database is unavailable
-      return applyFiltersToStaticData(staticDeals, filters);
+      return {
+        deals: applyFiltersToStaticData(staticDeals, filters),
+        source: 'static',
+      };
     }
 
     let query = `
@@ -119,7 +122,7 @@ async function fetchDealsFromDB(filters = {}) {
     const result = await db.query(query, queryParams);
 
     // Transform database results to match expected format
-    return result.rows.map(deal => ({
+    const deals = result.rows.map(deal => ({
       id: deal.id,
       title: deal.title,
       description: deal.description,
@@ -136,9 +139,17 @@ async function fetchDealsFromDB(filters = {}) {
       updatedAt: deal.updated_at
     }));
 
+    return {
+      deals,
+      source: 'database',
+    };
+
   } catch (error) {
     console.error('Database error, falling back to static data:', error);
-    return applyFiltersToStaticData(staticDeals, filters);
+    return {
+      deals: applyFiltersToStaticData(staticDeals, filters),
+      source: 'static',
+    };
   }
 }
 
@@ -177,7 +188,7 @@ export default async function handler(req, res) {
       const filters = { category, featured, limit };
 
       // Fetch deals from database or fallback to static data
-      const deals = await fetchDealsFromDB(filters);
+      const { deals, source } = await fetchDealsFromDB(filters);
 
       // Calculate additional metrics
       const totalSavings = deals.reduce((sum, deal) => {
@@ -198,7 +209,7 @@ export default async function handler(req, res) {
           averageRating: parseFloat(avgRating),
           filters: filters,
           timestamp: new Date().toISOString(),
-          source: dbInstance?.useFallback ? 'static' : 'database'
+          source
         }
       });
 

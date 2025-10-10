@@ -5,8 +5,9 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { resolveApiBaseUrl } from '../lib/utils/apiConfig';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = resolveApiBaseUrl();
 
 export const useDeals = (filters = {}) => {
   const { isAuthenticated } = useAuth();
@@ -151,7 +152,7 @@ export const useDeals = (filters = {}) => {
     refetch,
     getDealById,
     // Computed values for convenience
-    totalDeals: meta?.totalSavings || 0,
+    totalDeals: pagination?.total ?? deals.length,
     averageRating: meta?.averageRating || 0,
     hasDeals: deals.length > 0,
     isEmpty: !loading && deals.length === 0,
