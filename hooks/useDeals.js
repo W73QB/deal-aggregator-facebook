@@ -7,10 +7,9 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { resolveApiBaseUrl } from '../lib/utils/apiConfig';
 
-const API_BASE_URL = resolveApiBaseUrl();
-
 export const useDeals = (filters = {}) => {
   const { isAuthenticated } = useAuth();
+  const API_BASE_URL = resolveApiBaseUrl(); // Resolve at runtime, not module load time
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
