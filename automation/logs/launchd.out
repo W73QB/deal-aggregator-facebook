@@ -2599,3 +2599,212 @@ This file is being treated as an ES module because it has a '.js' file extension
 Node.js v22.17.0
 
 Node.js v22.17.0
+2025-10-09T03:47:12.864Z - 📊 Stats: FB:0, Blogs:2, Reach:14,600, Runtime:27h, Errors:4
+2025-10-09T03:47:12.896Z - 📊 Stats: FB:0, Blogs:2, Reach:14,600, Runtime:27h, Errors:4
+ℹ️  @google/generative-ai not installed - AI features disabled, using templates
+ℹ️  @google/generative-ai not installed - blog engine disabled
+ℹ️  @google/generative-ai not installed - viral distribution will use template fallback
+2025-10-09T07:16:46.498Z - 🚀 COMPLETE AUTOMATION MASTER STARTED
+2025-10-09T07:16:46.501Z - ====================================
+2025-10-09T07:16:46.501Z - 🌅 Running startup tasks...
+2025-10-09T07:16:46.502Z - 🔍 Checking system health...
+2025-10-09T07:16:46.514Z - ❌ Database health check failed
+ℹ️  @google/generative-ai not installed - AI features disabled, using templates
+ℹ️  @google/generative-ai not installed - blog engine disabled
+ℹ️  @google/generative-ai not installed - viral distribution will use template fallback
+2025-10-09T07:16:46.906Z - ❌ Facebook API health check failed
+2025-10-09T07:16:46.906Z - ❌ AI health check failed
+2025-10-09T07:16:46.906Z - ✅ System health - DB:false, FB:false, AI:false
+2025-10-09T07:16:46.906Z - 🌅 Creating morning content...
+2025-10-09T07:16:46.907Z - 📱 Publishing morning Facebook post...
+2025-10-09T07:16:46.908Z - ❌ Database query failed: 
+2025-10-09T07:16:46.916Z - 🚀 COMPLETE AUTOMATION MASTER STARTED
+2025-10-09T07:16:46.916Z - ====================================
+2025-10-09T07:16:46.916Z - 🌅 Running startup tasks...
+2025-10-09T07:16:46.916Z - 🔍 Checking system health...
+2025-10-09T07:16:46.926Z - ❌ Database health check failed
+2025-10-09T07:16:47.139Z - ❌ Facebook posting failed: Request failed with status code 400
+2025-10-09T07:16:47.162Z - 📝 Creating viral blog with multi-platform distribution...
+2025-10-09T07:16:47.164Z - ❌ Database query failed: 
+2025-10-09T07:16:47.186Z - 🔍 Analyzing trending topics...
+🔍 Analyzing current trends for deal content...
+❌ Trend analysis failed, using fallback trends
+2025-10-09T07:16:47.187Z - 👤 Using budgetGuru personality...
+❌ Human blog creation failed: AI model not available
+2025-10-09T07:16:47.267Z - ❌ Facebook API health check failed
+2025-10-09T07:16:47.276Z - ❌ AI health check failed
+2025-10-09T07:16:47.292Z - ✅ System health - DB:false, FB:false, AI:false
+2025-10-09T07:16:47.292Z - 🌅 Creating morning content...
+2025-10-09T07:16:47.293Z - 📱 Publishing morning Facebook post...
+2025-10-09T07:16:47.295Z - ❌ Database query failed: 
+2025-10-09T07:16:47.357Z - ✅ Viral blog saved: viral-deals-2025-10-09.html
+2025-10-09T07:16:47.357Z - 🚀 Executing viral distribution...
+🚀 Starting viral distribution campaign...
+⚠️  AI model not available - using template fallback for viral distribution
+📝 Creating facebook content...
+❌ Failed to create facebook content: AI model not available
+2025-10-09T07:16:47.518Z - ❌ Facebook posting failed: Request failed with status code 400
+2025-10-09T07:16:47.519Z - 📝 Creating viral blog with multi-platform distribution...
+2025-10-09T07:16:47.521Z - ❌ Database query failed: 
+2025-10-09T07:16:47.521Z - 🔍 Analyzing trending topics...
+🔍 Analyzing current trends for deal content...
+❌ Trend analysis failed, using fallback trends
+2025-10-09T07:16:47.521Z - 👤 Using budgetGuru personality...
+❌ Human blog creation failed: AI model not available
+2025-10-09T07:16:47.546Z - ✅ Viral blog saved: viral-deals-2025-10-09.html
+2025-10-09T07:16:47.546Z - 🚀 Executing viral distribution...
+🚀 Starting viral distribution campaign...
+⚠️  AI model not available - using template fallback for viral distribution
+📝 Creating facebook content...
+❌ Failed to create facebook content: AI model not available
+❌ facebook: Failed
+❌ facebook: Failed
+📝 Creating twitter content...
+❌ Failed to create twitter content: AI model not available
+📋 Twitter thread prepared:
+Tweet 1: {"tweet1": "🔥 Deal alert! Found 3 incredible discounts today", "tweet2": "MacBook Air 13" M2 Chip - 31% OFF!", "tweet3": "Full details: https://dealradarus.com/blog/2025-10-09.html"}
+✅ twitter: Success
+📝 Creating twitter content...
+❌ Failed to create twitter content: AI model not available
+📋 Twitter thread prepared:
+Tweet 1: {"tweet1": "🔥 Deal alert! Found 3 incredible discounts today", "tweet2": "MacBook Air 13" M2 Chip - 31% OFF!", "tweet3": "Full details: https://dealradarus.com/blog/2025-10-09.html"}
+✅ twitter: Success
+📝 Creating pinterest content...
+❌ Failed to create pinterest content: AI model not available
+📌 Pinterest pins prepared:
+Pin 1: Amazing MacBook Air 13" M2 Chip deal! Save 31% on this incredible find. Perfect for anyone looking f...
+✅ pinterest: Success
+📝 Creating pinterest content...
+❌ Failed to create pinterest content: AI model not available
+📌 Pinterest pins prepared:
+Pin 1: Amazing MacBook Air 13" M2 Chip deal! Save 31% on this incredible find. Perfect for anyone looking f...
+✅ pinterest: Success
+📝 Creating reddit content...
+❌ Failed to create reddit content: AI model not available
+💬 Reddit posts prepared:
+r/deals: Great deals on tech today
+✅ reddit: Success
+📝 Creating reddit content...
+❌ Failed to create reddit content: AI model not available
+💬 Reddit posts prepared:
+r/deals: Great deals on tech today
+✅ reddit: Success
+📝 Creating linkedin content...
+❌ Failed to create linkedin content: AI model not available
+💼 LinkedIn post prepared:
+Smart shopping update: Found some exceptional deals on quality products today. As someone who researches these extensively, I wanted to share the best ones. Full analysis: https://dealradarus.com/blog/2025-10-09.html
+✅ linkedin: Success
+📝 Creating linkedin content...
+❌ Failed to create linkedin content: AI model not available
+💼 LinkedIn post prepared:
+Smart shopping update: Found some exceptional deals on quality products today. As someone who researches these extensively, I wanted to share the best ones. Full analysis: https://dealradarus.com/blog/2025-10-09.html
+✅ linkedin: Success
+2025-10-09T07:16:57.601Z - ✅ Viral campaign complete!
+2025-10-09T07:16:57.609Z - 📊 Reach: 7,300 people
+2025-10-09T07:16:57.610Z - 📱 Platforms: 4/5
+2025-10-09T07:16:57.611Z - ✅ Startup tasks completed
+2025-10-09T07:16:57.611Z - 📅 Scheduling recurring tasks...
+2025-10-09T07:16:57.615Z - 📅 morning post scheduled for Thu, 10/9, 8:00 AM EDT
+2025-10-09T07:16:57.616Z - 📅 lunch post scheduled for Thu, 10/9, 12:30 PM EDT
+2025-10-09T07:16:57.617Z - 📅 evening post scheduled for Thu, 10/9, 6:00 PM EDT
+2025-10-09T07:16:57.617Z - 📝 Viral blog scheduled for Thu, 10/9, 9:00 AM EDT
+2025-10-09T07:16:57.617Z - ✅ All recurring tasks scheduled
+2025-10-09T07:16:57.617Z - 📊 Starting monitoring system...
+2025-10-09T07:16:57.618Z - ✅ Complete automation system fully operational
+2025-10-09T07:16:57.619Z - 📅 Next Facebook post: Thu, 8:00 AM EDT
+2025-10-09T07:16:57.619Z - 📝 Next viral blog: Thu, 9:00 AM EDT
+2025-10-09T07:16:57.787Z - ✅ Viral campaign complete!
+2025-10-09T07:16:57.792Z - 📊 Reach: 7,300 people
+2025-10-09T07:16:57.792Z - 📱 Platforms: 4/5
+2025-10-09T07:16:57.792Z - ✅ Startup tasks completed
+2025-10-09T07:16:57.792Z - 📅 Scheduling recurring tasks...
+2025-10-09T07:16:57.793Z - 📅 morning post scheduled for Thu, 10/9, 8:00 AM EDT
+2025-10-09T07:16:57.794Z - 📅 lunch post scheduled for Thu, 10/9, 12:30 PM EDT
+2025-10-09T07:16:57.794Z - 📅 evening post scheduled for Thu, 10/9, 6:00 PM EDT
+2025-10-09T07:16:57.795Z - 📝 Viral blog scheduled for Thu, 10/9, 9:00 AM EDT
+2025-10-09T07:16:57.795Z - ✅ All recurring tasks scheduled
+2025-10-09T07:16:57.795Z - 📊 Starting monitoring system...
+2025-10-09T07:16:57.795Z - ✅ Complete automation system fully operational
+2025-10-09T07:16:57.796Z - 📅 Next Facebook post: Thu, 8:00 AM EDT
+2025-10-09T07:16:57.796Z - 📝 Next viral blog: Thu, 9:00 AM EDT
+2025-10-10T03:20:39.425Z - 📅 Scheduling recurring tasks...
+2025-10-10T03:20:39.427Z - 📅 morning post scheduled for Fri, 10/10, 8:00 AM EDT
+2025-10-10T03:20:39.428Z - 📅 lunch post scheduled for Fri, 10/10, 12:30 PM EDT
+2025-10-10T03:20:39.428Z - 📅 evening post scheduled for Fri, 10/10, 6:00 PM EDT
+2025-10-10T03:20:39.429Z - 📝 Viral blog scheduled for Fri, 10/10, 9:00 AM EDT
+2025-10-10T03:20:39.429Z - ✅ All recurring tasks scheduled
+2025-10-10T03:20:39.429Z - 📊 Starting monitoring system...
+2025-10-10T03:20:39.429Z - ✅ Complete automation system fully operational
+2025-10-10T03:20:39.430Z - 📅 Next Facebook post: Fri, 8:00 AM EDT
+2025-10-10T03:20:39.431Z - 📝 Next viral blog: Fri, 9:00 AM EDT
+ℹ️  @google/generative-ai not installed - AI features disabled, using templates
+ℹ️  @google/generative-ai not installed - blog engine disabled
+ℹ️  @google/generative-ai not installed - viral distribution will use template fallback
+2025-10-10T03:20:43.705Z - 🚀 COMPLETE AUTOMATION MASTER STARTED
+2025-10-10T03:20:43.705Z - ====================================
+2025-10-10T03:20:43.706Z - 🌅 Running startup tasks...
+2025-10-10T03:20:43.706Z - 🔍 Checking system health...
+2025-10-10T03:20:43.719Z - ❌ Database health check failed
+2025-10-10T03:20:44.102Z - ❌ Facebook API health check failed
+2025-10-10T03:20:44.102Z - ❌ AI health check failed
+2025-10-10T03:20:44.103Z - ✅ System health - DB:false, FB:false, AI:false
+2025-10-10T03:20:44.103Z - 🌅 Creating morning content...
+2025-10-10T03:20:44.103Z - 📱 Publishing morning Facebook post...
+2025-10-10T03:20:44.105Z - ❌ Database query failed: 
+2025-10-10T03:20:44.341Z - ❌ Facebook posting failed: Request failed with status code 400
+2025-10-10T03:20:44.342Z - 📝 Creating viral blog with multi-platform distribution...
+2025-10-10T03:20:44.344Z - ❌ Database query failed: 
+2025-10-10T03:20:44.344Z - 🔍 Analyzing trending topics...
+🔍 Analyzing current trends for deal content...
+❌ Trend analysis failed, using fallback trends
+2025-10-10T03:20:44.345Z - 👤 Using budgetGuru personality...
+❌ Human blog creation failed: AI model not available
+2025-10-10T03:20:44.372Z - ✅ Viral blog saved: viral-deals-2025-10-10.html
+2025-10-10T03:20:44.372Z - 🚀 Executing viral distribution...
+🚀 Starting viral distribution campaign...
+⚠️  AI model not available - using template fallback for viral distribution
+📝 Creating facebook content...
+❌ Failed to create facebook content: AI model not available
+❌ facebook: Failed
+📝 Creating twitter content...
+❌ Failed to create twitter content: AI model not available
+📋 Twitter thread prepared:
+Tweet 1: {"tweet1": "🔥 Deal alert! Found 3 incredible discounts today", "tweet2": "MacBook Air 13" M2 Chip - 31% OFF!", "tweet3": "Full details: https://dealradarus.com/blog/2025-10-10.html"}
+✅ twitter: Success
+📝 Creating pinterest content...
+❌ Failed to create pinterest content: AI model not available
+📌 Pinterest pins prepared:
+Pin 1: Amazing MacBook Air 13" M2 Chip deal! Save 31% on this incredible find. Perfect for anyone looking f...
+✅ pinterest: Success
+📝 Creating reddit content...
+❌ Failed to create reddit content: AI model not available
+💬 Reddit posts prepared:
+r/deals: Great deals on tech today
+✅ reddit: Success
+📝 Creating linkedin content...
+❌ Failed to create linkedin content: AI model not available
+💼 LinkedIn post prepared:
+Smart shopping update: Found some exceptional deals on quality products today. As someone who researches these extensively, I wanted to share the best ones. Full analysis: https://dealradarus.com/blog/2025-10-10.html
+✅ linkedin: Success
+2025-10-10T03:20:54.622Z - ✅ Viral campaign complete!
+2025-10-10T03:20:54.627Z - 📊 Reach: 7,300 people
+2025-10-10T03:20:54.627Z - 📱 Platforms: 4/5
+2025-10-10T03:20:54.627Z - ✅ Startup tasks completed
+2025-10-10T03:20:54.628Z - 📅 Scheduling recurring tasks...
+2025-10-10T03:20:54.629Z - 📅 morning post scheduled for Fri, 10/10, 8:00 AM EDT
+2025-10-10T03:20:54.629Z - 📅 lunch post scheduled for Fri, 10/10, 12:30 PM EDT
+2025-10-10T03:20:54.630Z - 📅 evening post scheduled for Fri, 10/10, 6:00 PM EDT
+2025-10-10T03:20:54.630Z - 📝 Viral blog scheduled for Fri, 10/10, 9:00 AM EDT
+2025-10-10T03:20:54.630Z - ✅ All recurring tasks scheduled
+2025-10-10T03:20:54.631Z - 📊 Starting monitoring system...
+2025-10-10T03:20:54.631Z - ✅ Complete automation system fully operational
+2025-10-10T03:20:54.631Z - 📅 Next Facebook post: Fri, 8:00 AM EDT
+2025-10-10T03:20:54.632Z - 📝 Next viral blog: Fri, 9:00 AM EDT
+2025-10-10T04:20:39.968Z - 📊 Stats: FB:0, Blogs:1, Reach:7,300, Runtime:1h, Errors:1
+2025-10-10T04:20:55.168Z - 📊 Stats: FB:0, Blogs:1, Reach:7,300, Runtime:1h, Errors:1
+2025-10-10T06:11:45.357Z - 📊 Stats: FB:0, Blogs:1, Reach:7,300, Runtime:3h, Errors:1
+2025-10-10T06:11:45.358Z - 📊 Stats: FB:0, Blogs:1, Reach:7,300, Runtime:3h, Errors:1
+2025-10-10T07:11:45.346Z - 📊 Stats: FB:0, Blogs:1, Reach:7,300, Runtime:4h, Errors:1
+2025-10-10T07:11:45.346Z - 📊 Stats: FB:0, Blogs:1, Reach:7,300, Runtime:4h, Errors:1
+2025-10-10T08:24:49.540Z - 📊 Stats: FB:0, Blogs:1, Reach:7,300, Runtime:5h, Errors:1
+2025-10-10T08:24:49.540Z - 📊 Stats: FB:0, Blogs:1, Reach:7,300, Runtime:5h, Errors:1
