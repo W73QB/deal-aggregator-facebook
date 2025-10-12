@@ -79,6 +79,8 @@ SECRETS-DISCOVERY-REPORT.md
 .env.*
 !.env.template
 !.env.example
+.vercel_env_temp
+*_env_temp
 
 # Legacy backup files (duplicate content prevention)
 backup/

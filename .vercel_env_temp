@@ -1,3 +1,0 @@
-DATABASE_URL="postgresql://neondb_owner:npg_DOvMB0x2AJut@ep-bold-night-adnxdrn9.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-JWT_SECRET="LSq3Tz5hKd1vCUGwZwDahjzUS7R7+w2MJRhROHaHZVox0ShoVPAci5aqH20ovrN9tETdUzaaTaM9kOvlYkpLEg=="
-SESSION_SECRET="glc6UYzB5cqTjGAUsmIb29qjN1xZIO05u0VWFqK5RcE="
