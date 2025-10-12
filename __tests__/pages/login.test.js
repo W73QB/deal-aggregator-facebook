@@ -44,6 +44,9 @@ describe('Login Page', () => {
   const mockClearError = jest.fn();
 
   beforeEach(() => {
+    // Sync mockRouterInstance with mockPush
+    mockRouterInstance.push = mockPush;
+
     useRouter.mockReturnValue({
       push: mockPush,
       query: {}
