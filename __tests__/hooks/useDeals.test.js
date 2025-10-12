@@ -103,7 +103,7 @@ describe('useDeals', () => {
       const mockResponse = {
         success: true,
         data: mockDeals,
-        pagination: { page: 1, totalPages: 1, totalItems: 1 },
+        pagination: { page: 1, totalPages: 1, total: 20 },
         meta: { totalSavings: 20, averageRating: 4.5 }
       };
 

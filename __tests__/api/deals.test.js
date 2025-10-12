@@ -49,4 +49,14 @@ describe('GET /api/deals/:id', () => {
         expect(response.body.data).toHaveProperty('title', 'Test Deal');
         expect(response.body.data).toHaveProperty('image', 'http://example.com/image.png');
       });
+
+    it('should return a 404 error when the deal is not found', async () => {
+        db.query.mockResolvedValue({ rows: [] });
+
+        const response = await request(app).get('/api/deals/999');
+
+        expect(response.status).toBe(404);
+        expect(response.body.success).toBe(false);
+        expect(response.body.error).toBe('Deal not found');
+    });
 });
