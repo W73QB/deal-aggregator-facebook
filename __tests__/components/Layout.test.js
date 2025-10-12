@@ -203,23 +203,14 @@ describe('Layout', () => {
     test('renders header social links with correct URLs', () => {
       render(<Layout><div>Content</div></Layout>);
 
-      const facebookLink = screen.getAllByText('25K').find(el =>
-        el.closest('a')?.href === 'https://facebook.com/dealradarus'
-      );
+      const header = screen.getByRole('banner');
+      const facebookLink = header.querySelector('a[href="https://facebook.com/dealradarus"]');
+      const twitterLink = header.querySelector('a[href="https://x.com/dealradarus"]');
+      const instagramLink = header.querySelector('a[href="https://instagram.com/dealradarus"]');
+
       expect(facebookLink).toBeInTheDocument();
-
-      // Check for Twitter and Instagram links in header
-      const socialLinks = screen.getByTestId ? [] : document.querySelectorAll('.social-link');
-
-      // Alternative approach to find social links
-      const allLinks = screen.getAllByRole('link');
-      const facebookLinks = allLinks.filter(link => link.href === 'https://facebook.com/dealradarus');
-      const twitterLinks = allLinks.filter(link => link.href === 'https://twitter.com/dealradarus');
-      const instagramLinks = allLinks.filter(link => link.href === 'https://instagram.com/dealradarus');
-
-      expect(facebookLinks.length).toBeGreaterThan(0);
-      expect(twitterLinks.length).toBeGreaterThan(0);
-      expect(instagramLinks.length).toBeGreaterThan(0);
+      expect(twitterLink).toBeInTheDocument();
+      expect(instagramLink).toBeInTheDocument();
     });
 
     test('social links open in new tab', () => {

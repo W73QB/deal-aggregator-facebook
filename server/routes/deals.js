@@ -346,8 +346,7 @@ router.get('/:id', dealsRateLimit, async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        error: 'Deal not found',
-        message: `Deal with ID ${id} does not exist or is no longer active`
+        error: 'Deal not found'
       });
     }
 
