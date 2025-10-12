@@ -11,6 +11,16 @@ const { body, query, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
 const { authGuard, optionalAuth } = require('../auth/middleware/auth');
 
+const deriveDiscount = (row) => {
+  if (row.discount !== null && row.discount !== undefined) return row.discount;
+  if (row.original_price && row.sale_price) {
+    const original = parseFloat(row.original_price);
+    const sale = parseFloat(row.sale_price);
+    if (original > 0) return Math.round(((original - sale) / original) * 100);
+  }
+  return 0;
+};
+
 // Error tracking integration
 let errorTracker;
 try {
@@ -221,7 +231,7 @@ router.get('/', cacheMiddleware, dealsRateLimit, optionalAuth, validateDealsQuer
       image: deal.image,
       originalPrice: parseFloat(deal.original_price),
       salePrice: parseFloat(deal.sale_price),
-      discount: deal.discount,
+      discount: parseFloat(deriveDiscount(deal)),
       savings: parseFloat(deal.savings_amount || 0),
       rating: parseFloat(deal.rating || 0),
       category: deal.category,
@@ -336,7 +346,7 @@ router.get('/:id', dealsRateLimit, async (req, res) => {
     const result = await db.query(`
       SELECT
         id, title, description, image_url as image, original_price, sale_price,
-        discount, rating, category, featured, store, affiliate_url,
+        discount_percentage, rating, category, featured, store, affiliate_url,
         tags, stock_count, expires_at, created_at, updated_at,
         (original_price - sale_price) as savings_amount
       FROM deals
@@ -361,7 +371,7 @@ router.get('/:id', dealsRateLimit, async (req, res) => {
         image: deal.image,
         originalPrice: parseFloat(deal.original_price),
         salePrice: parseFloat(deal.sale_price),
-        discount: deal.discount,
+        discount: parseFloat(deriveDiscount(deal)),
         savings: parseFloat(deal.savings_amount || 0),
         rating: parseFloat(deal.rating || 0),
         category: deal.category,
@@ -526,7 +536,7 @@ router.get('/favorites', dealsRateLimit, authGuard(), async (req, res) => {
     const result = await db.query(`
       SELECT
         d.id, d.title, d.description, d.image_url as image, d.original_price, d.sale_price,
-        d.discount, d.rating, d.category, d.featured, d.store, d.affiliate_url,
+        d.discount_percentage, d.rating, d.category, d.featured, d.store, d.affiliate_url,
         d.tags, d.stock_count, d.expires_at, d.created_at, d.updated_at,
         uf.created_at as favorited_at,
         (d.original_price - d.sale_price) as savings_amount
@@ -552,7 +562,7 @@ router.get('/favorites', dealsRateLimit, authGuard(), async (req, res) => {
       image: deal.image,
       originalPrice: parseFloat(deal.original_price),
       salePrice: parseFloat(deal.sale_price),
-      discount: deal.discount,
+      discount: parseFloat(deriveDiscount(deal)),
       savings: parseFloat(deal.savings_amount || 0),
       rating: parseFloat(deal.rating || 0),
       category: deal.category,
