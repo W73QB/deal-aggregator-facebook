@@ -525,7 +525,7 @@ router.get('/favorites', dealsRateLimit, authGuard(), async (req, res) => {
     // Get user's favorite deals with deal details
     const result = await db.query(`
       SELECT
-        d.id, d.title, d.description, d.image, d.original_price, d.sale_price,
+        d.id, d.title, d.description, d.image_url as image, d.original_price, d.sale_price,
         d.discount, d.rating, d.category, d.featured, d.store, d.affiliate_url,
         d.tags, d.stock_count, d.expires_at, d.created_at, d.updated_at,
         uf.created_at as favorited_at,
