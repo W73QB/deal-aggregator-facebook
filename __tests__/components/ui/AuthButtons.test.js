@@ -14,13 +14,18 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }));
 
+// Mock router instance at module level to avoid hooks violation
+const mockRouterInstance = {
+  push: jest.fn(),
+  pathname: '/deals'
+};
+
 jest.mock('next/link', () => {
   return function MockedLink({ children, href, ...props }) {
     return (
       <a href={href} onClick={() => {
-        const { useRouter } = require('next/router');
-        const router = useRouter();
-        router.push(href);
+        // Use the module-level mock router instead of calling useRouter() in callback
+        mockRouterInstance.push(href);
       }} {...props}>
         {children}
       </a>
