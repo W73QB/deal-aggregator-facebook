@@ -335,7 +335,7 @@ router.get('/:id', dealsRateLimit, async (req, res) => {
 
     const result = await db.query(`
       SELECT
-        id, title, description, image, original_price, sale_price,
+        id, title, description, image_url as image, original_price, sale_price,
         discount, rating, category, featured, store, affiliate_url,
         tags, stock_count, expires_at, created_at, updated_at,
         (original_price - sale_price) as savings_amount
