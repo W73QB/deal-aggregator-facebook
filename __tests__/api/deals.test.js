@@ -60,3 +60,36 @@ describe('GET /api/deals/:id', () => {
         expect(response.body.error).toBe('Deal not found');
     });
 });
+
+describe('GET /api/deals', () => {
+    it('should return deals with the correct discount value from search', async () => {
+        const mockDeals = [{
+          id: 1,
+          title: 'Test Deal',
+          description: 'A great deal',
+          image: 'http://example.com/image.png',
+          original_price: '100.00',
+          sale_price: '50.00',
+          discount_percentage: 50,
+          rating: 4.5,
+          category: 'Electronics',
+          featured: true,
+          store: 'Test Store',
+          affiliate_url: 'http://example.com/deal',
+          tags: 'test,deal',
+          stock_count: 10,
+          expires_at: null,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          savings_amount: '50.00',
+        }];
+
+        db.query.mockResolvedValueOnce({ rows: mockDeals }).mockResolvedValueOnce({ rows: [{ total: 1 }] });
+
+        const response = await request(app).get('/api/deals?search=Test');
+
+        expect(response.status).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.data[0]).toHaveProperty('discount', 50);
+    });
+});
