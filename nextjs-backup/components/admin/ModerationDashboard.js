@@ -1,0 +1,227 @@
+import React, { useEffect, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import ReportCard from './ReportCard';
+import ReportStats from './ReportStats';
+import { 
+  fetchReports, 
+  fetchReportStats,
+  setCurrentFilter,
+  clearError 
+} from '../../lib/store/slices/reportsSlice';
+import { addNotification } from '../../lib/store/slices/notificationSlice';
+import styles from './ModerationDashboard.module.css';
+
+const FILTER_OPTIONS = {
+  all: 'All Reports',
+  pending: 'Pending Review',
+  reviewing: 'Under Review',
+  dismissed: 'Dismissed',
+  action_taken: 'Action Taken'
+};
+
+const ModerationDashboard = () => {
+  const dispatch = useDispatch();
+  const { 
+    reports, 
+    stats,
+    pagination, 
+    loading, 
+    statsLoading,
+    error, 
+    currentFilter 
+  } = useSelector(state => state.reports);
+  const { user } = useSelector(state => state.auth);
+  
+  const [refreshing, setRefreshing] = useState(false);
+
+  // Check if user is admin
+  const isAdmin = user?.role === 'admin';
+
+  const loadData = useCallback(async () => {
+    if (!isAdmin) return;
+    dispatch(clearError());
+    try {
+      await Promise.all([
+        dispatch(fetchReports({ 
+          page: 1, 
+          limit: 20, 
+          status: currentFilter 
+        })).unwrap(),
+        dispatch(fetchReportStats()).unwrap()
+      ]);
+    } catch (error) {
+      console.error('Failed to load moderation data:', error);
+    }
+  }, [isAdmin, currentFilter, dispatch]);
+
+  useEffect(() => {
+    if (!isAdmin) {
+      dispatch(addNotification({
+        type: 'error',
+        message: 'Access denied. Admin privileges required.',
+        duration: 4000
+      }));
+      return;
+    }
+
+    // Load initial data
+    loadData();
+  }, [isAdmin, currentFilter, dispatch, loadData]);
+
+  const handleFilterChange = (filter) => {
+    dispatch(setCurrentFilter(filter));
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await loadData();
+    setRefreshing(false);
+    
+    dispatch(addNotification({
+      type: 'success',
+      message: 'Dashboard refreshed',
+      duration: 2000
+    }));
+  };
+
+  const handleLoadMore = async () => {
+    if (!pagination.has_next || loading) return;
+    
+    try {
+      await dispatch(fetchReports({ 
+        page: pagination.page + 1, 
+        limit: 20, 
+        status: currentFilter 
+      })).unwrap();
+    } catch (error) {
+      dispatch(addNotification({
+        type: 'error',
+        message: 'Failed to load more reports',
+        duration: 4000
+      }));
+    }
+  };
+
+  if (!isAdmin) {
+    return (
+      <div className={styles.moderationDashboard}>
+        <div className={styles.accessDenied}>
+          <h2>Access Denied</h2>
+          <p>You need administrator privileges to access the moderation dashboard.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.moderationDashboard}>
+      {/* Dashboard Header */}
+      <div className={styles.dashboardHeader}>
+        <div className={styles.headerContent}>
+          <h1>Content Moderation Dashboard</h1>
+          <p>Review and manage reported content</p>
+        </div>
+        
+        <div className={styles.headerActions}>
+          <button 
+            className={styles.refreshBtn}
+            onClick={handleRefresh}
+            disabled={refreshing}
+          >
+            {refreshing ? (
+              <LoadingSpinner size="small" />
+            ) : (
+              '🔄 Refresh'
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Statistics Section */}
+      <ReportStats 
+        stats={stats} 
+        loading={statsLoading}
+        onFilterSelect={handleFilterChange}
+        currentFilter={currentFilter}
+      />
+
+      {/* Error Display */}
+      {error && (
+        <div className={styles.dashboardError} role="alert">
+          <p>⚠️ {error}</p>
+          <button className={styles.retryBtn} onClick={loadData}>
+            Retry
+          </button>
+        </div>
+      )}
+
+      {/* Filter Tabs */}
+      <div className={styles.filterTabs}>
+        {Object.entries(FILTER_OPTIONS).map(([value, label]) => (
+          <button
+            key={value}
+            className={`${styles.filterTab} ${currentFilter === value ? styles.filterTabActive : ''}`}
+            onClick={() => handleFilterChange(value)}
+            disabled={loading}
+          >
+            {label}
+            {stats[value] > 0 && (
+              <span className={styles.filterBadge}>{stats[value]}</span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Reports List */}
+      <div className={styles.reportsSection}>
+        {loading && !reports.length ? (
+          <LoadingSpinner size="large" text="Loading reports..." />
+        ) : reports.length > 0 ? (
+          <>
+            <div className={styles.reportsList}>
+              {reports.map((report) => (
+                <ReportCard 
+                  key={report.id}
+                  report={report}
+                  onUpdate={loadData}
+                />
+              ))}
+            </div>
+            
+            {/* Load More */}
+            {pagination.has_next && (
+              <div className={styles.loadMoreSection}>
+                <button
+                  className={styles.loadMoreBtn}
+                  onClick={handleLoadMore}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <LoadingSpinner size="small" text="Loading..." />
+                  ) : (
+                    `Load More (${pagination.total_items - reports.length} remaining)`
+                  )}
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className={styles.noReports}>
+            <div className={styles.noReportsContent}>
+              <h3>No reports found</h3>
+              <p>
+                {currentFilter === 'all' 
+                  ? 'No reports have been submitted yet.'
+                  : `No reports with "${FILTER_OPTIONS[currentFilter]}" status.`
+                }
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ModerationDashboard;

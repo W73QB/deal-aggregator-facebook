@@ -1,1 +1,0 @@
-self.__DYNAMIC_CSS_MANIFEST='["static/css/3537a631c89bb598.css","static/css/f23a9d177fe5358d.css","static/css/f194c7fb187b58fb.css","static/css/9fd1dd071a8a9cf3.css","static/css/47fc8d595d82a098.css"]';

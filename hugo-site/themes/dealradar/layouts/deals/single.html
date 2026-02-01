@@ -1,0 +1,148 @@
+{{ define "main" }}
+<article class="deal-page">
+  <div class="container">
+    <div class="deal-layout">
+      <div class="deal-main">
+        {{ if .Params.image }}
+        <div class="deal-image-large">
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" width="800" height="600">
+          {{ if .Params.discount }}
+          <span class="discount-badge-large">{{ .Params.discount }}% OFF</span>
+          {{ end }}
+        </div>
+        {{ end }}
+
+        <div class="deal-content">
+          <h1>{{ .Title }}</h1>
+          
+          <div class="deal-meta">
+            {{ if .Params.store }}
+            <span class="deal-store">🏪 {{ .Params.store }}</span>
+            {{ end }}
+            {{ if .Params.category }}
+            <span class="deal-category">📂 {{ .Params.category }}</span>
+            {{ end }}
+            <time datetime="{{ .PublishDate.Format "2006-01-02" }}">📅 {{ .PublishDate.Format "Jan 2, 2006" }}</time>
+          </div>
+
+          {{ .Content }}
+
+          {{ if .Params.features }}
+          <div class="deal-features">
+            <h3>Key Features:</h3>
+            <ul>
+              {{ range .Params.features }}
+              <li>{{ . }}</li>
+              {{ end }}
+            </ul>
+          </div>
+          {{ end }}
+
+          {{ if .Params.pros }}
+          <div class="deal-pros-cons">
+            <div class="pros">
+              <h3>✅ Pros:</h3>
+              <ul>
+                {{ range .Params.pros }}
+                <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            </div>
+            {{ if .Params.cons }}
+            <div class="cons">
+              <h3>❌ Cons:</h3>
+              <ul>
+                {{ range .Params.cons }}
+                <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            </div>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+
+      <aside class="deal-sidebar">
+        <div class="deal-price-box">
+          {{ if .Params.originalPrice }}
+          <div class="original-price">
+            <span class="label">Was:</span>
+            <span class="price">${{ .Params.originalPrice }}</span>
+          </div>
+          {{ end }}
+          
+          <div class="current-price">
+            <span class="label">Now:</span>
+            <span class="price">${{ .Params.price }}</span>
+          </div>
+          
+          {{ if .Params.discount }}
+          <div class="savings">
+            <span class="label">You Save:</span>
+            <span class="amount">{{ .Params.discount }}% ({{ if .Params.originalPrice }}${{ sub .Params.originalPrice .Params.price }}{{ end }})</span>
+          </div>
+          {{ end }}
+
+          {{ if .Params.affiliateUrl }}
+          <a href="{{ .Params.affiliateUrl }}" target="_blank" rel="noopener nofollow sponsored" class="btn btn-buy">
+            🛒 Get This Deal
+          </a>
+          {{ else if .Params.amazonAsin }}
+          <a href="https://www.amazon.com/dp/{{ .Params.amazonAsin }}?tag={{ .Site.Params.amazonTag }}" target="_blank" rel="noopener nofollow sponsored" class="btn btn-buy">
+            🛒 Buy on Amazon
+          </a>
+          {{ end }}
+
+          {{ if .Params.expiresAt }}
+          <div class="deal-expires">
+            ⏰ Expires: {{ .Params.expiresAt }}
+          </div>
+          {{ end }}
+        </div>
+
+        {{ if .Params.rating }}
+        <div class="deal-rating">
+          <h4>Rating</h4>
+          <div class="stars">
+            {{ $rating := .Params.rating }}
+            {{ range seq 5 }}
+              {{ if le . $rating }}⭐{{ else }}☆{{ end }}
+            {{ end }}
+            <span class="rating-number">{{ .Params.rating }}/5</span>
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Params.stores }}
+        <div class="compare-stores">
+          <h4>Compare Prices:</h4>
+          <ul class="stores-list">
+            {{ range .Params.stores }}
+            <li>
+              <span class="store-name">{{ .name }}</span>
+              <span class="store-price">${{ .price }}</span>
+              <a href="{{ .url }}" target="_blank" rel="noopener nofollow sponsored" class="store-link">Visit</a>
+            </li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+
+        <div class="affiliate-notice">
+          <p><small>{{ .Site.Params.affiliateDisclosure }}</small></p>
+        </div>
+      </aside>
+    </div>
+
+    {{ if .Params.tags }}
+    <div class="deal-tags">
+      <strong>Tags:</strong>
+      {{ range .Params.tags }}
+      <a href="/tags/{{ . | urlize }}/" class="tag">{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</article>
+{{ end }}

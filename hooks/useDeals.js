@@ -7,8 +7,10 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { resolveApiBaseUrl } from '../lib/utils/apiConfig';
 
-export const useDeals = (filters = {}) => {
-  const { isAuthenticated } = useAuth();
+const DEFAULT_FILTERS = {};
+
+export const useDeals = (filters = DEFAULT_FILTERS) => {
+  useAuth();
   const API_BASE_URL = resolveApiBaseUrl(); // Resolve at runtime, not module load time
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +19,7 @@ export const useDeals = (filters = {}) => {
   const [meta, setMeta] = useState(null);
 
   // Stabilize filters object to prevent infinite re-renders
-  const stableFilters = useMemo(() => filters, [JSON.stringify(filters)]);
+  const stableFilters = useMemo(() => filters ?? DEFAULT_FILTERS, [filters]);
 
   const buildQueryString = useCallback((params) => {
     const searchParams = new URLSearchParams();
@@ -106,7 +108,7 @@ export const useDeals = (filters = {}) => {
     } finally {
       setLoading(false);
     }
-  }, [stableFilters, buildQueryString]);
+  }, [stableFilters, buildQueryString, API_BASE_URL]);
 
   // Initial fetch
   useEffect(() => {
@@ -140,7 +142,7 @@ export const useDeals = (filters = {}) => {
       console.error(`Error fetching deal ${dealId}:`, error);
       throw error;
     }
-  }, []);
+  }, [API_BASE_URL]);
 
   return {
     deals,

@@ -1,0 +1,109 @@
+{{ define "main" }}
+<div class="list-page">
+  <header class="page-header">
+    <div class="container">
+      <h1>{{ .Title }}</h1>
+      {{ if .Description }}
+      <p class="page-description">{{ .Description }}</p>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-wrapper">
+      {{ if eq .Section "blog" }}
+      <div class="posts-grid">
+        {{ range .Paginator.Pages }}
+        <article class="post-card">
+          {{ if .Params.image }}
+          <div class="post-image">
+            <a href="{{ .Permalink }}">
+              <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" width="640" height="360">
+            </a>
+          </div>
+          {{ end }}
+          <div class="post-content">
+            <div class="post-meta">
+              {{ if .Params.categories }}
+              <span class="category">{{ index .Params.categories 0 }}</span>
+              {{ end }}
+              <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time>
+            </div>
+            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+            <p>{{ .Summary }}</p>
+            {{ if .Params.tags }}
+            <div class="post-tags">
+              {{ range .Params.tags }}
+              <a href="/tags/{{ . | urlize }}/" class="tag">{{ . }}</a>
+              {{ end }}
+            </div>
+            {{ end }}
+            <a href="{{ .Permalink }}" class="read-more">Read More →</a>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+      {{ else if eq .Section "deals" }}
+      <div class="deals-grid">
+        {{ range .Paginator.Pages }}
+        <article class="deal-card">
+          {{ if .Params.image }}
+          <div class="deal-image">
+            <a href="{{ .Permalink }}">
+              <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" width="400" height="300">
+            </a>
+            {{ if .Params.discount }}
+            <span class="discount-badge">-{{ .Params.discount }}%</span>
+            {{ end }}
+          </div>
+          {{ end }}
+          <div class="deal-content">
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            {{ if .Params.price }}
+            <div class="deal-price">
+              {{ if .Params.originalPrice }}
+              <span class="original-price">${{ .Params.originalPrice }}</span>
+              {{ end }}
+              <span class="sale-price">${{ .Params.price }}</span>
+              {{ if .Params.discount }}
+              <span class="savings">Save {{ .Params.discount }}%</span>
+              {{ end }}
+            </div>
+            {{ end }}
+            {{ if .Params.store }}
+            <div class="deal-store">Store: {{ .Params.store }}</div>
+            {{ end }}
+            <a href="{{ .Permalink }}" class="btn btn-deal">View Deal →</a>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+      {{ else }}
+      <div class="posts-grid">
+        {{ range .Paginator.Pages }}
+        <article class="post-card">
+          <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          <p>{{ .Summary }}</p>
+          <a href="{{ .Permalink }}" class="read-more">Read More →</a>
+        </article>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      {{ if gt .Paginator.TotalPages 1 }}
+      <nav class="pagination" aria-label="Pagination">
+        {{ if .Paginator.HasPrev }}
+        <a href="{{ .Paginator.Prev.URL }}" class="pagination-prev">← Previous</a>
+        {{ end }}
+        
+        <span class="pagination-info">Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
+        
+        {{ if .Paginator.HasNext }}
+        <a href="{{ .Paginator.Next.URL }}" class="pagination-next">Next →</a>
+        {{ end }}
+      </nav>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,101 @@
+{
+    "name": "antigravity-devcontainer",
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+    "remoteUser": "vscode",
+
+    // Cài đặt Node.js version 18 thông qua Dev Container Features
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "18",
+            "nodeGypDependencies": true,
+            "nvmVersion": "latest"
+        },
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "configureZshAsDefaultShell": true,
+            "installOhMyZsh": true,
+            "upgradePackages": true
+        }
+    },
+
+    // Khởi tạo home directory và workspace permissions sau khi container được tạo
+    "postCreateCommand": "bash -c 'mkdir -p ~/.antigravity ~/.vscode-server ~/.config && chmod -R 755 ~/ && chmod -R 755 /workspaces/${localWorkspaceFolderBasename} 2>/dev/null || true && npm install'",
+
+    // Đảm bảo permissions đúng mỗi khi container start
+    "postStartCommand": "bash -c 'mkdir -p ~/.antigravity ~/.vscode-server ~/.config && chmod -R 755 ~/.antigravity ~/.vscode-server ~/.config && touch ~/.antigravity/server.log && chmod 644 ~/.antigravity/server.log && echo \"Antigravity directories initialized at $(date)\" >> ~/.antigravity/server.log'",
+
+    // Forward ports cho Next.js dev server và backend
+    "forwardPorts": [3000, 8000],
+
+    // Container environment variables
+    "containerEnv": {
+        "NODE_ENV": "development",
+        "ANTIGRAVITY_HOME": "/home/vscode/.antigravity",
+        "npm_config_cache": "/home/vscode/.npm",
+        "NODE_OPTIONS": "--max-old-space-size=4096"
+    },
+
+    // VS Code customizations
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "google.antigravity-agent",
+                "ms-vscode.live-server",
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash",
+                        "icon": "terminal-bash"
+                    }
+                },
+                // Antigravity specific settings
+                "antigravity.serverPath": "/home/vscode/.antigravity",
+                "antigravity.logLevel": "debug",
+                "antigravity.autoStart": true,
+                "antigravity.enableTelemetry": false
+            }
+        }
+    },
+
+    // Mount configurations - không override workspace mount mặc định
+    "mounts": [
+        // Cache npm để tăng tốc độ builds
+        "source=deal-aggregator-npm-cache,target=/home/vscode/.npm,type=volume",
+        // Persistent Antigravity data
+        "source=antigravity-data,target=/home/vscode/.antigravity,type=volume"
+    ],
+
+    // Container user và security
+    "containerUser": "vscode",
+    "updateRemoteUserUID": true,
+
+    // Lifecycle scripts để đảm bảo clean state
+    "onCreateCommand": {
+        "create-dirs": "mkdir -p ~/.antigravity ~/.npm ~/.config ~/.vscode-server",
+        "set-permissions": "chmod -R 755 ~ || true"
+    },
+
+    // Wait for user setup before proceeding
+    "waitFor": "postCreateCommand",
+
+    // Resource limits
+    "runArgs": [
+        "--init",
+        "--memory=4g",
+        "--cpus=2"
+    ],
+
+    // Additional capabilities
+    "capAdd": [
+        "SYS_PTRACE"
+    ],
+
+    // Security options
+    "securityOpt": [
+        "seccomp=unconfined"
+    ]
+}

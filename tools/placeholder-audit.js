@@ -8,14 +8,17 @@
  * - Advanced validation with environment-specific rules
  */
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
 const { glob } = require('glob');
 
-// Import real values mapping for comprehensive validation
-const realValuesConfig = require('../config/real-values-mapping.js');
+// Import real values mapping for comprehensive validation (ESM)
+const realValuesConfig = await import('../config/real-values-mapping.js');
 
 const ROOT = process.cwd();
 const args = process.argv.slice(2);
@@ -1145,7 +1148,7 @@ if (!isMainThread) {
 }
 
 // Main execution
-if (require.main === module && isMainThread) {
+if (isMainThread) {
   const auditor = new PlaceholderAuditor();
   auditor.run().catch(error => {
     console.error('❌ Unexpected error:', error);
@@ -1153,4 +1156,4 @@ if (require.main === module && isMainThread) {
   });
 }
 
-module.exports = PlaceholderAuditor;
+export default PlaceholderAuditor;

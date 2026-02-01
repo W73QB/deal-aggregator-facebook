@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{ partial "seo.html" . }} {{ partial "schema.html" . }}
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href="{{ .Permalink }}" />
+
+    {{ with .OutputFormats.Get "rss" }}
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="{{ $.Site.Title }}"
+      href="{{ .Permalink }}"
+    />
+    {{ end }} {{ $style := resources.Get "css/main.css" | resources.Minify }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" />
+
+    {{ if .Site.Params.googleAnalytics }}
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', '{{ .Site.Params.googleAnalytics }}');
+    </script>
+    {{ end }}
+  </head>
+  <body class="{{ .Type }}">
+    {{ partial "header.html" . }}
+
+    <main id="main-content">{{ block "main" . }}{{ end }}</main>
+
+    {{ partial "footer.html" . }} {{ $js := resources.Get "js/main.js" |
+    resources.Minify }}
+    <script src="{{ $js.Permalink }}" defer></script>
+  </body>
+</html>

@@ -3,7 +3,7 @@
  * M3.9 Phase 2: Comprehensive validation patterns and environment-specific mappings
  */
 
-const realValuesMapping = {
+export const realValuesMapping = {
   // Environment-specific configurations
   environments: {
     development: {
@@ -163,7 +163,7 @@ const realValuesMapping = {
 };
 
 // Advanced validation patterns for different contexts
-const validationPatterns = {
+export const validationPatterns = {
   // Email validation patterns
   email: {
     pattern: /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g,
@@ -178,7 +178,7 @@ const validationPatterns = {
 
   // URL validation patterns
   url: {
-    pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g,
+    pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.+~#?&//=]*)/g,
     placeholders: [
       'https://example.com',
       'http://localhost:3000',
@@ -220,7 +220,7 @@ const validationPatterns = {
 };
 
 // Environment-specific validation rules
-const environmentRules = {
+export const environmentRules = {
   development: {
     allowHardcodedSecrets: true,
     requireEnvironmentVariables: false,
@@ -247,7 +247,7 @@ const environmentRules = {
 };
 
 // Security classification for different types of placeholders
-const securityClassification = {
+export const securityClassification = {
   HIGH_RISK: [
     'password', 'secret', 'private', 'key', 'token', 'auth',
     'credential', 'api_key', 'jwt', 'hash', 'salt'
@@ -260,63 +260,42 @@ const securityClassification = {
   ]
 };
 
-module.exports = {
-  realValuesMapping,
-  validationPatterns,
-  environmentRules,
-  securityClassification,
-  
-  // Helper functions
-  getRealValue: (placeholder, environment = 'development') => {
-    // Check environment-specific mapping first
-    if (realValuesMapping.environments[environment] && realValuesMapping.environments[environment][placeholder]) {
-      return realValuesMapping.environments[environment][placeholder];
-    }
-    
-    // Check service-specific mappings
-    for (const service in realValuesMapping.services) {
-      if (realValuesMapping.services[service][placeholder]) {
-        return realValuesMapping.services[service][placeholder];
-      }
-    }
-    
-    // Check common mappings
-    if (realValuesMapping.common[placeholder]) {
-      return realValuesMapping.common[placeholder];
-    }
-    
-    // Check domain mappings
-    if (realValuesMapping.domains[placeholder]) {
-      return realValuesMapping.domains[placeholder];
-    }
-    
-    // Check database mappings
-    if (realValuesMapping.database[placeholder]) {
-      return realValuesMapping.database[placeholder];
-    }
-    
-    return null;
-  },
-  
-  getSecurityLevel: (placeholder) => {
-    const lowerPlaceholder = placeholder.toLowerCase();
-    
-    for (const risk of securityClassification.HIGH_RISK) {
-      if (lowerPlaceholder.includes(risk)) {
-        return 'HIGH_RISK';
-      }
-    }
-    
-    for (const risk of securityClassification.MEDIUM_RISK) {
-      if (lowerPlaceholder.includes(risk)) {
-        return 'MEDIUM_RISK';
-      }
-    }
-    
-    return 'LOW_RISK';
-  },
-  
-  validateEnvironment: (environment) => {
-    return environmentRules[environment] || environmentRules.development;
+export const getRealValue = (placeholder, environment = 'development') => {
+  if (realValuesMapping.environments[environment] && realValuesMapping.environments[environment][placeholder]) {
+    return realValuesMapping.environments[environment][placeholder];
   }
+  for (const service in realValuesMapping.services) {
+    if (realValuesMapping.services[service][placeholder]) {
+      return realValuesMapping.services[service][placeholder];
+    }
+  }
+  if (realValuesMapping.common[placeholder]) {
+    return realValuesMapping.common[placeholder];
+  }
+  if (realValuesMapping.domains[placeholder]) {
+    return realValuesMapping.domains[placeholder];
+  }
+  if (realValuesMapping.database[placeholder]) {
+    return realValuesMapping.database[placeholder];
+  }
+  return null;
+};
+
+export const getSecurityLevel = (placeholder) => {
+  const lowerPlaceholder = placeholder.toLowerCase();
+  for (const risk of securityClassification.HIGH_RISK) {
+    if (lowerPlaceholder.includes(risk)) {
+      return 'HIGH_RISK';
+    }
+  }
+  for (const risk of securityClassification.MEDIUM_RISK) {
+    if (lowerPlaceholder.includes(risk)) {
+      return 'MEDIUM_RISK';
+    }
+  }
+  return 'LOW_RISK';
+};
+
+export const validateEnvironment = (environment) => {
+  return environmentRules[environment] || environmentRules.development;
 };

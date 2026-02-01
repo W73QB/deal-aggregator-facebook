@@ -3,7 +3,7 @@
  * Manages user authentication state and provides auth functions
  */
 
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import { resolveApiBaseUrl } from '../lib/utils/apiConfig';
 
 const AuthContext = createContext(null);
@@ -97,23 +97,7 @@ export function AuthProvider({ children }) {
   const API_BASE_URL = resolveApiBaseUrl();
 
   // Check authentication status on mount
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  // Auto refresh token every 10 minutes
-  useEffect(() => {
-    if (state.isAuthenticated) {
-      const interval = setInterval(() => {
-        refreshToken();
-      }, 10 * 60 * 1000); // 10 minutes
-
-      return () => clearInterval(interval);
-    }
-  }, [state.isAuthenticated]);
-
-  // Check current auth status
-  const checkAuthStatus = async () => {
+  const checkAuthStatus = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/me`, {
         method: 'GET',
@@ -130,17 +114,53 @@ export function AuthProvider({ children }) {
           payload: { user: data.data.user },
         });
       } else {
-        dispatch({
-          type: AUTH_ACTIONS.LOGOUT,
-        });
+        dispatch({ type: AUTH_ACTIONS.LOGOUT });
       }
     } catch (error) {
       console.error('Auth check failed:', error);
-      dispatch({
-        type: AUTH_ACTIONS.LOGOUT,
-      });
+      dispatch({ type: AUTH_ACTIONS.LOGOUT });
     }
-  };
+  }, [API_BASE_URL]);
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, [checkAuthStatus]);
+
+  // Auto refresh token every 10 minutes
+  const refreshToken = useCallback(async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        dispatch({ type: AUTH_ACTIONS.LOGOUT });
+        return false;
+      }
+
+      dispatch({ type: AUTH_ACTIONS.REFRESH_TOKEN });
+      return true;
+    } catch (error) {
+      console.error('Token refresh failed:', error);
+      dispatch({ type: AUTH_ACTIONS.LOGOUT });
+      return false;
+    }
+  }, [API_BASE_URL]);
+
+  useEffect(() => {
+    if (state.isAuthenticated) {
+      const interval = setInterval(() => {
+        refreshToken();
+      }, 10 * 60 * 1000);
+      return () => clearInterval(interval);
+    }
+  }, [state.isAuthenticated, refreshToken]);
+
+  // checkAuthStatus defined above
 
   // Login function
   const login = async (email, password) => {
@@ -243,29 +263,7 @@ export function AuthProvider({ children }) {
   };
 
   // Refresh token function
-  const refreshToken = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        dispatch({ type: AUTH_ACTIONS.LOGOUT });
-        return false;
-      }
-
-      dispatch({ type: AUTH_ACTIONS.REFRESH_TOKEN });
-      return true;
-    } catch (error) {
-      console.error('Token refresh failed:', error);
-      dispatch({ type: AUTH_ACTIONS.LOGOUT });
-      return false;
-    }
-  };
+  // refreshToken defined above
 
   // Update user profile
   const updateUser = (updates) => {

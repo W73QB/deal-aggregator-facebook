@@ -15,14 +15,18 @@ export const ThemeProvider = ({ children }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Check for saved theme preference or default to 'light'
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    try {
+      // Check for saved theme preference or default to 'light'
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else if (prefersDark) {
-      setTheme('dark');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else if (prefersDark) {
+        setTheme('dark');
+      }
+    } catch (e) {
+      console.warn('Theme initialization failed:', e);
     }
 
     setIsLoaded(true);
@@ -60,10 +64,10 @@ export const ThemeProvider = ({ children }) => {
     isLoaded
   };
 
-  // Prevent flash of wrong theme
-  if (!isLoaded) {
-    return null;
-  }
+  // Prevent flash of wrong theme - REMOVED to fix blank page issue
+  // if (!isLoaded) {
+  //   return null;
+  // }
 
   return (
     <ThemeContext.Provider value={value}>

@@ -1,0 +1,107 @@
+{{ define "main" }}
+<div class="homepage">
+  <section class="hero">
+    <div class="container">
+      <h1>🎯 Your Radar for the Best Deals</h1>
+      <p class="hero-subtitle">Find amazing tech deals, discounts, and buying guides. Save money on electronics, gadgets, and more!</p>
+      <div class="hero-cta">
+        <a href="/deals/" class="btn btn-primary">Browse Deals</a>
+        <a href="/blog/" class="btn btn-secondary">Read Blog</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-deals">
+    <div class="container">
+      <h2>🔥 Featured Deals</h2>
+      <div class="deals-grid">
+        {{ range first 6 (where .Site.RegularPages "Section" "deals") }}
+        <article class="deal-card">
+          {{ if .Params.image }}
+          <div class="deal-image">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" width="400" height="300">
+            {{ if .Params.discount }}
+            <span class="discount-badge">-{{ .Params.discount }}%</span>
+            {{ end }}
+          </div>
+          {{ end }}
+          <div class="deal-content">
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            {{ if .Params.price }}
+            <div class="deal-price">
+              {{ if .Params.originalPrice }}
+              <span class="original-price">${{ .Params.originalPrice }}</span>
+              {{ end }}
+              <span class="sale-price">${{ .Params.price }}</span>
+            </div>
+            {{ end }}
+            <a href="{{ .Permalink }}" class="btn btn-deal">View Deal →</a>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+      <div class="view-all">
+        <a href="/deals/" class="btn btn-outline">View All Deals →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="latest-posts">
+    <div class="container">
+      <h2>📝 Latest Blog Posts</h2>
+      <div class="posts-grid">
+        {{ range first 4 (where .Site.RegularPages "Section" "blog") }}
+        <article class="post-card">
+          {{ if .Params.image }}
+          <div class="post-image">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" width="640" height="360">
+          </div>
+          {{ end }}
+          <div class="post-content">
+            <div class="post-meta">
+              {{ if .Params.categories }}
+              <span class="category">{{ index .Params.categories 0 }}</span>
+              {{ end }}
+              <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time>
+            </div>
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            <p>{{ .Summary }}</p>
+            <a href="{{ .Permalink }}" class="read-more">Read More →</a>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+      <div class="view-all">
+        <a href="/blog/" class="btn btn-outline">View All Posts →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">💰</div>
+          <h3>Best Prices</h3>
+          <p>We track prices across multiple stores to find you the best deals.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Flash Deals</h3>
+          <p>Get notified about limited-time offers and flash sales.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📊</div>
+          <h3>Expert Reviews</h3>
+          <p>Read comprehensive buying guides and product reviews.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Curated Selection</h3>
+          <p>Every deal is hand-picked to ensure quality and value.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}
