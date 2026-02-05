@@ -1,19 +1,25 @@
 {{ define "main" }}
 <div class="homepage">
+  <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <h1>🎯 Your Radar for the Best Deals</h1>
-      <p class="hero-subtitle">Find amazing tech deals, discounts, and buying guides. Save money on electronics, gadgets, and more!</p>
-      <div class="hero-cta">
-        <a href="/deals/" class="btn btn-primary">Browse Deals</a>
-        <a href="/blog/" class="btn btn-secondary">Read Blog</a>
+      <div class="hero-content">
+        <h1>Your Radar <span>for the Best Deals</span></h1>
+        <p class="hero-subtitle">Find amazing tech deals, discounts, and buying guides. Save money on electronics, gadgets, and more!</p>
+        <div class="hero-cta">
+          <a href="/deals/" class="btn btn-primary">Browse Deals</a>
+          <a href="/blog/" class="btn btn-secondary">Read Blog</a>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Featured Deals Section -->
   <section class="featured-deals">
     <div class="container">
-      <h2>🔥 Featured Deals</h2>
+      <div class="section-header">
+        <h2>Featured Deals</h2>
+      </div>
       <div class="deals-grid">
         {{ range first 6 (where .Site.RegularPages "Section" "deals") }}
         <article class="deal-card">
@@ -46,9 +52,12 @@
     </div>
   </section>
 
+  <!-- Latest Blog Posts Section -->
   <section class="latest-posts">
     <div class="container">
-      <h2>📝 Latest Blog Posts</h2>
+      <div class="section-header">
+        <h2>Latest Blog Posts</h2>
+      </div>
       <div class="posts-grid">
         {{ range first 4 (where .Site.RegularPages "Section" "blog") }}
         <article class="post-card">
@@ -77,6 +86,7 @@
     </div>
   </section>
 
+  <!-- Features Section -->
   <section class="features">
     <div class="container">
       <div class="features-grid">

@@ -94,6 +94,14 @@ backup/
 .next/
 dist/
 
+# Hugo build artifacts
+public/
+resources/
+.hugo_build.lock
+
+# Local planning artifacts
+.sisyphus/
+
 # Testing and automation
 .playwright-mcp/
 automation/logs/*.json

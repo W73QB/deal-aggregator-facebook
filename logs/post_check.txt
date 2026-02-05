@@ -1,5 +1,0 @@
-CRON JOBS INSTALLED:
-# GA4 Daily Report (02:10 UTC daily)
-10 2 * * * /usr/local/opt/python@3.11/libexec/bin/python3 ./scripts/ga4_daily_report.py >> ./logs/cron_daily.log 2>&1
-# GA4 Realtime Monitor (every 5 minutes)
-*/5 * * * * /usr/local/opt/python@3.11/libexec/bin/python3 ./scripts/ga4_realtime_monitor.py >> ./logs/cron_realtime.log 2>&1

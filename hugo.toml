@@ -1,6 +1,6 @@
 baseURL = 'https://dealradarus.com/'
 languageCode = 'en-us'
-title = 'DealRadarUS - Your Radar for the Best Deals'
+title = 'CryptoRadar - Global Crypto News & Analysis'
 theme = 'dealradar'
 
 # Enable emoji support
@@ -19,7 +19,7 @@ enableRobotsTXT = true
 
 # Output formats
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
@@ -32,9 +32,9 @@ enableRobotsTXT = true
 
 # SEO and metadata
 [params]
-  description = "Find the best tech deals, discounts, and buying guides. Your trusted source for electronics deals and price comparisons."
-  author = "DealRadarUS Team"
-  keywords = ["deals", "tech deals", "electronics", "discounts", "affiliate", "shopping", "buying guides"]
+  description = "Latest cryptocurrency news, Bitcoin analysis, and blockchain updates. Expert trading guides and exchange reviews for the global crypto community."
+  author = "CryptoRadar Team"
+  keywords = ["cryptocurrency", "bitcoin", "ethereum", "blockchain", "crypto news", "crypto trading", "bitcoin price", "altcoins", "defi", "nft", "crypto exchange"]
   
   # Social media
   twitter = "dealradarus"
@@ -50,8 +50,10 @@ enableRobotsTXT = true
   # Affiliate disclosure
   affiliateDisclosure = "We may earn a commission from qualifying purchases made through affiliate links."
   
-  # Amazon affiliate tag
-  amazonTag = "dealradarus-20"
+  # Affiliate tags (for multiple exchanges)
+  binanceRef = "12345678"  # Replace with actual Binance referral code
+  bybitRef = "98765"       # Replace with actual Bybit referral code
+  okxRef = "54321"         # Replace with actual OKX referral code
   
   # Performance optimization
   [params.imageOptimization]
@@ -60,18 +62,20 @@ enableRobotsTXT = true
     
   # Schema.org
   [params.schema]
-    publisherName = "DealRadarUS"
-    publisherLogo = "/images/logo-concept.svg"
+    publisherName = "CryptoRadar"
+    publisherLogo = "/images/logo-crypto.svg"
     sameAs = [
-      "https://facebook.com/dealradarus",
-      "https://twitter.com/dealradarus"
+      "https://twitter.com/cryptoradar",
+      "https://facebook.com/cryptoradar"
     ]
 
-# Taxonomies for SEO
+# Taxonomies for crypto content
 [taxonomies]
   category = 'categories'
   tag = 'tags'
-  store = 'stores'
+  coin = 'coins'
+  exchange = 'exchanges'
+  topic = 'topics'
 
 # Menu configuration
 [menu]
@@ -81,29 +85,39 @@ enableRobotsTXT = true
     weight = 1
     
   [[menu.main]]
-    name = "Blog"
-    url = "/blog/"
+    name = "News"
+    url = "/news/"
     weight = 2
     
   [[menu.main]]
-    name = "Deals"
-    url = "/deals/"
+    name = "Analysis"
+    url = "/analysis/"
     weight = 3
     
   [[menu.main]]
-    name = "Categories"
-    url = "/categories/"
+    name = "Guides"
+    url = "/guides/"
     weight = 4
+    
+  [[menu.main]]
+    name = "Reviews"
+    url = "/reviews/"
+    weight = 5
+    
+  [[menu.main]]
+    name = "Prices"
+    url = "/prices/"
+    weight = 6
     
   [[menu.main]]
     name = "About"
     url = "/about/"
-    weight = 5
+    weight = 7
     
   [[menu.main]]
     name = "Contact"
     url = "/contact/"
-    weight = 6
+    weight = 8
 
 # Minification for performance
 [minify]
