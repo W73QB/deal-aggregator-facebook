@@ -1,0 +1,38 @@
+{{- $exchange := .Get "exchange" | default "binance" -}}
+{{- $campaign := .Get "campaign" | default "default" -}}
+{{- $text := .Get "text" | default "Sign Up Now" -}}
+{{- $class := .Get "class" | default "affiliate-button" -}}
+{{- $utm_source := .Get "utm_source" | default "dealradarus.com" -}}
+{{- $utm_medium := .Get "utm_medium" | default "affiliate" -}}
+{{- $utm_content := .Get "utm_content" | default $exchange -}}
+
+{{- $baseUrl := "" -}}
+{{- $refCode := "" -}}
+{{- $exchangeName := "" -}}
+
+{{- if eq $exchange "binance" -}}
+  {{- $baseUrl = "https://www.binance.com/register" -}}
+  {{- $refCode = site.Params.binanceRef | default "REF12345678" -}}
+  {{- $exchangeName = "Binance" -}}
+{{- else if eq $exchange "bybit" -}}
+  {{- $baseUrl = "https://www.bybit.com/invite" -}}
+  {{- $refCode = site.Params.bybitRef | default "98765" -}}
+  {{- $exchangeName = "Bybit" -}}
+{{- else if eq $exchange "okx" -}}
+  {{- $baseUrl = "https://www.okx.com/join" -}}
+  {{- $refCode = site.Params.okxRef | default "54321" -}}
+  {{- $exchangeName = "OKX" -}}
+{{- end -}}
+
+{{- $utmParams := printf "?ref=%s&utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s" $refCode $utm_source $utm_medium $campaign $utm_content -}}
+{{- $affiliateUrl := printf "%s%s" $baseUrl $utmParams -}}
+
+<div class="affiliate-cta">
+  <h3>Sign Up for {{ $exchangeName }} & Get Rewards</h3>
+  <p>Get 20% trading fee discount and exclusive bonuses when you register through our link.</p>
+  <a href="{{ $affiliateUrl }}" target="_blank" rel="nofollow noopener" class="{{ $class }}" data-exchange="{{ $exchange }}" data-campaign="{{ $campaign }}">
+    {{ $text }}
+    <span class="icon-external">↗</span>
+  </a>
+  <p class="affiliate-disclaimer"><small>⚠️ We may receive a commission when you sign up through this link. Cryptocurrency investing carries high risk.</small></p>
+</div>

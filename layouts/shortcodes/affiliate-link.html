@@ -1,0 +1,32 @@
+{{- $exchange := .Get "exchange" | default "binance" -}}
+{{- $text := .Get "text" | default "" -}}
+{{- $class := .Get "class" | default "affiliate-link" -}}
+
+{{- $baseUrl := "" -}}
+{{- $refCode := "" -}}
+{{- $displayName := "" -}}
+
+{{- if eq $exchange "binance" -}}
+  {{- $baseUrl = "https://www.binance.com/register" -}}
+  {{- $refCode = site.Params.binanceRef | default "REF12345678" -}}
+  {{- $displayName = "Binance" -}}
+{{- else if eq $exchange "bybit" -}}
+  {{- $baseUrl = "https://www.bybit.com/invite" -}}
+  {{- $refCode = site.Params.bybitRef | default "98765" -}}
+  {{- $displayName = "Bybit" -}}
+{{- else if eq $exchange "okx" -}}
+  {{- $baseUrl = "https://www.okx.com/join" -}}
+  {{- $refCode = site.Params.okxRef | default "54321" -}}
+  {{- $displayName = "OKX" -}}
+{{- end -}}
+
+{{- $linkText := $text -}}
+{{- if eq $linkText "" -}}
+  {{- $linkText = $displayName -}}
+{{- end -}}
+
+{{- $affiliateUrl := printf "%s?ref=%s&utm_source=dealradarus.com&utm_medium=affiliate&utm_campaign=inline_link" $baseUrl $refCode -}}
+
+<a href="{{ $affiliateUrl }}" target="_blank" rel="nofollow noopener" class="{{ $class }}" data-exchange="{{ $exchange }}">
+  {{ $linkText }}
+</a>
