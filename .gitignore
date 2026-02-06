@@ -1,107 +1,47 @@
-# Sensitive configuration files
-.mcp.json
-.claude.json
-claude_desktop_config.json
-config/.env.local.json
-
-# macOS
-.DS_Store
-
-# Logs
-*.log
-
-# 🔒 BULLETPROOF .ENV PROTECTION
-# ==============================================
-# Block ALL .env files with secrets from being tracked
-.env
-.env.*
-.env.local
-.env.production
-.env.development
-.env.test
-.env.staging
-.env.dealradarus.*
-
-# Config directory protection  
-config/.env.*
-config/*.env.*
-
-# Exception: ONLY allow safe templates
-!.env.template
-!.env.example
-!config/.env.template.json
-
-# Additional patterns to catch variations
-*.env.local
-*.env.production
-*.env.development
-*.env.test
-*.env.staging
-
-# API keys and tokens
-*.key
-*.pem
-
-# Data & runtime files
-data/raw/*.jsonl
-data/enriched/*.jsonl
-data/logs/*.csv
-data/logs/*.jsonl
-
-# Date-specific configs
-*/*-20250*.json
-*/*-20250*.jsonl
-
-# Duplicated nested structure
-deal-aggregator/deal-aggregator/
-
-# Runtime logs
-crawl-*.log
-fb-live-posts-*.jsonlnode_modules/
-node_modules/
-
-node_modules/
-
-# Sensitive configuration files  
-config/.env.*
-config/*.env.*
-!config/.env.template.json
-config/.env.local.json
-secrets/
-SECRETS-DISCOVERY-REPORT.md
-**/secrets.json
-**/all-secrets.json
-.vercel
-
-# Environment files with secrets
-.env.dealradarus.local
-.env.test
-.env.*
-!.env.template
-!.env.example
-.vercel_env_temp
-*_env_temp
-.env-backups/
-
-# Legacy backup files (duplicate content prevention)
-backup/
-*.backup*
-*.bak
-*.cachebak
-*.guard_backup
-
-# Next.js build artefacts
-.next/
-dist/
-
-# Hugo build artifacts
+# Hugo default
 public/
 resources/
 .hugo_build.lock
 
-# Local planning artifacts
+# Dependency directories
+node_modules/
+.next/
+dist/
+
+# Environment variables
+.env
+.env.*
+.env-backups/
+!.env.example
+!.env.template
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+.devcontainer/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel
+.vercel-rebuild
+
+# Sisyphus
 .sisyphus/
 
-# Testing and automation
+# Testing
 .playwright-mcp/
-automation/logs/*.json
+coverage/
+
+# Legacy/Backup
+backup/
+*.backup*
+*.bak
