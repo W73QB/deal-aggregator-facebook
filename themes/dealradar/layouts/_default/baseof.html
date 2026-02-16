@@ -11,30 +11,21 @@
     <link rel="canonical" href="{{ .Permalink }}" />
 
     {{ with .OutputFormats.Get "rss" }}
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="{{ $.Site.Title }}"
-      href="{{ .Permalink }}"
-    />
+    <link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}" />
     {{ end }}
 
-    <!-- Google Fonts - Neo-Brutalist Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;700&family=Chakra+Petch:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,700&display=swap"
       rel="stylesheet"
     />
 
     {{ $style := resources.Get "css/main.css" | resources.Minify }}
-    <link rel="stylesheet" href="{{ $style.Permalink }}" />
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 
     {{ if .Site.Params.googleAnalytics }}
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -46,12 +37,11 @@
     {{ end }}
   </head>
   <body class="{{ .Type }}">
-    {{ partial "header.html" . }}
+    {{ partial "site-header.html" . }}
 
     <main id="main-content">{{ block "main" . }}{{ end }}</main>
 
-    {{ partial "footer.html" . }} {{ $js := resources.Get "js/main.js" |
-    resources.Minify }}
-    <script src="{{ $js.Permalink }}" defer></script>
+    {{ partial "site-footer.html" . }} {{ $js := resources.Get "js/main.js" | resources.Minify }}
+    <script src="{{ $js.RelPermalink }}" defer></script>
   </body>
 </html>

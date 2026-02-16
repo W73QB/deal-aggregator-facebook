@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Stagger animation for grids
   const staggerContainers = document.querySelectorAll(
-    '.deals-grid, .posts-grid, .features-grid'
+    '.news-grid, .analysis-grid, .resource-list, .article-grid'
   );
 
   staggerContainers.forEach((container) => {
@@ -126,4 +126,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   `;
   document.head.appendChild(style);
+
+  const affiliateElements = document.querySelectorAll(
+    '.affiliate-button, .affiliate-link, [data-exchange]'
+  );
+
+  affiliateElements.forEach((element) => {
+    element.addEventListener('click', function () {
+      const trackedElement = this.closest('[data-exchange]') || this;
+      const exchange = trackedElement.dataset.exchange || 'unknown';
+      const campaign = trackedElement.dataset.campaign || 'default';
+      const buttonText = (this.textContent || trackedElement.textContent || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+      const pageUrl = window.location.href;
+      const eventParams = {
+        exchange,
+        campaign,
+        button_text: buttonText,
+        page_url: pageUrl,
+      };
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'affiliate_click',
+        ...eventParams,
+      });
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'affiliate_click', eventParams);
+      }
+    });
+  });
 });

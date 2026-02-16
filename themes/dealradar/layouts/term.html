@@ -1,7 +1,36 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
+<div class="list-page">
+  <header class="page-header">
+    <div class="container">
+      <p class="hero-eyebrow">Tag / Term</p>
+      <h1>{{ .Title }}</h1>
+      {{ if .Description }}
+      <p class="page-description">{{ .Description }}</p>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="article-grid">
+      {{ range .Pages }}
+      <article class="article-card">
+        {{ if .Params.image }}
+        <a class="article-media" href="{{ .RelPermalink }}">
+          <img src="{{ .Params.image }}" alt="{{ .LinkTitle }}" loading="lazy" width="640" height="360" />
+        </a>
+        {{ end }}
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="meta-chip">{{ .Section | title }}</span>
+            <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time>
+          </div>
+          <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+          <p>{{ .Summary | plainify | truncate 160 }}</p>
+          <a href="{{ .RelPermalink }}" class="read-more">Read Full Piece</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</div>
 {{ end }}

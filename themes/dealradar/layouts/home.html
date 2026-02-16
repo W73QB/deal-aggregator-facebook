@@ -1,9 +1,131 @@
 {{ define "main" }}
-  {{ .Content }}
-  {{ range site.RegularPages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+<div class="homepage">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Signal-first crypto newsroom</p>
+        <h1>Read the market before the market reacts.</h1>
+        <p class="hero-subtitle">
+          Real-time crypto coverage, deep analysis, and practical guides for traders
+          and long-term investors worldwide.
+        </p>
+        <div class="hero-cta">
+          <a href="/news/" class="btn btn-primary">Read Latest News</a>
+          <a href="/analysis/" class="btn btn-secondary">View Analysis</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <p>Coverage</p>
+            <strong>24/7</strong>
+          </div>
+          <div>
+            <p>Focus</p>
+            <strong>BTC • ETH • ALTS</strong>
+          </div>
+          <div>
+            <p>Style</p>
+            <strong>Global Macro + On-chain</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band">
+    <div class="container">
+      <div class="section-header">
+        <h2>Market Pulse</h2>
+        <a class="section-link" href="/news/">All News</a>
+      </div>
+      <div class="news-grid">
+        {{ range first 4 (where .Site.RegularPages "Section" "news") }}
+        <article class="pulse-card">
+          {{ if .Params.image }}
+          <a class="pulse-media" href="{{ .Permalink }}">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" width="640" height="360" />
+          </a>
+          {{ end }}
+          <div class="pulse-content">
+            <div class="pulse-meta">
+              <span class="meta-chip">News</span>
+              <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time>
+            </div>
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            <p>{{ .Summary | plainify | truncate 150 }}</p>
+            <a href="{{ .Permalink }}" class="read-more">Open Brief</a>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band">
+    <div class="container">
+      <div class="section-header">
+        <h2>Deep Analysis</h2>
+        <a class="section-link" href="/analysis/">All Analysis</a>
+      </div>
+      <div class="analysis-grid">
+        {{ range first 3 (where .Site.RegularPages "Section" "analysis") }}
+        <article class="analysis-card">
+          <div class="pulse-meta">
+            <span class="meta-chip">Analysis</span>
+            <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time>
+          </div>
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          <p>{{ .Summary | plainify | truncate 170 }}</p>
+          <a href="{{ .Permalink }}" class="read-more">Read Thesis</a>
+        </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band">
+    <div class="container">
+      <div class="resource-grid">
+        <div class="resource-column">
+          <div class="section-header">
+            <h2>Guides</h2>
+            <a class="section-link" href="/guides/">All Guides</a>
+          </div>
+          <div class="resource-list">
+            {{ range first 3 (where .Site.RegularPages "Section" "guides") }}
+            <article class="resource-item">
+              <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+              <p>{{ .Summary | plainify | truncate 120 }}</p>
+            </article>
+            {{ end }}
+          </div>
+        </div>
+
+        <div class="resource-column">
+          <div class="section-header">
+            <h2>Exchange Reviews</h2>
+            <a class="section-link" href="/reviews/">All Reviews</a>
+          </div>
+          <div class="resource-list">
+            {{ range first 3 (where .Site.RegularPages "Section" "reviews") }}
+            <article class="resource-item">
+              <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+              <p>{{ .Summary | plainify | truncate 120 }}</p>
+            </article>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="market-cta">
+    <div class="container">
+      <div class="market-cta-card">
+        <h2>Need a quick board check before your next trade?</h2>
+        <p>Open our crypto prices hub for live market snapshots and context.</p>
+        <a href="/prices/" class="btn btn-primary">Open Prices Desk</a>
+      </div>
+    </div>
+  </section>
+</div>
 {{ end }}

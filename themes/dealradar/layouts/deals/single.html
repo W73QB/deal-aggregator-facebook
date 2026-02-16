@@ -1,145 +1,127 @@
 {{ define "main" }}
-<article class="deal-page">
-  <div class="container">
-    <div class="deal-layout">
-      <div class="deal-main">
-        {{ if .Params.image }}
-        <div class="deal-image-large">
-          <img src="{{ .Params.image }}" alt="{{ .Title }}" width="800" height="600">
-          {{ if .Params.discount }}
-          <span class="discount-badge-large">{{ .Params.discount }}% OFF</span>
-          {{ end }}
-        </div>
+<article class="article-page">
+  <header class="article-header">
+    <div class="container">
+      <p class="hero-eyebrow">Deal Spotlight</p>
+      <h1>{{ .Title }}</h1>
+      <div class="article-meta">
+        {{ if .Params.store }}
+        <span>{{ .Params.store }}</span>
+        <span class="meta-separator">•</span>
         {{ end }}
-
-        <div class="deal-content">
-          <h1>{{ .Title }}</h1>
-          
-          <div class="deal-meta">
-            {{ if .Params.store }}
-            <span class="deal-store">🏪 {{ .Params.store }}</span>
-            {{ end }}
-            {{ if .Params.category }}
-            <span class="deal-category">📂 {{ .Params.category }}</span>
-            {{ end }}
-            <time datetime="{{ .PublishDate.Format "2006-01-02" }}">📅 {{ .PublishDate.Format "Jan 2, 2006" }}</time>
-          </div>
-
-          {{ .Content }}
-
-          {{ if .Params.features }}
-          <div class="deal-features">
-            <h3>Key Features:</h3>
-            <ul>
-              {{ range .Params.features }}
-              <li>{{ . }}</li>
-              {{ end }}
-            </ul>
-          </div>
-          {{ end }}
-
-          {{ if .Params.pros }}
-          <div class="deal-pros-cons">
-            <div class="pros">
-              <h3>✅ Pros:</h3>
-              <ul>
-                {{ range .Params.pros }}
-                <li>{{ . }}</li>
-                {{ end }}
-              </ul>
-            </div>
-            {{ if .Params.cons }}
-            <div class="cons">
-              <h3>❌ Cons:</h3>
-              <ul>
-                {{ range .Params.cons }}
-                <li>{{ . }}</li>
-                {{ end }}
-              </ul>
-            </div>
-            {{ end }}
-          </div>
-          {{ end }}
-        </div>
+        <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "January 2, 2006" }}</time>
+        {{ if .Params.discount }}
+        <span class="meta-separator">•</span>
+        <span>{{ .Params.discount }}% off</span>
+        {{ end }}
       </div>
+    </div>
+  </header>
 
-      <aside class="deal-sidebar">
-        <div class="deal-price-box">
-          {{ if .Params.originalPrice }}
-          <div class="original-price">
-            <span class="label">Was:</span>
-            <span class="price">${{ .Params.originalPrice }}</span>
-          </div>
-          {{ end }}
-          
-          <div class="current-price">
-            <span class="label">Now:</span>
-            <span class="price">${{ .Params.price }}</span>
-          </div>
-          
-          {{ if .Params.discount }}
-          <div class="savings">
-            <span class="label">You Save:</span>
-            <span class="amount">{{ .Params.discount }}% ({{ if .Params.originalPrice }}${{ sub .Params.originalPrice .Params.price }}{{ end }})</span>
-          </div>
-          {{ end }}
+  {{ if .Params.image }}
+  <div class="container">
+    <figure class="article-cover">
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" width="1200" height="630" loading="lazy" />
+    </figure>
+  </div>
+  {{ end }}
 
-          {{ if .Params.affiliateUrl }}
-          <a href="{{ .Params.affiliateUrl }}" target="_blank" rel="noopener nofollow sponsored" class="btn btn-buy">
-            🛒 Get This Deal
-          </a>
-          {{ else if .Params.amazonAsin }}
-          <a href="https://www.amazon.com/dp/{{ .Params.amazonAsin }}?tag={{ .Site.Params.amazonTag }}" target="_blank" rel="noopener nofollow sponsored" class="btn btn-buy">
-            🛒 Buy on Amazon
-          </a>
-          {{ end }}
+  <div class="container article-layout">
+    <div class="article-content">
+      {{ .Content }}
 
-          {{ if .Params.expiresAt }}
-          <div class="deal-expires">
-            ⏰ Expires: {{ .Params.expiresAt }}
-          </div>
-          {{ end }}
-        </div>
-
-        {{ if .Params.rating }}
-        <div class="deal-rating">
-          <h4>Rating</h4>
-          <div class="stars">
-            {{ $rating := .Params.rating }}
-            {{ range seq 5 }}
-              {{ if le . $rating }}⭐{{ else }}☆{{ end }}
-            {{ end }}
-            <span class="rating-number">{{ .Params.rating }}/5</span>
-          </div>
-        </div>
+      {{ if .Params.features }}
+      <h2>Key Features</h2>
+      <ul>
+        {{ range .Params.features }}
+        <li>{{ . }}</li>
         {{ end }}
+      </ul>
+      {{ end }}
 
-        {{ if .Params.stores }}
-        <div class="compare-stores">
-          <h4>Compare Prices:</h4>
-          <ul class="stores-list">
-            {{ range .Params.stores }}
-            <li>
-              <span class="store-name">{{ .name }}</span>
-              <span class="store-price">${{ .price }}</span>
-              <a href="{{ .url }}" target="_blank" rel="noopener nofollow sponsored" class="store-link">Visit</a>
-            </li>
-            {{ end }}
-          </ul>
-        </div>
+      {{ if .Params.pros }}
+      <h2>Pros</h2>
+      <ul>
+        {{ range .Params.pros }}
+        <li>{{ . }}</li>
         {{ end }}
+      </ul>
+      {{ end }}
 
-        <div class="affiliate-notice">
-          <p><small>{{ .Site.Params.affiliateDisclosure }}</small></p>
-        </div>
-      </aside>
+      {{ if .Params.cons }}
+      <h2>Cons</h2>
+      <ul>
+        {{ range .Params.cons }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+      {{ end }}
     </div>
 
+    <aside class="article-sidebar">
+      <div class="sidebar-card">
+        <h2>Deal Snapshot</h2>
+        <ul>
+          {{ if .Params.originalPrice }}
+          <li><strong>Was:</strong> ${{ .Params.originalPrice }}</li>
+          {{ end }}
+          {{ if .Params.price }}
+          <li><strong>Now:</strong> ${{ .Params.price }}</li>
+          {{ end }}
+          {{ if .Params.discount }}
+          <li><strong>Savings:</strong> {{ .Params.discount }}%</li>
+          {{ end }}
+          {{ if .Params.expiresAt }}
+          <li><strong>Expires:</strong> {{ .Params.expiresAt }}</li>
+          {{ end }}
+        </ul>
+
+        {{ if .Params.affiliateUrl }}
+        <a
+          href="{{ .Params.affiliateUrl }}"
+          target="_blank"
+          rel="noopener nofollow sponsored"
+          class="affiliate-button"
+          data-exchange="{{ if .Params.exchanges }}{{ index .Params.exchanges 0 }}{{ else }}deal{{ end }}"
+          data-campaign="deal_sidebar"
+          >Open Deal ↗</a>
+        {{ else if .Params.amazonAsin }}
+        <a
+          href="https://www.amazon.com/dp/{{ .Params.amazonAsin }}?tag={{ .Site.Params.amazonTag }}"
+          target="_blank"
+          rel="noopener nofollow sponsored"
+          class="affiliate-button"
+          data-exchange="amazon"
+          data-campaign="deal_sidebar"
+          >Open Deal ↗</a>
+        {{ end }}
+      </div>
+
+      {{ if .Params.stores }}
+      <div class="sidebar-card">
+        <h2>Compare Stores</h2>
+        <ul>
+          {{ range .Params.stores }}
+          <li>
+            <strong>{{ .name }}</strong> - ${{ .price }}
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+
+      <div class="sidebar-card affiliate-notice">
+        <p><strong>Disclosure:</strong> {{ .Site.Params.affiliateDisclosure }}</p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="container">
     {{ if .Params.tags }}
-    <div class="deal-tags">
+    <div class="post-tags">
       <strong>Tags:</strong>
       {{ range .Params.tags }}
-      <a href="/tags/{{ . | urlize }}/" class="tag">{{ . }}</a>
+      <a href="/tags/{{ . | urlize }}/" class="tag">#{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
