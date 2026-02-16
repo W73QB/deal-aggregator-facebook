@@ -1,13 +1,13 @@
 ---
-title: "About CryptoRadar"
+title: "About DealRadarUS"
 date: 2026-02-16T00:00:00+00:00
-author: "CryptoRadar Team"
-description: "Learn about CryptoRadar's mission, editorial standards, and coverage focus."
+author: "DealRadarUS Team"
+description: "Learn about DealRadarUS's mission, editorial standards, and coverage focus."
 ---
 
 ## Our Mission
 
-CryptoRadar helps readers understand fast-moving crypto markets with clear reporting, practical guides, and evidence-based analysis.
+DealRadarUS helps readers understand fast-moving crypto markets with clear reporting, practical guides, and evidence-based analysis.
 
 ## What We Cover
 

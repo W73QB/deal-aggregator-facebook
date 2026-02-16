@@ -1,7 +1,7 @@
 ---
 title: "DeFi Market Analysis: Yields Are Back"
 date: 2026-02-03T11:00:00+00:00
-author: "CryptoRadar Analyst Team"
+author: "DealRadarUS Analyst Team"
 categories: ["analysis"]
 tags: ["defi", "yield-farming", "rwa"]
 coins: ["aave", "uniswap", "maker"]

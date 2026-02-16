@@ -1,7 +1,7 @@
 ---
 title: "Ethereum ETF Updates: Staking Features Finally Approved?"
 date: 2026-02-04T14:30:00+00:00
-author: "CryptoRadar Team"
+author: "DealRadarUS Team"
 categories: ["news"]
 tags: ["ethereum", "etf", "staking", "defi"]
 coins: ["ethereum"]

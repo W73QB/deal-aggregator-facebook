@@ -3,7 +3,7 @@ date: {{ .Date }}
 draft: true
 title: '{{ replace .File.ContentBaseName "-" " " | title }} - Complete Guide'
 description: ''
-author: 'CryptoRadar Team'
+author: 'DealRadarUS Team'
 categories: ['guides']
 tags: ['guide', 'beginner', 'crypto']
 coins: []

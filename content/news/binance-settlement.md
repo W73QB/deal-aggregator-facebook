@@ -1,7 +1,7 @@
 ---
 title: "Binance Reaches New Settlement: Compliance Era Begins"
 date: 2026-02-03T10:15:00+00:00
-author: "CryptoRadar Team"
+author: "DealRadarUS Team"
 categories: ["news"]
 tags: ["binance", "regulation", "compliance", "cz"]
 coins: ["bnb"]

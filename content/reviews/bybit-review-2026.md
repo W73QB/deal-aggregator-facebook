@@ -1,7 +1,7 @@
 ---
 title: "Bybit Review 2026: The Trader's Paradise"
 date: 2026-02-04T07:00:00+00:00
-author: "CryptoRadar Review Team"
+author: "DealRadarUS Review Team"
 categories: ["reviews"]
 tags: ["bybit", "exchange-review", "derivatives"]
 coins: []

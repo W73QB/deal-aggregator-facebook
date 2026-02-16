@@ -1,7 +1,7 @@
 ---
 title: "Crypto Wallets 101: How to Store Your Assets Safely"
 date: 2026-02-04T09:00:00+00:00
-author: "CryptoRadar Education Team"
+author: "DealRadarUS Education Team"
 categories: ["guides"]
 tags: ["wallets", "security", "self-custody"]
 coins: []

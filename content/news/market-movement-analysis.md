@@ -1,7 +1,7 @@
 ---
 title: "Market Movement Analysis: Why is Crypto Pumping?"
 date: 2026-02-01T12:00:00+00:00
-author: "CryptoRadar Team"
+author: "DealRadarUS Team"
 categories: ["news", "analysis"]
 tags: ["market-analysis", "bitcoin", "altcoins", "macro"]
 coins: ["bitcoin", "ethereum", "solana"]

@@ -1,6 +1,6 @@
 baseURL = 'https://dealradarus.com/'
 languageCode = 'en-us'
-title = 'CryptoRadar - Global Crypto News & Analysis'
+title = 'DealRadarUS - Global Crypto News & Analysis'
 theme = 'dealradar'
 
 # Enable emoji support
@@ -33,7 +33,7 @@ enableRobotsTXT = true
 # SEO and metadata
 [params]
   description = "Latest cryptocurrency news, Bitcoin analysis, and blockchain updates. Expert trading guides and exchange reviews for the global crypto community."
-  author = "CryptoRadar Team"
+  author = "DealRadarUS Team"
   keywords = ["cryptocurrency", "bitcoin", "ethereum", "blockchain", "crypto news", "crypto trading", "bitcoin price", "altcoins", "defi", "nft", "crypto exchange"]
   
 # Social media (consistent branding across all platforms)
@@ -72,7 +72,7 @@ cryptocomRef = "" # TODO: Add Crypto.com referral code
     
   # Schema.org
   [params.schema]
-    publisherName = "CryptoRadar"
+    publisherName = "DealRadarUS"
     publisherLogo = "/images/logo-crypto.svg"
 sameAs = [
     "https://twitter.com/dealradarus",

@@ -1,7 +1,7 @@
 ---
 title: "Binance Review 2026: Still the King of Crypto?"
 date: 2026-02-05T07:00:00+00:00
-author: "CryptoRadar Review Team"
+author: "DealRadarUS Review Team"
 categories: ["reviews"]
 tags: ["binance", "exchange-review", "best-exchange"]
 coins: ["bnb"]

@@ -3,7 +3,7 @@ date: {{ .Date }}
 draft: true
 title: '{{ replace .File.ContentBaseName "-" " " | title }} Review'
 description: ''
-author: 'CryptoRadar Team'
+author: 'DealRadarUS Team'
 categories: ['reviews']
 tags: ['exchange', 'review']
 exchanges: ['binance']

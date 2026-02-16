@@ -1,7 +1,7 @@
 ---
 title: "OKX Review 2026: Bridging CeFi and DeFi"
 date: 2026-02-03T07:00:00+00:00
-author: "CryptoRadar Review Team"
+author: "DealRadarUS Review Team"
 categories: ["reviews"]
 tags: ["okx", "exchange-review", "web3"]
 coins: ["okb"]

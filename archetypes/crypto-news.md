@@ -3,7 +3,7 @@ date: {{ .Date }}
 draft: true
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
 description: ''
-author: 'CryptoRadar Team'
+author: 'DealRadarUS Team'
 categories: ['news']
 tags: ['bitcoin', 'crypto']
 coins: ['bitcoin']

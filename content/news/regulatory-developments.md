@@ -1,7 +1,7 @@
 ---
 title: "Global Regulatory Developments: 2026 Q1 Roundup"
 date: 2026-02-02T08:00:00+00:00
-author: "CryptoRadar Team"
+author: "DealRadarUS Team"
 categories: ["news"]
 tags: ["regulation", "mica", "sec", "g20"]
 coins: []

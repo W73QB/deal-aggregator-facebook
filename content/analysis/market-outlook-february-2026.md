@@ -1,7 +1,7 @@
 ---
 title: "Bitcoin Market Outlook February 2026: The Road to $150k"
 date: 2026-02-05T10:00:00+00:00
-author: "CryptoRadar Analyst Team"
+author: "DealRadarUS Analyst Team"
 categories: ["analysis"]
 tags: ["bitcoin", "price-prediction", "technical-analysis"]
 coins: ["bitcoin"]

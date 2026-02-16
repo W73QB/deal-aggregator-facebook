@@ -1,7 +1,7 @@
 ---
 title: "NFT Market Trends 2026: Utility Over Hype"
 date: 2026-02-02T13:00:00+00:00
-author: "CryptoRadar Analyst Team"
+author: "DealRadarUS Analyst Team"
 categories: ["analysis"]
 tags: ["nft", "metaverse", "gaming"]
 coins: ["apecoin", "blur"]

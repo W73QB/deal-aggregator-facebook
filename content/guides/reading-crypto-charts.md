@@ -1,7 +1,7 @@
 ---
 title: "Reading Crypto Charts: Technical Analysis Basics"
 date: 2026-02-02T15:00:00+00:00
-author: "CryptoRadar Education Team"
+author: "DealRadarUS Education Team"
 categories: ["guides"]
 tags: ["trading", "technical-analysis", "charts"]
 coins: []

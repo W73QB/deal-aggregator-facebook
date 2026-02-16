@@ -1,7 +1,7 @@
 ---
 title: "Understanding Crypto Fees: Don't Get Rekt"
 date: 2026-02-03T14:00:00+00:00
-author: "CryptoRadar Education Team"
+author: "DealRadarUS Education Team"
 categories: ["guides"]
 tags: ["fees", "trading", "gas"]
 coins: []
@@ -49,7 +49,7 @@ When you move crypto on-chain, you pay miners/validators.
 ## How to Reduce Fees
 
 1. **Hold Exchange Tokens**: Holding BNB on Binance or KCS on KuCoin can give you a 25% discount.
-2. **Use Affiliate Links**: Signing up via [CryptoRadar links]({{< ref "/reviews" >}}) can often grant fee rebates.
+2. **Use Affiliate Links**: Signing up via [DealRadarUS links]({{< ref "/reviews" >}}) can often grant fee rebates.
 3. **Volume Discounts**: High-volume traders get lower rates automatically.
 4. **Use L2 Networks**: Transact on Arbitrum, Optimism, or Solana for sub-cent fees.
 

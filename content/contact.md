@@ -1,8 +1,8 @@
 ---
 title: "Contact"
 date: 2026-02-16T00:00:00+00:00
-author: "CryptoRadar Team"
-description: "How to reach the CryptoRadar team for feedback, corrections, and partnerships."
+author: "DealRadarUS Team"
+description: "How to reach the DealRadarUS team for feedback, corrections, and partnerships."
 ---
 
 ## Get in Touch

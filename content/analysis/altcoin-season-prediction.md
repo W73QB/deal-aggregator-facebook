@@ -1,7 +1,7 @@
 ---
 title: "Altcoin Season Prediction: When Will It Start?"
 date: 2026-02-04T16:00:00+00:00
-author: "CryptoRadar Analyst Team"
+author: "DealRadarUS Analyst Team"
 categories: ["analysis"]
 tags: ["altcoins", "ethereum", "solana", "season"]
 coins: ["ethereum", "solana", "avalanche"]

@@ -1,7 +1,7 @@
 ---
 title: "How to Buy Bitcoin: A Step-by-Step Guide for Beginners"
 date: 2026-02-05T08:00:00+00:00
-author: "CryptoRadar Education Team"
+author: "DealRadarUS Education Team"
 categories: ["guides"]
 tags: ["bitcoin", "beginner", "investing"]
 coins: ["bitcoin"]

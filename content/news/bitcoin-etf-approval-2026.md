@@ -1,7 +1,7 @@
 ---
 title: "Bitcoin ETF Approval 2026: A New Era for Crypto"
 date: 2026-02-05T09:00:00+00:00
-author: "CryptoRadar Team"
+author: "DealRadarUS Team"
 categories: ["news"]
 tags: ["bitcoin", "etf", "regulation", "sec"]
 coins: ["bitcoin"]

@@ -4,5 +4,5 @@
   <path d="M45 15H55C60 15 60 20 55 20H45V15Z" fill="white"/>
   <path d="M45 25H55C60 25 60 30 55 30H45V25Z" fill="white"/>
   <path d="M45 10V40" stroke="white" stroke-width="4"/>
-  <text x="70" y="32" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="24">CryptoRadar</text>
+  <text x="70" y="32" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="24">DealRadarUS</text>
 </svg>
