@@ -5,12 +5,13 @@ User-agent: *
 Allow: /
 
 # Prioritize important pages for crawling
-Allow: /deals/
-Allow: /blog/
+Allow: /news/
+Allow: /analysis/
+Allow: /guides/
+Allow: /reviews/
+Allow: /prices/
+Allow: /about/
 Allow: /contact/
-Allow: /affiliate-disclosure/
-Allow: /privacy-policy/
-Allow: /terms-of-service/
 
 # Block sensitive or unnecessary areas
 Disallow: /admin/
@@ -21,7 +22,6 @@ Disallow: /handoff/
 Disallow: /scripts/
 Disallow: /temp/
 Disallow: /test/
-Disallow: /*.json$
 
 # Sitemap location
 Sitemap: {{ .Site.BaseURL }}sitemap.xml

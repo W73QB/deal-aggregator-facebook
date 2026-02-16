@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://dealradarus.com/'
 languageCode = 'en-US'
-title = 'My New Hugo Site'
+title = 'DealRadarUS - Global Crypto News & Analysis'
 
 [menus]
   [[menus.main]]
