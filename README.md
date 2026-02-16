@@ -1,6 +1,6 @@
-# CryptoRadar - Global Crypto News & Analysis
+# DealRadarUS - Global Crypto News & Analysis
 
-CryptoRadar is a premier cryptocurrency news and analysis platform providing real-time market updates, in-depth analysis, and comprehensive guides for global investors.
+DealRadarUS is a premier cryptocurrency news and analysis platform providing real-time market updates, in-depth analysis, and comprehensive guides for global investors.
 
 **Live Site**: [https://dealradarus.com](https://dealradarus.com)
 
@@ -106,7 +106,7 @@ Map `dealradarus.com` to GitHub Pages IPs:
 Map `www` subdomain:
 - Type: `CNAME`
 - Name: `www`
-- Target: `w73qb.github.io`
+- Target: `dealradarus.com`
 - Proxy: Enabled
 
 ### 3. Page Rules (Optional but Recommended)
@@ -158,4 +158,4 @@ Use the shortcodes to insert affiliate links in content:
 
 ---
 
-© 2026 CryptoRadar. All rights reserved.
+© 2026 DealRadarUS. All rights reserved.

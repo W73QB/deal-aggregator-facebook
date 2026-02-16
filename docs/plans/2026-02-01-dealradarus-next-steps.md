@@ -106,7 +106,7 @@ Add GitHub Pages instructions:
 Add Cloudflare DNS steps for apex canonical:
 
 - A records for `dealradarus.com`
-- CNAME for `www` to `username.github.io`
+- CNAME for `www` to `dealradarus.com`
 - Optional AAAA records
 
 ### Task 6: Verification
