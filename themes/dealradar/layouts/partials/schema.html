@@ -1,78 +1,113 @@
 {{ if .IsPage }}
 <script type="application/ld+json">
-  {{ $sameAs := .Site.Params.schema.sameAs }}
-  {{ $offerUrl := "" }}
-  {{ if .Params.affiliateUrl }}
-    {{ $offerUrl = .Params.affiliateUrl }}
-  {{ else if .Params.amazonAsin }}
-    {{ $offerUrl = printf "https://www.amazon.com/dp/%s?tag=%s" .Params.amazonAsin .Site.Params.amazonTag }}
+{{ $sameAs := .Site.Params.schema.sameAs }}
+{{ $offerUrl := "" }}
+{{ if .Params.affiliateUrl }}
+{{ $offerUrl = .Params.affiliateUrl }}
+{{ else if .Params.amazonAsin }}
+{{ $offerUrl = printf "https://www.amazon.com/dp/%s?tag=%s" .Params.amazonAsin .Site.Params.amazonTag }}
+{{ end }}
+{
+  "@context": "https://schema.org",
+  "@type": "{{ if eq .Section "news" }}NewsArticle{{ else if eq .Section "blog" }}BlogPosting{{ else if eq .Section "deals" }}Product{{ else }}Article{{ end }}",
+  "headline": "{{ .Title }}",
+  "description": "{{ if .Description }}{{ .Description }}{{ else }}{{ .Summary }}{{ end }}",
+  {{ if .Params.image }}
+  "image": "{{ .Params.image | absURL }}",
   {{ end }}
-  {
-    "@context": "https://schema.org",
-    "@type": "{{ if eq .Section "blog" }}BlogPosting{{ else if eq .Section "deals" }}Product{{ else }}Article{{ end }}",
-    "headline": "{{ .Title }}",
-    "description": "{{ if .Description }}{{ .Description }}{{ else }}{{ .Summary }}{{ end }}",
-    {{ if .Params.image }}
-    "image": "{{ .Params.image | absURL }}",
-    {{ end }}
-    "author": {
-      "@type": "Person",
-      "name": "{{ if .Params.author }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "{{ .Site.Params.schema.publisherName }}",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "{{ .Site.Params.schema.publisherLogo | absURL }}"
-      }{{ if $sameAs }},
-      "sameAs": [{{ range $index, $url := $sameAs }}{{ if $index }},{{ end }}"{{ $url }}"{{ end }}]{{ end }}
-    },
-    "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
-    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "{{ .Permalink }}"
-    }{{ if and .Params.price $offerUrl }},
-    "offers": {
-      "@type": "Offer",
-      "price": "{{ .Params.price }}",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "url": "{{ $offerUrl }}"
-    }{{ end }}{{ if .Params.rating }},
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "{{ .Params.rating }}",
-      "bestRating": "5",
-      "worstRating": "1",
-      "ratingCount": "{{ default 100 .Params.ratingCount }}"
-    }{{ end }}
-  }
+  "author": {
+    "@type": "Person",
+    "name": "{{ if .Params.author }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Params.schema.publisherName }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.schema.publisherLogo | absURL }}"
+    }{{ if $sameAs }},
+    "sameAs": [{{ range $index, $url := $sameAs }}{{ if $index }},{{ end }}"{{ $url }}"{{ end }}]{{ end }}
+  },
+  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  }{{ if and .Params.price $offerUrl }},
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ .Params.price }}",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "{{ $offerUrl }}"
+  }{{ end }}{{ if .Params.rating }},
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ .Params.rating }}",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "{{ default 100 .Params.ratingCount }}"
+  }{{ end }}
+}
 </script>
-{{ end }} {{ if .IsHome }}
+
 <script type="application/ld+json">
-  {{ $sameAs := .Site.Params.schema.sameAs }}
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "{{ .Site.Title }}",
-    "url": "{{ .Site.BaseURL }}",
-    "description": "{{ .Site.Params.description }}",
-    "publisher": {
-      "@type": "Organization",
-      "name": "{{ .Site.Params.schema.publisherName }}",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "{{ .Site.Params.schema.publisherLogo | absURL }}"
-      }{{ if $sameAs }},
-      "sameAs": [{{ range $index, $url := $sameAs }}{{ if $index }},{{ end }}"{{ $url }}"{{ end }}]{{ end }}
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ .Site.BaseURL }}"
+    }{{ if .Section }},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ .Section | title }}",
+      "item": "{{ .Site.BaseURL }}{{ .Section }}/"
     },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "{{ .Site.BaseURL }}search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ .Title }}",
+      "item": "{{ .Permalink }}"
+    }{{ else }},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ .Title }}",
+      "item": "{{ .Permalink }}"
+    }{{ end }}
+  ]
+}
+</script>
+{{ end }}
+
+{{ if .IsHome }}
+{{ $sameAs := .Site.Params.schema.sameAs }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ .Site.Title }}",
+  "url": "{{ .Site.BaseURL }}",
+  "description": "{{ .Site.Params.description }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Params.schema.publisherName }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.schema.publisherLogo | absURL }}"
+    }{{ if $sameAs }},
+    "sameAs": [{{ range $index, $url := $sameAs }}{{ if $index }},{{ end }}"{{ $url }}"{{ end }}]{{ end }}
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ .Site.BaseURL }}search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
   }
+}
 </script>
 {{ end }}

@@ -1,7 +1,29 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
+<div class="list-page">
+  <header class="page-header">
+    <div class="container">
+      <p class="hero-eyebrow">Taxonomy</p>
+      <h1>{{ .Title }}</h1>
+      {{ if .Description }}
+      <p class="page-description">{{ .Description }}</p>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="article-grid">
+      {{ range .Pages }}
+      <article class="article-card">
+        <div class="article-body">
+          <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+          {{ if .Pages }}
+          <p>{{ len .Pages }} entries</p>
+          {{ end }}
+          <a href="{{ .RelPermalink }}" class="read-more">Browse Term</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</div>
 {{ end }}

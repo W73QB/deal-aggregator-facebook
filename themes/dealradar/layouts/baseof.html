@@ -1,17 +1,47 @@
-<!DOCTYPE html>
-<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
-<head>
-  {{ partial "head.html" . }}
-</head>
-<body>
-  <header>
-    {{ partial "header.html" . }}
-  </header>
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
-</body>
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{ partial "seo.html" . }} {{ partial "schema.html" . }}
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href="{{ .Permalink }}" />
+
+    {{ with .OutputFormats.Get "rss" }}
+    <link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}" />
+    {{ end }}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;700&family=Chakra+Petch:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,700&display=swap"
+      rel="stylesheet"
+    />
+
+    {{ $style := resources.Get "css/main.css" | resources.Minify }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+
+    {{ if .Site.Params.googleAnalytics }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', '{{ .Site.Params.googleAnalytics }}');
+    </script>
+    {{ end }}
+  </head>
+  <body class="{{ .Type }}">
+    {{ partial "site-header.html" . }}
+
+    <main id="main-content">{{ block "main" . }}{{ end }}</main>
+
+    {{ partial "site-footer.html" . }} {{ $js := resources.Get "js/main.js" | resources.Minify }}
+    <script src="{{ $js.RelPermalink }}" defer></script>
+  </body>
 </html>

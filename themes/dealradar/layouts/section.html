@@ -1,10 +1,66 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+<div class="list-page">
+  <header class="page-header">
+    <div class="container">
+      <p class="hero-eyebrow">{{ .Section | title }}</p>
+      <h1>{{ .Title }}</h1>
+      {{ if .Description }}
+      <p class="page-description">{{ .Description }}</p>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-wrapper">
+      <div class="article-grid">
+        {{ range .Paginator.Pages }}
+        <article class="article-card">
+          {{ if .Params.image }}
+          <a class="article-media" href="{{ .Permalink }}">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" width="640" height="360" />
+          </a>
+          {{ end }}
+
+          <div class="article-body">
+            <div class="article-meta">
+              <span class="meta-chip">
+                {{ if .Params.categories }}{{ index .Params.categories 0 }}{{ else }}{{ .Section | title }}{{ end }}
+              </span>
+              <time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time>
+            </div>
+
+            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+            <p>{{ .Summary | plainify | truncate 170 }}</p>
+
+            <div class="article-footer">
+              {{ if .Params.tags }}
+              <div class="meta-tags">
+                {{ range first 3 .Params.tags }}
+                <a href="/tags/{{ . | urlize }}/" class="tag">#{{ . }}</a>
+                {{ end }}
+              </div>
+              {{ end }}
+              <a href="{{ .Permalink }}" class="read-more">Read Full Piece</a>
+            </div>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+
+      {{ if gt .Paginator.TotalPages 1 }}
+      <nav class="pagination" aria-label="Pagination">
+        {{ if .Paginator.HasPrev }}
+        <a href="{{ .Paginator.Prev.URL }}" class="pagination-prev" rel="prev">← Previous</a>
+        {{ end }}
+
+        <span class="pagination-info">Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
+
+        {{ if .Paginator.HasNext }}
+        <a href="{{ .Paginator.Next.URL }}" class="pagination-next" rel="next">Next →</a>
+        {{ end }}
+      </nav>
+      {{ end }}
+    </div>
+  </div>
+</div>
 {{ end }}

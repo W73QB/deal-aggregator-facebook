@@ -36,24 +36,34 @@ enableRobotsTXT = true
   author = "CryptoRadar Team"
   keywords = ["cryptocurrency", "bitcoin", "ethereum", "blockchain", "crypto news", "crypto trading", "bitcoin price", "altcoins", "defi", "nft", "crypto exchange"]
   
-  # Social media
-  twitter = "dealradarus"
-  facebook = "dealradarus"
+# Social media (consistent branding across all platforms)
+twitter = "dealradarus"
+facebook = "dealradarus"
+instagram = "dealradarus"
+youtube = "dealradarus"
+telegram = "dealradarus"
   
   # SEO Images
   ogImage = "/images/og-share.png"
   logo = "/images/logo-concept.svg"
   
-  # Analytics
-  googleAnalytics = ""
-  
-  # Affiliate disclosure
-  affiliateDisclosure = "We may earn a commission from qualifying purchases made through affiliate links."
-  
-  # Affiliate tags (for multiple exchanges)
-  binanceRef = "12345678"  # Replace with actual Binance referral code
-  bybitRef = "98765"       # Replace with actual Bybit referral code
-  okxRef = "54321"         # Replace with actual OKX referral code
+# Analytics - Replace with your GA4 measurement ID (e.g., G-XXXXXXXXXX)
+googleAnalytics = ""
+
+# Affiliate disclosure
+affiliateDisclosure = "We may earn a commission from qualifying purchases made through affiliate links."
+
+# Affiliate tags (for multiple exchanges)
+# IMPORTANT: Replace these placeholder values with your actual referral codes from each exchange
+# Binance: https://www.binance.com/en/affiliate
+# Bybit: https://www.bybit.com/en-US/affiliate
+# OKX: https://www.okx.com/affiliate
+binanceRef = "12345678" # TODO: Replace with actual Binance referral code
+bybitRef = "98765" # TODO: Replace with actual Bybit referral code
+okxRef = "54321" # TODO: Replace with actual OKX referral code
+coinbaseRef = "" # TODO: Add Coinbase referral code
+krakenRef = "" # TODO: Add Kraken referral code
+cryptocomRef = "" # TODO: Add Crypto.com referral code
   
   # Performance optimization
   [params.imageOptimization]
@@ -64,10 +74,13 @@ enableRobotsTXT = true
   [params.schema]
     publisherName = "CryptoRadar"
     publisherLogo = "/images/logo-crypto.svg"
-    sameAs = [
-      "https://twitter.com/cryptoradar",
-      "https://facebook.com/cryptoradar"
-    ]
+sameAs = [
+    "https://twitter.com/dealradarus",
+    "https://facebook.com/dealradarus",
+    "https://instagram.com/dealradarus",
+    "https://youtube.com/@dealradarus",
+    "https://t.me/dealradarus"
+  ]
 
 # Taxonomies for crypto content
 [taxonomies]

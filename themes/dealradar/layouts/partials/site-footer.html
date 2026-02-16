@@ -1,0 +1,43 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-about">
+        <h3>{{ .Site.Title }}</h3>
+        <p>{{ .Site.Params.description }}</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Sections</h4>
+        <ul>
+          {{ range .Site.Menus.main }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h4>Watchlist</h4>
+        <div class="social-links">
+          {{ if .Site.Params.facebook }}
+          <a href="https://facebook.com/{{ .Site.Params.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <span>Facebook</span>
+          </a>
+          {{ end }} {{ if .Site.Params.twitter }}
+          <a href="https://twitter.com/{{ .Site.Params.twitter }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <span>Twitter</span>
+          </a>
+          {{ end }} {{ if .Site.Params.telegram }}
+          <a href="https://t.me/{{ .Site.Params.telegram }}" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+            <span>Telegram</span>
+          </a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="affiliate-disclosure">{{ .Site.Params.affiliateDisclosure }}</p>
+      <p class="copyright">&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
