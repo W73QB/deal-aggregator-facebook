@@ -7,6 +7,9 @@
       {{ if .Description }}
       <p class="page-description">{{ .Description }}</p>
       {{ end }}
+      {{ if .Content }}
+      <div class="page-description">{{ .Content }}</div>
+      {{ end }}
     </div>
   </header>
 
